@@ -1,0 +1,17 @@
+:root {
+  /* Theme Option 3: Quantum Slate (electric cyan + ember) */
+  --bg: #07090d;
+  --panel: #111824;
+  --border: rgba(182, 199, 255, 0.16);
+
+  --text: rgba(245, 249, 255, 0.96);
+  --muted: rgba(208, 218, 242, 0.62);
+
+  --accent: #00d5ff;
+  --accent-2: #ff7a45;
+  --on-accent: #061016;
+
+  --good: #3dffb0;
+  --bad: #ff427e;
+  --warn: #ffb84d;
+}

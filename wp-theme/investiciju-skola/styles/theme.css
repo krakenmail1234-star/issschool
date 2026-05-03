@@ -1,0 +1,18 @@
+:root {
+  /* Simple + clean (Default): Cloud Base */
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --border: rgba(15, 23, 42, 0.12);
+
+  --text: rgba(15, 23, 42, 0.95);
+  --muted: rgba(71, 85, 105, 0.82);
+
+  /* Calm, modern accent */
+  --accent: #2563eb; /* blue */
+  --accent-2: #14b8a6; /* teal (secondary) */
+  --on-accent: #ffffff;
+
+  --good: #16a34a;
+  --bad: #dc2626;
+  --warn: #d97706;
+}

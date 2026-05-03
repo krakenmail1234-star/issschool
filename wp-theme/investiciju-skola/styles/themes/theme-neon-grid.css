@@ -1,0 +1,17 @@
+:root {
+  /* Theme Option 2: Neon Grid (cyber-lime + hot magenta) */
+  --bg: #06060a;
+  --panel: #101019;
+  --border: rgba(255, 255, 255, 0.14);
+
+  --text: rgba(251, 252, 255, 0.96);
+  --muted: rgba(210, 214, 230, 0.66);
+
+  --accent: #b9ff30;
+  --accent-2: #ff3df0;
+  --on-accent: #090a06;
+
+  --good: #46ffa2;
+  --bad: #ff4d4d;
+  --warn: #ffd24d;
+}

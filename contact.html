@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <meta name="theme-color" content="#fff9f0" />
+    <title>Contact — AI Skola</title>
+    <meta name="description" content="Contact AI Skola for program questions, overviews, or mentorship." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./assets/logo-is.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/theme.css" />
+    <script defer src="./scripts/site.js"></script>
+  </head>
+  <body data-privacy-href="./privacy.html" data-doc-title="meta_title_contact" data-doc-desc="meta_desc_contact">
+    <a class="skip-link" href="#main" data-i18n="skip_to_content">Skip to content</a>
+
+    <header class="topbar" data-elevates>
+      <div class="container topbar__inner">
+        <a class="brand" href="./index.html" data-i18n-aria="aria_brand_home">
+          <span class="brand__logo" aria-hidden="true"></span>
+          <span class="brand__text">AI Skola</span>
+        </a>
+        <nav class="nav" data-i18n-aria="aria_nav_primary">
+          <a class="nav__link" href="./program.html" data-i18n="nav_program">Program</a>
+          <a class="nav__link" href="./mentorship.html" data-i18n="nav_mentorship">Mentorship</a>
+          <a class="nav__link" href="./faq.html" data-i18n="nav_faq">FAQ</a>
+          <span class="nav__divider" aria-hidden="true"></span>
+          <a class="nav__link" href="./about.html" data-i18n="nav_about">About</a>
+          <a class="nav__link" href="./services.html" data-i18n="nav_services">Services</a>
+          <a class="nav__link is-active" href="./contact.html" data-i18n="nav_contact">Contact</a>
+        </nav>
+        <div class="topbar__actions">
+          <select class="langselect" data-lang-select data-i18n-aria="aria_label_language">
+            <option value="en">ENG</option>
+            <option value="lv">LV</option>
+            <option value="ru">RU</option>
+          </select>
+          <a class="button button--ghost" href="./program.html" data-i18n="cta_program">Program</a>
+          <a class="button" href="./services.html" data-i18n="nav_services">Services</a>
+          <button class="iconbtn" type="button" data-menu-button data-i18n-aria="aria_open_menu" aria-expanded="false">
+            <span class="iconbtn__bars" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobilemenu" data-mobile-menu hidden>
+        <div class="container mobilemenu__inner">
+          <a class="mobilemenu__link" href="./program.html" data-i18n="nav_program">Program</a>
+          <a class="mobilemenu__link" href="./mentorship.html" data-i18n="nav_mentorship">Mentorship</a>
+          <a class="mobilemenu__link" href="./faq.html" data-i18n="nav_faq">FAQ</a>
+          <div class="mobilemenu__divider"></div>
+          <a class="mobilemenu__link" href="./about.html" data-i18n="nav_about">About</a>
+          <a class="mobilemenu__link" href="./services.html" data-i18n="nav_services">Services</a>
+          <a class="mobilemenu__link" href="./contact.html" data-i18n="nav_contact">Contact</a>
+          <div class="mobilemenu__cta">
+            <a class="button button--ghost" href="./contact.html" data-i18n="hero_cta_primary">Book a free consultation</a>
+            <a class="button" href="./program.html" data-i18n="hero_cta_secondary">View programs</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="pagehero">
+        <div class="container pagehero__inner">
+          <div>
+            <div class="badge">
+              <span class="badge__dot" aria-hidden="true"></span>
+              <span data-i18n="contact_badge">Contact</span>
+            </div>
+            <h1 class="h1" data-i18n="contact_h1">Let’s talk.</h1>
+            <p class="lead" data-i18n="contact_lead">
+              Send a message and we’ll get you the right next step: education, overviews, or mentorship.
+            </p>
+          </div>
+          <div class="pagehero__panel" aria-hidden="true">
+            <div class="glasscard">
+              <div class="glasscard__header">
+                <div class="chip" data-i18n="contact_chip_response">Response</div>
+                <div class="chip chip--muted" data-i18n="contact_chip_sla">24–48h</div>
+              </div>
+              <div class="glasscard__body">
+                <div class="mono subtle" data-i18n="contact_email_label">Email</div>
+                <div class="mono" data-contact-email>hello@example.com</div>
+                <div class="fineprint">
+                  <button class="button button--ghost" type="button" data-copy-email data-i18n="contact_copy_email">
+                    Copy email
+                  </button>
+                </div>
+                <div class="divider"></div>
+                <div class="mono subtle" data-i18n="contact_discord_label">Discord</div>
+                <div class="mono" data-i18n="contact_discord_note">Invite link in Discord page</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--alt">
+        <div class="container">
+          <div class="contact">
+            <form class="form" id="contactForm">
+              <div class="form__row">
+                <label class="field">
+                  <span class="field__label" data-i18n="contact_form_name">Name</span>
+                  <input class="field__input" name="name" autocomplete="name" required />
+                </label>
+                <label class="field">
+                  <span class="field__label" data-i18n="contact_form_email">Email</span>
+                  <input class="field__input" name="email" type="email" autocomplete="email" required />
+                </label>
+              </div>
+              <label class="field">
+                <span class="field__label" data-i18n="contact_form_topic">Topic</span>
+                <select class="field__input" name="topic" required>
+                  <option value="" selected disabled data-i18n="contact_form_choose">Choose one</option>
+                  <option value="consult" data-i18n="topic_consult">Free consultation</option>
+                  <option value="corporate" data-i18n="topic_corporate">Corporate training</option>
+                  <option value="individual" data-i18n="topic_individual">Individual training / mentoring</option>
+                  <option value="other" data-i18n="topic_other">Other question</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field__label" data-i18n="contact_form_message">Message</span>
+                <textarea class="field__input field__input--area" name="message" rows="6" required></textarea>
+              </label>
+              <div class="form__actions">
+                <button class="button" type="submit" data-i18n="contact_form_send">Send message</button>
+                <a class="button button--ghost" href="./program.html" data-i18n="cta_program">Program</a>
+              </div>
+              <div class="fineprint" data-i18n="contact_form_fineprint">
+                Default behavior opens your email client (mailto). Replace it with a backend endpoint later without
+                changing the page layout.
+              </div>
+            </form>
+
+            <aside class="aside">
+              <div class="aside__card">
+                <div class="aside__title" data-i18n="contact_quicklinks">Quick links</div>
+                <div class="aside__line"><a class="link" href="./program.html" data-i18n="nav_program">Program</a></div>
+                <div class="aside__line"><a class="link" href="./services.html" data-i18n="nav_services">Services</a></div>
+                <div class="aside__line">
+                  <a class="link" href="./mentorship.html" data-i18n="nav_mentorship">Mentorship</a>
+                </div>
+              </div>
+              <div class="aside__card">
+                <div class="aside__title" data-i18n="contact_boundary_title">Boundary</div>
+                <div class="aside__text" data-i18n="contact_boundary_text">
+                  Education only — no guaranteed results, no promised signals.
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="footer__left">
+          <div class="brand brand--small">
+            <span class="brand__logo" aria-hidden="true"></span>
+            <span class="brand__text">AI Skola</span>
+          </div>
+          <div class="footer__meta">© <span id="year"></span> · <span data-i18n="footer_tagline">Education & mentorship.</span></div>
+        </div>
+        <div class="footer__right">
+          <a class="footer__link" href="./about.html" data-i18n="nav_about">About</a>
+          <a class="footer__link" href="./services.html" data-i18n="nav_services">Services</a>
+          <a class="footer__link" href="./privacy.html" data-i18n="nav_privacy">Privacy</a>
+          <a class="footer__link" href="./contact.html" data-i18n="nav_contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

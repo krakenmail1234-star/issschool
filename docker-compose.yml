@@ -1,0 +1,45 @@
+# Local WordPress with the Investiciju Skola theme mounted from this repo.
+# Requires Docker Desktop (Windows): https://docs.docker.com/desktop/
+#
+# From repo root:
+#   docker compose up -d
+# Open http://localhost:8080 and complete the WP installer (language, site title, admin user).
+# Then Appearance → Themes → activate "Investiciju Skola".
+# Create pages with slugs: program, discord, mentorship, faq, about, services, contact.
+# Settings → Reading → set a static homepage.
+
+services:
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - wp_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  wordpress:
+    image: wordpress:6.7-php8.2-apache
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - ./wp-theme/investiciju-skola:/var/www/html/wp-content/themes/investiciju-skola
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  wp_db_data:
