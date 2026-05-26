@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="./assets/logo-is.svg" type="image/svg+xml" />
+    <link rel="icon" href="https://i.imgur.com/bsQTVXQ.png" type="image/png" />
     <link rel="stylesheet" href="./styles/base.css" />
     <link rel="stylesheet" href="./styles/theme.css" />
     <script defer src="./scripts/site.js"></script>
@@ -30,21 +30,16 @@
         </a>
         <nav class="nav" data-i18n-aria="aria_nav_primary">
           <a class="nav__link" href="./program.html" data-i18n="nav_program">Program</a>
-          <a class="nav__link" href="./mentorship.html" data-i18n="nav_mentorship">Mentorship</a>
-          <a class="nav__link" href="./faq.html" data-i18n="nav_faq">FAQ</a>
-          <span class="nav__divider" aria-hidden="true"></span>
-          <a class="nav__link" href="./about.html" data-i18n="nav_about">About</a>
           <a class="nav__link" href="./services.html" data-i18n="nav_services">Services</a>
           <a class="nav__link is-active" href="./contact.html" data-i18n="nav_contact">Contact</a>
         </nav>
         <div class="topbar__actions">
+          <a class="button" href="./contact.html" data-i18n="nav_contact">Kontakti</a>
           <select class="langselect" data-lang-select data-i18n-aria="aria_label_language">
             <option value="en">ENG</option>
             <option value="lv">LV</option>
             <option value="ru">RU</option>
           </select>
-          <a class="button button--ghost" href="./program.html" data-i18n="cta_program">Program</a>
-          <a class="button" href="./services.html" data-i18n="nav_services">Services</a>
           <button class="iconbtn" type="button" data-menu-button data-i18n-aria="aria_open_menu" aria-expanded="false">
             <span class="iconbtn__bars" aria-hidden="true"></span>
           </button>
@@ -88,10 +83,13 @@
                 <div class="chip chip--muted" data-i18n="contact_chip_sla">24–48h</div>
               </div>
               <div class="glasscard__body">
-                <div class="mono subtle" data-i18n="contact_email_label">Email</div>
-                <div class="mono" data-contact-email>hello@example.com</div>
+                <div class="mono subtle">SIA Intelekta Skola</div>
+                <div class="mono">Reģ. Nr.: 40203747500 · reģ. datums: 19.05.2026</div>
+                <div class="mono subtle" style="margin-top:8px;" data-i18n="contact_email_label">Email</div>
+                <div class="mono" data-contact-email>info@intelektaskola.lv</div>
+                <div class="mono" style="margin-top:8px;">Tel: +371 20771001, +371 20771002, +371 20771003</div>
                 <div class="fineprint">
-                  <button class="button button--ghost" type="button" data-copy-email data-i18n="contact_copy_email">
+                  <button class="button" type="button" data-copy-email data-i18n="contact_copy_email">
                     Copy email
                   </button>
                 </div>
@@ -143,13 +141,11 @@
             </form>
 
             <aside class="aside">
-              <div class="aside__card">
-                <div class="aside__title" data-i18n="contact_quicklinks">Quick links</div>
+                <div class="aside__card">
+                <div class="aside__title" data-i18n="contact_quicklinks">Contact details</div>
                 <div class="aside__line"><a class="link" href="./program.html" data-i18n="nav_program">Program</a></div>
                 <div class="aside__line"><a class="link" href="./services.html" data-i18n="nav_services">Services</a></div>
-                <div class="aside__line">
-                  <a class="link" href="./mentorship.html" data-i18n="nav_mentorship">Mentorship</a>
-                </div>
+                <div class="aside__line"><a class="link" href="./contact.html" data-i18n="nav_contact">Contact</a></div>
               </div>
               <div class="aside__card">
                 <div class="aside__title" data-i18n="contact_boundary_title">Boundary</div>
@@ -170,11 +166,11 @@
             <span class="brand__logo" aria-hidden="true"></span>
             <span class="brand__text">Intelekta Skola</span>
           </div>
-          <div class="footer__meta">© <span id="year"></span> · <span data-i18n="footer_tagline">Education & mentorship.</span></div>
+          <div class="footer__meta">© <span id="year"></span> · <span data-i18n="footer_tagline">Education & support.</span></div>
         </div>
         <div class="footer__right">
-          <a class="footer__link" href="./about.html" data-i18n="nav_about">About</a>
           <a class="footer__link" href="./services.html" data-i18n="nav_services">Services</a>
+          <a class="footer__link" href="./faq.html" data-i18n="nav_faq">FAQ</a>
           <a class="footer__link" href="./privacy.html" data-i18n="nav_privacy">Privacy</a>
           <a class="footer__link" href="./contact.html" data-i18n="nav_contact">Contact</a>
         </div>

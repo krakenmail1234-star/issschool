@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     <meta name="color-scheme" content="light" />
     <meta name="supported-color-schemes" content="light" />
     <meta name="theme-color" content="#f6f7fb" />
-    <link rel="icon" href="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/logo-is.svg'); ?>" type="image/svg+xml" />
+    <link rel="icon" href="<?php echo esc_url('https://i.imgur.com/bsQTVXQ.png'); ?>" type="image/png" />
     <?php wp_head(); ?>
   </head>
   <?php
@@ -43,28 +43,23 @@ if (!defined('ABSPATH')) {
     <header class="topbar" data-elevates>
       <div class="container topbar__inner">
         <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" data-i18n-aria="aria_brand_home">
-          <img class="brand__logo" src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/logo-is.svg'); ?>" alt="" aria-hidden="true" />
+          <img class="brand__logo" src="<?php echo esc_url('https://i.imgur.com/bsQTVXQ.png'); ?>" alt="" aria-hidden="true" />
           <span class="brand__text">Investiciju Skola</span>
         </a>
 
         <nav class="nav" data-i18n-aria="aria_nav_primary">
-          <a class="nav__link" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="nav_program">Program</a>
-          <a class="nav__link" href="<?php echo esc_url(home_url('/mentorship/')); ?>" data-i18n="nav_mentorship">Mentorship</a>
-          <a class="nav__link" href="<?php echo esc_url(home_url('/faq/')); ?>" data-i18n="nav_faq">FAQ</a>
-          <span class="nav__divider" aria-hidden="true"></span>
-          <a class="nav__link" href="<?php echo esc_url(home_url('/about/')); ?>" data-i18n="nav_about">About</a>
-          <a class="nav__link" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services">Services</a>
-          <a class="nav__link" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="nav_contact">Contact</a>
+          <a class="<?php echo esc_attr(investiciju_skola_nav_link_class('program')); ?>" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="nav_program">Program</a>
+          <a class="<?php echo esc_attr(investiciju_skola_nav_link_class('services')); ?>" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services">Services</a>
+          <a class="<?php echo esc_attr(investiciju_skola_nav_link_class('contact')); ?>" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="nav_contact">Contact</a>
         </nav>
 
         <div class="topbar__actions">
+          <a class="button" href="<?php echo esc_url(home_url('/contact/')); ?>">Kontakti</a>
           <select class="langselect" data-lang-select data-i18n-aria="aria_label_language">
             <option value="en">ENG</option>
             <option value="lv">LV</option>
             <option value="ru">RU</option>
           </select>
-          <a class="button button--ghost" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="cta_program">Program</a>
-          <a class="button" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="cta_contact">Contact</a>
 
           <button class="iconbtn" type="button" data-menu-button data-i18n-aria="aria_open_menu" aria-expanded="false">
             <span class="iconbtn__bars" aria-hidden="true"></span>
@@ -75,10 +70,9 @@ if (!defined('ABSPATH')) {
       <div class="mobilemenu" data-mobile-menu hidden>
         <div class="container mobilemenu__inner">
           <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="nav_program">Program</a>
-          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/mentorship/')); ?>" data-i18n="nav_mentorship">Mentorship</a>
-          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/faq/')); ?>" data-i18n="nav_faq">FAQ</a>
+          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services">Services</a>
+          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="nav_contact">Contact</a>
           <div class="mobilemenu__divider"></div>
-          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/about/')); ?>" data-i18n="nav_about">About</a>
           <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services">Services</a>
           <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="nav_contact">Contact</a>
           <div class="mobilemenu__cta">

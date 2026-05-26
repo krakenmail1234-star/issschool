@@ -39,6 +39,11 @@ html {
   background: var(--bg);
 }
 
+/* Ensure page content is not hidden behind a fixed header */
+body {
+  padding-top: var(--header-h);
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -106,7 +111,7 @@ video {
 }
 
 .topbar {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 40;
   border-bottom: 1px solid color-mix(in srgb, var(--border) 85%, transparent);

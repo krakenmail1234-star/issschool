@@ -7,6 +7,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+function investiciju_skola_nav_link_class(string $slug): string
+{
+    return is_page($slug) ? 'nav__link is-active' : 'nav__link';
+}
+
 function investiciju_skola_enqueue_assets(): void
 {
     $ver = wp_get_theme()->get('Version');

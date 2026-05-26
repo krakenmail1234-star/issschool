@@ -18,8 +18,8 @@ get_header();
         <span data-i18n="home_h1c">edge.</span>
       </h1>
       <p class="lead" data-i18n="home_lead">
-        Structured learning for trading fundamentals and market mechanics, weekly market briefings, and focused
-        mentorship.
+        Structured learning for trading fundamentals and market mechanics, weekly market briefings, and ongoing
+        support.
       </p>
       <div class="hero__cta">
         <a class="button" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="hero_cta_primary">Explore the program</a>
@@ -32,7 +32,7 @@ get_header();
         </div>
         <div class="stat">
           <div class="stat__label" data-i18n="home_stat2_k">Format</div>
-          <div class="stat__value" data-i18n="home_stat2_v">Lessons · Briefings · Mentorship</div>
+          <div class="stat__value" data-i18n="home_stat2_v">Lessons · Briefings · Support</div>
         </div>
         <div class="stat">
           <div class="stat__label" data-i18n="home_stat3_k">Cadence</div>
@@ -107,7 +107,7 @@ get_header();
       <article class="card">
         <div class="card__top">
           <div class="icon icon--shield" aria-hidden="true"></div>
-          <h3 class="h3" data-i18n="home_prog_card3_title">Mentorship layer</h3>
+          <h3 class="h3" data-i18n="home_prog_card3_title">Support layer</h3>
         </div>
         <p data-i18n="home_prog_card3_text">Feedback, review, and guidance tailored to your stage — from foundations to refinement.</p>
         <ul class="list">
@@ -149,7 +149,7 @@ get_header();
       </figure>
       <figure class="review">
         <blockquote class="review__quote" data-i18n="review_3_quote">
-          Mentorship gave me a weekly rhythm I could sustain. I treat learning like engineering now — not gambling.
+          Ongoing support gave me a weekly rhythm I could sustain. I treat learning like engineering now — not gambling.
         </blockquote>
         <figcaption class="review__footer">
           <div class="review__name" data-i18n="review_3_name">L.S.</div>
