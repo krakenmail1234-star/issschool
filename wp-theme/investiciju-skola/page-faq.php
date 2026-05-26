@@ -35,29 +35,44 @@ get_header();
   <div class="container">
     <div class="faq">
       <details class="faq__item">
-        <summary data-i18n="faq_q1">Is this financial advice?</summary>
-        <div class="faq__body" data-i18n="faq_a1">
-          No. This is educational content and support around process and frameworks.
-        </div>
+        <summary data-i18n="faq_q1">Are trainings suitable for beginners?</summary>
+        <div class="faq__body" data-i18n="faq_a1">Yes. Programs are tailored from zero to advanced, depending on your team.</div>
       </details>
       <details class="faq__item">
-        <summary data-i18n="faq_q2">Do you cover beginners?</summary>
-        <div class="faq__body" data-i18n="faq_a2">
-          Yes — we start with clean foundations, then build toward execution and review loops.
-        </div>
+        <summary data-i18n="faq_q2">Do I need programming skills?</summary>
+        <div class="faq__body" data-i18n="faq_a2">No — except when we train developers on Cursor and GitHub Copilot.</div>
       </details>
       <details class="faq__item">
-        <summary data-i18n="faq_q3">What instruments do you focus on?</summary>
-        <div class="faq__body" data-i18n="faq_a3">
-          FX majors, indices, and crypto — with overviews that emphasize behavior and drivers.
-        </div>
+        <summary data-i18n="faq_q3">What language are sessions in?</summary>
+        <div class="faq__body" data-i18n="faq_a3">Primarily Latvian, with English terminology as standard in the AI field.</div>
       </details>
       <details class="faq__item">
-        <summary data-i18n="faq_q4">How do I join the Discord?</summary>
-        <div class="faq__body" data-i18n="faq_a4">
-          Use the Discord page and click the invite button. The invite URL is configured in the site settings file
-          (`scripts/site.js`).
-        </div>
+        <summary data-i18n="faq_q4">Can we do on-site training?</summary>
+        <div class="faq__body" data-i18n="faq_a4">Yes — in Riga, other Latvian cities, or at your office.</div>
+      </details>
+      <details class="faq__item">
+        <summary data-i18n="faq_q5">How long is a typical session?</summary>
+        <div class="faq__body" data-i18n="faq_a5">Intro sessions are usually 1.5–2 hours. Corporate programs are planned around your goals.</div>
+      </details>
+      <details class="faq__item">
+        <summary data-i18n="faq_q6">Which AI tools do you cover?</summary>
+        <div class="faq__body" data-i18n="faq_a6">ChatGPT, Claude, Cursor, GitHub Copilot, and others depending on your tasks.</div>
+      </details>
+      <details class="faq__item">
+        <summary data-i18n="faq_q7">How does payment work?</summary>
+        <div class="faq__body" data-i18n="faq_a7">You can purchase services online via Stripe. Corporate projects get a custom quote.</div>
+      </details>
+      <details class="faq__item">
+        <summary data-i18n="faq_q8">Is data confidentiality covered?</summary>
+        <div class="faq__body" data-i18n="faq_a8">Yes. We work with your materials safely; corporate clients can sign an NDA.</div>
+      </details>
+      <details class="faq__item">
+        <summary data-i18n="faq_q9">Can you train executives only?</summary>
+        <div class="faq__body" data-i18n="faq_a9">Yes. Short leadership sessions on AI strategy, risks, and adoption priorities.</div>
+      </details>
+      <details class="faq__item">
+        <summary data-i18n="faq_q10">How do I get started?</summary>
+        <div class="faq__body" data-i18n="faq_a10">Email info@intelektaskola.lv, use the contact form, or book via the Services page.</div>
       </details>
     </div>
 

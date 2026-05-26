@@ -101,7 +101,7 @@ get_header();
           <li>Jautājumi un atbildes</li>
         </ul>
         <div class="panel__actions">
-          <a class="button" href="#" data-stripe-link="training">Pirkt ar Stripe</a>
+          <a class="button" href="#" data-stripe-link="training">Iegādāties</a>
         </div>
       </article>
 
@@ -117,7 +117,7 @@ get_header();
           <li>Drošības un kvalitātes pārbaudes</li>
         </ul>
         <div class="panel__actions">
-          <a class="button" href="#" data-stripe-link="automation">Pirkt ar Stripe</a>
+          <a class="button" href="#" data-stripe-link="automation">Iegādāties</a>
         </div>
       </article>
 
@@ -133,58 +133,9 @@ get_header();
           <li>Nodevums + īsa apmācība</li>
         </ul>
         <div class="panel__actions">
-          <a class="button" href="#" data-stripe-link="integration">Pirkt ar Stripe</a>
+          <a class="button" href="#" data-stripe-link="integration">Rezervēt</a>
         </div>
       </article>
-    </div>
-  </div>
-</section>
-
-<section class="section section--alt">
-  <div class="container">
-    <div class="section__head">
-      <h2 class="h2" data-i18n="services_how_h2">How we work</h2>
-      <p class="sublead" data-i18n="services_how_sublead">A clean loop: learn → apply → review → iterate.</p>
-    </div>
-    <div class="timeline">
-      <div class="timeline__item">
-        <div class="timeline__k">1</div>
-        <div class="timeline__v">
-          <div class="timeline__title" data-i18n="services_step1_title">Assess</div>
-          <div class="timeline__text" data-i18n="services_step1_text">Where you are now — skill, process, and constraints.</div>
-        </div>
-      </div>
-      <div class="timeline__item">
-        <div class="timeline__k">2</div>
-        <div class="timeline__v">
-          <div class="timeline__title" data-i18n="services_step2_title">Design</div>
-          <div class="timeline__text" data-i18n="services_step2_text">A simple plan with rules and conditions that fit your stage.</div>
-        </div>
-      </div>
-      <div class="timeline__item">
-        <div class="timeline__k">3</div>
-        <div class="timeline__v">
-          <div class="timeline__title" data-i18n="services_step3_title">Execute</div>
-          <div class="timeline__text" data-i18n="services_step3_text">Repeat the protocol with a calm cadence.</div>
-        </div>
-      </div>
-      <div class="timeline__item">
-        <div class="timeline__k">4</div>
-        <div class="timeline__v">
-          <div class="timeline__title" data-i18n="services_step4_title">Review</div>
-          <div class="timeline__text" data-i18n="services_step4_text">Tight feedback cycles that convert variance into learning.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout">
-      <div>
-        <div class="callout__title" data-i18n="services_callout_title">Want a recommendation?</div>
-        <div class="callout__text" data-i18n="services_callout_text">
-          Send your goals and current stage — we’ll suggest the right layer.
-        </div>
-      </div>
-      <a class="button" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="cta_contact">Contact</a>
     </div>
   </div>
 </section>
