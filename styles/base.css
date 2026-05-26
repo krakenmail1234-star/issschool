@@ -194,6 +194,7 @@ video {
   flex-wrap: nowrap;
   justify-content: center;
   min-width: 0;
+  width: 100%;
   position: relative;
   z-index: 1;
 }

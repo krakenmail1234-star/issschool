@@ -20,11 +20,9 @@ if (!defined('ABSPATH')) {
       $slug = get_post_field('post_name', get_queried_object_id());
       $i18n_page_map = array(
           'program' => array('meta_title_program', 'meta_desc_program'),
-          'about' => array('meta_title_about', 'meta_desc_about'),
           'services' => array('meta_title_services', 'meta_desc_services'),
           'privacy' => array('meta_title_privacy', 'meta_desc_privacy'),
           'discord' => array('meta_title_discord', 'meta_desc_discord'),
-          'mentorship' => array('meta_title_mentorship', 'meta_desc_mentorship'),
           'faq' => array('meta_title_faq', 'meta_desc_faq'),
           'contact' => array('meta_title_contact', 'meta_desc_contact'),
       );

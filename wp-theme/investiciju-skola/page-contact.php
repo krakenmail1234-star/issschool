@@ -25,7 +25,7 @@ get_header();
         </div>
         <div class="glasscard__body">
           <div class="mono subtle" data-i18n="contact_email_label">Email</div>
-          <div class="mono" data-contact-email>hello@example.com</div>
+          <div class="mono" data-contact-email>info@intelektaskola.lv</div>
           <div class="fineprint">
             <button class="button button--ghost" type="button" data-copy-email data-i18n="contact_copy_email">
               Copy email
@@ -83,9 +83,6 @@ get_header();
           <div class="aside__title" data-i18n="contact_quicklinks">Quick links</div>
           <div class="aside__line"><a class="link" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="nav_program">Program</a></div>
           <div class="aside__line"><a class="link" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services">Services</a></div>
-          <div class="aside__line">
-            <a class="link" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services">Services</a>
-          </div>
         </div>
         <div class="aside__card">
           <div class="aside__title" data-i18n="contact_boundary_title">Boundary</div>
