@@ -71,8 +71,6 @@ if (!defined('ABSPATH')) {
           <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services">Services</a>
           <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="nav_contact">Contact</a>
           <div class="mobilemenu__divider"></div>
-          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services">Services</a>
-          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="nav_contact">Contact</a>
           <div class="mobilemenu__cta">
             <a class="button button--ghost" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="hero_cta_primary">Explore the program</a>
             <a class="button" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="cta_contact">Contact</a>
