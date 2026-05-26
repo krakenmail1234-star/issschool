@@ -57,6 +57,17 @@ body {
   letter-spacing: 0.02em;
   font-size: 17px;
   overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer.footer {
+  margin-top: auto;
 }
 
 /* Prevent UA/theme “help” from shifting palette */
@@ -333,6 +344,9 @@ body.menu-open {
     align-items: center;
     justify-content: center;
   }
+  .topbar__actions .langselect {
+    display: none;
+  }
 }
 
 .langselect {
@@ -439,6 +453,13 @@ body.menu-open {
   padding: 16px 0 18px;
   display: grid;
   gap: 10px;
+}
+.mobilemenu__lang {
+  display: flex;
+  justify-content: flex-end;
+}
+.mobilemenu__lang .langselect {
+  width: 6.5rem;
 }
 .mobilemenu__link {
   display: block;

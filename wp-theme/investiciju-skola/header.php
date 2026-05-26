@@ -69,6 +69,13 @@ if (!defined('ABSPATH')) {
 
       <div class="mobilemenu" data-mobile-menu hidden>
         <div class="container mobilemenu__inner">
+          <div class="mobilemenu__lang">
+            <select class="langselect" data-lang-select data-i18n-aria="aria_label_language">
+              <option value="en">ENG</option>
+              <option value="lv">LV</option>
+              <option value="ru">RU</option>
+            </select>
+          </div>
           <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="nav_program" data-nav="program">Program</a>
           <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services" data-nav="services">Services</a>
           <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/musu-darbi/')); ?>" data-i18n="nav_work" data-nav="musu-darbi">Our work</a>
