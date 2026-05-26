@@ -8,6 +8,11 @@
       instagram: "https://www.instagram.com/intelektaskola/",
       linkedin: "https://www.linkedin.com/company/intelektaskola",
     },
+    stripeLinks: {
+      training: "https://buy.stripe.com/9B6bJ0gyD610dr00vP2ZO00",
+      automation: "https://buy.stripe.com/9B6bJ0gyD610dr00vP2ZO00",
+      integration: "https://buy.stripe.com/9B6bJ0gyD610dr00vP2ZO00",
+    },
   };
 
   const qs = (sel, root = document) => root.querySelector(sel);
@@ -29,6 +34,11 @@
   qsa("[data-social]").forEach((el) => {
     const key = el.getAttribute("data-social");
     if (key && config.social[key]) el.setAttribute("href", config.social[key]);
+  });
+
+  qsa("[data-stripe-link]").forEach((el) => {
+    const key = el.getAttribute("data-stripe-link");
+    if (key && config.stripeLinks[key]) el.setAttribute("href", config.stripeLinks[key]);
   });
 
   const header = qs("[data-elevates]");

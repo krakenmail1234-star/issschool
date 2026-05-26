@@ -8,6 +8,11 @@
       instagram: "https://www.instagram.com/intelektaskola/",
       linkedin: "https://www.linkedin.com/company/intelektaskola",
     },
+    stripeLinks: {
+      training: "https://buy.stripe.com/9B6bJ0gyD610dr00vP2ZO00",
+      automation: "https://buy.stripe.com/9B6bJ0gyD610dr00vP2ZO00",
+      integration: "https://buy.stripe.com/9B6bJ0gyD610dr00vP2ZO00",
+    },
   };
 
   const qs = (sel, root = document) => root.querySelector(sel);
@@ -29,6 +34,11 @@
   qsa("[data-social]").forEach((el) => {
     const key = el.getAttribute("data-social");
     if (key && config.social[key]) el.setAttribute("href", config.social[key]);
+  });
+
+  qsa("[data-stripe-link]").forEach((el) => {
+    const key = el.getAttribute("data-stripe-link");
+    if (key && config.stripeLinks[key]) el.setAttribute("href", config.stripeLinks[key]);
   });
 
   const header = qs("[data-elevates]");
@@ -75,6 +85,103 @@
     });
   };
   markActiveNav();
+
+  const initCarousels = () => {
+    qsa("[data-carousel]").forEach((root) => {
+      const track = qs("[data-carousel-track]", root);
+      const slides = qsa("[data-carousel-slide]", root);
+      const prev = qs("[data-carousel-prev]", root);
+      const next = qs("[data-carousel-next]", root);
+      const dotsWrap = qs("[data-carousel-dots]", root);
+      if (!track || slides.length === 0) return;
+
+      const originals = slides.slice();
+      const count = originals.length;
+      if (count > 1) {
+        // Seamless loop: clone last+first to create a continuous strip.
+        const firstClone = originals[0].cloneNode(true);
+        const lastClone = originals[count - 1].cloneNode(true);
+        firstClone.setAttribute("data-carousel-clone", "true");
+        lastClone.setAttribute("data-carousel-clone", "true");
+        track.insertBefore(lastClone, track.firstChild);
+        track.appendChild(firstClone);
+      }
+
+      let idx = count > 1 ? 1 : 0; // start on the first real slide if looping
+      let timer = null;
+      const interval = Number(root.getAttribute("data-interval") || "5500");
+      const autoplay = (root.getAttribute("data-autoplay") || "false") === "true";
+
+      const render = () => {
+        track.style.transform = `translateX(${-idx * 100}%)`;
+        if (dotsWrap) {
+          const current = count > 1 ? (idx - 1 + count) % count : 0;
+          qsa("button", dotsWrap).forEach((b, i) => b.setAttribute("aria-current", i === current ? "true" : "false"));
+        }
+      };
+
+      const go = (delta) => {
+        idx += delta;
+        render();
+      };
+
+      const jumpInstant = (to) => {
+        track.classList.add("is-instant");
+        idx = to;
+        render();
+        // Force reflow, then restore transition.
+        // eslint-disable-next-line no-unused-expressions
+        track.offsetHeight;
+        track.classList.remove("is-instant");
+      };
+
+      const stop = () => {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+      };
+      const start = () => {
+        stop();
+        if (!autoplay || count < 2) return;
+        timer = window.setInterval(() => go(1), Math.max(2500, interval));
+      };
+
+      if (dotsWrap) {
+        dotsWrap.innerHTML = "";
+        originals.forEach((_, i) => {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "carousel__dot";
+          b.setAttribute("aria-label", `Go to slide ${i + 1}`);
+          b.addEventListener("click", () => {
+            idx = count > 1 ? i + 1 : i;
+            render();
+            start();
+          });
+          dotsWrap.appendChild(b);
+        });
+      }
+
+      if (prev) prev.addEventListener("click", () => (go(-1), start()));
+      if (next) next.addEventListener("click", () => (go(1), start()));
+
+      // After sliding to clones, instantly jump to the corresponding real slide.
+      if (count > 1) {
+        track.addEventListener("transitionend", () => {
+          if (idx === 0) jumpInstant(count);
+          else if (idx === count + 1) jumpInstant(1);
+        });
+      }
+
+      root.addEventListener("mouseenter", stop);
+      root.addEventListener("mouseleave", start);
+      root.addEventListener("focusin", stop);
+      root.addEventListener("focusout", start);
+
+      render();
+      start();
+    });
+  };
+  initCarousels();
 
   // --- i18n (ENG / LAT / RUS) ---
   const I18N = {
@@ -128,6 +235,9 @@
       meta_desc_contact: "Book a free consultation or ask about corporate and individual AI training.",
       meta_title_work: "Our work — Intelekta Skola",
       meta_desc_work: "Selected AI training and implementation projects by Intelekta Skola.",
+
+      work_gallery_h2: "Work highlights",
+      work_gallery_lead: "A few visuals from completed projects. Use “‹” and “›” to browse.",
 
       work_badge: "Portfolio",
       work_h1: "Our work",
@@ -438,6 +548,9 @@
       meta_title_work: "Mūsu darbi — Intelekta Skola",
       meta_desc_work: "Izvēlēti Intelekta Skola projekti AI apmācībās un ieviešanā.",
 
+      work_gallery_h2: "Darbu piemēri",
+      work_gallery_lead: "Daži vizuāli piemēri no paveiktā. Nospied “‹” vai “›”, lai pārslēgtu.",
+
       work_badge: "Portfolio",
       work_h1: "Mūsu darbi",
       work_lead: "Izvēlēti projekti un sadarbības — no korporatīvām apmācībām līdz praktiskai AI ieviešanai komandās.",
@@ -747,6 +860,9 @@
       meta_desc_contact: "Бесплатная диагностическая встреча и коммерческие предложения по обучению ИИ.",
       meta_title_work: "Наши работы — Intelekta Skola",
       meta_desc_work: "Избранные проекты Intelekta Skola по обучению и внедрению ИИ.",
+
+      work_gallery_h2: "Примеры работ",
+      work_gallery_lead: "Несколько визуальных примеров. Нажмите “‹” или “›”, чтобы переключать.",
 
       work_badge: "Портфолио",
       work_h1: "Наши работы",

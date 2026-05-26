@@ -96,35 +96,38 @@
 
       <section class="section">
         <div class="container">
-          <div class="theme-grid">
-            <article class="theme-item">
-              <div class="theme-item__n" aria-hidden="true">1</div>
-              <div class="theme-item__body">
-                <h3 data-i18n="work_item1_title">Corporate AI training</h3>
-                <p data-i18n="work_item1_text">
-                  Multi-session program for a professional services team: prompting, document workflows, and safe adoption
-                  guidelines.
-                </p>
+          <div class="workshow">
+            <div class="workshow__head">
+              <h2 class="h2" data-i18n="work_gallery_h2">Darbu piemēri</h2>
+              <p class="sublead" data-i18n="work_gallery_lead">
+                Daži vizuāli piemēri no paveiktā. Nospied “‹” vai “›”, lai pārslēgtu.
+              </p>
+            </div>
+
+            <div class="carousel" data-carousel data-autoplay="true" data-interval="5500">
+              <div class="carousel__viewport" role="region" aria-roledescription="carousel" aria-label="Mūsu darbi">
+                <div class="carousel__track" data-carousel-track>
+                  <figure class="carousel__slide" data-carousel-slide>
+                    <img class="carousel__img" src="./assets/work/work-01.png" alt="Mūsu darbi — piemērs 1" loading="lazy" />
+                  </figure>
+                  <figure class="carousel__slide" data-carousel-slide>
+                    <img class="carousel__img" src="./assets/work/work-02.png" alt="Mūsu darbi — piemērs 2" loading="lazy" />
+                  </figure>
+                  <figure class="carousel__slide" data-carousel-slide>
+                    <img class="carousel__img" src="./assets/work/work-03.png" alt="Mūsu darbi — piemērs 3" loading="lazy" />
+                  </figure>
+                  <figure class="carousel__slide" data-carousel-slide>
+                    <img class="carousel__img" src="./assets/work/work-04.png" alt="Mūsu darbi — piemērs 4" loading="lazy" />
+                  </figure>
+                </div>
               </div>
-            </article>
-            <article class="theme-item">
-              <div class="theme-item__n" aria-hidden="true">2</div>
-              <div class="theme-item__body">
-                <h3 data-i18n="work_item2_title">Productivity sprint</h3>
-                <p data-i18n="work_item2_text">
-                  Hands-on workshop series focused on ChatGPT, Claude, and internal templates for marketing and operations.
-                </p>
+
+              <div class="carousel__controls">
+                <button class="carousel__btn" type="button" data-carousel-prev aria-label="Previous slide">‹</button>
+                <div class="carousel__dots" data-carousel-dots aria-label="Choose slide"></div>
+                <button class="carousel__btn" type="button" data-carousel-next aria-label="Next slide">›</button>
               </div>
-            </article>
-            <article class="theme-item">
-              <div class="theme-item__n" aria-hidden="true">3</div>
-              <div class="theme-item__body">
-                <h3 data-i18n="work_item3_title">Automation pilot</h3>
-                <p data-i18n="work_item3_text">
-                  Light automation design with review loops — from repetitive tasks to measurable time saved per week.
-                </p>
-              </div>
-            </article>
+            </div>
           </div>
 
           <div class="callout">

@@ -81,6 +81,65 @@ get_header();
   </div>
 </section>
 
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <h2 class="h2">Pakalpojumi un cenas</h2>
+      <p class="sublead">Ātrs starts vai konkrēta ieviešana. Pirkums notiek caur Stripe.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <div class="card__top">
+          <div class="icon icon--spark" aria-hidden="true"></div>
+          <h3 class="h3">AI Apmācības</h3>
+        </div>
+        <p><strong>150 EUR</strong> · Ievadlekcija</p>
+        <ul class="list">
+          <li>AI pamati + praktiska lietošana</li>
+          <li>Prompti, darba plūsmas, šabloni</li>
+          <li>Jautājumi un atbildes</li>
+        </ul>
+        <div class="panel__actions">
+          <a class="button" href="#" data-stripe-link="training">Pirkt ar Stripe</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__top">
+          <div class="icon icon--grid" aria-hidden="true"></div>
+          <h3 class="h3">AI Automatizācijas</h3>
+        </div>
+        <p><strong>150 EUR</strong> · Boti, Aģenti</p>
+        <ul class="list">
+          <li>Procesu automatizācija</li>
+          <li>Čatboti / aģenti konkrētiem uzdevumiem</li>
+          <li>Drošības un kvalitātes pārbaudes</li>
+        </ul>
+        <div class="panel__actions">
+          <a class="button" href="#" data-stripe-link="automation">Pirkt ar Stripe</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__top">
+          <div class="icon icon--shield" aria-hidden="true"></div>
+          <h3 class="h3">AI Integrācija / Web izstrāde</h3>
+        </div>
+        <p><strong>400 EUR</strong></p>
+        <ul class="list">
+          <li>Integrācijas ar esošām sistēmām</li>
+          <li>Web risinājums + AI funkcionalitāte</li>
+          <li>Nodevums + īsa apmācība</li>
+        </ul>
+        <div class="panel__actions">
+          <a class="button" href="#" data-stripe-link="integration">Pirkt ar Stripe</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="section section--alt">
   <div class="container">
     <div class="section__head">
