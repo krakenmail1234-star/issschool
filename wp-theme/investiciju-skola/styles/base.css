@@ -253,7 +253,7 @@ video {
     display: none;
   }
   .nav {
-    justify-content: flex-start;
+    justify-content: center;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
