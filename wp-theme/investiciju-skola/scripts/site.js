@@ -3,6 +3,11 @@
     discordInviteUrl: "https://discord.com/invite/REPLACE_ME",
     contactEmail: "info@intelektaskola.lv",
     contactSubjectPrefix: "Investiciju Skola — ",
+    social: {
+      facebook: "https://www.facebook.com/intelektaskola",
+      instagram: "https://www.instagram.com/intelektaskola/",
+      linkedin: "https://www.linkedin.com/company/intelektaskola",
+    },
   };
 
   const qs = (sel, root = document) => root.querySelector(sel);
@@ -20,6 +25,11 @@
     discordLink.setAttribute("href", config.discordInviteUrl);
     /* Same-tab navigation; invite URL is static config (replace in config). */
   }
+
+  qsa("[data-social]").forEach((el) => {
+    const key = el.getAttribute("data-social");
+    if (key && config.social[key]) el.setAttribute("href", config.social[key]);
+  });
 
   const header = qs("[data-elevates]");
   const setHeaderElevated = () => {
@@ -48,7 +58,7 @@
       else openMobileMenu();
     });
 
-    qsa("a[href^=\"#\"]", mobileMenu).forEach((a) => {
+    qsa("a[href]", mobileMenu).forEach((a) => {
       a.addEventListener("click", () => closeMobileMenu());
     });
 
@@ -57,11 +67,20 @@
     });
   }
 
+  const markActiveNav = () => {
+    const slug = window.location.pathname.replace(/\/$/, "").split("/").filter(Boolean).pop() || "";
+    qsa("[data-nav]").forEach((el) => {
+      el.classList.toggle("is-active", (el.getAttribute("data-nav") || "") === slug);
+    });
+  };
+  markActiveNav();
+
   // --- i18n (ENG / LAT / RUS) ---
   const I18N = {
     en: {
       nav_program: "Program",
       nav_discord: "Discord",
+      nav_work: "Our work",
       nav_faq: "FAQ",
       nav_services: "Services",
       nav_contact: "Contact",
@@ -345,6 +364,7 @@
     lv: {
       nav_program: "Programma",
       nav_discord: "Discord",
+      nav_work: "Mūsu darbi",
       nav_faq: "BUJ",
       nav_services: "Pakalpojumi",
       nav_contact: "Kontakti",
@@ -629,6 +649,7 @@
     ru: {
       nav_program: "Программа",
       nav_discord: "Discord",
+      nav_work: "Наши работы",
       nav_faq: "FAQ",
       nav_services: "Услуги",
       nav_contact: "Контакты",

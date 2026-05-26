@@ -24,6 +24,7 @@ if (!defined('ABSPATH')) {
           'privacy' => array('meta_title_privacy', 'meta_desc_privacy'),
           'discord' => array('meta_title_discord', 'meta_desc_discord'),
           'faq' => array('meta_title_faq', 'meta_desc_faq'),
+          'musu-darbi' => array('meta_title_work', 'meta_desc_work'),
           'contact' => array('meta_title_contact', 'meta_desc_contact'),
       );
       if (isset($i18n_page_map[$slug])) {
@@ -46,19 +47,20 @@ if (!defined('ABSPATH')) {
         </a>
 
         <nav class="nav" data-i18n-aria="aria_nav_primary">
-          <a class="<?php echo esc_attr(investiciju_skola_nav_link_class('program')); ?>" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="nav_program">Program</a>
-          <a class="<?php echo esc_attr(investiciju_skola_nav_link_class('services')); ?>" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services">Services</a>
-          <a class="<?php echo esc_attr(investiciju_skola_nav_link_class('contact')); ?>" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="nav_contact">Contact</a>
+          <a class="<?php echo esc_attr(investiciju_skola_nav_link_class('program')); ?>" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="nav_program" data-nav="program">Program</a>
+          <a class="<?php echo esc_attr(investiciju_skola_nav_link_class('services')); ?>" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services" data-nav="services">Services</a>
+          <a class="<?php echo esc_attr(investiciju_skola_nav_link_class('musu-darbi')); ?>" href="<?php echo esc_url(home_url('/musu-darbi/')); ?>" data-i18n="nav_work" data-nav="musu-darbi">Our work</a>
+          <a class="<?php echo esc_attr(investiciju_skola_nav_link_class('faq')); ?>" href="<?php echo esc_url(home_url('/faq/')); ?>" data-i18n="nav_faq" data-nav="faq">FAQ</a>
+          <a class="<?php echo esc_attr(investiciju_skola_nav_link_class('contact')); ?>" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="nav_contact" data-nav="contact">Contact</a>
         </nav>
 
         <div class="topbar__actions">
-          <a class="button" href="<?php echo esc_url(home_url('/contact/')); ?>">Kontakti</a>
           <select class="langselect" data-lang-select data-i18n-aria="aria_label_language">
             <option value="en">ENG</option>
             <option value="lv">LV</option>
             <option value="ru">RU</option>
           </select>
-
+          <a class="button" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="cta_contact">Contact</a>
           <button class="iconbtn" type="button" data-menu-button data-i18n-aria="aria_open_menu" aria-expanded="false">
             <span class="iconbtn__bars" aria-hidden="true"></span>
           </button>
@@ -67,13 +69,14 @@ if (!defined('ABSPATH')) {
 
       <div class="mobilemenu" data-mobile-menu hidden>
         <div class="container mobilemenu__inner">
-          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="nav_program">Program</a>
-          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services">Services</a>
-          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="nav_contact">Contact</a>
-          <div class="mobilemenu__divider"></div>
+          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="nav_program" data-nav="program">Program</a>
+          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services" data-nav="services">Services</a>
+          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/musu-darbi/')); ?>" data-i18n="nav_work" data-nav="musu-darbi">Our work</a>
+          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/faq/')); ?>" data-i18n="nav_faq" data-nav="faq">FAQ</a>
+          <a class="mobilemenu__link" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="nav_contact" data-nav="contact">Contact</a>
           <div class="mobilemenu__cta">
-            <a class="button button--ghost" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="hero_cta_primary">Explore the program</a>
-            <a class="button" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="cta_contact">Contact</a>
+            <a class="button" href="<?php echo esc_url(home_url('/contact/')); ?>" data-i18n="hero_cta_primary">Book a free consultation</a>
+            <a class="button button--ghost" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="hero_cta_secondary">View programs</a>
           </div>
         </div>
       </div>

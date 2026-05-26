@@ -3,6 +3,11 @@
     discordInviteUrl: "https://discord.com/invite/REPLACE_ME",
     contactEmail: "info@intelektaskola.lv",
     contactSubjectPrefix: "Intelekta Skola — ",
+    social: {
+      facebook: "https://www.facebook.com/intelektaskola",
+      instagram: "https://www.instagram.com/intelektaskola/",
+      linkedin: "https://www.linkedin.com/company/intelektaskola",
+    },
   };
 
   const qs = (sel, root = document) => root.querySelector(sel);
@@ -20,6 +25,11 @@
     discordLink.setAttribute("href", config.discordInviteUrl);
     /* Same-tab navigation; invite URL is static config (replace in config). */
   }
+
+  qsa("[data-social]").forEach((el) => {
+    const key = el.getAttribute("data-social");
+    if (key && config.social[key]) el.setAttribute("href", config.social[key]);
+  });
 
   const header = qs("[data-elevates]");
   const setHeaderElevated = () => {
@@ -71,6 +81,7 @@
     en: {
       nav_program: "Programs",
       nav_discord: "Community",
+      nav_work: "Our work",
       nav_faq: "FAQ",
       nav_services: "Services",
       nav_contact: "Contact",
@@ -96,6 +107,10 @@
       aria_nav_primary: "Primary navigation",
       aria_brand_home: "Intelekta Skola home",
       aria_open_menu: "Open menu",
+      footer_social_label: "Follow us",
+      aria_social_facebook: "Intelekta Skola on Facebook",
+      aria_social_instagram: "Intelekta Skola on Instagram",
+      aria_social_linkedin: "Intelekta Skola on LinkedIn",
       meta_title_home: "Intelekta Skola — AI skills training | ChatGPT, Claude, Cursor",
       meta_desc_home:
         "Professional AI training for teams and individuals: ChatGPT, Claude, Cursor, GitHub Copilot, productivity, automation, and safe adoption.",
@@ -111,6 +126,27 @@
       meta_desc_faq: "Beginner-friendly AI training, languages, on-site options, and prerequisites.",
       meta_title_contact: "Contact — Intelekta Skola",
       meta_desc_contact: "Book a free consultation or ask about corporate and individual AI training.",
+      meta_title_work: "Our work — Intelekta Skola",
+      meta_desc_work: "Selected AI training and implementation projects by Intelekta Skola.",
+
+      work_badge: "Portfolio",
+      work_h1: "Our work",
+      work_lead: "Selected projects and collaborations — from corporate training to practical AI adoption in teams.",
+      work_chip_practice: "Practice",
+      work_chip_results: "Results",
+      work_card_tagline: "Real teams · Real workflows",
+      work_card_note: "Replace placeholders with your case studies when ready.",
+      work_item1_title: "Corporate AI training",
+      work_item1_text:
+        "Multi-session program for a professional services team: prompting, document workflows, and safe adoption guidelines.",
+      work_item2_title: "Productivity sprint",
+      work_item2_text:
+        "Hands-on workshop series focused on ChatGPT, Claude, and internal templates for marketing and operations.",
+      work_item3_title: "Automation pilot",
+      work_item3_text:
+        "Light automation design with review loops — from repetitive tasks to measurable time saved per week.",
+      work_callout_title: "Want a similar outcome?",
+      work_callout_text: "Tell us about your team and goals — we'll propose a tailored plan.",
 
       privacy_title: "Privacy & cookies",
       privacy_intro:
@@ -354,6 +390,7 @@
     lv: {
       nav_program: "Programma",
       nav_discord: "Kopiena",
+      nav_work: "Mūsu darbi",
       nav_faq: "BUJ",
       nav_services: "Pakalpojumi",
       nav_contact: "Kontakti",
@@ -379,6 +416,10 @@
       aria_nav_primary: "Galvenā navigācija",
       aria_brand_home: "Intelekta Skola sākumlapa",
       aria_open_menu: "Atvērt izvēlni",
+      footer_social_label: "Sekojiet mums",
+      aria_social_facebook: "Intelekta Skola Facebook",
+      aria_social_instagram: "Intelekta Skola Instagram",
+      aria_social_linkedin: "Intelekta Skola LinkedIn",
       meta_title_home: "Intelekta Skola — AI prasmju apmācības | ChatGPT, Claude, Cursor",
       meta_desc_home:
         "Profesionālas MI apmācības uzņēmumiem un privātpersonām: ChatGPT, Claude, Cursor, Copilot, ikdiena, automatizācija, produktivitāte.",
@@ -394,6 +435,27 @@
       meta_desc_faq: "BUJ par AI apmācībām: iesācējiem, programmēšanu, valodu un klātieni.",
       meta_title_contact: "Kontakti — Intelekta Skola",
       meta_desc_contact: "Piesakies bezmaksas konsultācijai vai jautā par korporatīvajām un individuālajām programmām.",
+      meta_title_work: "Mūsu darbi — Intelekta Skola",
+      meta_desc_work: "Izvēlēti Intelekta Skola projekti AI apmācībās un ieviešanā.",
+
+      work_badge: "Portfolio",
+      work_h1: "Mūsu darbi",
+      work_lead: "Izvēlēti projekti un sadarbības — no korporatīvām apmācībām līdz praktiskai AI ieviešanai komandās.",
+      work_chip_practice: "Prakse",
+      work_chip_results: "Rezultāti",
+      work_card_tagline: "Reālas komandas · Reāli procesi",
+      work_card_note: "Aizvietojiet ar saviem case study, kad tie būs gatavi.",
+      work_item1_title: "Korporatīvās AI apmācības",
+      work_item1_text:
+        "Vairāku sesiju programma profesionālo pakalpojumu komandai: prompting, dokumentu plūsmas un droša ieviešana.",
+      work_item2_title: "Produktivitātes sprints",
+      work_item2_text:
+        "Praktiski darbnīcu cikli ar ChatGPT, Claude un iekšējām veidnēm mārketingam un operācijām.",
+      work_item3_title: "Automatizācijas pilots",
+      work_item3_text:
+        "Viegla automatizācijas plānošana ar pārskatīšanas cikliem — no rutīnas uz izmērāmu ietaupījumu nedēļā.",
+      work_callout_title: "Vēlaties līdzīgu rezultātu?",
+      work_callout_text: "Pastāstiet par komandu un mērķiem — piedāvāsim pielāgotu plānu.",
 
       privacy_title: "Privātums un sīkdatnes",
       privacy_intro:
@@ -638,6 +700,7 @@
     ru: {
       nav_program: "Программы",
       nav_discord: "Сообщество",
+      nav_work: "Наши работы",
       nav_faq: "FAQ",
       nav_services: "Услуги",
       nav_contact: "Контакты",
@@ -663,6 +726,10 @@
       aria_nav_primary: "Основная навигация",
       aria_brand_home: "Главная Intelekta Skola",
       aria_open_menu: "Открыть меню",
+      footer_social_label: "Мы в соцсетях",
+      aria_social_facebook: "Intelekta Skola в Facebook",
+      aria_social_instagram: "Intelekta Skola в Instagram",
+      aria_social_linkedin: "Intelekta Skola в LinkedIn",
       meta_title_home: "Intelekta Skola — обучение навыкам ИИ | ChatGPT, Claude, Cursor",
       meta_desc_home:
         "Корпоративное и индивидуальное обучение ИИ: ChatGPT, Claude, Cursor, Copilot, продуктивность и безопасность.",
@@ -678,6 +745,27 @@
       meta_desc_faq: "Вопросы об уровне подготовки, языке, очном формате и навыках программирования.",
       meta_title_contact: "Контакты — Intelekta Skola",
       meta_desc_contact: "Бесплатная диагностическая встреча и коммерческие предложения по обучению ИИ.",
+      meta_title_work: "Наши работы — Intelekta Skola",
+      meta_desc_work: "Избранные проекты Intelekta Skola по обучению и внедрению ИИ.",
+
+      work_badge: "Портфолио",
+      work_h1: "Наши работы",
+      work_lead: "Избранные проекты и сотрудничество — от корпоративного обучения до практического внедрения ИИ в командах.",
+      work_chip_practice: "Практика",
+      work_chip_results: "Результат",
+      work_card_tagline: "Реальные команды · Реальные процессы",
+      work_card_note: "Замените заглушки на ваши кейсы, когда они будут готовы.",
+      work_item1_title: "Корпоративное обучение ИИ",
+      work_item1_text:
+        "Многосессионная программа для команды профессиональных услуг: промпты, документооборот и безопасное внедрение.",
+      work_item2_title: "Спринт продуктивности",
+      work_item2_text:
+        "Практические воркшопы с ChatGPT, Claude и внутренними шаблонами для маркетинга и операций.",
+      work_item3_title: "Пилот автоматизации",
+      work_item3_text:
+        "Лёгкая автоматизация с циклами проверки — от рутины к измеримой экономии времени в неделю.",
+      work_callout_title: "Хотите похожий результат?",
+      work_callout_text: "Расскажите о команде и целях — предложим план под вас.",
 
       privacy_title: "Конфиденциальность и cookie",
       privacy_intro:
