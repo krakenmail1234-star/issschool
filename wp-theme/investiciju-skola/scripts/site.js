@@ -54,27 +54,55 @@
   const closeMobileMenu = () => {
     if (!menuBtn || !mobileMenu) return;
     menuBtn.setAttribute("aria-expanded", "false");
+    mobileMenu.classList.remove("is-open");
     mobileMenu.hidden = true;
+    document.body.classList.remove("menu-open");
   };
   const openMobileMenu = () => {
     if (!menuBtn || !mobileMenu) return;
     menuBtn.setAttribute("aria-expanded", "true");
     mobileMenu.hidden = false;
+    mobileMenu.classList.add("is-open");
+    document.body.classList.add("menu-open");
+  };
+  const toggleMobileMenu = () => {
+    const expanded = menuBtn?.getAttribute("aria-expanded") === "true";
+    if (expanded) closeMobileMenu();
+    else openMobileMenu();
   };
   if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener("click", () => {
-      const expanded = menuBtn.getAttribute("aria-expanded") === "true";
-      if (expanded) closeMobileMenu();
-      else openMobileMenu();
+    menuBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMobileMenu();
     });
 
     qsa("a[href]", mobileMenu).forEach((a) => {
       a.addEventListener("click", () => closeMobileMenu());
     });
 
+    document.addEventListener(
+      "click",
+      (e) => {
+        if (!mobileMenu.classList.contains("is-open")) return;
+        const t = e.target;
+        if (t instanceof Node && (menuBtn.contains(t) || mobileMenu.contains(t))) return;
+        closeMobileMenu();
+      },
+      true,
+    );
+
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeMobileMenu();
     });
+
+    window.addEventListener(
+      "resize",
+      () => {
+        if (window.matchMedia("(min-width: 1061px)").matches) closeMobileMenu();
+      },
+      { passive: true },
+    );
   }
 
   const markActiveNav = () => {
@@ -472,6 +500,9 @@
       services_card3_li1: "Habit building with AI",
       services_card3_li2: "Accountability and reviews",
       services_card3_li3: "Closed alumni community (as agreed)",
+      services_buy_training: "Purchase",
+      services_buy_automation: "Purchase",
+      services_buy_integration: "Reserve",
       services_how_h2: "How engagements run",
       services_how_sublead: "Free diagnostic → tailored curriculum → interactive practice → post-training support.",
       services_step1_title: "Diagnostic call",
@@ -799,6 +830,9 @@
       services_card3_li1: "Ieradumi strādāt ar AI",
       services_card3_li2: "Atskaites un atgriezeniskā saite",
       services_card3_li3: "Slēgta alumni kopiena (pēc vienošanās)",
+      services_buy_training: "Iegādāties",
+      services_buy_automation: "Iegādāties",
+      services_buy_integration: "Rezervēt",
       services_how_h2: "Kā norit sadarbība",
       services_how_sublead: "Bezmaksas diagnostika → programma → praktiskas nodarbības → pēcapmācību atbalsts.",
       services_step1_title: "Diagnostikas saruna",
@@ -1126,6 +1160,9 @@
       services_card3_li1: "Привычки работы с ИИ",
       services_card3_li2: "Отчётность и обратная связь",
       services_card3_li3: "Закрытое сообщество выпускников (по договорённости)",
+      services_buy_training: "Купить",
+      services_buy_automation: "Купить",
+      services_buy_integration: "Забронировать",
       services_how_h2: "Как проходит сотрудничество",
       services_how_sublead: "Бесплатная диагностика → программа → практика → поддержка после обучения.",
       services_step1_title: "Диагностика",

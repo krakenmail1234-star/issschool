@@ -28,52 +28,6 @@ if (!defined('ABSPATH')) {
             </div>
           </div>
         </div>
-        <div class="footer__faq">
-          <h2 class="footer__faq-title" data-i18n="footer_faq_title">BUJ</h2>
-          <div class="footer__faq-list faq faq--compact">
-            <details class="faq__item">
-              <summary data-i18n="faq_q1">Vai apmācības ir piemērotas iesācējiem?</summary>
-              <div class="faq__body" data-i18n="faq_a1">Jā. Programmas tiek veidotas atbilstoši dalībnieku līmenim.</div>
-            </details>
-            <details class="faq__item">
-              <summary data-i18n="faq_q2">Vai ir nepieciešamas programmēšanas zināšanas?</summary>
-              <div class="faq__body" data-i18n="faq_a2">Nē, izņemot gadījumos, kad apmācām programmētājus ar Cursor un Copilot.</div>
-            </details>
-            <details class="faq__item">
-              <summary data-i18n="faq_q3">Kādā valodā notiek apmācības?</summary>
-              <div class="faq__body" data-i18n="faq_a3">Galvenokārt latviešu valodā, ar angļu terminoloģiju.</div>
-            </details>
-            <details class="faq__item">
-              <summary data-i18n="faq_q4">Vai varam saņemt apmācības klātienē?</summary>
-              <div class="faq__body" data-i18n="faq_a4">Jā – Rīgā, citās Latvijas pilsētās vai jūsu birojā.</div>
-            </details>
-            <details class="faq__item">
-              <summary data-i18n="faq_q5">Kā ilgi ilgst viena apmācība?</summary>
-              <div class="faq__body" data-i18n="faq_a5">Ievadlekcija parasti 1,5–2 stundas. Korporatīvās programmas tiek plānotas pēc jūsu mērķiem.</div>
-            </details>
-            <details class="faq__item">
-              <summary data-i18n="faq_q6">Kādus AI rīkus jūs apgūstat?</summary>
-              <div class="faq__body" data-i18n="faq_a6">ChatGPT, Claude, Cursor, GitHub Copilot un citus rīkus atbilstoši uzdevumiem.</div>
-            </details>
-            <details class="faq__item">
-              <summary data-i18n="faq_q7">Kā notiek apmaksa?</summary>
-              <div class="faq__body" data-i18n="faq_a7">Pakalpojumus var iegādāties tiešsaistē caur Stripe. Korporatīvajiem projektiem — individuāls piedāvājums.</div>
-            </details>
-            <details class="faq__item">
-              <summary data-i18n="faq_q8">Vai dati un konfidencialitāte ir nodrošināta?</summary>
-              <div class="faq__body" data-i18n="faq_a8">Jā. Strādājam ar jūsu materiāliem droši; korporatīvajiem klientiem varam parakstīt NDA.</div>
-            </details>
-            <details class="faq__item">
-              <summary data-i18n="faq_q9">Vai ir iespējama apmācība tikai vadībai?</summary>
-              <div class="faq__body" data-i18n="faq_a9">Jā. Īsas sesijas vadītājiem par AI stratēģiju un ieviešanas prioritātēm.</div>
-            </details>
-            <details class="faq__item">
-              <summary data-i18n="faq_q10">Kā pieteikties?</summary>
-              <div class="faq__body" data-i18n="faq_a10">Rakstiet uz info@intelektaskola.lv, izmantojiet kontaktu formu vai rezervējiet caur Pakalpojumi lapu.</div>
-            </details>
-          </div>
-          <a class="footer__faq-more" href="<?php echo esc_url(home_url('/faq/')); ?>" data-i18n="footer_faq_more">Visi jautājumi →</a>
-        </div>
         <div class="footer__right">
           <a class="footer__link" href="<?php echo esc_url(home_url('/program/')); ?>" data-i18n="nav_program">Program</a>
           <a class="footer__link" href="<?php echo esc_url(home_url('/services/')); ?>" data-i18n="nav_services">Services</a>
