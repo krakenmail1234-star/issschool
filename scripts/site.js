@@ -57,6 +57,15 @@
     });
   }
 
+  const markActiveNav = () => {
+    const file = (window.location.pathname.split("/").pop() || "index.html").replace(/\.html$/i, "");
+    const page = file === "index" ? "" : file;
+    qsa("[data-nav]").forEach((el) => {
+      el.classList.toggle("is-active", (el.getAttribute("data-nav") || "") === page);
+    });
+  };
+  markActiveNav();
+
   // --- i18n (ENG / LAT / RUS) ---
   const I18N = {
     en: {

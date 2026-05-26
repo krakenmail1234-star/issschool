@@ -116,11 +116,13 @@ video {
 .topbar {
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 40;
   border-bottom: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
   background: color-mix(in srgb, var(--bg) 94%, transparent);
   backdrop-filter: blur(12px);
-  /* Stack mobile panel above page content */
   isolation: isolate;
 }
 .topbar[data-elevated="true"] {
@@ -128,10 +130,11 @@ video {
 }
 
 .topbar__inner {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  position: relative;
+  display: flex;
   align-items: center;
-  column-gap: clamp(8px, 1.5vw, 16px);
+  justify-content: space-between;
+  gap: clamp(8px, 1.5vw, 16px);
   min-height: var(--header-h);
 }
 
@@ -139,9 +142,11 @@ video {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 1 1 0;
   min-width: 0;
+  max-width: min(240px, 42vw);
   position: relative;
-  z-index: 3;
+  z-index: 2;
 }
 .brand__logo {
   width: 40px;
@@ -177,10 +182,7 @@ video {
 }
 
 /* Header fit rules (prevents overflow on mid widths) */
-.topbar__inner > * {
-  min-width: 0;
-}
-.brand {
+.topbar__inner > :not(.nav) {
   min-width: 0;
 }
 .brand__text {
@@ -188,14 +190,23 @@ video {
 }
 
 .nav {
-  display: flex;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
   align-items: center;
   gap: 2px;
   flex-wrap: nowrap;
   justify-content: center;
   min-width: 0;
-  width: 100%;
-  position: relative;
+  width: max-content;
+  max-width: min(560px, calc(100% - 280px));
+  padding: 4px 6px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  background: color-mix(in srgb, var(--panel) 78%, transparent);
+  box-shadow: var(--shadow-sm);
   z-index: 1;
 }
 .nav__link {
@@ -232,10 +243,11 @@ video {
   align-items: center;
   gap: 8px;
   justify-content: flex-end;
-  flex-shrink: 0;
+  flex: 1 1 0;
+  min-width: 0;
   flex-wrap: nowrap;
   position: relative;
-  z-index: 3;
+  z-index: 2;
 }
 
 /* Native <select> list paints above siblings; lift this stack while open/focused */
@@ -257,16 +269,12 @@ video {
 }
 
 @media (max-width: 1180px) {
-  .nav__divider {
-    display: none;
-  }
   .nav {
-    justify-content: center;
+    max-width: min(480px, calc(100% - 240px));
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 0 4px;
-    mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 16px), transparent);
   }
   .nav::-webkit-scrollbar {
     display: none;
@@ -290,30 +298,22 @@ video {
   }
 }
 
-@media (max-width: 1060px) {
-  .topbar__inner {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    column-gap: 10px;
+@media (max-width: 1140px) {
+  .topbar__actions > .button:not(.iconbtn) {
+    display: none;
   }
+}
+
+@media (max-width: 1060px) {
   .brand {
     flex: 0 1 auto;
-    min-width: 0;
+    max-width: min(200px, 58vw);
   }
   .nav {
     display: none !important;
   }
   .topbar__actions {
     flex: 0 0 auto;
-    margin-left: auto;
-    flex-shrink: 0;
-  }
-  /* One clear primary in the bar on narrow screens */
-  .topbar__actions .button.button--ghost {
-    display: none;
   }
   .iconbtn {
     display: inline-flex;
@@ -419,6 +419,12 @@ video {
 .mobilemenu__link:hover {
   box-shadow: var(--shadow-sm);
   border-color: color-mix(in srgb, var(--border) 90%, transparent);
+}
+.mobilemenu__link.is-active {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--border));
+  background: color-mix(in srgb, var(--accent) 10%, var(--panel));
+  color: var(--text);
+  font-weight: 600;
 }
 .mobilemenu__divider {
   height: 1px;
@@ -1390,6 +1396,23 @@ video {
   font-size: 13px;
   line-height: 1.45;
   max-width: 42ch;
+}
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--text) 78%, var(--muted));
+}
+.footer__contact-item a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.footer__contact-item a:hover {
+  color: var(--text);
 }
 .footer__right {
   display: flex;
