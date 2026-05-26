@@ -370,6 +370,21 @@ body.menu-open {
 .iconbtn:hover {
   box-shadow: var(--shadow-sm);
 }
+
+/* Keep this after base .iconbtn (Safari/iOS: ensure hamburger is visible) */
+@media (max-width: 1060px) {
+  .iconbtn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav {
+    display: none !important;
+  }
+  .topbar__actions .langselect {
+    display: none !important;
+  }
+}
 .iconbtn__bars {
   width: 18px;
   height: 12px;
