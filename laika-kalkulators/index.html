@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="lv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>AI Laika Kalkulators — Intelekta Skola</title>
+    <meta
+      name="description"
+      content="Aprēķini, cik stundu un eiro mēnesī tava komanda var ietaupīt, ieviešot AI ikdienas darbā. Bezmaksas interaktīvs rīks."
+    />
+    <link rel="icon" href="../assets/logo-is.svg" type="image/svg+xml" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+            colors: { cream: '#fff9f0', ink: '#1a2332', muted: '#3d4a5c', accent: '#e85d04', sky: '#0ea5e9', sun: '#fde68a', good: '#059669' },
+            boxShadow: {
+              depth: '0 10px 30px -8px rgba(232,93,4,.25), 0 30px 60px -20px rgba(14,165,233,.25)',
+              glass: '0 8px 32px rgba(26,35,50,.12)',
+              lift: '0 24px 50px -12px rgba(26,35,50,.28)',
+            },
+            keyframes: { floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-18px)' } } },
+            animation: { floaty: 'floaty 9s ease-in-out infinite' },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #fff9f0; }
+      .blob { filter: blur(60px); opacity: .55; }
+      .scene { perspective: 1200px; }
+      .tilt { transform-style: preserve-3d; transition: transform .25s ease, box-shadow .25s ease; will-change: transform; }
+      .glass { background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.62)); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+      .grain { background-image: radial-gradient(rgba(26,35,50,.04) 1px, transparent 1px); background-size: 18px 18px; }
+      /* Range slider */
+      input[type='range'] { -webkit-appearance: none; appearance: none; height: 8px; border-radius: 99px; background: linear-gradient(90deg, #e85d04, #0ea5e9); outline: none; }
+      input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; height: 22px; width: 22px; border-radius: 50%; background: #fff; border: 3px solid #e85d04; box-shadow: 0 4px 12px rgba(232,93,4,.4); cursor: pointer; }
+      input[type='range']::-moz-range-thumb { height: 22px; width: 22px; border-radius: 50%; background: #fff; border: 3px solid #e85d04; cursor: pointer; }
+      .task-on { box-shadow: 0 0 0 2px #e85d04, 0 10px 30px -8px rgba(232,93,4,.3); }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased grain min-h-screen relative overflow-x-hidden">
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div class="blob animate-floaty absolute -top-24 -left-24 h-96 w-96 rounded-full bg-accent"></div>
+      <div class="blob animate-floaty absolute top-1/3 -right-24 h-[28rem] w-[28rem] rounded-full bg-sky" style="animation-delay:-3s"></div>
+      <div class="blob animate-floaty absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-good" style="animation-delay:-6s"></div>
+    </div>
+
+    <header class="sticky top-0 z-30 glass border-b border-black/5">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+        <a href="../index.html" class="flex items-center gap-3 group">
+          <img src="../assets/logo-is.svg" alt="" class="h-9 w-9 transition-transform group-hover:-rotate-6" />
+          <span class="text-lg font-extrabold tracking-tight">Intelekta Skola</span>
+        </a>
+        <div class="flex items-center gap-3">
+          <a href="../riki/index.html" class="hidden text-sm font-semibold text-muted hover:text-ink sm:block">← Visi rīki</a>
+          <a href="../contact.html" class="rounded-full bg-ink px-4 py-2 text-sm font-bold text-white shadow-glass transition hover:-translate-y-0.5 hover:shadow-lift">Pieteikties</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-5 pb-28 pt-12">
+      <section class="mb-10 text-center">
+        <div class="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-white/70 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-accent shadow-glass">
+          <span class="h-2 w-2 animate-pulse rounded-full bg-accent"></span>
+          Bezmaksas rīks · Cik tu ietaupi ar AI
+        </div>
+        <h1 class="mx-auto max-w-3xl text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
+          <span class="bg-gradient-to-r from-accent via-orange-500 to-sky bg-clip-text text-transparent">AI Laika Kalkulators</span>
+        </h1>
+        <p class="mx-auto mt-4 max-w-2xl text-lg font-medium text-muted">
+          Atzīmē rutīnas uzdevumus, kas patērē tavu nedēļu. Mēs parādīsim, cik stundu un eiro tava
+          komanda var ietaupīt mēnesī, kad AI paveic daļu darba.
+        </p>
+      </section>
+
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-5">
+        <!-- Inputs -->
+        <section class="lg:col-span-3">
+          <div class="mb-4 flex items-center gap-3">
+            <span class="grid h-8 w-8 place-items-center rounded-full bg-accent text-sm font-extrabold text-white shadow-depth">1</span>
+            <h2 class="text-xl font-bold">Tavi nedēļas uzdevumi</h2>
+          </div>
+          <div id="taskList" class="space-y-3"></div>
+
+          <div class="mt-6 rounded-3xl border border-white/60 glass p-5 shadow-glass">
+            <label class="flex items-center justify-between gap-4">
+              <span class="font-semibold">Vidējā darba stundas izmaksa</span>
+              <span class="text-lg font-extrabold text-accent"><span id="rateVal">25</span> €/h</span>
+            </label>
+            <input id="rate" type="range" min="10" max="120" step="5" value="25" class="mt-3 w-full" />
+            <p class="mt-2 text-xs text-muted">Iekļauj algu + nodokļus + pieskaitāmās izmaksas. Vidēji 20–40 €/h Latvijā.</p>
+
+            <label class="mt-5 flex items-center justify-between gap-4">
+              <span class="font-semibold">Cilvēki, kas dara šos darbus</span>
+              <span class="text-lg font-extrabold text-accent"><span id="peopleVal">3</span></span>
+            </label>
+            <input id="people" type="range" min="1" max="50" step="1" value="3" class="mt-3 w-full" />
+          </div>
+        </section>
+
+        <!-- Results -->
+        <section class="scene lg:col-span-2">
+          <div class="mb-4 flex items-center gap-3">
+            <span class="grid h-8 w-8 place-items-center rounded-full bg-sky text-sm font-extrabold text-white shadow-depth">2</span>
+            <h2 class="text-xl font-bold">Tavs ietaupījums</h2>
+          </div>
+
+          <div id="resultCard" class="tilt sticky top-24 overflow-hidden rounded-[2rem] border border-white/60 bg-gradient-to-br from-ink to-[#0b1422] p-7 text-white shadow-lift">
+            <div class="blob absolute -right-10 -top-10 h-48 w-48 rounded-full bg-accent/60"></div>
+            <div class="blob absolute -bottom-12 -left-10 h-48 w-48 rounded-full bg-sky/60"></div>
+            <div class="relative">
+              <div class="text-sm font-semibold uppercase tracking-wider text-white/60">Ietaupītais laiks mēnesī</div>
+              <div class="mt-1 flex items-end gap-2">
+                <span id="hoursOut" class="text-6xl font-extrabold leading-none">0</span>
+                <span class="mb-1 text-xl font-bold text-white/70">h</span>
+              </div>
+
+              <div class="mt-6 rounded-2xl bg-white/10 p-4">
+                <div class="text-sm font-semibold uppercase tracking-wider text-white/60">Naudas vērtība mēnesī</div>
+                <div class="mt-1 text-4xl font-extrabold text-sun">€ <span id="moneyOut">0</span></div>
+              </div>
+
+              <div class="mt-4 grid grid-cols-2 gap-3">
+                <div class="rounded-2xl bg-white/10 p-3 text-center">
+                  <div class="text-2xl font-extrabold"><span id="daysOut">0</span></div>
+                  <div class="text-xs text-white/60">pilnas dienas / gadā</div>
+                </div>
+                <div class="rounded-2xl bg-white/10 p-3 text-center">
+                  <div class="text-2xl font-extrabold">€ <span id="yearOut">0</span></div>
+                  <div class="text-xs text-white/60">gadā</div>
+                </div>
+              </div>
+
+              <!-- before/after bar -->
+              <div class="mt-6">
+                <div class="mb-1 flex justify-between text-xs text-white/60"><span>Pirms</span><span>Pēc AI</span></div>
+                <div class="h-4 w-full overflow-hidden rounded-full bg-white/15">
+                  <div id="saveBar" class="h-full rounded-full bg-gradient-to-r from-accent to-sun transition-all duration-700" style="width:0%"></div>
+                </div>
+                <div class="mt-1 text-right text-xs text-white/70"><span id="pctOut">0</span>% mazāk rutīnas laika</div>
+              </div>
+
+              <a href="../contact.html" class="mt-6 block rounded-full bg-accent px-5 py-3 text-center font-bold shadow-depth transition hover:-translate-y-1">
+                Pārvērst šo ietaupījumu realitātē →
+              </a>
+              <p id="emptyHint" class="mt-3 text-center text-xs text-white/50">Atzīmē vismaz vienu uzdevumu augstāk.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <p class="mx-auto mt-8 max-w-3xl text-center text-xs text-muted">
+        * Aprēķins ir orientējošs un balstīts uz tipiskiem AI laika ietaupījumiem katram uzdevumu veidam.
+        Reālais rezultāts atkarīgs no procesiem un apmācības — tieši ar to mēs palīdzam.
+      </p>
+    </main>
+
+    <footer class="mx-auto max-w-6xl px-5 pb-10 text-center text-sm text-muted">
+      © <span id="year"></span> Intelekta Skola · AI Laika Kalkulators ·
+      <a href="../index.html" class="font-semibold text-accent hover:underline">intelektaskola.lv</a>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="lv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>Bezmaksas AI rīki — Intelekta Skola</title>
+    <meta
+      name="description"
+      content="Bezmaksas interaktīvi AI rīki tavam biznesam: promptu darbnīca, laika kalkulators un AI gatavības tests."
+    />
+    <link rel="icon" href="../assets/logo-is.svg" type="image/svg+xml" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+            colors: { cream: '#fff9f0', ink: '#1a2332', muted: '#3d4a5c', accent: '#e85d04', sky: '#0ea5e9', sun: '#fde68a', good: '#059669' },
+            boxShadow: {
+              depth: '0 10px 30px -8px rgba(232,93,4,.25), 0 30px 60px -20px rgba(14,165,233,.25)',
+              glass: '0 8px 32px rgba(26,35,50,.12)',
+              lift: '0 24px 50px -12px rgba(26,35,50,.28)',
+            },
+            keyframes: { floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-18px)' } } },
+            animation: { floaty: 'floaty 9s ease-in-out infinite' },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #fff9f0; }
+      .blob { filter: blur(60px); opacity: .55; }
+      .scene { perspective: 1200px; }
+      .tilt { transform-style: preserve-3d; transition: transform .25s ease, box-shadow .25s ease; will-change: transform; }
+      .tilt .up { transform: translateZ(36px); }
+      .glass { background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.62)); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+      .grain { background-image: radial-gradient(rgba(26,35,50,.04) 1px, transparent 1px); background-size: 18px 18px; }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased grain min-h-screen relative overflow-x-hidden">
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div class="blob animate-floaty absolute -top-24 -left-24 h-96 w-96 rounded-full bg-accent"></div>
+      <div class="blob animate-floaty absolute top-1/3 -right-24 h-[28rem] w-[28rem] rounded-full bg-sky" style="animation-delay:-3s"></div>
+      <div class="blob animate-floaty absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-sun" style="animation-delay:-6s"></div>
+    </div>
+
+    <header class="sticky top-0 z-30 glass border-b border-black/5">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+        <a href="../index.html" class="flex items-center gap-3 group">
+          <img src="../assets/logo-is.svg" alt="" class="h-9 w-9 transition-transform group-hover:-rotate-6" />
+          <span class="text-lg font-extrabold tracking-tight">Intelekta Skola</span>
+        </a>
+        <nav class="hidden items-center gap-6 text-sm font-semibold text-muted md:flex">
+          <a href="../program.html" class="hover:text-ink transition">Programma</a>
+          <a href="../services.html" class="hover:text-ink transition">Pakalpojumi</a>
+          <a href="../faq.html" class="hover:text-ink transition">BUJ</a>
+        </nav>
+        <a href="../contact.html" class="rounded-full bg-ink px-4 py-2 text-sm font-bold text-white shadow-glass transition hover:-translate-y-0.5 hover:shadow-lift">Pieteikties</a>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-5 pb-28 pt-14">
+      <section class="mb-12 text-center">
+        <div class="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-white/70 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-accent shadow-glass">
+          <span class="h-2 w-2 animate-pulse rounded-full bg-accent"></span>
+          Bezmaksas · Bez reģistrācijas
+        </div>
+        <h1 class="mx-auto max-w-3xl text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
+          <span class="bg-gradient-to-r from-accent via-orange-500 to-sky bg-clip-text text-transparent">AI rīki tavam biznesam</span>
+        </h1>
+        <p class="mx-auto mt-4 max-w-2xl text-lg font-medium text-muted">
+          Trīs mazi rīki, kas parāda, kā AI atvieglo ikdienas darbu. Izmēģini — un, ja patīk,
+          mēs apmācīsim tavu komandu to darīt katru dienu.
+        </p>
+      </section>
+
+      <section class="scene grid grid-cols-1 gap-6 md:grid-cols-3">
+        <!-- Tool 1 -->
+        <a href="../prompt-darbnica/index.html" class="tilt group flex flex-col rounded-[2rem] border border-white/60 glass p-7 shadow-glass hover:shadow-depth">
+          <div class="up">
+            <div class="mb-4 grid h-16 w-16 place-items-center rounded-3xl bg-gradient-to-br from-accent to-sky text-4xl shadow-depth">🎯</div>
+            <h2 class="text-2xl font-extrabold leading-tight">Promptu Darbnīca</h2>
+            <p class="mt-2 text-muted">Izvēlies biznesa scenāriju un saņem gatavu, profesionālu AI promptu — ar pirms/pēc piemēru.</p>
+          </div>
+          <span class="up mt-6 inline-flex items-center gap-2 font-bold text-accent">Atvērt rīku <span class="transition group-hover:translate-x-1">→</span></span>
+        </a>
+
+        <!-- Tool 2 -->
+        <a href="../laika-kalkulators/index.html" class="tilt group flex flex-col rounded-[2rem] border border-white/60 glass p-7 shadow-glass hover:shadow-depth">
+          <div class="up">
+            <div class="mb-4 grid h-16 w-16 place-items-center rounded-3xl bg-gradient-to-br from-good to-sky text-4xl shadow-depth">⏱️</div>
+            <h2 class="text-2xl font-extrabold leading-tight">AI Laika Kalkulators</h2>
+            <p class="mt-2 text-muted">Aprēķini, cik stundu un eiro mēnesī tava komanda var ietaupīt, ieviešot AI ikdienā.</p>
+          </div>
+          <span class="up mt-6 inline-flex items-center gap-2 font-bold text-accent">Atvērt rīku <span class="transition group-hover:translate-x-1">→</span></span>
+        </a>
+
+        <!-- Tool 3 -->
+        <a href="../ai-gatavibas-tests/index.html" class="tilt group flex flex-col rounded-[2rem] border border-white/60 glass p-7 shadow-glass hover:shadow-depth">
+          <div class="up">
+            <div class="mb-4 grid h-16 w-16 place-items-center rounded-3xl bg-gradient-to-br from-sky to-accent text-4xl shadow-depth">🧭</div>
+            <h2 class="text-2xl font-extrabold leading-tight">AI Gatavības Tests</h2>
+            <p class="mt-2 text-muted">6 jautājumi → tavs gatavības rezultāts un personalizēta ceļa karte, ar ko sākt.</p>
+          </div>
+          <span class="up mt-6 inline-flex items-center gap-2 font-bold text-accent">Atvērt rīku <span class="transition group-hover:translate-x-1">→</span></span>
+        </a>
+      </section>
+
+      <!-- CTA -->
+      <section class="scene mt-16">
+        <div class="tilt relative overflow-hidden rounded-[2rem] border border-white/60 bg-gradient-to-br from-ink to-[#0b1422] p-10 text-center text-white shadow-lift">
+          <div class="blob absolute -right-10 -top-10 h-56 w-56 rounded-full bg-accent/60"></div>
+          <div class="blob absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-sky/60"></div>
+          <div class="up relative">
+            <h2 class="text-3xl font-extrabold md:text-4xl">No rīka līdz reālam rezultātam</h2>
+            <p class="mx-auto mt-3 max-w-xl text-white/80">Intelekta Skola māca komandas un uzņēmumus ieviest AI ikdienas darbā — ar izmērāmu efektu. Pieteikies bezmaksas konsultācijai.</p>
+            <div class="mt-6 flex flex-wrap justify-center gap-3">
+              <a href="../contact.html" class="rounded-full bg-accent px-6 py-3 font-bold shadow-depth transition hover:-translate-y-1">Pieteikties konsultācijai</a>
+              <a href="../program.html" class="rounded-full border border-white/30 bg-white/10 px-6 py-3 font-bold transition hover:-translate-y-1">Skatīt programmu</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mx-auto max-w-6xl px-5 pb-10 text-center text-sm text-muted">
+      © <span id="year"></span> Intelekta Skola · Bezmaksas AI rīki ·
+      <a href="../index.html" class="font-semibold text-accent hover:underline">intelektaskola.lv</a>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+      document.querySelectorAll('.tilt').forEach((el) => {
+        el.addEventListener('pointermove', (e) => {
+          const r = el.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          el.style.transform = `rotateX(${(-py * 7).toFixed(2)}deg) rotateY(${(px * 7).toFixed(2)}deg)`;
+        });
+        el.addEventListener('pointerleave', () => (el.style.transform = ''));
+      });
+    </script>
+  </body>
+</html>
