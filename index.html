@@ -1,19 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="lv">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#050506" />
-    <title>Intelekta Skola — Practical AI Mastery</title>
+    <meta name="theme-color" content="#05070d" />
+    <title>Intelekta Skola — Praktiska AI meistarība</title>
     <meta
       name="description"
-      content="Practical, hands-on AI education: ChatGPT & LLM mastery, prompt engineering, automation and real-world AI implementation for professionals and teams."
+      content="Praktiskas, uz darbību vērstas AI apmācības: ChatGPT un LLM meistarība, promptu inženierija, automatizācija un reāla mākslīgā intelekta ieviešana uzņēmumiem un komandām."
     />
     <link rel="icon" href="./assets/logo-is.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/aurora.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
@@ -22,99 +23,41 @@
           extend: {
             fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
             colors: {
-              ink: '#050506',
-              ink2: '#0b0b0f',
-              gold: '#e9c96b',
-              goldlt: '#f6e6b0',
-              golddeep: '#b8860b',
+              ink: '#05070d', ink2: '#0a0f1c',
+              brand: '#3b82f6', brandlt: '#93c5fd', branddeep: '#1d4ed8', electric: '#60a5fa',
+              muted: '#94a3b8',
             },
           },
         },
       };
     </script>
-    <style>
-      :root { --gold: #e9c96b; --goldlt: #f6e6b0; --gold-deep: #b8860b; }
-      * { -webkit-tap-highlight-color: transparent; }
-      html { scroll-behavior: smooth; }
-      body { background: #050506; color: #f4f4f5; overflow-x: hidden; }
-
-      /* ambient gold radial wash */
-      .ambient::before {
-        content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-        background:
-          radial-gradient(60rem 40rem at 50% -10%, rgba(233,201,107,.10), transparent 60%),
-          radial-gradient(40rem 30rem at 90% 20%, rgba(184,134,11,.08), transparent 60%),
-          radial-gradient(40rem 30rem at 0% 70%, rgba(233,201,107,.06), transparent 60%);
-      }
-
-      .gold-text { background: linear-gradient(135deg, #f6e6b0, #e9c96b 40%, #b8860b); -webkit-background-clip: text; background-clip: text; color: transparent; }
-      .gold-line { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-      .hairline { border: 1px solid rgba(233,201,107,.18); }
-
-      .glass {
-        background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
-        border: 1px solid rgba(233,201,107,.16);
-        backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-      }
-      .glass-strong { background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); }
-
-      .glow { box-shadow: 0 0 0 1px rgba(233,201,107,.14), 0 20px 60px -20px rgba(233,201,107,.18); }
-      .glow-hover { transition: transform .5s cubic-bezier(.25,0,0,1), box-shadow .5s cubic-bezier(.25,0,0,1), border-color .5s; }
-      .glow-hover:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 0 0 1px rgba(233,201,107,.4), 0 30px 70px -24px rgba(233,201,107,.35); border-color: rgba(233,201,107,.45); }
-
-      /* Framer-Motion-style reveal: opacity 0->1, y 24->0, 0.8s, ease [0.25,0,0,1] */
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.25,0,0,1), transform .8s cubic-bezier(.25,0,0,1); }
-      .reveal.is-in { opacity: 1; transform: none; }
-      @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
-
-      /* Pulsing gold glow behind the enroll button */
-      .btn-glow { position: relative; isolation: isolate; }
-      .btn-glow::before {
-        content: ''; position: absolute; inset: -3px; z-index: -1; border-radius: 9999px;
-        background: linear-gradient(120deg, #f6e6b0, #e9c96b, #b8860b, #e9c96b);
-        filter: blur(14px); opacity: .55; animation: pulse 3.2s ease-in-out infinite;
-      }
-      @keyframes pulse { 0%,100% { opacity: .4; } 50% { opacity: .85; } }
-
-      /* Roadmap line draw on scroll */
-      .road-line { transform: scaleX(0); transform-origin: left; transition: transform 1.4s cubic-bezier(.25,0,0,1); }
-      .road.drawn .road-line { transform: scaleX(1); }
-      .road-node { opacity: 0; transform: translateY(14px) scale(.9); transition: opacity .6s cubic-bezier(.25,0,0,1), transform .6s cubic-bezier(.25,0,0,1); }
-      .road.drawn .road-node { opacity: 1; transform: none; }
-      .road-vline { transform: scaleY(0); transform-origin: top; transition: transform 1.4s cubic-bezier(.25,0,0,1); }
-      .road.drawn .road-vline { transform: scaleY(1); }
-
-      .field { background: rgba(255,255,255,.04); border: 1px solid rgba(233,201,107,.18); transition: border-color .3s, box-shadow .3s; }
-      .field:focus { outline: none; border-color: rgba(233,201,107,.6); box-shadow: 0 0 0 3px rgba(233,201,107,.12); }
-
-      .nav-link { position: relative; }
-      .nav-link::after { content: ''; position: absolute; left: 0; bottom: -4px; height: 1px; width: 0; background: var(--gold); transition: width .35s cubic-bezier(.25,0,0,1); }
-      .nav-link:hover::after { width: 100%; }
-
-      ::selection { background: rgba(233,201,107,.3); color: #fff; }
-    </style>
   </head>
 
   <body class="ambient font-sans antialiased relative">
     <!-- ===================== NAV ===================== -->
     <header class="fixed top-0 inset-x-0 z-50">
       <div class="mx-auto max-w-7xl px-5">
-        <div class="mt-3 flex items-center justify-between rounded-2xl glass px-4 py-2.5">
-          <a href="#top" class="flex items-center gap-3 group">
+        <div class="mt-3 flex items-center justify-between gap-3 rounded-2xl glass px-4 py-2.5">
+          <a href="#top" class="flex items-center gap-3 group shrink-0">
             <img src="./assets/logo-is.svg" alt="" class="h-8 w-8 transition-transform duration-500 group-hover:rotate-[-8deg]" />
-            <span class="text-sm font-extrabold tracking-tight">INTELEKTA<span class="gold-text">SKOLA</span></span>
+            <span class="text-sm font-extrabold tracking-tight">INTELEKTA<span class="brand-text">SKOLA</span></span>
           </a>
-          <nav class="hidden items-center gap-7 text-sm font-medium text-zinc-300 md:flex">
-            <a href="#courses" class="nav-link">Courses</a>
-            <a href="#tools" class="nav-link">Free tools</a>
-            <a href="#why" class="nav-link">Why us</a>
-            <a href="#roadmap" class="nav-link">Roadmap</a>
-            <a href="#contact" class="nav-link">Contact</a>
+          <nav class="hidden items-center gap-7 text-sm font-medium text-zinc-300 lg:flex">
+            <a href="#courses" class="nav-link" data-i18n="nav.courses">Kursi</a>
+            <a href="#tools" class="nav-link" data-i18n="nav.tools">Bezmaksas rīki</a>
+            <a href="#why" class="nav-link" data-i18n="nav.why">Kāpēc mēs</a>
+            <a href="#roadmap" class="nav-link" data-i18n="nav.roadmap">Ceļa karte</a>
+            <a href="#contact" class="nav-link" data-i18n="nav.contact">Kontakti</a>
           </nav>
-          <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener"
-            class="rounded-full bg-gradient-to-r from-goldlt to-golddeep px-4 py-2 text-sm font-bold text-black transition hover:brightness-110">
-            Enroll
-          </a>
+          <div class="flex items-center gap-2">
+            <div class="langseg hidden items-center gap-1 rounded-full hairline bg-white/5 p-1 text-xs font-bold sm:flex" role="group" aria-label="Valoda">
+              <button type="button" data-lang="lv" class="rounded-full px-2.5 py-1">LV</button>
+              <button type="button" data-lang="en" class="rounded-full px-2.5 py-1">EN</button>
+              <button type="button" data-lang="ru" class="rounded-full px-2.5 py-1">RU</button>
+            </div>
+            <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener"
+              class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110" data-i18n="nav.enroll">Pieteikties</a>
+          </div>
         </div>
       </div>
     </header>
@@ -125,153 +68,141 @@
       <div class="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-transparent to-ink"></div>
 
       <div class="relative z-10 mx-auto max-w-4xl px-6 text-center" data-parallax="0.04">
-        <div class="reveal mx-auto mb-6 inline-flex items-center gap-2 rounded-full hairline bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-          <span class="h-1.5 w-1.5 rounded-full bg-gold"></span> AI Education · Implemented
+        <div class="reveal mx-auto mb-6 inline-flex items-center gap-2 rounded-full hairline bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-electric">
+          <span class="h-1.5 w-1.5 rounded-full bg-electric"></span> <span data-i18n="hero.badge">AI izglītība · ieviesta praksē</span>
         </div>
         <h1 class="reveal text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl" style="transition-delay:.08s">
-          Master the AI that actually<br class="hidden sm:block" />
-          <span class="gold-text">moves your business.</span>
+          <span data-i18n="hero.title1">Apgūsti mākslīgo intelektu, kas</span><br class="hidden sm:block" />
+          <span class="brand-text" data-i18n="hero.title2">patiešām virza tavu biznesu.</span>
         </h1>
-        <p class="reveal mx-auto mt-6 max-w-2xl text-lg text-zinc-300/90 md:text-xl" style="transition-delay:.16s">
-          Practical, hands-on training in ChatGPT, prompt engineering, automation and real-world AI
-          implementation — for professionals, teams and the genuinely curious.
+        <p class="reveal mx-auto mt-6 max-w-2xl text-lg text-zinc-300/90 md:text-xl" style="transition-delay:.16s" data-i18n="hero.sub">
+          Praktiskas, uz darbību vērstas apmācības ChatGPT, promptu inženierijā, automatizācijā un reālā AI ieviešanā.
         </p>
         <div class="reveal mt-9 flex flex-wrap items-center justify-center gap-4" style="transition-delay:.24s">
           <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener"
-            class="btn-glow rounded-full bg-gradient-to-r from-goldlt to-golddeep px-7 py-3.5 text-base font-bold text-black transition hover:brightness-110">
-            Enroll Today
-          </a>
-          <a href="#courses" class="rounded-full hairline bg-white/5 px-7 py-3.5 text-base font-semibold text-zinc-100 transition hover:bg-white/10">
-            Explore courses
-          </a>
+            class="btn-glow btn-primary rounded-full px-7 py-3.5 text-base font-bold transition hover:brightness-110" data-i18n="hero.cta1">Pieteikties tagad</a>
+          <a href="#courses" class="rounded-full hairline bg-white/5 px-7 py-3.5 text-base font-semibold text-zinc-100 transition hover:bg-white/10" data-i18n="hero.cta2">Apskatīt kursus</a>
         </div>
       </div>
 
-      <a href="#courses" class="absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-gold/70 animate-bounce" aria-label="Scroll down">
+      <a href="#courses" class="absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-electric/70 animate-bounce" aria-label="Scroll down">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </a>
     </section>
 
     <main class="relative z-10">
-      <!-- ===================== SECTION 1 · COURSES ===================== -->
+      <!-- SECTION 1 · COURSES -->
       <section id="courses" class="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div class="reveal mb-14 text-center">
-          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Courses</div>
-          <h2 class="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">Programs built for <span class="gold-text">real-world AI.</span></h2>
+          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="courses.label">Kursi</div>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
+            <span data-i18n="courses.head1">Programmas reālam</span> <span class="brand-text" data-i18n="courses.head2">AI darbam.</span>
+          </h2>
         </div>
         <div id="courseGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
       </section>
 
-      <!-- ===================== SECTION 2 · FREE TOOLS ===================== -->
+      <!-- SECTION 2 · FREE TOOLS -->
       <section id="tools" class="relative mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div class="reveal mb-14 text-center">
-          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Practice What You Learn</div>
-          <h2 class="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">Free AI Learning Tools</h2>
-          <p class="mx-auto mt-4 max-w-xl text-zinc-400">Try the methods before you enrol. No sign-up. Built by Intelekta Skola.</p>
+          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="tools.label">Mācies darot</div>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl" data-i18n="tools.head">Bezmaksas AI mācību rīki</h2>
+          <p class="mx-auto mt-4 max-w-xl text-zinc-400" data-i18n="tools.sub">Izmēģini metodes pirms pieteikšanās. Bez reģistrācijas.</p>
         </div>
         <div id="toolGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
       </section>
 
-      <!-- ===================== SECTION 3 · WHY US ===================== -->
+      <!-- SECTION 3 · WHY US -->
       <section id="why" class="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div class="reveal mb-14 text-center">
-          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Why Intelekta Skola</div>
-          <h2 class="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">Built for <span class="gold-text">practical AI mastery.</span></h2>
+          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="why.label">Kāpēc Intelekta Skola</div>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
+            <span data-i18n="why.head1">Radīts praktiskai</span> <span class="brand-text" data-i18n="why.head2">AI meistarībai.</span>
+          </h2>
         </div>
         <div id="whyGrid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
       </section>
 
-      <!-- ===================== SECTION 4 · ROADMAP ===================== -->
+      <!-- SECTION 4 · ROADMAP -->
       <section id="roadmap" class="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div class="reveal mb-16 text-center">
-          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Roadmap</div>
-          <h2 class="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">Your learning roadmap</h2>
+          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="roadmap.label">Ceļa karte</div>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl" data-i18n="roadmap.head">Tava mācību ceļa karte</h2>
         </div>
-
         <div class="road relative">
-          <!-- desktop horizontal line -->
-          <div class="road-line gold-line absolute left-0 right-0 top-[34px] hidden h-px md:block"></div>
-          <!-- mobile vertical line -->
-          <div class="road-vline gold-line absolute left-[34px] top-0 bottom-0 block w-px md:hidden" style="background:linear-gradient(180deg,transparent,var(--gold),transparent)"></div>
-
+          <div class="road-line brand-line absolute left-0 right-0 top-[34px] hidden h-px md:block"></div>
+          <div class="road-vline brand-line absolute left-[34px] top-0 bottom-0 block w-px md:hidden"></div>
           <ol id="roadList" class="grid grid-cols-1 gap-10 md:grid-cols-5 md:gap-4"></ol>
         </div>
       </section>
 
-      <!-- ===================== SECTION 5 · CONTACT ===================== -->
+      <!-- SECTION 5 · CONTACT -->
       <section id="contact" class="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div class="reveal mb-14 text-center">
-          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Contact</div>
-          <h2 class="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">Start Your <span class="gold-text">AI Journey</span></h2>
+          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="contact.label">Kontakti</div>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
+            <span data-i18n="contact.head1">Sāc savu</span> <span class="brand-text" data-i18n="contact.head2">AI ceļu</span>
+          </h2>
         </div>
-
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <!-- Company info cards -->
           <div class="reveal space-y-4">
             <div class="glass glow rounded-3xl p-6">
-              <div class="text-sm font-semibold uppercase tracking-wider text-gold">Company</div>
+              <div class="text-sm font-semibold uppercase tracking-wider text-electric" data-i18n="company.title">Uzņēmums</div>
               <div class="mt-1 text-2xl font-extrabold">SIA Intelekta Skola</div>
               <div id="companyGrid" class="mt-5 grid grid-cols-2 gap-4 text-sm"></div>
             </div>
             <div class="glass rounded-3xl p-6">
-              <div class="text-sm font-semibold uppercase tracking-wider text-gold">Legal address</div>
+              <div class="text-sm font-semibold uppercase tracking-wider text-electric" data-i18n="company.addrLabel">Juridiskā adrese</div>
               <address class="mt-2 not-italic text-zinc-200 leading-relaxed">
-                Avotu iela 9–21<br />Lielvārde, Ogres novads<br />LV-5071, Latvia
+                Avotu iela 9–21<br /><span data-i18n="company.addrCity">Lielvārde, Ogres novads</span><br /><span data-i18n="company.addrZip">LV-5071, Latvija</span>
               </address>
-              <a href="mailto:info@intelektaskola.lv" class="mt-4 inline-flex items-center gap-2 text-gold hover:text-goldlt">
-                info@intelektaskola.lv
-              </a>
+              <a href="mailto:info@intelektaskola.lv" class="mt-4 inline-flex items-center gap-2 text-electric hover:text-brandlt">info@intelektaskola.lv</a>
             </div>
           </div>
 
-          <!-- Contact form -->
           <div class="reveal" style="transition-delay:.1s">
             <form id="contactForm" class="glass glow rounded-3xl p-6 sm:p-8">
               <div class="space-y-4">
                 <label class="block">
-                  <span class="mb-1.5 block text-sm font-semibold text-zinc-200">Name</span>
-                  <input id="cfName" required type="text" placeholder="Your name" class="field w-full rounded-xl px-4 py-3 text-zinc-100 placeholder:text-zinc-500" />
+                  <span class="mb-1.5 block text-sm font-semibold text-zinc-200" data-i18n="contact.name">Vārds</span>
+                  <input id="cfName" required type="text" class="field w-full rounded-xl px-4 py-3" data-i18n-ph="contact.namePh" />
                 </label>
                 <label class="block">
-                  <span class="mb-1.5 block text-sm font-semibold text-zinc-200">Email</span>
-                  <input id="cfEmail" required type="email" placeholder="you@company.com" class="field w-full rounded-xl px-4 py-3 text-zinc-100 placeholder:text-zinc-500" />
+                  <span class="mb-1.5 block text-sm font-semibold text-zinc-200" data-i18n="contact.email">E-pasts</span>
+                  <input id="cfEmail" required type="email" class="field w-full rounded-xl px-4 py-3" data-i18n-ph="contact.emailPh" />
                 </label>
                 <label class="block">
-                  <span class="mb-1.5 block text-sm font-semibold text-zinc-200">Message</span>
-                  <textarea id="cfMsg" required rows="5" placeholder="What would you like to learn or implement?" class="field w-full resize-none rounded-xl px-4 py-3 text-zinc-100 placeholder:text-zinc-500"></textarea>
+                  <span class="mb-1.5 block text-sm font-semibold text-zinc-200" data-i18n="contact.message">Ziņa</span>
+                  <textarea id="cfMsg" required rows="5" class="field w-full resize-none rounded-xl px-4 py-3" data-i18n-ph="contact.messagePh"></textarea>
                 </label>
-                <button type="submit" class="w-full rounded-full bg-gradient-to-r from-goldlt to-golddeep px-6 py-3.5 font-bold text-black transition hover:brightness-110">
-                  Send message
-                </button>
-                <p class="text-center text-xs text-zinc-500">Opens your email client addressed to info@intelektaskola.lv.</p>
+                <button type="submit" class="btn-primary w-full rounded-full px-6 py-3.5 font-bold transition hover:brightness-110" data-i18n="contact.send">Sūtīt ziņu</button>
+                <p class="text-center text-xs text-zinc-500" data-i18n="contact.note">Atver tavu e-pasta klientu ar adresi info@intelektaskola.lv.</p>
               </div>
             </form>
           </div>
         </div>
       </section>
 
-      <!-- ===================== FINAL CTA ===================== -->
+      <!-- FINAL CTA -->
       <section class="relative mx-auto max-w-7xl px-6 pb-28">
         <div class="reveal relative overflow-hidden rounded-[2.5rem] hairline glass-strong glass p-10 text-center md:p-16">
-          <div class="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-gold/20 blur-[80px]"></div>
+          <div class="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-brand/25 blur-[80px]"></div>
           <div class="relative">
-            <div class="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Ready For The Future?</div>
+            <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="final.label">Gatavs nākotnei?</div>
             <h2 class="mx-auto mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
-              The next decade <span class="gold-text">belongs to AI.</span>
+              <span data-i18n="final.head1">Nākamā desmitgade</span> <span class="brand-text" data-i18n="final.head2">pieder AI.</span>
             </h2>
-            <p class="mx-auto mt-5 max-w-xl text-lg text-zinc-300">Learn practical artificial intelligence skills with Intelekta Skola.</p>
+            <p class="mx-auto mt-5 max-w-xl text-lg text-zinc-300" data-i18n="final.sub">Apgūsti praktiskas mākslīgā intelekta prasmes ar Intelekta Skolu.</p>
             <div class="mt-9">
               <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener"
-                class="btn-glow inline-block rounded-full bg-gradient-to-r from-goldlt to-golddeep px-9 py-4 text-lg font-extrabold text-black transition hover:brightness-110">
-                Enroll Today
-              </a>
+                class="btn-glow btn-primary inline-block rounded-full px-9 py-4 text-lg font-extrabold transition hover:brightness-110" data-i18n="final.cta">Pieteikties tagad</a>
             </div>
           </div>
         </div>
       </section>
     </main>
 
-    <!-- ===================== FOOTER (minimal) ===================== -->
+    <!-- FOOTER -->
     <footer class="border-t border-white/5">
       <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-zinc-500 sm:flex-row">
         <div class="flex items-center gap-2">
@@ -279,12 +210,50 @@
           <span>© <span id="year"></span> SIA Intelekta Skola · Reg. 40203747500</span>
         </div>
         <div class="flex items-center gap-5">
-          <a href="./program.html" class="hover:text-gold">Program</a>
-          <a href="./privacy.html" class="hover:text-gold">Privacy</a>
-          <a href="mailto:info@intelektaskola.lv" class="hover:text-gold">info@intelektaskola.lv</a>
+          <a href="./program.html" class="hover:text-electric" data-i18n="footer.program">Programma</a>
+          <a href="./privacy.html" class="hover:text-electric" data-i18n="footer.privacy">Privātums</a>
+          <a href="mailto:info@intelektaskola.lv" class="hover:text-electric">info@intelektaskola.lv</a>
         </div>
       </div>
     </footer>
+
+    <!-- ===================== FREE GUIDE MODAL ===================== -->
+    <div id="guideModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-5">
+      <div id="guideBackdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+      <div id="guideCard" class="relative w-full max-w-lg translate-y-4 scale-95 opacity-0 rounded-3xl glass-strong glass p-7 shadow-2xl transition-all duration-500 sm:p-9">
+        <button id="guideClose" type="button" aria-label="Close" class="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-white/5 text-zinc-400 transition hover:bg-white/10 hover:text-white">✕</button>
+        <div class="pointer-events-none absolute -top-20 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-brand/30 blur-[70px]"></div>
+        <div class="relative">
+          <div class="inline-flex items-center gap-2 rounded-full hairline bg-white/5 px-3 py-1 text-xs font-bold uppercase tracking-wider text-electric">
+            🎁 <span data-i18n="guide.badge">Bezmaksas dāvana</span>
+          </div>
+          <h3 class="mt-4 text-2xl font-extrabold leading-tight sm:text-3xl" data-i18n="guide.title">Saņem bezmaksas AI ceļvedi</h3>
+          <p class="mt-3 text-sm text-zinc-300" data-i18n="guide.sub">“5 AI darbplūsmas, kas ietaupa stundas katru nedēļu” — praktisks ceļvedis. Ievadi e-pastu, un nosūtīsim to tev.</p>
+          <form id="guideForm" class="mt-6 space-y-3">
+            <input id="guideName" required type="text" class="field w-full rounded-xl px-4 py-3" data-i18n-ph="guide.namePh" />
+            <input id="guideEmail" required type="email" class="field w-full rounded-xl px-4 py-3" data-i18n-ph="guide.emailPh" />
+            <button type="submit" class="btn-glow btn-primary w-full rounded-full px-6 py-3.5 font-bold transition hover:brightness-110" data-i18n="guide.button">Saņemt ceļvedi</button>
+          </form>
+          <div class="mt-4 flex items-center justify-between text-xs text-zinc-500">
+            <span data-i18n="guide.privacy">Bez surogātpasta. Atrakstīšanās jebkurā laikā.</span>
+            <button id="guideSkip" type="button" class="font-semibold text-zinc-400 underline-offset-2 hover:text-white hover:underline" data-i18n="guide.skip">Varbūt vēlāk</button>
+          </div>
+          <p id="guideSuccess" class="mt-4 hidden rounded-xl border border-emerald-400/30 bg-emerald-400/10 p-3 text-center text-sm font-semibold text-emerald-300" data-i18n="guide.success">Paldies! Atver tavu e-pasta klientu, lai pabeigtu pieprasījumu.</p>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      /* roadmap draw (page-specific) */
+      .road-line { transform: scaleX(0); transform-origin: left; transition: transform 1.4s cubic-bezier(.25,0,0,1); }
+      .road.drawn .road-line { transform: scaleX(1); }
+      .road-node { opacity: 0; transform: translateY(14px) scale(.9); transition: opacity .6s cubic-bezier(.25,0,0,1), transform .6s cubic-bezier(.25,0,0,1); }
+      .road.drawn .road-node { opacity: 1; transform: none; }
+      .road-vline { transform: scaleY(0); transform-origin: top; transition: transform 1.4s cubic-bezier(.25,0,0,1); background: linear-gradient(180deg, transparent, var(--brand), transparent); }
+      .road.drawn .road-vline { transform: scaleY(1); }
+      #guideModal.is-open { display: flex; }
+      #guideModal.is-open #guideCard { transform: none; opacity: 1; }
+    </style>
 
     <script src="./scripts/ai-home.js"></script>
   </body>

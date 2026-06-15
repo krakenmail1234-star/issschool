@@ -23,16 +23,16 @@ function renderTasks() {
   list.innerHTML = TASKS.map((t) => {
     const s = state[t.id];
     return `
-    <div data-task="${t.id}" class="task glass rounded-2xl border border-white/60 p-4 transition ${s.on ? 'task-on' : 'shadow-glass'}">
+    <div data-task="${t.id}" class="task glass rounded-2xl p-4 transition ${s.on ? 'task-on' : ''}">
       <div class="flex items-center gap-3">
-        <button type="button" data-toggle="${t.id}" class="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-2xl transition ${s.on ? 'bg-gradient-to-br from-accent to-sky' : 'bg-black/5'}">${t.icon}</button>
+        <button type="button" data-toggle="${t.id}" class="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-2xl transition ${s.on ? 'bg-gradient-to-br from-brand to-electric' : 'bg-white/5'}">${t.icon}</button>
         <div class="min-w-0 flex-1">
           <div class="font-bold leading-tight">${t.name}</div>
           <div class="truncate text-xs text-muted">${t.hint}</div>
         </div>
         <label class="flex cursor-pointer items-center">
           <input type="checkbox" data-check="${t.id}" ${s.on ? 'checked' : ''} class="peer sr-only" />
-          <span class="relative h-6 w-11 rounded-full bg-black/15 transition peer-checked:bg-accent after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:transition peer-checked:after:translate-x-5"></span>
+          <span class="relative h-6 w-11 rounded-full bg-white/15 transition peer-checked:bg-brand after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:transition peer-checked:after:translate-x-5"></span>
         </label>
       </div>
       <div data-slider-wrap="${t.id}" class="mt-3 ${s.on ? '' : 'hidden'}">

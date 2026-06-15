@@ -63,7 +63,7 @@ const TIERS = [
     min: 0,
     max: 39,
     badge: 'Sākuma punkts',
-    badgeClass: 'bg-accent/20 text-sun',
+    badgeClass: 'bg-brand/20 text-brandlt',
     title: 'Liels neizmantots potenciāls',
     text: 'Tu vēl tikai sāc, un tieši tāpēc ieguvums var būt vislielākais. Sāksim ar pamatiem un ātrām uzvarām.',
     recos: [
@@ -76,7 +76,7 @@ const TIERS = [
     min: 40,
     max: 69,
     badge: 'Augošs',
-    badgeClass: 'bg-sky/25 text-sky',
+    badgeClass: 'bg-electric/20 text-electric',
     title: 'Pamati ir — laiks sistēmai',
     text: 'Jūs jau lietojat AI, bet bez vienotas pieejas. Ar struktūru un veidnēm rezultāts kļūs paredzams un mērāms.',
     recos: [
@@ -124,16 +124,16 @@ function renderQuestion() {
         .map(
           (o, i) => `
         <button type="button" data-opt="${i}"
-          class="group flex w-full items-center gap-3 rounded-2xl border border-ink/10 bg-white/70 px-4 py-3.5 text-left font-semibold transition hover:-translate-y-0.5 hover:border-accent hover:shadow-depth ${answers[current] === i ? 'border-accent ring-2 ring-accent' : ''}">
-          <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-ink/20 text-sm font-bold text-muted group-hover:border-accent group-hover:text-accent">${String.fromCharCode(65 + i)}</span>
+          class="group flex w-full items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-left font-semibold text-zinc-100 transition hover:-translate-y-0.5 hover:border-brand hover:bg-white/10 hover:shadow-depth ${answers[current] === i ? 'border-brand ring-2 ring-brand' : ''}">
+          <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-white/20 text-sm font-bold text-muted group-hover:border-brand group-hover:text-electric">${String.fromCharCode(65 + i)}</span>
           <span class="flex-1">${o.t}</span>
-          <span class="text-accent opacity-0 transition group-hover:opacity-100">→</span>
+          <span class="text-electric opacity-0 transition group-hover:opacity-100">→</span>
         </button>`
         )
         .join('')}
     </div>
     <div class="mt-5 flex justify-between">
-      <button type="button" id="backBtn" class="rounded-full px-4 py-2 text-sm font-bold text-muted transition hover:text-ink ${current === 0 ? 'invisible' : ''}">← Atpakaļ</button>
+      <button type="button" id="backBtn" class="rounded-full px-4 py-2 text-sm font-bold text-muted transition hover:text-white ${current === 0 ? 'invisible' : ''}">← Atpakaļ</button>
       <span class="text-xs text-muted self-center">Izvēlies atbildi, lai turpinātu</span>
     </div>`;
 

@@ -204,12 +204,12 @@ function renderScenarioGrid() {
   grid.innerHTML = SCENARIOS.map(
     (s) => `
     <button data-id="${s.id}" type="button"
-      class="card-tilt tilt group text-left rounded-3xl border border-white/60 glass p-5 shadow-glass hover:shadow-depth focus:outline-none focus:ring-2 focus:ring-accent">
-      <div class="layer-up">
-        <div class="mb-3 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-accent to-sky text-3xl shadow-depth">${s.icon}</div>
+      class="group text-left rounded-3xl glass glow-hover p-5 focus:outline-none focus:ring-2 focus:ring-brand">
+      <div>
+        <div class="mb-3 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand to-electric text-3xl shadow-depth">${s.icon}</div>
         <h3 class="text-lg font-bold leading-tight">${s.title}</h3>
         <p class="mt-1 text-sm text-muted">${s.sub}</p>
-        <span class="mt-3 inline-flex items-center gap-1 text-sm font-bold text-accent opacity-0 transition group-hover:opacity-100">
+        <span class="mt-3 inline-flex items-center gap-1 text-sm font-bold text-electric opacity-0 transition group-hover:opacity-100">
           Izvēlēties →
         </span>
       </div>
@@ -261,7 +261,7 @@ function selectScenario(id) {
 
 function fieldHtml(f) {
   const base =
-    'w-full rounded-xl border border-ink/15 bg-white/80 px-3 py-2.5 text-sm text-ink placeholder:text-muted/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 transition';
+    'field w-full rounded-xl px-3 py-2.5 text-sm text-zinc-100 [&>option]:bg-ink2 [&>option]:text-zinc-100 transition';
   let control;
   if (f.type === 'textarea') {
     control = `<textarea id="f_${f.id}" rows="4" placeholder="${escapeHtml(f.placeholder || '')}" class="${base} resize-none"></textarea>`;
@@ -272,7 +272,7 @@ function fieldHtml(f) {
   } else {
     control = `<input id="f_${f.id}" type="text" placeholder="${escapeHtml(f.placeholder || '')}" class="${base}" />`;
   }
-  return `<label class="block"><span class="mb-1.5 block text-sm font-semibold text-ink">${f.label}</span>${control}</label>`;
+  return `<label class="block"><span class="mb-1.5 block text-sm font-semibold text-zinc-100">${f.label}</span>${control}</label>`;
 }
 
 /* ------------------------------------------------------------------ *

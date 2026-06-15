@@ -3,123 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#05070d" />
     <title>Promptu Darbnīca — Intelekta Skola</title>
     <meta
       name="description"
       content="Bezmaksas interaktīvs rīks: izvēlies biznesa scenāriju un saņem gatavu, profesionālu AI promptu, ko izmantot savā ikdienas darbā."
     />
     <link rel="icon" href="../assets/logo-is.svg" type="image/svg+xml" />
-
-    <!-- Tailwind via CDN (standalone, no build step) -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/aurora.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
             colors: {
-              cream: '#fff9f0',
-              ink: '#1a2332',
-              muted: '#3d4a5c',
-              accent: '#e85d04',
-              sky: '#0ea5e9',
-              sun: '#fde68a',
+              ink: '#05070d', ink2: '#0a0f1c',
+              brand: '#3b82f6', brandlt: '#93c5fd', branddeep: '#1d4ed8', electric: '#60a5fa',
+              accent: '#3b82f6', sky: '#60a5fa', muted: '#94a3b8', good: '#34d399',
             },
-            boxShadow: {
-              depth: '0 10px 30px -8px rgba(232,93,4,.25), 0 30px 60px -20px rgba(14,165,233,.25)',
-              glass: '0 8px 32px rgba(26,35,50,.12)',
-              lift: '0 24px 50px -12px rgba(26,35,50,.28)',
-            },
-            keyframes: {
-              floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-18px)' } },
-              pop: { '0%': { transform: 'scale(.96)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } },
-            },
-            animation: {
-              floaty: 'floaty 9s ease-in-out infinite',
-              pop: 'pop .35s ease-out both',
-            },
+            boxShadow: { depth: '0 10px 30px -8px rgba(59,130,246,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
           },
         },
       };
     </script>
     <style>
-      html { scroll-behavior: smooth; }
-      body { background: #fff9f0; }
-
-      /* Animated depth blobs */
-      .blob { filter: blur(60px); opacity: .55; }
-
-      /* 3D scene helpers */
-      .scene { perspective: 1200px; }
-      .tilt { transform-style: preserve-3d; transition: transform .25s ease, box-shadow .25s ease; will-change: transform; }
-      .tilt .layer-up { transform: translateZ(40px); }
-
-      /* Flip card */
+      /* Flip card (page-specific) */
       .flip { perspective: 1600px; }
       .flip__inner { transform-style: preserve-3d; transition: transform .7s cubic-bezier(.2,.8,.2,1); }
       .flip.is-flipped .flip__inner { transform: rotateY(180deg); }
       .flip__face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
       .flip__back { transform: rotateY(180deg); }
-
-      .glass {
-        background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.62));
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-      }
-      .grain { background-image: radial-gradient(rgba(26,35,50,.04) 1px, transparent 1px); background-size: 18px 18px; }
-
-      /* Pretty scrollbars for the output */
-      .nice-scroll::-webkit-scrollbar { width: 8px; }
-      .nice-scroll::-webkit-scrollbar-thumb { background: rgba(232,93,4,.35); border-radius: 99px; }
+      .task-on { box-shadow: 0 0 0 1px rgba(96,165,250,.5), 0 10px 30px -8px rgba(59,130,246,.35); }
     </style>
   </head>
 
-  <body class="font-sans text-ink antialiased grain min-h-screen relative overflow-x-hidden">
-    <!-- Background depth blobs -->
-    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      <div class="blob animate-floaty absolute -top-24 -left-24 h-96 w-96 rounded-full bg-accent"></div>
-      <div class="blob animate-floaty absolute top-1/3 -right-24 h-[28rem] w-[28rem] rounded-full bg-sky" style="animation-delay:-3s"></div>
-      <div class="blob animate-floaty absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-sun" style="animation-delay:-6s"></div>
-    </div>
-
+  <body class="ambient font-sans antialiased relative min-h-screen">
     <!-- Header -->
-    <header class="sticky top-0 z-30 glass border-b border-black/5">
+    <header class="sticky top-0 z-30 glass border-b border-white/5">
       <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
         <a href="../index.html" class="flex items-center gap-3 group">
           <img src="../assets/logo-is.svg" alt="" class="h-9 w-9 transition-transform group-hover:-rotate-6" />
-          <span class="text-lg font-extrabold tracking-tight">Intelekta Skola</span>
+          <span class="text-lg font-extrabold tracking-tight">INTELEKTA<span class="brand-text">SKOLA</span></span>
         </a>
-        <nav class="hidden items-center gap-6 text-sm font-semibold text-muted md:flex">
-          <a href="../program.html" class="hover:text-ink transition">Programma</a>
-          <a href="../services.html" class="hover:text-ink transition">Pakalpojumi</a>
-          <a href="../faq.html" class="hover:text-ink transition">BUJ</a>
-        </nav>
-        <a
-          href="../contact.html"
-          class="rounded-full bg-ink px-4 py-2 text-sm font-bold text-white shadow-glass transition hover:-translate-y-0.5 hover:shadow-lift"
-          >Pieteikties</a
-        >
+        <div class="flex items-center gap-3">
+          <a href="../riki/index.html" class="hidden text-sm font-semibold text-muted hover:text-white sm:block">← Visi rīki</a>
+          <a href="../contact.html" class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110">Pieteikties</a>
+        </div>
       </div>
     </header>
 
-    <main class="mx-auto max-w-6xl px-5 pb-28 pt-12">
+    <main class="relative z-10 mx-auto max-w-6xl px-5 pb-28 pt-12">
       <!-- Hero -->
       <section class="scene mb-12 text-center">
-        <div class="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-white/70 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-accent shadow-glass">
-          <span class="h-2 w-2 animate-pulse rounded-full bg-accent"></span>
+        <div class="reveal is-in mx-auto mb-5 inline-flex items-center gap-2 rounded-full hairline bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-electric">
+          <span class="h-2 w-2 animate-pulse rounded-full bg-electric"></span>
           Bezmaksas rīks · AI ikdienas darbam
         </div>
-        <h1 class="mx-auto max-w-3xl text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
-          <span class="bg-gradient-to-r from-accent via-orange-500 to-sky bg-clip-text text-transparent">Promptu Darbnīca</span>
+        <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
+          <span class="brand-text">Promptu Darbnīca</span>
         </h1>
-        <p class="mx-auto mt-4 max-w-2xl text-lg font-medium text-muted">
+        <p class="mx-auto mt-4 max-w-2xl text-lg font-medium text-zinc-300">
           Izvēlies ikdienas biznesa uzdevumu, ieraksti dažus vārdus — un saņem gatavu, profesionālu AI promptu,
           ko vari uzreiz izmantot ChatGPT vai Claude. Bez reģistrācijas.
         </p>
@@ -128,23 +76,23 @@
       <!-- Step 1: choose scenario -->
       <section class="mb-12">
         <div class="mb-4 flex items-center gap-3">
-          <span class="grid h-8 w-8 place-items-center rounded-full bg-accent text-sm font-extrabold text-white shadow-depth">1</span>
+          <span class="grid h-8 w-8 place-items-center rounded-full btn-primary text-sm font-extrabold shadow-depth">1</span>
           <h2 class="text-xl font-bold">Izvēlies scenāriju</h2>
         </div>
         <div id="scenarioGrid" class="scene grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
       </section>
 
-      <!-- Step 2 + 3: builder + output -->
+      <!-- Step 2 + 3 -->
       <section id="workbench" class="hidden grid grid-cols-1 gap-6 lg:grid-cols-2">
         <!-- Builder -->
         <div class="scene">
           <div class="mb-4 flex items-center gap-3">
-            <span class="grid h-8 w-8 place-items-center rounded-full bg-sky text-sm font-extrabold text-white shadow-depth">2</span>
+            <span class="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-sm font-extrabold text-electric shadow-depth">2</span>
             <h2 class="text-xl font-bold">Aizpildi detaļas</h2>
           </div>
-          <div class="tilt glass rounded-3xl border border-white/60 p-6 shadow-glass">
+          <div class="tilt glass rounded-3xl p-6 glow">
             <div class="mb-4 flex items-center gap-3">
-              <div id="builderIcon" class="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-accent to-sky text-2xl text-white shadow-depth"></div>
+              <div id="builderIcon" class="grid h-12 w-12 place-items-center rounded-2xl bg-brand/15 text-2xl text-electric shadow-depth"></div>
               <div>
                 <h3 id="builderTitle" class="text-lg font-bold leading-tight"></h3>
                 <p id="builderSub" class="text-sm text-muted"></p>
@@ -154,46 +102,39 @@
           </div>
         </div>
 
-        <!-- Output: 3D flip card -->
+        <!-- Output: flip card -->
         <div class="scene">
           <div class="mb-4 flex items-center justify-between gap-3">
             <div class="flex items-center gap-3">
-              <span class="grid h-8 w-8 place-items-center rounded-full bg-ink text-sm font-extrabold text-white shadow-depth">3</span>
+              <span class="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-sm font-extrabold text-white shadow-depth">3</span>
               <h2 class="text-xl font-bold">Tavs prompts</h2>
             </div>
-            <button id="flipBtn" type="button" class="rounded-full border border-ink/15 bg-white/70 px-3 py-1.5 text-xs font-bold text-muted shadow-glass transition hover:-translate-y-0.5 hover:text-ink">
+            <button id="flipBtn" type="button" class="rounded-full hairline bg-white/5 px-3 py-1.5 text-xs font-bold text-muted transition hover:-translate-y-0.5 hover:text-white">
               ↻ Skatīt piemēru
             </button>
           </div>
 
           <div id="flipCard" class="flip h-[28rem]">
             <div class="flip__inner relative h-full w-full">
-              <!-- Front: the prompt -->
-              <div class="flip__face flip__front absolute inset-0 flex flex-col rounded-3xl border border-white/60 bg-gradient-to-br from-white to-cream p-6 shadow-lift">
+              <!-- Front -->
+              <div class="flip__face flip__front absolute inset-0 flex flex-col rounded-3xl glass-strong glass p-6 glow">
                 <div class="mb-3 flex items-center justify-between">
-                  <span class="inline-flex items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-xs font-bold text-accent">
-                    🎯 Gatavs prompts
-                  </span>
-                  <button id="copyBtn" type="button" class="rounded-full bg-ink px-3 py-1.5 text-xs font-bold text-white transition hover:-translate-y-0.5">
-                    Kopēt
-                  </button>
+                  <span class="inline-flex items-center gap-2 rounded-full bg-brand/15 px-3 py-1 text-xs font-bold text-electric">🎯 Gatavs prompts</span>
+                  <button id="copyBtn" type="button" class="btn-primary rounded-full px-3 py-1.5 text-xs font-bold transition hover:-translate-y-0.5">Kopēt</button>
                 </div>
-                <pre id="promptOut" class="nice-scroll flex-1 overflow-auto whitespace-pre-wrap rounded-2xl bg-white/70 p-4 text-sm leading-relaxed text-ink"></pre>
+                <pre id="promptOut" class="nice-scroll flex-1 overflow-auto whitespace-pre-wrap rounded-2xl bg-black/30 p-4 text-sm leading-relaxed text-zinc-100"></pre>
                 <p class="mt-3 text-xs text-muted">Ielīmē šo ChatGPT vai Claude. Aizvieto [kvadrātiekavās] ar saviem datiem, ja vēlies.</p>
               </div>
-
-              <!-- Back: before/after example -->
-              <div class="flip__face flip__back absolute inset-0 flex flex-col rounded-3xl border border-white/60 bg-gradient-to-br from-sky/10 to-white p-6 shadow-lift">
-                <span class="mb-3 inline-flex w-max items-center gap-2 rounded-full bg-sky/15 px-3 py-1 text-xs font-bold text-sky">
-                  ✨ Pirms / Pēc
-                </span>
-                <div class="mb-3 rounded-2xl border border-bad/20 bg-red-50/60 p-3">
-                  <div class="mb-1 text-xs font-bold uppercase tracking-wide text-red-500">Pirms (tava melnraksta doma)</div>
-                  <p id="beforeOut" class="text-sm text-muted"></p>
+              <!-- Back -->
+              <div class="flip__face flip__back absolute inset-0 flex flex-col rounded-3xl glass-strong glass p-6 glow">
+                <span class="mb-3 inline-flex w-max items-center gap-2 rounded-full bg-brand/15 px-3 py-1 text-xs font-bold text-electric">✨ Pirms / Pēc</span>
+                <div class="mb-3 rounded-2xl border border-red-400/20 bg-red-500/10 p-3">
+                  <div class="mb-1 text-xs font-bold uppercase tracking-wide text-red-300">Pirms (tava melnraksta doma)</div>
+                  <p id="beforeOut" class="text-sm text-zinc-300"></p>
                 </div>
-                <div class="nice-scroll flex-1 overflow-auto rounded-2xl border border-good/20 bg-emerald-50/60 p-3">
-                  <div class="mb-1 text-xs font-bold uppercase tracking-wide text-emerald-600">Pēc (ko AI atgriež)</div>
-                  <p id="afterOut" class="whitespace-pre-wrap text-sm text-ink"></p>
+                <div class="nice-scroll flex-1 overflow-auto rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-3">
+                  <div class="mb-1 text-xs font-bold uppercase tracking-wide text-emerald-300">Pēc (ko AI atgriež)</div>
+                  <p id="afterOut" class="whitespace-pre-wrap text-sm text-zinc-100"></p>
                 </div>
               </div>
             </div>
@@ -203,35 +144,31 @@
 
       <!-- CTA -->
       <section class="scene mt-20">
-        <div class="tilt relative overflow-hidden rounded-[2rem] border border-white/60 bg-gradient-to-br from-ink to-[#0b1422] p-10 text-center text-white shadow-lift">
-          <div class="blob absolute -right-10 -top-10 h-56 w-56 rounded-full bg-accent/60"></div>
-          <div class="blob absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-sky/60"></div>
-          <div class="layer-up relative">
+        <div class="tilt relative overflow-hidden rounded-[2rem] glass-strong glass p-10 text-center glow">
+          <div class="pointer-events-none absolute -right-10 -top-10 h-56 w-56 rounded-full bg-brand/25 blur-[70px]"></div>
+          <div class="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-branddeep/30 blur-[70px]"></div>
+          <div class="relative">
             <h2 class="text-3xl font-extrabold md:text-4xl">Patika? Tā ir tikai sākums.</h2>
-            <p class="mx-auto mt-3 max-w-xl text-white/80">
+            <p class="mx-auto mt-3 max-w-xl text-zinc-300">
               Intelekta Skola māca komandas un uzņēmumus ieviest AI ikdienas darbā — ar izmērāmu rezultātu.
               Pieteikies bezmaksas konsultācijai un pārrunāsim tavu konkrēto gadījumu.
             </p>
             <div class="mt-6 flex flex-wrap justify-center gap-3">
-              <a href="../contact.html" class="rounded-full bg-accent px-6 py-3 font-bold shadow-depth transition hover:-translate-y-1">
-                Pieteikties konsultācijai
-              </a>
-              <a href="../program.html" class="rounded-full border border-white/30 bg-white/10 px-6 py-3 font-bold transition hover:-translate-y-1">
-                Skatīt programmu
-              </a>
+              <a href="../contact.html" class="btn-glow btn-primary rounded-full px-6 py-3 font-bold transition hover:-translate-y-1">Pieteikties konsultācijai</a>
+              <a href="../index.html" class="rounded-full hairline bg-white/5 px-6 py-3 font-bold text-zinc-100 transition hover:bg-white/10">Uz sākumlapu</a>
             </div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="mx-auto max-w-6xl px-5 pb-10 text-center text-sm text-muted">
+    <footer class="relative z-10 mx-auto max-w-6xl px-5 pb-10 text-center text-sm text-muted">
       © <span id="year"></span> Intelekta Skola · Promptu Darbnīca ·
-      <a href="../index.html" class="font-semibold text-accent hover:underline">intelektaskola.lv</a>
+      <a href="../index.html" class="font-semibold text-electric hover:underline">intelektaskola.lv</a>
     </footer>
 
     <!-- Toast -->
-    <div id="toast" class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 translate-y-4 rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-white opacity-0 shadow-lift transition-all">
+    <div id="toast" class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 translate-y-4 rounded-full btn-primary px-5 py-2.5 text-sm font-bold opacity-0 transition-all">
       Nokopēts! 📋
     </div>
 

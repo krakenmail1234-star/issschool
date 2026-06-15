@@ -3,150 +3,120 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#05070d" />
     <title>AI Gatavības Tests — Intelekta Skola</title>
     <meta
       name="description"
       content="6 īsi jautājumi, lai uzzinātu, cik gatavs tavs uzņēmums ir mākslīgajam intelektam — un kuri AI rīki tev palīdzētu vispirms."
     />
     <link rel="icon" href="../assets/logo-is.svg" type="image/svg+xml" />
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/aurora.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
-            colors: { cream: '#fff9f0', ink: '#1a2332', muted: '#3d4a5c', accent: '#e85d04', sky: '#0ea5e9', sun: '#fde68a', good: '#059669' },
-            boxShadow: {
-              depth: '0 10px 30px -8px rgba(232,93,4,.25), 0 30px 60px -20px rgba(14,165,233,.25)',
-              glass: '0 8px 32px rgba(26,35,50,.12)',
-              lift: '0 24px 50px -12px rgba(26,35,50,.28)',
-            },
-            keyframes: {
-              floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-18px)' } },
-              pop: { '0%': { transform: 'scale(.96) translateY(10px)', opacity: '0' }, '100%': { transform: 'scale(1) translateY(0)', opacity: '1' } },
-            },
-            animation: { floaty: 'floaty 9s ease-in-out infinite', pop: 'pop .4s ease-out both' },
-          },
-        },
+        theme: { extend: {
+          fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+          colors: { ink: '#05070d', ink2: '#0a0f1c', brand: '#3b82f6', brandlt: '#93c5fd', branddeep: '#1d4ed8', electric: '#60a5fa', accent: '#3b82f6', sky: '#60a5fa', muted: '#94a3b8', good: '#34d399' },
+          boxShadow: { depth: '0 10px 30px -8px rgba(59,130,246,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+          keyframes: { pop: { '0%': { transform: 'scale(.96) translateY(10px)', opacity: '0' }, '100%': { transform: 'scale(1) translateY(0)', opacity: '1' } } },
+          animation: { pop: 'pop .4s ease-out both' },
+        } },
       };
     </script>
-    <style>
-      html { scroll-behavior: smooth; }
-      body { background: #fff9f0; }
-      .blob { filter: blur(60px); opacity: .55; }
-      .scene { perspective: 1200px; }
-      .tilt { transform-style: preserve-3d; transition: transform .25s ease, box-shadow .25s ease; will-change: transform; }
-      .glass { background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.62)); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-      .grain { background-image: radial-gradient(rgba(26,35,50,.04) 1px, transparent 1px); background-size: 18px 18px; }
-      .gauge-ring { transition: stroke-dashoffset 1.1s cubic-bezier(.2,.8,.2,1); }
-    </style>
+    <style>.gauge-ring { transition: stroke-dashoffset 1.1s cubic-bezier(.2,.8,.2,1); }</style>
   </head>
 
-  <body class="font-sans text-ink antialiased grain min-h-screen relative overflow-x-hidden">
-    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      <div class="blob animate-floaty absolute -top-24 -left-24 h-96 w-96 rounded-full bg-sky"></div>
-      <div class="blob animate-floaty absolute top-1/3 -right-24 h-[28rem] w-[28rem] rounded-full bg-accent" style="animation-delay:-3s"></div>
-      <div class="blob animate-floaty absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-sun" style="animation-delay:-6s"></div>
-    </div>
-
-    <header class="sticky top-0 z-30 glass border-b border-black/5">
+  <body class="ambient font-sans antialiased relative min-h-screen">
+    <header class="sticky top-0 z-30 glass border-b border-white/5">
       <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 py-3">
         <a href="../index.html" class="flex items-center gap-3 group">
           <img src="../assets/logo-is.svg" alt="" class="h-9 w-9 transition-transform group-hover:-rotate-6" />
-          <span class="text-lg font-extrabold tracking-tight">Intelekta Skola</span>
+          <span class="text-lg font-extrabold tracking-tight">INTELEKTA<span class="brand-text">SKOLA</span></span>
         </a>
         <div class="flex items-center gap-3">
-          <a href="../riki/index.html" class="hidden text-sm font-semibold text-muted hover:text-ink sm:block">← Visi rīki</a>
-          <a href="../contact.html" class="rounded-full bg-ink px-4 py-2 text-sm font-bold text-white shadow-glass transition hover:-translate-y-0.5 hover:shadow-lift">Pieteikties</a>
+          <a href="../riki/index.html" class="hidden text-sm font-semibold text-muted hover:text-white sm:block">← Visi rīki</a>
+          <a href="../contact.html" class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110">Pieteikties</a>
         </div>
       </div>
     </header>
 
-    <main class="mx-auto max-w-3xl px-5 pb-28 pt-12">
-      <!-- Intro / progress -->
+    <main class="relative z-10 mx-auto max-w-3xl px-5 pb-28 pt-12">
       <section class="mb-8 text-center">
-        <div class="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-sky/30 bg-white/70 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-sky shadow-glass">
-          <span class="h-2 w-2 animate-pulse rounded-full bg-sky"></span>
+        <div class="mx-auto mb-5 inline-flex items-center gap-2 rounded-full hairline bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-electric">
+          <span class="h-2 w-2 animate-pulse rounded-full bg-electric"></span>
           Bezmaksas tests · 6 jautājumi · ~1 min
         </div>
-        <h1 class="mx-auto max-w-2xl text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">
-          <span class="bg-gradient-to-r from-sky via-cyan-500 to-accent bg-clip-text text-transparent">AI Gatavības Tests</span>
-        </h1>
-        <p class="mx-auto mt-4 max-w-xl text-lg font-medium text-muted">
+        <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl"><span class="brand-text">AI Gatavības Tests</span></h1>
+        <p class="mx-auto mt-4 max-w-xl text-lg font-medium text-zinc-300">
           Atbildi uz 6 jautājumiem un uzzini, cik gatavs tavs uzņēmums ir mākslīgajam intelektam —
           un ar kuriem rīkiem sākt.
         </p>
       </section>
 
-      <!-- Progress bar -->
       <div id="progressWrap" class="mb-6">
         <div class="mb-1 flex justify-between text-xs font-semibold text-muted">
           <span>Jautājums <span id="qNum">1</span>/<span id="qTotal">6</span></span>
           <span id="qPct">0%</span>
         </div>
-        <div class="h-2.5 w-full overflow-hidden rounded-full bg-black/10">
-          <div id="progressBar" class="h-full rounded-full bg-gradient-to-r from-sky to-accent transition-all duration-500" style="width:0%"></div>
+        <div class="h-2.5 w-full overflow-hidden rounded-full bg-white/10">
+          <div id="progressBar" class="h-full rounded-full bg-gradient-to-r from-branddeep to-electric transition-all duration-500" style="width:0%"></div>
         </div>
       </div>
 
-      <!-- Quiz card -->
       <section class="scene">
-        <div id="quizCard" class="tilt glass rounded-[2rem] border border-white/60 p-7 shadow-lift"></div>
+        <div id="quizCard" class="tilt glass rounded-[2rem] p-7 glow"></div>
       </section>
 
-      <!-- Result (hidden until done) -->
       <section id="resultSection" class="scene hidden">
-        <div class="tilt relative overflow-hidden rounded-[2rem] border border-white/60 bg-gradient-to-br from-ink to-[#0b1422] p-8 text-white shadow-lift animate-pop">
-          <div class="blob absolute -right-10 -top-10 h-56 w-56 rounded-full bg-sky/60"></div>
-          <div class="blob absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-accent/60"></div>
+        <div class="tilt relative overflow-hidden rounded-[2rem] glass-strong glass p-8 glow animate-pop">
+          <div class="pointer-events-none absolute -right-10 -top-10 h-56 w-56 rounded-full bg-brand/25 blur-[70px]"></div>
+          <div class="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-branddeep/30 blur-[70px]"></div>
           <div class="relative grid grid-cols-1 items-center gap-6 sm:grid-cols-2">
-            <!-- Gauge -->
             <div class="flex justify-center">
               <div class="relative h-48 w-48">
                 <svg viewBox="0 0 120 120" class="h-full w-full -rotate-90">
-                  <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="12" />
+                  <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="12" />
                   <circle id="gaugeRing" class="gauge-ring" cx="60" cy="60" r="52" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" />
                   <defs>
                     <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0" stop-color="#0ea5e9" />
-                      <stop offset="1" stop-color="#e85d04" />
+                      <stop offset="0" stop-color="#1d4ed8" />
+                      <stop offset="1" stop-color="#60a5fa" />
                     </linearGradient>
                   </defs>
                 </svg>
                 <div class="absolute inset-0 flex flex-col items-center justify-center">
                   <span id="scoreOut" class="text-5xl font-extrabold">0</span>
-                  <span class="text-xs uppercase tracking-wider text-white/60">no 100</span>
+                  <span class="text-xs uppercase tracking-wider text-zinc-400">no 100</span>
                 </div>
               </div>
             </div>
-            <!-- Verdict -->
             <div>
               <div id="tierBadge" class="mb-2 inline-block rounded-full px-3 py-1 text-xs font-bold"></div>
               <h2 id="tierTitle" class="text-2xl font-extrabold leading-tight"></h2>
-              <p id="tierText" class="mt-2 text-sm text-white/80"></p>
+              <p id="tierText" class="mt-2 text-sm text-zinc-300"></p>
             </div>
           </div>
 
           <div class="relative mt-6">
-            <div class="mb-2 text-sm font-bold uppercase tracking-wider text-white/60">Tev ieteicamie pirmie soļi</div>
+            <div class="mb-2 text-sm font-bold uppercase tracking-wider text-zinc-400">Tev ieteicamie pirmie soļi</div>
             <ul id="recoList" class="space-y-2"></ul>
           </div>
 
           <div class="relative mt-7 flex flex-wrap gap-3">
-            <a href="../contact.html" class="rounded-full bg-accent px-6 py-3 font-bold shadow-depth transition hover:-translate-y-1">Saņemt personīgu plānu →</a>
-            <button id="retryBtn" type="button" class="rounded-full border border-white/30 bg-white/10 px-6 py-3 font-bold transition hover:-translate-y-1">Pārstartēt testu</button>
+            <a href="../contact.html" class="btn-glow btn-primary rounded-full px-6 py-3 font-bold transition hover:-translate-y-1">Saņemt personīgu plānu →</a>
+            <button id="retryBtn" type="button" class="rounded-full hairline bg-white/5 px-6 py-3 font-bold text-zinc-100 transition hover:bg-white/10">Pārstartēt testu</button>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="mx-auto max-w-5xl px-5 pb-10 text-center text-sm text-muted">
+    <footer class="relative z-10 mx-auto max-w-5xl px-5 pb-10 text-center text-sm text-muted">
       © <span id="year"></span> Intelekta Skola · AI Gatavības Tests ·
-      <a href="../index.html" class="font-semibold text-accent hover:underline">intelektaskola.lv</a>
+      <a href="../index.html" class="font-semibold text-electric hover:underline">intelektaskola.lv</a>
     </footer>
 
     <script src="./app.js"></script>
