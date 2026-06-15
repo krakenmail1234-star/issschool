@@ -50,7 +50,7 @@
   var y = $('#year');
   if (y) y.textContent = new Date().getFullYear();
 
-  // contact form -> mailto (if present)
+  // contact form -> email (Apps Script) with mailto fallback
   var f = $('#contactForm');
   if (f) {
     f.addEventListener('submit', function (e) {
@@ -58,9 +58,18 @@
       var name = $('#cfName').value.trim();
       var email = $('#cfEmail').value.trim();
       var msg = $('#cfMsg').value.trim();
-      var subject = encodeURIComponent('Intelekta Skola — ' + (name || 'Web'));
-      var body = encodeURIComponent(name + '\n' + email + '\n\n' + msg);
-      window.location.href = 'mailto:info@intelektaskola.lv?subject=' + subject + '&body=' + body;
+      var btn = f.querySelector('button[type="submit"]');
+      var sender = window.ISsendForm || function () { return Promise.resolve(false); };
+      sender({ type: 'contact', name: name, email: email, message: msg }).then(function (sent) {
+        if (sent) {
+          if (btn) { btn.textContent = '✓'; btn.disabled = true; btn.classList.add('opacity-70'); }
+          f.reset();
+        } else {
+          var subject = encodeURIComponent('Intelekta Skola — ' + (name || 'Web'));
+          var body = encodeURIComponent(name + '\n' + email + '\n\n' + msg);
+          window.location.href = 'mailto:info@intelektaskola.lv?subject=' + subject + '&body=' + body;
+        }
+      });
     });
   }
 

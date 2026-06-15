@@ -447,16 +447,25 @@
     menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
   })();
 
-  /* ---------- contact form -> mailto ---------- */
+  /* ---------- contact form -> email (Apps Script) with mailto fallback ---------- */
   $('#contactForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const d = T[lang].contact;
     const name = $('#cfName').value.trim();
     const email = $('#cfEmail').value.trim();
     const msg = $('#cfMsg').value.trim();
-    const subject = encodeURIComponent(`${d.subject} — ${name || 'Web'}`);
-    const body = encodeURIComponent(`${d.name}: ${name}\n${d.email}: ${email}\n\n${msg}`);
-    window.location.href = `mailto:info@intelektaskola.lv?subject=${subject}&body=${body}`;
+    const btn = e.target.querySelector('button[type="submit"]');
+    const send = (window.ISsendForm || (() => Promise.resolve(false)))({ type: 'contact', name, email, message: msg, lang });
+    send.then((sent) => {
+      if (sent) {
+        if (btn) { btn.textContent = '✓ ' + d.send; btn.disabled = true; btn.classList.add('opacity-70'); }
+        e.target.reset();
+      } else {
+        const subject = encodeURIComponent(`${d.subject} — ${name || 'Web'}`);
+        const body = encodeURIComponent(`${d.name}: ${name}\n${d.email}: ${email}\n\n${msg}`);
+        window.location.href = `mailto:info@intelektaskola.lv?subject=${subject}&body=${body}`;
+      }
+    });
   });
 
   /* ---------- free-guide modal (first visit) ---------- */
@@ -473,12 +482,18 @@
       const d = T[lang].guide;
       const name = $('#guideName').value.trim();
       const email = $('#guideEmail').value.trim();
-      $('#guideSuccess').classList.remove('hidden');
       localStorage.setItem('is_guide_seen', '1');
-      const subject = encodeURIComponent(d.subject);
-      const body = encodeURIComponent(`${name}\n${email}`);
-      setTimeout(() => { window.location.href = `mailto:info@intelektaskola.lv?subject=${subject}&body=${body}`; }, 600);
-      setTimeout(close, 2600);
+      $('#guideSuccess').classList.remove('hidden');
+      const send = (window.ISsendForm || (() => Promise.resolve(false)))({ type: 'guide', name, email, lang });
+      send.then((sent) => {
+        // If no backend is configured yet, fall back to emailing the lead via the visitor's client.
+        if (!sent) {
+          const subject = encodeURIComponent(d.subject);
+          const body = encodeURIComponent(`${name}\n${email}`);
+          setTimeout(() => { window.location.href = `mailto:info@intelektaskola.lv?subject=${subject}&body=${body}`; }, 600);
+        }
+        setTimeout(close, 2600);
+      });
     });
     if (!localStorage.getItem('is_guide_seen')) {
       setTimeout(open, reduce ? 200 : 1300);
