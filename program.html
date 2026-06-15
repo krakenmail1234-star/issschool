@@ -42,7 +42,25 @@
               <button type="button" data-lang="en" class="rounded-full px-2.5 py-1">EN</button>
               <button type="button" data-lang="ru" class="rounded-full px-2.5 py-1">RU</button>
             </div>
-            <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener" class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110" data-i18n="nav.enroll">Pieteikties</a>
+            <a href="mailto:info@intelektaskola.lv?subject=Pieteikties%20-%20Intelekta%20Skola" class="hidden btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110 sm:inline-block" data-i18n="nav.enroll">Pieteikties</a>
+            <button id="menuBtn" type="button" aria-label="Izvelne" aria-expanded="false" class="grid h-10 w-10 place-items-center rounded-full hairline bg-white/5 text-zinc-100 lg:hidden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="h-5 w-5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+          </div>
+        </div>
+
+        <div id="mobileMenu" class="mt-2 hidden rounded-2xl glass p-3 lg:hidden">
+          <nav class="flex flex-col text-sm font-semibold text-zinc-100">
+            <a href="./index.html#courses" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.courses">Kursi</a>
+            <a href="./program.html" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.program">Programma</a>
+            <a href="./tools/index.html" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.tools">Bezmaksas riki</a>
+            <a href="./contact.html" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.contact">Kontakti</a>
+          </nav>
+          <div class="mt-2 flex items-center justify-between gap-2 border-t border-white/10 pt-3">
+            <div class="langseg flex items-center gap-1 rounded-full hairline bg-white/5 p-1 text-xs font-bold" role="group" aria-label="Valoda">
+              <button type="button" data-lang="lv" class="rounded-full px-2.5 py-1">LV</button>
+              <button type="button" data-lang="en" class="rounded-full px-2.5 py-1">EN</button>
+              <button type="button" data-lang="ru" class="rounded-full px-2.5 py-1">RU</button>
+            </div>
+            <a href="mailto:info@intelektaskola.lv?subject=Pieteikties%20-%20Intelekta%20Skola" class="btn-primary rounded-full px-4 py-2 text-sm font-bold" data-i18n="nav.enroll">Pieteikties</a>
           </div>
         </div>
       </div>

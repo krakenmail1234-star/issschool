@@ -434,6 +434,19 @@
     }, { passive: true });
   }
 
+  /* ---------- mobile menu toggle ---------- */
+  (function mobileMenu() {
+    const btn = $('#menuBtn');
+    const menu = $('#mobileMenu');
+    if (!btn || !menu) return;
+    const close = () => { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); };
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('hidden') === false;
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+  })();
+
   /* ---------- contact form -> mailto ---------- */
   $('#contactForm').addEventListener('submit', (e) => {
     e.preventDefault();

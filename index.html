@@ -55,8 +55,30 @@
               <button type="button" data-lang="en" class="rounded-full px-2.5 py-1">EN</button>
               <button type="button" data-lang="ru" class="rounded-full px-2.5 py-1">RU</button>
             </div>
-            <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener"
-              class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110" data-i18n="nav.enroll">Pieteikties</a>
+            <a href="mailto:info@intelektaskola.lv?subject=Pieteikties%20-%20Intelekta%20Skola"
+              class="hidden btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110 sm:inline-block" data-i18n="nav.enroll">Pieteikties</a>
+            <button id="menuBtn" type="button" aria-label="Izvēlne" aria-expanded="false" class="grid h-10 w-10 place-items-center rounded-full hairline bg-white/5 text-zinc-100 lg:hidden">
+              <svg id="menuIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="h-5 w-5"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="mt-2 hidden rounded-2xl glass p-3 lg:hidden">
+          <nav class="flex flex-col text-sm font-semibold text-zinc-100">
+            <a href="#courses" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.courses">Kursi</a>
+            <a href="#tools" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.tools">Bezmaksas rīki</a>
+            <a href="#why" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.why">Kāpēc mēs</a>
+            <a href="#roadmap" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.roadmap">Ceļa karte</a>
+            <a href="#contact" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.contact">Kontakti</a>
+          </nav>
+          <div class="mt-2 flex items-center justify-between gap-2 border-t border-white/10 pt-3">
+            <div class="langseg flex items-center gap-1 rounded-full hairline bg-white/5 p-1 text-xs font-bold" role="group" aria-label="Valoda">
+              <button type="button" data-lang="lv" class="rounded-full px-2.5 py-1">LV</button>
+              <button type="button" data-lang="en" class="rounded-full px-2.5 py-1">EN</button>
+              <button type="button" data-lang="ru" class="rounded-full px-2.5 py-1">RU</button>
+            </div>
+            <a href="mailto:info@intelektaskola.lv?subject=Pieteikties%20-%20Intelekta%20Skola" class="btn-primary rounded-full px-4 py-2 text-sm font-bold" data-i18n="nav.enroll">Pieteikties</a>
           </div>
         </div>
       </div>
@@ -79,7 +101,7 @@
           Praktiskas, uz darbību vērstas apmācības ChatGPT, promptu inženierijā, automatizācijā un reālā AI ieviešanā.
         </p>
         <div class="reveal mt-9 flex flex-wrap items-center justify-center gap-4" style="transition-delay:.24s">
-          <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener"
+          <a href="mailto:info@intelektaskola.lv?subject=Pieteikties%20-%20Intelekta%20Skola"
             class="btn-glow btn-primary rounded-full px-7 py-3.5 text-base font-bold transition hover:brightness-110" data-i18n="hero.cta1">Pieteikties tagad</a>
           <a href="#courses" class="rounded-full hairline bg-white/5 px-7 py-3.5 text-base font-semibold text-zinc-100 transition hover:bg-white/10" data-i18n="hero.cta2">Apskatīt kursus</a>
         </div>
@@ -194,7 +216,7 @@
             </h2>
             <p class="mx-auto mt-5 max-w-xl text-lg text-zinc-300" data-i18n="final.sub">Apgūsti praktiskas mākslīgā intelekta prasmes ar Intelekta Skolu.</p>
             <div class="mt-9">
-              <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener"
+              <a href="mailto:info@intelektaskola.lv?subject=Pieteikties%20-%20Intelekta%20Skola"
                 class="btn-glow btn-primary inline-block rounded-full px-9 py-4 text-lg font-extrabold transition hover:brightness-110" data-i18n="final.cta">Pieteikties tagad</a>
             </div>
           </div>

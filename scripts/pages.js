@@ -34,6 +34,19 @@
     });
   });
 
+  // mobile menu toggle
+  var menuBtn = $('#menuBtn');
+  var mobileMenu = $('#mobileMenu');
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', function () {
+      var open = mobileMenu.classList.toggle('hidden') === false;
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { mobileMenu.classList.add('hidden'); menuBtn.setAttribute('aria-expanded', 'false'); });
+    });
+  }
+
   var y = $('#year');
   if (y) y.textContent = new Date().getFullYear();
 
