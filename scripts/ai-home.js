@@ -12,6 +12,9 @@
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const STRIPE_MAIN = 'https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01';
   const STRIPE_INDIVIDUAL = 'https://buy.stripe.com/9B6bJ0gyD610dr00vP2ZO00';
+  const STRIPE_PROMPT = 'https://buy.stripe.com/7sY8wOdmrdtsaeOemF2ZO02';
+  const STRIPE_AUTOMATION = 'https://buy.stripe.com/eVq14mbejdts9aKfqJ2ZO03';
+  const STRIPE_CHATGPT = 'https://buy.stripe.com/14A7sKfuz0GGcmW0vP2ZO04';
   const $ = (s, r = document) => r.querySelector(s);
 
   /* ---------- translations ---------- */
@@ -70,10 +73,9 @@
         ],
       },
       company: {
-        title: 'Uzņēmums', addrLabel: 'Juridiskā adrese', addrCity: 'Lielvārde, Ogres novads', addrZip: 'LV-5071, Latvija',
+        title: 'Uzņēmums', addrLabel: 'Juridiskā adrese', addrCity: 'Rīga', addrZip: 'Latvija',
         rows: [
           { k: 'Reģ. numurs', v: '40203747500' },
-          { k: 'Reģistrēts', v: '19.05.2026' },
           { k: 'PVN numurs', v: 'LV40203747500' },
           { k: 'PVN statuss', v: 'Aktīvs', good: true },
         ],
@@ -149,10 +151,9 @@
         ],
       },
       company: {
-        title: 'Company', addrLabel: 'Legal address', addrCity: 'Lielvārde, Ogres novads', addrZip: 'LV-5071, Latvia',
+        title: 'Company', addrLabel: 'Legal address', addrCity: 'Rīga', addrZip: 'Latvia',
         rows: [
           { k: 'Reg. number', v: '40203747500' },
-          { k: 'Registered', v: '19.05.2026' },
           { k: 'VAT number', v: 'LV40203747500' },
           { k: 'VAT status', v: 'Active', good: true },
         ],
@@ -228,10 +229,9 @@
         ],
       },
       company: {
-        title: 'Компания', addrLabel: 'Юридический адрес', addrCity: 'Lielvārde, Ogres novads', addrZip: 'LV-5071, Латвия',
+        title: 'Компания', addrLabel: 'Юридический адрес', addrCity: 'Rīga', addrZip: 'Латвия',
         rows: [
           { k: 'Рег. номер', v: '40203747500' },
-          { k: 'Зарегистрировано', v: '19.05.2026' },
           { k: 'Номер НДС', v: 'LV40203747500' },
           { k: 'Статус НДС', v: 'Активен', good: true },
         ],
@@ -277,11 +277,11 @@
   // language-independent config per card (icons, links, flags).
   // `let` so the Sanity CMS loader can replace it with editable content.
   let COURSE_META = [
-    { icon: 'rocket', href: STRIPE_MAIN },
-    { icon: 'chat', href: STRIPE_MAIN },
-    { icon: 'bolt', href: STRIPE_MAIN },
-    { icon: 'user', href: STRIPE_INDIVIDUAL, featured: true },
-    { icon: 'sparkle', href: STRIPE_MAIN },
+    { icon: 'rocket', href: STRIPE_MAIN },          // AI ieviešana
+    { icon: 'chat', href: STRIPE_CHATGPT },          // ChatGPT un LLM meistarība
+    { icon: 'bolt', href: STRIPE_AUTOMATION },        // AI automatizācija sociālajiem tīkliem
+    { icon: 'user', href: STRIPE_INDIVIDUAL, featured: true }, // Individuālais AI kurss
+    { icon: 'sparkle', href: STRIPE_PROMPT },         // Promptu inženierija
   ];
   const TOOL_META = [
     { icon: 'target', href: null },

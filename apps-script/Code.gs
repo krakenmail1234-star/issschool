@@ -25,19 +25,23 @@ function doPost(e) {
 
     var type = String(data.type || 'contact');
     var name = String(data.name || '').trim();
+    var surname = String(data.surname || '').trim();
     var email = String(data.email || '').trim();
     var message = String(data.message || '').trim();
+    var fullName = (name + ' ' + surname).trim();
 
     // basic email sanity check
     var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     // 1) Notify the business
-    var subject = (type === 'guide')
-      ? 'Jauns AI ceļveža pieprasījums — ' + (name || email || 'nezināms')
-      : 'Jauns kontaktpieprasījums — ' + (name || email || 'nezināms');
+    var subject;
+    if (type === 'guide') subject = 'Jauns AI ceļveža pieprasījums — ' + (fullName || email || 'nezināms');
+    else if (type === 'apply') subject = 'Jauns pieteikums apmācībām — ' + (fullName || email || 'nezināms');
+    else subject = 'Jauns kontaktpieprasījums — ' + (fullName || email || 'nezināms');
     var body =
       'Tips: ' + type + '\n' +
       'Vārds: ' + name + '\n' +
+      (surname ? ('Uzvārds: ' + surname + '\n') : '') +
       'E-pasts: ' + email + '\n' +
       (message ? ('\nZiņa:\n' + message + '\n') : '') +
       '\n— Nosūtīts no ' + SITE;
