@@ -10,11 +10,11 @@
       name="description"
       content="Bezmaksas interaktīvs rīks: izvēlies biznesa scenāriju un saņem gatavu, profesionālu AI promptu, ko izmantot savā ikdienas darbā."
     />
-    <link rel="icon" href="../assets/logo-is.svg" type="image/svg+xml" />
+    <link rel="icon" href="../../assets/logo-is.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles/aurora.css" />
+    <link rel="stylesheet" href="../../styles/aurora.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -46,13 +46,13 @@
     <!-- Header -->
     <header class="sticky top-0 z-30 glass border-b border-white/5">
       <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-        <a href="../index.html" class="flex items-center gap-3 group">
-          <img src="../assets/logo-is.svg" alt="" class="h-9 w-9 transition-transform group-hover:-rotate-6" />
-          <span class="text-lg font-extrabold tracking-tight">INTELEKTA<span class="brand-text">SKOLA</span></span>
+        <a href="../../index.html" class="flex items-center gap-3 group">
+          <img src="../../assets/logo-is.svg" alt="" class="h-9 w-9 transition-transform group-hover:-rotate-6" />
+          <span class="text-lg font-extrabold tracking-tight">Intelekta <span class="brand-text">Skola</span></span>
         </a>
         <div class="flex items-center gap-3">
-          <a href="../riki/index.html" class="hidden text-sm font-semibold text-muted hover:text-white sm:block">← Visi rīki</a>
-          <a href="../contact.html" class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110">Pieteikties</a>
+          <a href="../index.html" class="hidden text-sm font-semibold text-muted hover:text-white sm:block">← Visi rīki</a>
+          <a href="../../contact.html" class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110">Pieteikties</a>
         </div>
       </div>
     </header>
@@ -119,7 +119,7 @@
               <!-- Front -->
               <div class="flip__face flip__front absolute inset-0 flex flex-col rounded-3xl glass-strong glass p-6 glow">
                 <div class="mb-3 flex items-center justify-between">
-                  <span class="inline-flex items-center gap-2 rounded-full bg-brand/15 px-3 py-1 text-xs font-bold text-electric">🎯 Gatavs prompts</span>
+                  <span class="inline-flex items-center gap-2 rounded-full bg-brand/15 px-3 py-1 text-xs font-bold text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-3.5 w-3.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg> Gatavs prompts</span>
                   <button id="copyBtn" type="button" class="btn-primary rounded-full px-3 py-1.5 text-xs font-bold transition hover:-translate-y-0.5">Kopēt</button>
                 </div>
                 <pre id="promptOut" class="nice-scroll flex-1 overflow-auto whitespace-pre-wrap rounded-2xl bg-black/30 p-4 text-sm leading-relaxed text-zinc-100"></pre>
@@ -127,7 +127,7 @@
               </div>
               <!-- Back -->
               <div class="flip__face flip__back absolute inset-0 flex flex-col rounded-3xl glass-strong glass p-6 glow">
-                <span class="mb-3 inline-flex w-max items-center gap-2 rounded-full bg-brand/15 px-3 py-1 text-xs font-bold text-electric">✨ Pirms / Pēc</span>
+                <span class="mb-3 inline-flex w-max items-center gap-2 rounded-full bg-brand/15 px-3 py-1 text-xs font-bold text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="h-3.5 w-3.5"><path d="M12 3l1.8 5.2L19 11l-5.2 1.8L12 18l-1.8-5.2L5 11l5.2-1.8z"/></svg> Pirms / Pēc</span>
                 <div class="mb-3 rounded-2xl border border-red-400/20 bg-red-500/10 p-3">
                   <div class="mb-1 text-xs font-bold uppercase tracking-wide text-red-300">Pirms (tava melnraksta doma)</div>
                   <p id="beforeOut" class="text-sm text-zinc-300"></p>
@@ -154,8 +154,8 @@
               Pieteikies bezmaksas konsultācijai un pārrunāsim tavu konkrēto gadījumu.
             </p>
             <div class="mt-6 flex flex-wrap justify-center gap-3">
-              <a href="../contact.html" class="btn-glow btn-primary rounded-full px-6 py-3 font-bold transition hover:-translate-y-1">Pieteikties konsultācijai</a>
-              <a href="../index.html" class="rounded-full hairline bg-white/5 px-6 py-3 font-bold text-zinc-100 transition hover:bg-white/10">Uz sākumlapu</a>
+              <a href="../../contact.html" class="btn-glow btn-primary rounded-full px-6 py-3 font-bold transition hover:-translate-y-1">Pieteikties konsultācijai</a>
+              <a href="../../index.html" class="rounded-full hairline bg-white/5 px-6 py-3 font-bold text-zinc-100 transition hover:bg-white/10">Uz sākumlapu</a>
             </div>
           </div>
         </div>
@@ -164,14 +164,15 @@
 
     <footer class="relative z-10 mx-auto max-w-6xl px-5 pb-10 text-center text-sm text-muted">
       © <span id="year"></span> Intelekta Skola · Promptu Darbnīca ·
-      <a href="../index.html" class="font-semibold text-electric hover:underline">intelektaskola.lv</a>
+      <a href="../../index.html" class="font-semibold text-electric hover:underline">intelektaskola.lv</a>
     </footer>
 
     <!-- Toast -->
     <div id="toast" class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 translate-y-4 rounded-full btn-primary px-5 py-2.5 text-sm font-bold opacity-0 transition-all">
-      Nokopēts! 📋
+      Nokopēts!
     </div>
 
+    <script src="../../scripts/icons.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>

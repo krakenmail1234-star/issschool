@@ -200,7 +200,7 @@ function showResult() {
   $('#tierText').textContent = tier.text;
   $('#recoList').innerHTML = tier.recos
     .map(
-      (r) => `<li class="flex items-start gap-2 text-sm text-white/90"><span class="mt-0.5 text-sun">✓</span><span>${r}</span></li>`
+      (r) => `<li class="flex items-start gap-2 text-sm text-white/90"><span class="mt-0.5 text-electric">✓</span><span>${r}</span></li>`
     )
     .join('');
 

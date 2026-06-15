@@ -284,11 +284,11 @@
   ];
   const TOOL_META = [
     { icon: 'target', href: null },
-    { icon: 'wand', href: './prompt-darbnica/index.html', live: true },
+    { icon: 'wand', href: './tools/prompt-darbnica/index.html', live: true },
     { icon: 'sparkle', href: null },
-    { icon: 'gauge', href: './ai-gatavibas-tests/index.html', live: true },
+    { icon: 'gauge', href: './tools/ai-gatavibas-tests/index.html', live: true },
     { icon: 'compass', href: null },
-    { icon: 'bolt', href: './laika-kalkulators/index.html', live: true },
+    { icon: 'bolt', href: './tools/laika-kalkulators/index.html', live: true },
   ];
   const WHY_ICONS = ['rocket', 'hands', 'briefcase', 'gear', 'mentor', 'infinity'];
 

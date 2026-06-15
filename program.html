@@ -1,244 +1,173 @@
 <!doctype html>
-<html lang="en">
+<html lang="lv">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light" />
-    <meta name="supported-color-schemes" content="light" />
-    <meta name="theme-color" content="#fff9f0" />
-    <title>Program — Intelekta Skola</title>
-    <meta name="description" content="Intelekta Skola programma: sešas tēmas — prompti, modeļi, produktivitāte, saturs, automatizācija, drošība." />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#05070d" />
+    <title>Programma — Intelekta Skola</title>
+    <meta name="description" content="Intelekta Skolas AI kursi: ieviešana, ChatGPT meistarība, automatizācija, individuālās apmācības un promptu inženierija." />
+    <link rel="icon" href="./assets/logo-is.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="icon" href="https://i.imgur.com/bsQTVXQ.png" type="image/png" />
-    <link rel="stylesheet" href="./styles/base.css" />
-    <link rel="stylesheet" href="./styles/theme.css" />
-    <script defer src="./scripts/site.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/aurora.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { theme: { extend: {
+        fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+        colors: { ink: '#05070d', ink2: '#0a0f1c', brand: '#3b82f6', brandlt: '#93c5fd', branddeep: '#1d4ed8', electric: '#60a5fa', muted: '#94a3b8' },
+        boxShadow: { depth: '0 10px 30px -8px rgba(59,130,246,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+      } } };
+    </script>
   </head>
-  <body data-privacy-href="./privacy.html" data-doc-title="meta_title_program" data-doc-desc="meta_desc_program">
-    <a class="skip-link" href="#main" data-i18n="skip_to_content">Skip to content</a>
 
-        <header class="topbar" data-elevates>
-      <div class="container topbar__inner">
-        <a class="brand" href="./index.html" data-i18n-aria="aria_brand_home">
-          <span class="brand__logo" aria-hidden="true"></span>
-          <span class="brand__text">Intelekta Skola</span>
-        </a>
-
-        <nav class="nav" data-i18n-aria="aria_nav_primary">
-          <a class="nav__link" href="./program.html" data-i18n="nav_program" data-nav="program">Program</a>
-          <a class="nav__link" href="./services.html" data-i18n="nav_services" data-nav="services">Services</a>
-          <a class="nav__link" href="./musu-darbi.html" data-i18n="nav_work" data-nav="musu-darbi">Our work</a>
-          <a class="nav__link" href="./faq.html" data-i18n="nav_faq" data-nav="faq">FAQ</a>
-          <a class="nav__link" href="./riki/index.html" data-i18n="nav_tools" data-nav="riki">Tools</a>
-          <a class="nav__link" href="./contact.html" data-i18n="nav_contact" data-nav="contact">Contact</a>
-        </nav>
-
-        <div class="topbar__actions">
-          <select class="langselect" data-lang-select data-i18n-aria="aria_label_language">
-            <option value="en">ENG</option>
-            <option value="lv">LV</option>
-            <option value="ru">RU</option>
-          </select>
-          <a class="button" href="./contact.html" data-i18n="cta_contact">Contact</a>
-          <button class="iconbtn" type="button" data-menu-button data-i18n-aria="aria_open_menu" aria-expanded="false">
-            <span class="iconbtn__bars" aria-hidden="true"></span>
-          </button>
-        </div>
-      </div>
-
-      <div class="mobilemenu" data-mobile-menu hidden>
-        <div class="container mobilemenu__inner">
-          <div class="mobilemenu__lang">
-            <select class="langselect" data-lang-select data-i18n-aria="aria_label_language">
-              <option value="en">ENG</option>
-              <option value="lv">LV</option>
-              <option value="ru">RU</option>
-            </select>
-          </div>
-          <a class="mobilemenu__link" href="./program.html" data-i18n="nav_program" data-nav="program">Program</a>
-          <a class="mobilemenu__link" href="./services.html" data-i18n="nav_services" data-nav="services">Services</a>
-          <a class="mobilemenu__link" href="./musu-darbi.html" data-i18n="nav_work" data-nav="musu-darbi">Our work</a>
-          <a class="mobilemenu__link" href="./faq.html" data-i18n="nav_faq" data-nav="faq">FAQ</a>
-          <a class="mobilemenu__link" href="./riki/index.html" data-i18n="nav_tools" data-nav="riki">Tools</a>
-          <a class="mobilemenu__link" href="./contact.html" data-i18n="nav_contact" data-nav="contact">Contact</a>
-          <div class="mobilemenu__cta">
-            <a class="button" href="./contact.html" data-i18n="hero_cta_primary">Book a free consultation</a>
-            <a class="button button--ghost" href="./program.html" data-i18n="hero_cta_secondary">View programs</a>
+  <body class="ambient font-sans antialiased relative">
+    <header class="fixed top-0 inset-x-0 z-50">
+      <div class="mx-auto max-w-7xl px-5">
+        <div class="mt-3 flex items-center justify-between gap-3 rounded-2xl glass px-4 py-2.5">
+          <a href="./index.html" class="flex items-center gap-3 group shrink-0">
+            <img src="./assets/logo-is.svg" alt="Intelekta Skola" class="h-8 w-8" />
+            <span class="text-sm font-extrabold tracking-tight">Intelekta <span class="brand-text">Skola</span></span>
+          </a>
+          <nav class="hidden items-center gap-7 text-sm font-medium text-zinc-300 lg:flex">
+            <a href="./index.html#courses" class="nav-link" data-i18n="nav.courses">Kursi</a>
+            <a href="./program.html" class="nav-link" data-i18n="nav.program">Programma</a>
+            <a href="./tools/index.html" class="nav-link" data-i18n="nav.tools">Bezmaksas rīki</a>
+            <a href="./contact.html" class="nav-link" data-i18n="nav.contact">Kontakti</a>
+          </nav>
+          <div class="flex items-center gap-2">
+            <div class="langseg hidden items-center gap-1 rounded-full hairline bg-white/5 p-1 text-xs font-bold sm:flex" role="group" aria-label="Valoda">
+              <button type="button" data-lang="lv" class="rounded-full px-2.5 py-1">LV</button>
+              <button type="button" data-lang="en" class="rounded-full px-2.5 py-1">EN</button>
+              <button type="button" data-lang="ru" class="rounded-full px-2.5 py-1">RU</button>
+            </div>
+            <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener" class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110" data-i18n="nav.enroll">Pieteikties</a>
           </div>
         </div>
       </div>
     </header>
 
+    <main class="relative z-10 mx-auto max-w-7xl px-6 pb-28 pt-32">
+      <div class="mb-14 text-center">
+        <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="hero.label">Programma</div>
+        <h1 class="mt-3 text-4xl font-extrabold tracking-tight md:text-6xl">
+          <span data-i18n="hero.title1">Pieci kursi —</span> <span class="brand-text" data-i18n="hero.title2">no pamatiem līdz ieviešanai.</span>
+        </h1>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-zinc-300" data-i18n="hero.sub">Katrs kurss ir praktisks un balstīts reālos darba uzdevumos. Izvēlies atsevišķu tēmu vai ej cauri visam ceļam.</p>
+      </div>
 
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- 1 -->
+        <article class="glass glow-hover rounded-3xl p-7">
+          <div class="mb-5 inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2"/><path d="M9 11a8 8 0 0 1 8-8c2 0 3 1 3 3a8 8 0 0 1-8 8l-3-3z"/><circle cx="14" cy="9" r="1.3"/></svg></div>
+          <h2 class="text-xl font-bold" data-i18n="c1.t">AI ieviešana</h2>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="c1.d">Kā uzņēmumi ievieš AI sistēmas, darba plūsmas un produktivitātes risinājumus — soli pa solim, ar reāliem piemēriem.</p>
+          <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-electric hover:text-brandlt"><span data-i18n="enroll">Pieteikties</span> →</a>
+        </article>
+        <!-- 2 -->
+        <article class="glass glow-hover rounded-3xl p-7">
+          <div class="mb-5 inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-5A8 8 0 1 1 21 12z"/></svg></div>
+          <h2 class="text-xl font-bold" data-i18n="c2.t">ChatGPT un LLM meistarība</h2>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="c2.d">Praktiska AI lietošana, prompti, darba plūsmas un padziļinātas ChatGPT un Claude tehnikas ikdienas darbam.</p>
+          <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-electric hover:text-brandlt"><span data-i18n="enroll">Pieteikties</span> →</a>
+        </article>
+        <!-- 3 -->
+        <article class="glass glow-hover rounded-3xl p-7">
+          <div class="mb-5 inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M3 11v2a1 1 0 0 0 1 1h2l9 5V5L6 10H4a1 1 0 0 0-1 1z"/><path d="M18 8a4 4 0 0 1 0 8"/></svg></div>
+          <h2 class="text-xl font-bold" data-i18n="c3.t">AI automatizācija sociālajiem tīkliem</h2>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="c3.d">Automatizē satura veidošanu, plānošanu un publicēšanu ar mūsdienu AI rīkiem — no idejas līdz publikācijai.</p>
+          <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-electric hover:text-brandlt"><span data-i18n="enroll">Pieteikties</span> →</a>
+        </article>
+        <!-- 4 (featured) -->
+        <article class="glass glow-hover rounded-3xl p-7 ring-1 ring-brand/40">
+          <div class="mb-5 inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+          <div class="mb-2 inline-block rounded-full bg-brand/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-electric" data-i18n="c4.badge">Personīgākais</div>
+          <h2 class="text-xl font-bold" data-i18n="c4.t">Individuālais AI kurss</h2>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="c4.d">Personalizētas individuālas apmācības, pielāgotas taviem mērķiem un profesijai. Tempu un tēmas nosaki tu.</p>
+          <a href="https://buy.stripe.com/9B6bJ0gyD610dr00vP2ZO00" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-electric hover:text-brandlt"><span data-i18n="c4.cta">Pieteikt 1:1</span> →</a>
+        </article>
+        <!-- 5 -->
+        <article class="glass glow-hover rounded-3xl p-7">
+          <div class="mb-5 inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" class="h-6 w-6"><path d="M12 3l1.8 5.2L19 11l-5.2 1.8L12 18l-1.8-5.2L5 11l5.2-1.8z"/></svg></div>
+          <h2 class="text-xl font-bold" data-i18n="c5.t">Promptu inženierija</h2>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="c5.d">Apgūsti strukturētu promptu veidošanu biznesam, radošumam un automatizācijai — atkārtojami, paredzami rezultāti.</p>
+          <a href="https://buy.stripe.com/3cI14m6Y3ahgbiS0vP2ZO01" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-electric hover:text-brandlt"><span data-i18n="enroll">Pieteikties</span> →</a>
+        </article>
+        <!-- free tools cross-link -->
+        <a href="./tools/index.html" class="glass glow-hover flex flex-col justify-center rounded-3xl p-7 text-center">
+          <div class="mx-auto mb-3 inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></div>
+          <h2 class="text-lg font-bold" data-i18n="toolsCard.t">Izmēģini bezmaksas rīkus</h2>
+          <p class="mt-1 text-sm text-zinc-400" data-i18n="toolsCard.d">Promptu darbnīca, laika kalkulators un gatavības tests.</p>
+          <span class="mt-3 inline-flex items-center justify-center gap-1 text-sm font-bold text-electric" data-i18n="toolsCard.cta">Atvērt rīkus →</span>
+        </a>
+      </div>
 
-    <main id="main">
-      <section class="pagehero">
-        <div class="container pagehero__inner">
-          <div>
-            <div class="badge">
-              <span class="badge__dot" aria-hidden="true"></span>
-              <span data-i18n="program_badge">Program</span>
-            </div>
-            <h1 class="h1" data-i18n="program_h1">A program built like a system.</h1>
-            <p class="lead" data-i18n="program_lead">Progressive modules, practical frameworks, and clean mental models.</p>
-          </div>
-          <div class="pagehero__panel" aria-hidden="true">
-            <div class="glasscard">
-              <div class="glasscard__header">
-                <div class="chip" data-i18n="program_chip_modules">Modules</div>
-                <div class="chip chip--muted" data-i18n="program_chip_structured">Structured</div>
-              </div>
-              <div class="glasscard__body">
-                <div class="mono subtle" data-i18n="program_card_loop">Learn → Apply → Review → Iterate</div>
-                <div class="divider"></div>
-                <div class="mono" data-i18n="program_card_stack">Mechanics · Playbooks · Mentorship</div>
-              </div>
-            </div>
-          </div>
+      <!-- CTA -->
+      <div class="mt-16 overflow-hidden rounded-[2.5rem] glass-strong glass p-10 text-center md:p-14 relative">
+        <div class="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-brand/25 blur-[80px]"></div>
+        <div class="relative">
+          <h2 class="text-3xl font-extrabold md:text-4xl" data-i18n="cta.h">Nezini, ar ko sākt?</h2>
+          <p class="mx-auto mt-3 max-w-xl text-zinc-300" data-i18n="cta.p">Piesakies bezmaksas 20–30 minūšu konsultācijai — ieteiksim tev piemērotāko ceļu.</p>
+          <a href="./contact.html" class="btn-glow btn-primary mt-6 inline-block rounded-full px-7 py-3.5 font-bold transition hover:-translate-y-1" data-i18n="cta.btn">Pieteikties konsultācijai</a>
         </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="cards">
-            <article class="card">
-              <div class="card__top">
-                <div class="icon icon--grid" aria-hidden="true"></div>
-                <h2 class="h3" data-i18n="program_card1_title">Market mechanics</h2>
-              </div>
-              <p data-i18n="program_card1_text">
-                Order flow concepts, liquidity, sessions, volatility, and why price moves — explained clearly.
-              </p>
-              <ul class="list">
-                <li data-i18n="program_card1_li1">Structure, regimes, and narrative</li>
-                <li data-i18n="program_card1_li2">Risk thinking and execution hygiene</li>
-                <li data-i18n="program_card1_li3">Review loops and journaling</li>
-              </ul>
-            </article>
-            <article class="card">
-              <div class="card__top">
-                <div class="icon icon--spark" aria-hidden="true"></div>
-                <h2 class="h3" data-i18n="program_card2_title">Playbooks</h2>
-              </div>
-              <p data-i18n="program_card2_text">
-                Repeatable setups and decision trees — so you know what to do, and when not to.
-              </p>
-              <ul class="list">
-                <li data-i18n="program_card2_li1">Entry/exit protocols</li>
-                <li data-i18n="program_card2_li2">Conditions checklist</li>
-                <li data-i18n="program_card2_li3">Post-trade debrief</li>
-              </ul>
-            </article>
-            <article class="card">
-              <div class="card__top">
-                <div class="icon icon--shield" aria-hidden="true"></div>
-                <h2 class="h3" data-i18n="program_card3_title">Mentorship layer</h2>
-              </div>
-              <p data-i18n="program_card3_text">
-                Feedback, review, and guidance tailored to your stage — from foundations to refinement.
-              </p>
-              <ul class="list">
-                <li data-i18n="program_card3_li1">1:1 reviews (optional)</li>
-                <li data-i18n="program_card3_li2">Actionable improvements</li>
-                <li data-i18n="program_card3_li3">Accountability cadence</li>
-              </ul>
-            </article>
-          </div>
-
-          <div class="callout">
-            <div>
-              <div class="callout__title" data-i18n="program_callout_title">Want a recommended path?</div>
-              <div class="callout__text" data-i18n="program_callout_text">
-                Send your current stage and goals — we’ll suggest the right starting point.
-              </div>
-            </div>
-            <a class="button" href="./contact.html" data-i18n="cta_contact">Contact</a>
-          </div>
-        </div>
-      </section>
+      </div>
     </main>
 
-    <footer class="footer">
-      <div class="container footer__inner">
-        <div class="footer__left">
-          <div class="brand brand--small">
-            <span class="brand__logo" aria-hidden="true"></span>
-            <span class="brand__text">Intelekta Skola</span>
-          </div>
-          <div class="footer__meta">© <span id="year"></span> · <span data-i18n="footer_tagline">Education & support.</span></div>
-
-          <div class="footer__contact">
-            <div class="footer__contact-item"><span data-i18n="header_company_name">SIA Intelekta Skola</span></div>
-            <div class="footer__contact-item"><span data-i18n="header_registration">Reģ. Nr.: 40203747500 · reģ. datums: 19.05.2026</span></div>
-            <div class="footer__contact-item"><span data-i18n="header_email_label">Email</span>: <a href="mailto:info@intelektaskola.lv" data-i18n="header_email">info@intelektaskola.lv</a></div>
-            <div class="footer__contact-item"><span data-i18n="header_phone">Tel: +371 20771001, +371 20771002, +371 20771003</span></div>
-          </div>
-          <div class="footer__social">
-            <span class="footer__social-label" data-i18n="footer_social_label">Sekojiet mums</span>
-            <div class="footer__social-links">
-              <a
-                class="socialicon"
-                href="https://www.facebook.com/intelektaskola"
-                data-social="facebook"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-i18n-aria="aria_social_facebook"
-              >
-                <svg class="socialicon__svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="currentColor"
-                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                  />
-                </svg>
-              </a>
-              <a
-                class="socialicon"
-                href="https://www.instagram.com/intelektaskola/"
-                data-social="instagram"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-i18n-aria="aria_social_instagram"
-              >
-                <svg class="socialicon__svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="currentColor"
-                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
-                  />
-                </svg>
-              </a>
-              <a
-                class="socialicon"
-                href="https://www.linkedin.com/company/intelektaskola"
-                data-social="linkedin"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-i18n-aria="aria_social_linkedin"
-              >
-                <svg class="socialicon__svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="currentColor"
-                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 010-4.124 2.062 2.062 0 010 4.124zM7.114 20.452H3.56V9h3.554v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                  />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="footer__right">
-          <a class="footer__link" href="./program.html" data-i18n="nav_program">Program</a>
-          <a class="footer__link" href="./services.html" data-i18n="nav_services">Services</a>
-          <a class="footer__link" href="./musu-darbi.html" data-i18n="nav_work">Our work</a>
-          <a class="footer__link" href="./faq.html" data-i18n="nav_faq">FAQ</a>
-          <a class="footer__link" href="./privacy.html" data-i18n="nav_privacy">Privacy</a>
-          <a class="footer__link" href="./contact.html" data-i18n="nav_contact">Contact</a>
+    <footer class="border-t border-white/5">
+      <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-zinc-500 sm:flex-row">
+        <div class="flex items-center gap-2"><img src="./assets/logo-is.svg" alt="" class="h-6 w-6" /><span>© <span id="year"></span> SIA Intelekta Skola · Reg. 40203747500</span></div>
+        <div class="flex items-center gap-5">
+          <a href="./index.html" class="hover:text-electric" data-i18n="footer.home">Sākums</a>
+          <a href="./privacy.html" class="hover:text-electric" data-i18n="footer.privacy">Privātums</a>
+          <a href="mailto:info@intelektaskola.lv" class="hover:text-electric">info@intelektaskola.lv</a>
         </div>
       </div>
     </footer>
+
+    <script>
+      window.PAGE_I18N = {
+        lv: {
+          nav: { courses: 'Kursi', program: 'Programma', tools: 'Bezmaksas rīki', contact: 'Kontakti', enroll: 'Pieteikties' },
+          hero: { label: 'Programma', title1: 'Pieci kursi —', title2: 'no pamatiem līdz ieviešanai.', sub: 'Katrs kurss ir praktisks un balstīts reālos darba uzdevumos. Izvēlies atsevišķu tēmu vai ej cauri visam ceļam.' },
+          enroll: 'Pieteikties',
+          c1: { t: 'AI ieviešana', d: 'Kā uzņēmumi ievieš AI sistēmas, darba plūsmas un produktivitātes risinājumus — soli pa solim, ar reāliem piemēriem.' },
+          c2: { t: 'ChatGPT un LLM meistarība', d: 'Praktiska AI lietošana, prompti, darba plūsmas un padziļinātas ChatGPT un Claude tehnikas ikdienas darbam.' },
+          c3: { t: 'AI automatizācija sociālajiem tīkliem', d: 'Automatizē satura veidošanu, plānošanu un publicēšanu ar mūsdienu AI rīkiem — no idejas līdz publikācijai.' },
+          c4: { badge: 'Personīgākais', t: 'Individuālais AI kurss', d: 'Personalizētas individuālas apmācības, pielāgotas taviem mērķiem un profesijai. Tempu un tēmas nosaki tu.', cta: 'Pieteikt 1:1' },
+          c5: { t: 'Promptu inženierija', d: 'Apgūsti strukturētu promptu veidošanu biznesam, radošumam un automatizācijai — atkārtojami, paredzami rezultāti.' },
+          toolsCard: { t: 'Izmēģini bezmaksas rīkus', d: 'Promptu darbnīca, laika kalkulators un gatavības tests.', cta: 'Atvērt rīkus →' },
+          cta: { h: 'Nezini, ar ko sākt?', p: 'Piesakies bezmaksas 20–30 minūšu konsultācijai — ieteiksim tev piemērotāko ceļu.', btn: 'Pieteikties konsultācijai' },
+          footer: { home: 'Sākums', privacy: 'Privātums' },
+        },
+        en: {
+          nav: { courses: 'Courses', program: 'Program', tools: 'Free tools', contact: 'Contact', enroll: 'Enroll' },
+          hero: { label: 'Program', title1: 'Five courses —', title2: 'from foundations to implementation.', sub: 'Every course is practical and built on real work tasks. Pick a single topic or follow the whole path.' },
+          enroll: 'Enroll',
+          c1: { t: 'AI Implementation', d: 'How businesses deploy AI systems, workflows and productivity solutions — step by step, with real examples.' },
+          c2: { t: 'ChatGPT & LLM Mastery', d: 'Practical AI usage, prompting, workflows and advanced ChatGPT and Claude techniques for daily work.' },
+          c3: { t: 'AI Automation for Social Media', d: 'Automate content generation, planning and publishing with modern AI tools — from idea to published post.' },
+          c4: { badge: 'Most personal', t: 'AI Individual Course', d: 'Personalized one-on-one training tailored to your goals and profession. You set the pace and topics.', cta: 'Book 1:1' },
+          c5: { t: 'Prompt Engineering', d: 'Master structured prompting for business, creativity and automation — repeatable, predictable results.' },
+          toolsCard: { t: 'Try the free tools', d: 'Prompt workshop, time calculator and readiness test.', cta: 'Open tools →' },
+          cta: { h: 'Not sure where to start?', p: 'Book a free 20–30 minute consultation — we’ll suggest the best path for you.', btn: 'Book a consultation' },
+          footer: { home: 'Home', privacy: 'Privacy' },
+        },
+        ru: {
+          nav: { courses: 'Курсы', program: 'Программа', tools: 'Бесплатные инструменты', contact: 'Контакты', enroll: 'Записаться' },
+          hero: { label: 'Программа', title1: 'Пять курсов —', title2: 'от основ до внедрения.', sub: 'Каждый курс практичный и построен на реальных рабочих задачах. Выберите одну тему или пройдите весь путь.' },
+          enroll: 'Записаться',
+          c1: { t: 'Внедрение ИИ', d: 'Как компании внедряют ИИ-системы, процессы и решения для продуктивности — шаг за шагом, с реальными примерами.' },
+          c2: { t: 'Мастерство ChatGPT и LLM', d: 'Практическое использование ИИ, промпты, процессы и продвинутые техники ChatGPT и Claude для ежедневной работы.' },
+          c3: { t: 'Автоматизация соцсетей с ИИ', d: 'Автоматизируйте создание контента, планирование и публикацию современными ИИ-инструментами — от идеи до поста.' },
+          c4: { badge: 'Самый личный', t: 'Индивидуальный курс по ИИ', d: 'Персональное обучение под ваши цели и профессию. Темп и темы выбираете вы.', cta: 'Записаться 1:1' },
+          c5: { t: 'Промпт-инженерия', d: 'Освойте структурированные промпты для бизнеса, творчества и автоматизации — повторяемые, предсказуемые результаты.' },
+          toolsCard: { t: 'Попробуйте бесплатные инструменты', d: 'Мастерская промптов, калькулятор времени и тест готовности.', cta: 'Открыть инструменты →' },
+          cta: { h: 'Не знаете, с чего начать?', p: 'Запишитесь на бесплатную консультацию 20–30 минут — подскажем подходящий путь.', btn: 'Записаться на консультацию' },
+          footer: { home: 'Главная', privacy: 'Конфиденциальность' },
+        },
+      };
+    </script>
+    <script src="./scripts/pages.js"></script>
   </body>
 </html>
-

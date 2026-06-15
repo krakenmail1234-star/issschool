@@ -1,58 +1,48 @@
-# Investiciju Skola — Static Site
+# Intelekta Skola — website
 
-School for learning trading, forex, and more. Modern, minimal front-end for a financial markets education + Discord + mentorship website.
+Static, blue/white/black dark site for an AI education business (Latvian by default,
+with EN / RU language switch). No build step — plain HTML + Tailwind (CDN) + vanilla JS.
 
-## Pages
+## Structure
 
-- `index.html` (landing)
-- `program.html`
-- `discord.html`
-- `mentorship.html`
-- `faq.html`
-- `about.html`
-- `services.html`
-- `contact.html`
-
-Navigation links to About/Services/Contacts are set to open in a **new tab** and the pages share the **same CSS**.
-Program/Discord/Mentorship/FAQ are also separate pages (no scrolling sections required).
+```
+index.html              Landing page (hero, courses, free tools, why, roadmap, contact, CTA)
+program.html            Courses / program detail
+contact.html            Contact + company info + form
+privacy.html            Privacy & cookies
+assets/
+  logo-is.svg           Logo + favicon (used everywhere)
+styles/
+  aurora.css            Shared blue dark theme (glass, glow, reveal, fields, buttons)
+scripts/
+  ai-home.js            Landing logic: i18n (LV/EN/RU), Three.js hero, reveals, free-guide modal
+  icons.js              Shared professional SVG icon set (isIcon())
+  pages.js              Shared i18n + form handling for the standalone pages
+tools/
+  index.html            Free-tools hub
+  prompt-darbnica/      Prompt workshop (index.html + app.js)
+  laika-kalkulators/    Time / ROI calculator
+  ai-gatavibas-tests/   AI readiness quiz
+```
 
 ## Run locally
 
-Any simple static server works.
-
-### Option 1: VS Code / Cursor “Live Server”
-
-Open `index.html` and start Live Server.
-
-### Option 2: Node (http-server)
-
 ```bash
-npx http-server -p 5173 .
+python -m http.server 5179
+# open http://localhost:5179/index.html
 ```
 
-Then open `http://localhost:5173`.
+## Language
 
-### Option 3: Python
+Latvian is the default. The header has an LV / EN / RU switch; the choice is stored in
+`localStorage` (`is_lang`) and shared across all pages. Landing copy lives in `scripts/ai-home.js`;
+standalone-page copy lives inline in each page as `window.PAGE_I18N`.
 
-```bash
-python -m http.server 5173
-```
+## Payments
 
-## Theme options (3 styles)
+Stripe payment links are wired into the "Pieteikties / Enroll" buttons.
 
-The site uses:
+## Theming
 
-- Shared layout + components: `styles/base.css`
-- Active theme tokens: `styles/theme.css`
-
-To switch the look, copy one of these into `styles/theme.css`:
-
-- `styles/themes/theme-neon-grid.css`
-- `styles/themes/theme-quantum-slate.css`
-
-Default theme is the minimal modern theme in `styles/theme.css`.
-
-## Customize content
-
-- Discord invite: edit `discordInviteUrl` in `scripts/site.js`
-- Contact email: edit `contactEmail` in `scripts/site.js`
+All pages share `styles/aurora.css`. Brand colour is electric blue (`--brand #3b82f6`,
+`--electric #60a5fa`) on near-black (`--bg #05070d`). To restyle, edit the CSS variables there.

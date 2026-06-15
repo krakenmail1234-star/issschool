@@ -3,14 +3,14 @@
 
 // Each task: typical hours/week spent + how much AI realistically removes (saveRate).
 const TASKS = [
-  { id: 'email', icon: '✉️', name: 'E-pasti un sarakste', hint: 'rakstīšana, atbildes, kopsavilkumi', defH: 6, save: 0.5 },
-  { id: 'reports', icon: '📊', name: 'Atskaites un dokumenti', hint: 'sagatavošana, formatēšana', defH: 4, save: 0.45 },
-  { id: 'support', icon: '💬', name: 'Klientu atbildes', hint: 'jautājumi, sūdzības, FAQ', defH: 5, save: 0.55 },
-  { id: 'content', icon: '✍️', name: 'Satura veidošana', hint: 'soc. tīkli, mārketings, teksti', defH: 4, save: 0.6 },
-  { id: 'meetings', icon: '📝', name: 'Sapulču pieraksti', hint: 'protokoli, uzdevumi', defH: 2, save: 0.65 },
-  { id: 'research', icon: '🔎', name: 'Izpēte un apkopošana', hint: 'informācijas meklēšana', defH: 3, save: 0.5 },
-  { id: 'data', icon: '🗂️', name: 'Datu ievade / kārtošana', hint: 'tabulas, kopēšana', defH: 3, save: 0.45 },
-  { id: 'planning', icon: '📅', name: 'Plānošana un koordinācija', hint: 'grafiki, uzdevumu sadale', defH: 2, save: 0.35 },
+  { id: 'email', icon: 'mail', name: 'E-pasti un sarakste', hint: 'rakstīšana, atbildes, kopsavilkumi', defH: 6, save: 0.5 },
+  { id: 'reports', icon: 'chart', name: 'Atskaites un dokumenti', hint: 'sagatavošana, formatēšana', defH: 4, save: 0.45 },
+  { id: 'support', icon: 'chat', name: 'Klientu atbildes', hint: 'jautājumi, sūdzības, FAQ', defH: 5, save: 0.55 },
+  { id: 'content', icon: 'pen', name: 'Satura veidošana', hint: 'soc. tīkli, mārketings, teksti', defH: 4, save: 0.6 },
+  { id: 'meetings', icon: 'notes', name: 'Sapulču pieraksti', hint: 'protokoli, uzdevumi', defH: 2, save: 0.65 },
+  { id: 'research', icon: 'search', name: 'Izpēte un apkopošana', hint: 'informācijas meklēšana', defH: 3, save: 0.5 },
+  { id: 'data', icon: 'folder', name: 'Datu ievade / kārtošana', hint: 'tabulas, kopēšana', defH: 3, save: 0.45 },
+  { id: 'planning', icon: 'calendar', name: 'Plānošana un koordinācija', hint: 'grafiki, uzdevumu sadale', defH: 2, save: 0.35 },
 ];
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -25,7 +25,7 @@ function renderTasks() {
     return `
     <div data-task="${t.id}" class="task glass rounded-2xl p-4 transition ${s.on ? 'task-on' : ''}">
       <div class="flex items-center gap-3">
-        <button type="button" data-toggle="${t.id}" class="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-2xl transition ${s.on ? 'bg-gradient-to-br from-brand to-electric' : 'bg-white/5'}">${t.icon}</button>
+        <button type="button" data-toggle="${t.id}" class="grid h-11 w-11 shrink-0 place-items-center rounded-xl transition ${s.on ? 'bg-gradient-to-br from-brand to-electric text-white' : 'bg-white/5 text-electric'}">${isIcon(t.icon, 'h-6 w-6')}</button>
         <div class="min-w-0 flex-1">
           <div class="font-bold leading-tight">${t.name}</div>
           <div class="truncate text-xs text-muted">${t.hint}</div>

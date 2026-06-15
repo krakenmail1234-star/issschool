@@ -11,7 +11,7 @@
 const SCENARIOS = [
   {
     id: 'email',
-    icon: '✉️',
+    icon: 'mail',
     title: 'Klienta e-pasts',
     sub: 'Pārvērt īsu domu pieklājīgā, pārliecinošā e-pastā.',
     fields: [
@@ -38,7 +38,7 @@ Prasības:
   },
   {
     id: 'summary',
-    icon: '📝',
+    icon: 'notes',
     title: 'Sapulces kopsavilkums',
     sub: 'No haotiskām piezīmēm uz strukturētu kopsavilkumu ar uzdevumiem.',
     fields: [
@@ -63,7 +63,7 @@ Esi konkrēts. Neizdomā informāciju, kuras nav piezīmēs.`,
   },
   {
     id: 'offer',
-    icon: '💼',
+    icon: 'briefcase',
     title: 'Piedāvājums klientam',
     sub: 'Sagatavo pārdošanas piedāvājumu, kas uzsver ieguvumu.',
     fields: [
@@ -91,7 +91,7 @@ Tonis: pārliecinošs, bet bez liekas pārspīlēšanas.`,
   },
   {
     id: 'social',
-    icon: '📣',
+    icon: 'megaphone',
     title: 'Sociālo tīklu ieraksts',
     sub: 'Viena ideja → gatavs ieraksts ar āķi un aicinājumu.',
     fields: [
@@ -112,12 +112,12 @@ Prasības:
 - Pielāgo garumu un toni ${v.platform} auditorijai.`,
     example: {
       before: '“pateikt ka ir jauns AI kurss uzņēmumiem”',
-      after: 'Tava komanda joprojām raksta e-pastus ar rokām? ⏳\n\nMēs apmācām uzņēmumus izmantot AI ikdienas darbā — un ietaupīt stundas katru nedēļu.\n\nPieraksties bezmaksas konsultācijai 👉 saite bio.\n\n#AI #bizness #produktivitāte',
+      after: 'Tava komanda joprojām raksta e-pastus ar rokām?\n\nMēs apmācām uzņēmumus izmantot AI ikdienas darbā — un ietaupīt stundas katru nedēļu.\n\nPieraksties bezmaksas konsultācijai — saite bio.\n\n#AI #bizness #produktivitāte',
     },
   },
   {
     id: 'complaint',
-    icon: '🛟',
+    icon: 'lifebuoy',
     title: 'Atbilde uz sūdzību',
     sub: 'Nomierini neapmierinātu klientu un saglabā attiecības.',
     fields: [
@@ -145,7 +145,7 @@ Prasības:
   },
   {
     id: 'job',
-    icon: '🧲',
+    icon: 'users',
     title: 'Darba sludinājums',
     sub: 'Pievelkošs sludinājums, kas piesaista īstos kandidātus.',
     fields: [
@@ -168,7 +168,7 @@ Struktūra:
 Tonis: cilvēcīgs, enerģisks, bez korporatīvām klišejām.`,
     example: {
       before: '“meklējam pārdošanas vadītāju ar pieredzi”',
-      after: 'Pārdošanas vadītājs, kas mīl slēgt darījumus 🚀\n\nMēs esam augoša IT kompānija Rīgā...\n\nTavi pienākumi:\n• Vadīt B2B pārdošanas ciklu\n...\nKo piedāvājam:\n• Bonusu sistēma bez “griestiem”\n\nPieteikies — atbildam 3 dienu laikā!',
+      after: 'Pārdošanas vadītājs, kas mīl slēgt darījumus\n\nMēs esam augoša IT kompānija Rīgā...\n\nTavi pienākumi:\n• Vadīt B2B pārdošanas ciklu\n...\nKo piedāvājam:\n• Bonusu sistēma bez “griestiem”\n\nPieteikies — atbildam 3 dienu laikā!',
     },
   },
 ];
@@ -206,7 +206,7 @@ function renderScenarioGrid() {
     <button data-id="${s.id}" type="button"
       class="group text-left rounded-3xl glass glow-hover p-5 focus:outline-none focus:ring-2 focus:ring-brand">
       <div>
-        <div class="mb-3 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand to-electric text-3xl shadow-depth">${s.icon}</div>
+        <div class="mb-3 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand to-electric text-white shadow-depth">${isIcon(s.icon, 'h-7 w-7')}</div>
         <h3 class="text-lg font-bold leading-tight">${s.title}</h3>
         <p class="mt-1 text-sm text-muted">${s.sub}</p>
         <span class="mt-3 inline-flex items-center gap-1 text-sm font-bold text-electric opacity-0 transition group-hover:opacity-100">
@@ -236,7 +236,7 @@ function selectScenario(id) {
     b.classList.toggle('ring-accent', b.dataset.id === id);
   });
 
-  $('#builderIcon').textContent = activeScenario.icon;
+  $('#builderIcon').innerHTML = isIcon(activeScenario.icon, 'h-6 w-6');
   $('#builderTitle').textContent = activeScenario.title;
   $('#builderSub').textContent = activeScenario.sub;
 
