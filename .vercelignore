@@ -1,0 +1,15 @@
+# Only the static website should be deployed.
+node_modules
+.git
+studio-intelektask
+wix-velo
+wix-export
+apps-script
+.agents
+.claude
+*.code-workspace
+docker-compose.yml
+CMS.md
+README.md
+image-*.jpg
+image-*.png
