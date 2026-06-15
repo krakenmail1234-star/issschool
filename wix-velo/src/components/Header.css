@@ -1,0 +1,150 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.topbar.is-elevated {
+  border-bottom-color: var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+.topbar__inner {
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+.brand__logo {
+  border-radius: 6px;
+}
+
+.nav {
+  display: none;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.nav__link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.nav__link.is-active,
+.nav__link:hover {
+  color: var(--text);
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.iconbtn {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  cursor: pointer;
+}
+
+.iconbtn__bars,
+.iconbtn__bars::before,
+.iconbtn__bars::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text);
+  position: relative;
+}
+
+.iconbtn__bars::before,
+.iconbtn__bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.iconbtn__bars::before {
+  top: -6px;
+}
+
+.iconbtn__bars::after {
+  top: 6px;
+}
+
+.mobilemenu {
+  position: absolute;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0 1.5rem;
+}
+
+.mobilemenu__inner {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.mobilemenu__link {
+  padding: 0.5rem 0;
+  font-weight: 600;
+}
+
+.mobilemenu__cta {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+@media (min-width: 1061px) {
+  .nav {
+    display: flex;
+  }
+
+  .iconbtn {
+    display: none;
+  }
+
+  .mobilemenu {
+    display: none;
+  }
+}
+
+@media (max-width: 1060px) {
+  .topbar__actions .button:not(.iconbtn) {
+    display: none;
+  }
+}
