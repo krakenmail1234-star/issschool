@@ -274,8 +274,9 @@
   const icon = (k, cls = 'h-6 w-6') =>
     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="${cls}">${I[k] || ''}</svg>`;
 
-  // language-independent config per card (icons, links, flags)
-  const COURSE_META = [
+  // language-independent config per card (icons, links, flags).
+  // `let` so the Sanity CMS loader can replace it with editable content.
+  let COURSE_META = [
     { icon: 'rocket', href: STRIPE_MAIN },
     { icon: 'chat', href: STRIPE_MAIN },
     { icon: 'bolt', href: STRIPE_MAIN },
@@ -293,8 +294,9 @@
   const WHY_ICONS = ['rocket', 'hands', 'briefcase', 'gear', 'mentor', 'infinity'];
 
   /* ---------- build static DOM once (with data-i18n paths) ---------- */
-  $('#courseGrid').innerHTML = COURSE_META.map(
-    (m, i) => `
+  function renderCourseGrid() {
+    $('#courseGrid').innerHTML = COURSE_META.map(
+      (m, i) => `
     <article class="reveal glass glow-hover rounded-3xl p-7 ${m.featured ? 'ring-1 ring-brand/40' : ''}" style="transition-delay:${i * 0.06}s" data-tilt>
       <div class="mb-5 inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric">${icon(m.icon)}</div>
       ${m.featured ? `<div class="mb-2 inline-block rounded-full bg-brand/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-electric" data-i18n="courses.items.${i}.badge"></div>` : ''}
@@ -304,7 +306,9 @@
         <span data-i18n="courses.items.${i}.cta"></span> <span aria-hidden="true">→</span>
       </a>
     </article>`
-  ).join('');
+    ).join('');
+  }
+  renderCourseGrid();
 
   $('#toolGrid').innerHTML = TOOL_META.map(
     (m, i) => `
@@ -413,8 +417,12 @@
   }
 
   /* ---------- perspective tilt + parallax ---------- */
-  if (!reduce && window.matchMedia('(pointer:fine)').matches) {
-    document.querySelectorAll('[data-tilt]').forEach((el) => {
+  const tiltEnabled = !reduce && window.matchMedia('(pointer:fine)').matches;
+  function attachTilt(scope) {
+    if (!tiltEnabled) return;
+    (scope || document).querySelectorAll('[data-tilt]').forEach((el) => {
+      if (el.__tilt) return;
+      el.__tilt = 1;
       el.addEventListener('pointermove', (e) => {
         const r = el.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width - 0.5;
@@ -423,6 +431,9 @@
       });
       el.addEventListener('pointerleave', () => { el.style.transform = ''; });
     });
+  }
+  if (tiltEnabled) {
+    attachTilt(document);
     const layers = document.querySelectorAll('[data-parallax]');
     window.addEventListener('pointermove', (e) => {
       const cx = e.clientX / window.innerWidth - 0.5;
@@ -498,6 +509,37 @@
     if (!localStorage.getItem('is_guide_seen')) {
       setTimeout(open, reduce ? 200 : 1300);
     }
+  })();
+
+  /* ---------- Sanity CMS: editable courses (optional, graceful fallback) ---------- */
+  (function loadCMSCourses() {
+    const SANITY = { projectId: 'eanw34a4', dataset: 'production', apiVersion: '2023-01-01' };
+    const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+    const groq =
+      '*[_type=="course"]|order(order asc){order,icon,stripeUrl,featured,titleLv,titleEn,titleRu,descLv,descEn,descRu,ctaLv,ctaEn,ctaRu,badgeLv,badgeEn,badgeRu}';
+    const url = `https://${SANITY.projectId}.apicdn.sanity.io/v${SANITY.apiVersion}/data/query/${SANITY.dataset}?query=${encodeURIComponent(groq)}`;
+    fetch(url)
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((j) => {
+        const items = j && j.result;
+        if (!Array.isArray(items) || !items.length) return; // no CMS content yet -> keep hardcoded defaults
+        COURSE_META = items.map((c) => ({ icon: c.icon || 'sparkle', href: c.stripeUrl || STRIPE_MAIN, featured: !!c.featured }));
+        ['lv', 'en', 'ru'].forEach((L) => {
+          const C = cap(L);
+          const fallbackCta = (T[L].courses.items[0] && T[L].courses.items[0].cta) || 'Pieteikties';
+          T[L].courses.items = items.map((c) => ({
+            title: c['title' + C] || c.titleLv || '',
+            desc: c['desc' + C] || c.descLv || '',
+            cta: c['cta' + C] || fallbackCta,
+            badge: c['badge' + C] || '',
+          }));
+        });
+        renderCourseGrid();
+        translate(lang);
+        document.querySelectorAll('#courseGrid .reveal').forEach((el) => el.classList.add('is-in'));
+        attachTilt(document.getElementById('courseGrid'));
+      })
+      .catch(() => { /* offline / CORS / private dataset -> keep defaults silently */ });
   })();
 
   /* ---------- Three.js hero: blue particle field ---------- */
