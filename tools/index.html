@@ -62,11 +62,11 @@
           <span class="text-lg font-extrabold tracking-tight">Intelekta <span class="brand-text">Skola</span></span>
         </a>
         <nav class="hidden items-center gap-6 text-sm font-semibold text-muted md:flex">
-          <a href="../index.html" class="hover:text-white transition">Sākums</a>
-          <a href="../program.html" class="hover:text-white transition">Programma</a>
-          <a href="../contact.html" class="hover:text-white transition">Kontakti</a>
+          <a href="../index.html" class="hover:text-white transition" data-i18n="navHome">Sākums</a>
+          <a href="../program.html" class="hover:text-white transition" data-i18n="navProgram">Programma</a>
+          <a href="../contact.html" class="hover:text-white transition" data-i18n="navContact">Kontakti</a>
         </nav>
-        <a href="mailto:info@intelektaskola.lv?subject=Pieteikties%20-%20Intelekta%20Skola" data-apply class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110">Pieteikties</a>
+        <div class="flex items-center gap-2"><div class="langseg flex items-center gap-1 rounded-full hairline bg-white/5 p-1 text-xs font-bold" role="group" aria-label="Valoda"><button type="button" data-lang="lv" class="rounded-full px-2.5 py-1">LV</button><button type="button" data-lang="en" class="rounded-full px-2.5 py-1">EN</button><button type="button" data-lang="ru" class="rounded-full px-2.5 py-1">RU</button></div><a href="mailto:info@intelektaskola.lv?subject=Pieteikties%20-%20Intelekta%20Skola" data-apply class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110" data-i18n="enroll">Pieteikties</a></div>
       </div>
     </header>
 
@@ -74,15 +74,12 @@
       <section class="mb-12 text-center">
         <div class="reveal is-in mx-auto mb-5 inline-flex items-center gap-2 rounded-full hairline bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-electric">
           <span class="h-2 w-2 animate-pulse rounded-full bg-electric"></span>
-          Bezmaksas · Bez reģistrācijas
+          <span data-i18n="badge">Bezmaksas · Bez reģistrācijas</span>
         </div>
         <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
-          <span class="brand-text">AI rīki tavam biznesam</span>
+          <span class="brand-text" data-i18n="h1">AI rīki tavam biznesam</span>
         </h1>
-        <p class="mx-auto mt-4 max-w-2xl text-lg font-medium text-zinc-300">
-          Trīs mazi rīki, kas parāda, kā AI atvieglo ikdienas darbu. Izmēģini — un, ja patīk,
-          mēs apmācīsim tavu komandu to darīt katru dienu.
-        </p>
+        <p class="mx-auto mt-4 max-w-2xl text-lg font-medium text-zinc-300" data-i18n="lead">Trīs mazi rīki, kas parāda, kā AI atvieglo ikdienas darbu. Izmēģini — un, ja patīk, mēs apmācīsim tavu komandu to darīt katru dienu.</p>
       </section>
 
       <section class="scene grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -90,27 +87,27 @@
           <div class="up">
             <div class="mb-4 grid h-16 w-16 place-items-center rounded-3xl bg-gradient-to-br from-brand to-electric text-white shadow-depth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></div>
             <h2 class="text-2xl font-extrabold leading-tight">Promptu Darbnīca</h2>
-            <p class="mt-2 text-muted">Izvēlies biznesa scenāriju un saņem gatavu, profesionālu AI promptu — ar pirms/pēc piemēru.</p>
+            <p class="mt-2 text-muted" data-i18n="card1">Izvēlies biznesa scenāriju un saņem gatavu, profesionālu AI promptu — ar pirms/pēc piemēru.</p>
           </div>
-          <span class="up mt-6 inline-flex items-center gap-2 font-bold text-electric">Atvērt rīku <span class="transition group-hover:translate-x-1">→</span></span>
+          <span class="up mt-6 inline-flex items-center gap-2 font-bold text-electric"><span data-i18n="openTool">Atvērt rīku</span> <span class="transition group-hover:translate-x-1">→</span></span>
         </a>
 
         <a href="./laika-kalkulators/index.html" class="tilt group flex flex-col rounded-[2rem] glass glow-hover p-7">
           <div class="up">
             <div class="mb-4 grid h-16 w-16 place-items-center rounded-3xl bg-gradient-to-br from-branddeep to-electric text-white shadow-depth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
             <h2 class="text-2xl font-extrabold leading-tight">AI Laika Kalkulators</h2>
-            <p class="mt-2 text-muted">Aprēķini, cik stundu un eiro mēnesī tava komanda var ietaupīt, ieviešot AI ikdienā.</p>
+            <p class="mt-2 text-muted" data-i18n="card2">Aprēķini, cik stundu un eiro mēnesī tava komanda var ietaupīt, ieviešot AI ikdienā.</p>
           </div>
-          <span class="up mt-6 inline-flex items-center gap-2 font-bold text-electric">Atvērt rīku <span class="transition group-hover:translate-x-1">→</span></span>
+          <span class="up mt-6 inline-flex items-center gap-2 font-bold text-electric"><span data-i18n="openTool">Atvērt rīku</span> <span class="transition group-hover:translate-x-1">→</span></span>
         </a>
 
         <a href="./ai-gatavibas-tests/index.html" class="tilt group flex flex-col rounded-[2rem] glass glow-hover p-7">
           <div class="up">
             <div class="mb-4 grid h-16 w-16 place-items-center rounded-3xl bg-gradient-to-br from-electric to-branddeep text-white shadow-depth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5 13 13l-4.5 2.5L11 11l4.5-2.5z"/></svg></div>
             <h2 class="text-2xl font-extrabold leading-tight">AI Gatavības Tests</h2>
-            <p class="mt-2 text-muted">6 jautājumi → tavs gatavības rezultāts un personalizēta ceļa karte, ar ko sākt.</p>
+            <p class="mt-2 text-muted" data-i18n="card3">6 jautājumi → tavs gatavības rezultāts un personalizēta ceļa karte, ar ko sākt.</p>
           </div>
-          <span class="up mt-6 inline-flex items-center gap-2 font-bold text-electric">Atvērt rīku <span class="transition group-hover:translate-x-1">→</span></span>
+          <span class="up mt-6 inline-flex items-center gap-2 font-bold text-electric"><span data-i18n="openTool">Atvērt rīku</span> <span class="transition group-hover:translate-x-1">→</span></span>
         </a>
       </section>
 
@@ -119,11 +116,11 @@
           <div class="pointer-events-none absolute -right-10 -top-10 h-56 w-56 rounded-full bg-brand/25 blur-[70px]"></div>
           <div class="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-branddeep/30 blur-[70px]"></div>
           <div class="up relative">
-            <h2 class="text-3xl font-extrabold md:text-4xl">No rīka līdz reālam rezultātam</h2>
-            <p class="mx-auto mt-3 max-w-xl text-zinc-300">Intelekta Skola māca komandas un uzņēmumus ieviest AI ikdienas darbā — ar izmērāmu efektu. Pieteikies bezmaksas konsultācijai.</p>
+            <h2 class="text-3xl font-extrabold md:text-4xl" data-i18n="ctaH">No rīka līdz reālam rezultātam</h2>
+            <p class="mx-auto mt-3 max-w-xl text-zinc-300" data-i18n="ctaP">Intelekta Skola māca komandas un uzņēmumus ieviest AI ikdienas darbā — ar izmērāmu efektu. Pieteikies bezmaksas konsultācijai.</p>
             <div class="mt-6 flex flex-wrap justify-center gap-3">
-              <a href="../contact.html" class="btn-glow btn-primary rounded-full px-6 py-3 font-bold transition hover:-translate-y-1">Pieteikties konsultācijai</a>
-              <a href="../index.html" class="rounded-full hairline bg-white/5 px-6 py-3 font-bold text-zinc-100 transition hover:bg-white/10">Uz sākumlapu</a>
+              <a href="../contact.html" class="btn-glow btn-primary rounded-full px-6 py-3 font-bold transition hover:-translate-y-1" data-i18n="ctaBtn">Pieteikties konsultācijai</a>
+              <a href="../index.html" class="rounded-full hairline bg-white/5 px-6 py-3 font-bold text-zinc-100 transition hover:bg-white/10" data-i18n="ctaHome">Uz sākumlapu</a>
             </div>
           </div>
         </div>
@@ -142,6 +139,11 @@
     </footer>
 
     <script>
+      var UI={"lv": {"navHome": "Sākums", "navProgram": "Programma", "navContact": "Kontakti", "enroll": "Pieteikties", "badge": "Bezmaksas · Bez reģistrācijas", "h1": "AI rīki tavam biznesam", "lead": "Trīs mazi rīki, kas parāda, kā AI atvieglo ikdienas darbu. Izmēģini — un, ja patīk, mēs apmācīsim tavu komandu to darīt katru dienu.", "card1": "Izvēlies biznesa scenāriju un saņem gatavu, profesionālu AI promptu — ar pirms/pēc piemēru.", "card2": "Aprēķini, cik stundu un eiro mēnesī tava komanda var ietaupīt, ieviešot AI ikdienā.", "card3": "6 jautājumi → tavs gatavības rezultāts un personalizēta ceļa karte, ar ko sākt.", "openTool": "Atvērt rīku", "ctaH": "No rīka līdz reālam rezultātam", "ctaP": "Intelekta Skola māca komandas un uzņēmumus ieviest AI ikdienas darbā — ar izmērāmu efektu. Pieteikies bezmaksas konsultācijai.", "ctaBtn": "Pieteikties konsultācijai", "ctaHome": "Uz sākumlapu"}, "en": {"navHome": "Home", "navProgram": "Program", "navContact": "Contact", "enroll": "Enroll", "badge": "Free · No sign-up", "h1": "AI tools for your business", "lead": "Three small tools that show how AI eases everyday work. Try them — and if you like it, we will train your team to do it every day.", "card1": "Pick a business scenario and get a ready, professional AI prompt — with a before/after example.", "card2": "Calculate how many hours and euros per month your team can save by adopting AI.", "card3": "6 questions then your readiness score and a personalised roadmap to start with.", "openTool": "Open tool", "ctaH": "From a tool to a real result", "ctaP": "Intelekta Skola teaches teams and businesses to adopt AI in everyday work — with measurable impact. Book a free consultation.", "ctaBtn": "Book a consultation", "ctaHome": "Back to home"}, "ru": {"navHome": "Главная", "navProgram": "Программа", "navContact": "Контакты", "enroll": "Записаться", "badge": "Бесплатно · Без регистрации", "h1": "ИИ-инструменты для бизнеса", "lead": "Три небольших инструмента, показывающих, как ИИ облегчает работу. Попробуйте — и, если понравится, мы научим вашу команду делать это каждый день.", "card1": "Выберите бизнес-сценарий и получите готовый профессиональный ИИ-промпт — с примером до/после.", "card2": "Посчитайте, сколько часов и евро в месяц ваша команда может экономить с ИИ.", "card3": "6 вопросов — ваш уровень готовности и персональная дорожная карта.", "openTool": "Открыть инструмент", "ctaH": "От инструмента к реальному результату", "ctaP": "Intelekta Skola учит команды и компании внедрять ИИ в ежедневную работу — с измеримым эффектом. Запишитесь на бесплатную консультацию.", "ctaBtn": "Записаться на консультацию", "ctaHome": "На главную"}};
+      var lang=(function(){var l=localStorage.getItem('is_lang')||'lv';return ['lv','en','ru'].indexOf(l)>=0?l:'lv';})();
+      function applyLang(){document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(function(el){var v=UI[lang][el.getAttribute('data-i18n')];if(typeof v==='string')el.textContent=v;});document.querySelectorAll('.langseg [data-lang]').forEach(function(b){b.classList.toggle('is-active',b.dataset.lang===lang);});}
+      document.querySelectorAll('.langseg [data-lang]').forEach(function(b){b.addEventListener('click',function(){lang=b.dataset.lang;localStorage.setItem('is_lang',lang);applyLang();});});
+      applyLang();
       document.getElementById('year').textContent = new Date().getFullYear();
       document.querySelectorAll('.tilt').forEach((el) => {
         el.addEventListener('pointermove', (e) => {

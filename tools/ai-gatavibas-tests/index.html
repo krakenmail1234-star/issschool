@@ -64,8 +64,9 @@
           <span class="text-lg font-extrabold tracking-tight">Intelekta <span class="brand-text">Skola</span></span>
         </a>
         <div class="flex items-center gap-3">
-          <a href="../index.html" class="hidden text-sm font-semibold text-muted hover:text-white sm:block">← Visi rīki</a>
-          <a href="mailto:info@intelektaskola.lv?subject=Pieteikties%20-%20Intelekta%20Skola" data-apply class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110">Pieteikties</a>
+          <div class="langseg flex items-center gap-1 rounded-full hairline bg-white/5 p-1 text-xs font-bold" role="group" aria-label="Valoda"><button type="button" data-lang="lv" class="rounded-full px-2.5 py-1">LV</button><button type="button" data-lang="en" class="rounded-full px-2.5 py-1">EN</button><button type="button" data-lang="ru" class="rounded-full px-2.5 py-1">RU</button></div>
+          <a href="../index.html" class="hidden text-sm font-semibold text-muted hover:text-white sm:block" data-i18n="allTools">← Visi rīki</a>
+          <a href="mailto:info@intelektaskola.lv?subject=Pieteikties%20-%20Intelekta%20Skola" data-apply class="btn-primary rounded-full px-4 py-2 text-sm font-bold transition hover:brightness-110" data-i18n="enroll">Pieteikties</a>
         </div>
       </div>
     </header>
@@ -74,18 +75,15 @@
       <section class="mb-8 text-center">
         <div class="mx-auto mb-5 inline-flex items-center gap-2 rounded-full hairline bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-electric">
           <span class="h-2 w-2 animate-pulse rounded-full bg-electric"></span>
-          Bezmaksas tests · 6 jautājumi · ~1 min
+          <span data-i18n="badge">Bezmaksas tests · 6 jautājumi · ~1 min</span>
         </div>
         <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl"><span class="brand-text">AI Gatavības Tests</span></h1>
-        <p class="mx-auto mt-4 max-w-xl text-lg font-medium text-zinc-300">
-          Atbildi uz 6 jautājumiem un uzzini, cik gatavs tavs uzņēmums ir mākslīgajam intelektam —
-          un ar kuriem rīkiem sākt.
-        </p>
+        <p class="mx-auto mt-4 max-w-xl text-lg font-medium text-zinc-300" data-i18n="lead">Atbildi uz 6 jautājumiem un uzzini, cik gatavs tavs uzņēmums ir mākslīgajam intelektam — un ar kuriem rīkiem sākt.</p>
       </section>
 
       <div id="progressWrap" class="mb-6">
         <div class="mb-1 flex justify-between text-xs font-semibold text-muted">
-          <span>Jautājums <span id="qNum">1</span>/<span id="qTotal">6</span></span>
+          <span><span data-i18n="qLabel">Jautājums</span> <span id="qNum">1</span>/<span id="qTotal">6</span></span>
           <span id="qPct">0%</span>
         </div>
         <div class="h-2.5 w-full overflow-hidden rounded-full bg-white/10">
@@ -116,7 +114,7 @@
                 </svg>
                 <div class="absolute inset-0 flex flex-col items-center justify-center">
                   <span id="scoreOut" class="text-5xl font-extrabold">0</span>
-                  <span class="text-xs uppercase tracking-wider text-zinc-400">no 100</span>
+                  <span class="text-xs uppercase tracking-wider text-zinc-400" data-i18n="no100">no 100</span>
                 </div>
               </div>
             </div>
@@ -128,13 +126,13 @@
           </div>
 
           <div class="relative mt-6">
-            <div class="mb-2 text-sm font-bold uppercase tracking-wider text-zinc-400">Tev ieteicamie pirmie soļi</div>
+            <div class="mb-2 text-sm font-bold uppercase tracking-wider text-zinc-400" data-i18n="recosHeading">Tev ieteicamie pirmie soļi</div>
             <ul id="recoList" class="space-y-2"></ul>
           </div>
 
           <div class="relative mt-7 flex flex-wrap gap-3">
-            <a href="../../contact.html" class="btn-glow btn-primary rounded-full px-6 py-3 font-bold transition hover:-translate-y-1">Saņemt personīgu plānu →</a>
-            <button id="retryBtn" type="button" class="rounded-full hairline bg-white/5 px-6 py-3 font-bold text-zinc-100 transition hover:bg-white/10">Pārstartēt testu</button>
+            <a href="../../contact.html" class="btn-glow btn-primary rounded-full px-6 py-3 font-bold transition hover:-translate-y-1" data-i18n="planBtn">Saņemt personīgu plānu →</a>
+            <button id="retryBtn" type="button" class="rounded-full hairline bg-white/5 px-6 py-3 font-bold text-zinc-100 transition hover:bg-white/10" data-i18n="retryBtn">Pārstartēt testu</button>
           </div>
         </div>
       </section>
@@ -154,7 +152,7 @@
     <script src="../../scripts/config.js"></script>
     <script src="../../scripts/apply.js"></script>
     <script src="../../scripts/icons.js"></script>
-    <script src="./app.js"></script>
+    <script src="./app.js?v=2"></script>
     <script src="../../scripts/chatbot.js"></script>
   </body>
 </html>
