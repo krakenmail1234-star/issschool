@@ -86,10 +86,11 @@
       item.kw.forEach(function (k) { if (n.indexOf(norm(k)) >= 0) score++; });
       if (score > bestScore) { bestScore = score; best = item; }
     });
-    if (best && bestScore > 0) return best.a[lang];
+    if (best && bestScore > 0) return { text: best.a[lang], contact: false };
     // greeting?
-    for (var i = 0; i < GREET.length; i++) { if (n.indexOf(GREET[i]) >= 0) return UI[lang].greet; }
-    return FALLBACK[lang];
+    for (var i = 0; i < GREET.length; i++) { if (n.indexOf(GREET[i]) >= 0) return { text: UI[lang].greet, contact: false }; }
+    // unknown question -> reply with contact info + a contact action
+    return { text: FALLBACK[lang], contact: true };
   }
 
   // ---- styles ----
@@ -156,9 +157,32 @@
     b.innerHTML = '<span class="cb-dot"></span><span class="cb-dot"></span><span class="cb-dot"></span>';
     msgs.appendChild(b); msgs.scrollTop = msgs.scrollHeight; return b;
   }
-  function botReply(text) {
+  function contactAction() {
+    var lang = L();
+    var label = { lv: 'Sazināties ar mums', en: 'Contact us', ru: 'Связаться с нами' }[lang];
+    var holder = document.createElement('div');
+    holder.style.cssText = 'align-self:flex-start;display:flex;gap:7px;flex-wrap:wrap';
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'cb-chip'; btn.style.fontWeight = '700';
+    btn.textContent = label;
+    btn.addEventListener('click', function () {
+      if (typeof window.ISopenApply === 'function') window.ISopenApply();
+      else window.location.href = 'mailto:info@intelektaskola.lv?subject=Jaut%C4%81jums%20-%20Intelekta%20Skola';
+    });
+    var mail = document.createElement('a');
+    mail.href = 'mailto:info@intelektaskola.lv';
+    mail.className = 'cb-chip'; mail.style.textDecoration = 'none';
+    mail.textContent = 'info@intelektaskola.lv';
+    holder.appendChild(btn); holder.appendChild(mail);
+    msgs.appendChild(holder); msgs.scrollTop = msgs.scrollHeight;
+  }
+  function botReply(res) {
+    var text = res.text;
     var t = typing();
-    setTimeout(function () { t.remove(); add(text, 'bot'); }, 600 + Math.min(900, text.length * 8));
+    setTimeout(function () {
+      t.remove(); add(text, 'bot');
+      if (res.contact) contactAction();
+    }, 600 + Math.min(900, text.length * 8));
   }
   function renderChips() {
     var c = UI[L()];
