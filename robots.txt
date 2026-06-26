@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://intelektaskola.lv/sitemap.xml
+Sitemap: https://www.intelektaskola.lv/sitemap.xml

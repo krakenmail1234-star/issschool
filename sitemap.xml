@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://intelektaskola.lv/</loc>
+    <loc>https://www.intelektaskola.lv/</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://intelektaskola.lv/program.html</loc>
+    <loc>https://www.intelektaskola.lv/program.html</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://intelektaskola.lv/contact.html</loc>
+    <loc>https://www.intelektaskola.lv/contact.html</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://intelektaskola.lv/tools/</loc>
+    <loc>https://www.intelektaskola.lv/tools/</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://intelektaskola.lv/tools/prompt-darbnica/</loc>
+    <loc>https://www.intelektaskola.lv/tools/prompt-darbnica/</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://intelektaskola.lv/tools/laika-kalkulators/</loc>
+    <loc>https://www.intelektaskola.lv/tools/laika-kalkulators/</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://intelektaskola.lv/tools/ai-gatavibas-tests/</loc>
+    <loc>https://www.intelektaskola.lv/tools/ai-gatavibas-tests/</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://intelektaskola.lv/privacy.html</loc>
+    <loc>https://www.intelektaskola.lv/privacy.html</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
