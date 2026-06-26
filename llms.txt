@@ -23,6 +23,7 @@ Intelekta Skola offers practical AI courses focused on real workplace tasks rath
 - [Home](https://www.intelektaskola.lv/): Overview of Intelekta Skola and its courses.
 - [Programs](https://www.intelektaskola.lv/program.html): Full list of AI courses with enrollment links.
 - [Tools](https://www.intelektaskola.lv/tools/): Free AI tools hub.
+- [Blog](https://www.intelektaskola.lv/blog.html): Curated daily AI and ChatGPT news from Latvian media, in Latvian, each linking to its original source.
 - [Contact](https://www.intelektaskola.lv/contact.html): Contact form and company details.
 
 ## Optional

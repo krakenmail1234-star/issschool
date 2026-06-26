@@ -11,7 +11,7 @@
     <!-- End Google Tag Manager -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#05070d" />
+    <meta name="theme-color" content="#081712" />
     <title>Kontakti — Intelekta Skola</title>
     <meta name="description" content="Sazinies ar Intelekta Skolu par AI apmācībām komandām un privātpersonām. Bezmaksas konsultācija." />
     <link rel="canonical" href="https://www.intelektaskola.lv/contact.html" />
@@ -37,7 +37,7 @@
     <script>
       tailwind.config = { theme: { extend: {
         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
-        colors: { ink: '#05070d', ink2: '#0a0f1c', brand: '#3b82f6', brandlt: '#93c5fd', branddeep: '#1d4ed8', electric: '#60a5fa', muted: '#94a3b8' },
+        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
       } } };
     </script>
     <script type="application/ld+json">
@@ -62,6 +62,7 @@
             <a href="./index.html#courses" class="nav-link" data-i18n="nav.courses">Kursi</a>
             <a href="./program.html" class="nav-link" data-i18n="nav.program">Programma</a>
             <a href="./tools/index.html" class="nav-link" data-i18n="nav.tools">Bezmaksas rīki</a>
+            <a href="./blog.html" class="nav-link" data-i18n="nav.blog">Blogs</a>
             <a href="./contact.html" class="nav-link" data-i18n="nav.contact">Kontakti</a>
           </nav>
           <div class="flex items-center gap-2">
@@ -80,6 +81,7 @@
             <a href="./index.html#courses" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.courses">Kursi</a>
             <a href="./program.html" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.program">Programma</a>
             <a href="./tools/index.html" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.tools">Bezmaksas riki</a>
+            <a href="./blog.html" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.blog">Blogs</a>
             <a href="./contact.html" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.contact">Kontakti</a>
           </nav>
           <div class="mt-2 flex items-center justify-between gap-2 border-t border-white/10 pt-3">
@@ -95,12 +97,22 @@
     </header>
 
     <main class="relative z-10 mx-auto max-w-7xl px-6 pb-28 pt-32">
-      <div class="mb-12 text-center">
-        <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="hero.label">Kontakti</div>
-        <h1 class="mt-3 text-4xl font-extrabold tracking-tight md:text-6xl">
-          <span data-i18n="hero.title1">Sāc savu</span> <span class="brand-text" data-i18n="hero.title2">AI ceļu</span>
-        </h1>
-        <p class="mx-auto mt-4 max-w-xl text-lg text-zinc-300" data-i18n="hero.sub">Uzraksti ziņu — atbildam 24–48 stundu laikā. Bezmaksas konsultācija bez saistībām.</p>
+      <div class="mb-14 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+        <div>
+          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="hero.label">Kontakti</div>
+          <h1 class="mt-3 text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
+            <span data-i18n="hero.title1">Sāc savu</span> <span class="brand-text" data-i18n="hero.title2">AI ceļu</span>
+          </h1>
+          <p class="mt-4 max-w-xl text-lg text-zinc-300" data-i18n="hero.sub">Uzraksti ziņu — atbildam 24–48 stundu laikā. Bezmaksas konsultācija bez saistībām.</p>
+        </div>
+        <div class="relative aspect-[16/10] overflow-hidden rounded-[2rem] hairline">
+          <img src="https://images.unsplash.com/photo-1531403009284-440f915bc4cb?auto=format&fit=crop&w=1000&q=80" alt="" class="absolute inset-0 h-full w-full object-cover" loading="eager" />
+          <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent"></div>
+          <div class="absolute bottom-5 left-5 right-5 glass rounded-2xl p-4">
+            <div class="text-xs font-semibold uppercase tracking-wider text-electric" data-i18n="hero.cardLabel">Atbildam ātri</div>
+            <div class="mt-1 text-sm text-zinc-300" data-i18n="hero.cardSub">24–48 stundu laikā, bez saistībām.</div>
+          </div>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -156,22 +168,22 @@
     <script>
       window.PAGE_I18N = {
         lv: {
-          nav: { courses: 'Kursi', program: 'Programma', tools: 'Bezmaksas rīki', contact: 'Kontakti', enroll: 'Pieteikties' },
-          hero: { label: 'Kontakti', title1: 'Sāc savu', title2: 'AI ceļu', sub: 'Uzraksti ziņu — atbildam 24–48 stundu laikā. Bezmaksas konsultācija bez saistībām.' },
+          nav: { courses: 'Kursi', program: 'Programma', tools: 'Bezmaksas rīki', blog: 'Blogs', contact: 'Kontakti', enroll: 'Pieteikties' },
+          hero: { label: 'Kontakti', title1: 'Sāc savu', title2: 'AI ceļu', sub: 'Uzraksti ziņu — atbildam 24–48 stundu laikā. Bezmaksas konsultācija bez saistībām.', cardLabel: 'Atbildam ātri', cardSub: '24–48 stundu laikā, bez saistībām.' },
           company: { title: 'Uzņēmums', reg: 'Reģ. numurs', registered: 'Reģistrēts', vat: 'PVN numurs', vatstatus: 'PVN statuss', vatstatusV: 'Aktīvs', addrLabel: 'Juridiskā adrese', country: 'Latvija' },
           form: { name: 'Vārds', email: 'E-pasts', message: 'Ziņa', namePh: 'Tavs vārds', emailPh: 'tu@uznemums.lv', messagePh: 'Ko vēlies apgūt vai ieviest?', send: 'Sūtīt ziņu', note: 'Atver tavu e-pasta klientu ar adresi info@intelektaskola.lv.' },
           footer: { home: 'Sākums', privacy: 'Privātums' },
         },
         en: {
-          nav: { courses: 'Courses', program: 'Program', tools: 'Free tools', contact: 'Contact', enroll: 'Enroll' },
-          hero: { label: 'Contact', title1: 'Start Your', title2: 'AI Journey', sub: 'Send a message — we reply within 24–48 hours. A free, no-obligation consultation.' },
+          nav: { courses: 'Courses', program: 'Program', tools: 'Free tools', blog: 'Blog', contact: 'Contact', enroll: 'Enroll' },
+          hero: { label: 'Contact', title1: 'Start Your', title2: 'AI Journey', sub: 'Send a message — we reply within 24–48 hours. A free, no-obligation consultation.', cardLabel: 'We reply fast', cardSub: 'Within 24–48 hours, no obligation.' },
           company: { title: 'Company', reg: 'Reg. number', registered: 'Registered', vat: 'VAT number', vatstatus: 'VAT status', vatstatusV: 'Active', addrLabel: 'Legal address', country: 'Latvia' },
           form: { name: 'Name', email: 'Email', message: 'Message', namePh: 'Your name', emailPh: 'you@company.com', messagePh: 'What would you like to learn or implement?', send: 'Send message', note: 'Opens your email client addressed to info@intelektaskola.lv.' },
           footer: { home: 'Home', privacy: 'Privacy' },
         },
         ru: {
-          nav: { courses: 'Курсы', program: 'Программа', tools: 'Бесплатные инструменты', contact: 'Контакты', enroll: 'Записаться' },
-          hero: { label: 'Контакты', title1: 'Начните свой', title2: 'путь в ИИ', sub: 'Напишите нам — отвечаем в течение 24–48 часов. Бесплатная консультация без обязательств.' },
+          nav: { courses: 'Курсы', program: 'Программа', tools: 'Бесплатные инструменты', blog: 'Блог', contact: 'Контакты', enroll: 'Записаться' },
+          hero: { label: 'Контакты', title1: 'Начните свой', title2: 'путь в ИИ', sub: 'Напишите нам — отвечаем в течение 24–48 часов. Бесплатная консультация без обязательств.', cardLabel: 'Быстро отвечаем', cardSub: 'В течение 24–48 часов, без обязательств.' },
           company: { title: 'Компания', reg: 'Рег. номер', registered: 'Зарегистрировано', vat: 'Номер НДС', vatstatus: 'Статус НДС', vatstatusV: 'Активен', addrLabel: 'Юридический адрес', country: 'Латвия' },
           form: { name: 'Имя', email: 'Эл. почта', message: 'Сообщение', namePh: 'Ваше имя', emailPh: 'you@company.com', messagePh: 'Что хотите изучить или внедрить?', send: 'Отправить', note: 'Откроет ваш почтовый клиент с адресом info@intelektaskola.lv.' },
           footer: { home: 'Главная', privacy: 'Конфиденциальность' },

@@ -20,13 +20,15 @@
   /* ---------- translations ---------- */
   const T = {
     lv: {
-      nav: { courses: 'Kursi', tools: 'Bezmaksas rīki', why: 'Kāpēc mēs', roadmap: 'Ceļa karte', contact: 'Kontakti', enroll: 'Pieteikties' },
+      nav: { courses: 'Kursi', tools: 'Bezmaksas rīki', blog: 'Blogs', why: 'Kāpēc mēs', roadmap: 'Ceļa karte', contact: 'Kontakti', enroll: 'Pieteikties' },
       hero: {
         badge: 'AI izglītība · ieviesta praksē',
         title1: 'Apgūsti mākslīgo intelektu, kas',
         title2: 'patiešām virza tavu biznesu.',
         sub: 'Praktiskas, uz darbību vērstas apmācības ChatGPT, promptu inženierijā, automatizācijā un reālā AI ieviešanā — profesionāļiem, komandām un zinātkārajiem.',
         cta1: 'Pieteikties tagad', cta2: 'Apskatīt kursus',
+        cardLabel: 'AI apmācības', cardSub: 'Praktiskas prasmes reālam darbam — soli pa solim.',
+        tag1: 'ChatGPT meistarība', tag2: 'AI ieviešana', tag3: 'Promptu inženierija', tag4: 'Automatizācija', tag5: 'Individuālās apmācības',
       },
       courses: {
         label: 'Kursi', head1: 'Programmas reālam', head2: 'AI darbam.',
@@ -98,13 +100,15 @@
     },
 
     en: {
-      nav: { courses: 'Courses', tools: 'Free tools', why: 'Why us', roadmap: 'Roadmap', contact: 'Contact', enroll: 'Enroll' },
+      nav: { courses: 'Courses', tools: 'Free tools', blog: 'Blog', why: 'Why us', roadmap: 'Roadmap', contact: 'Contact', enroll: 'Enroll' },
       hero: {
         badge: 'AI Education · Implemented',
         title1: 'Master the AI that actually',
         title2: 'moves your business.',
         sub: 'Practical, hands-on training in ChatGPT, prompt engineering, automation and real-world AI implementation — for professionals, teams and the genuinely curious.',
         cta1: 'Enroll Today', cta2: 'Explore courses',
+        cardLabel: 'AI Training', cardSub: 'Practical skills for real work — step by step.',
+        tag1: 'ChatGPT Mastery', tag2: 'AI Implementation', tag3: 'Prompt Engineering', tag4: 'Automation', tag5: 'Individual Training',
       },
       courses: {
         label: 'Courses', head1: 'Programs built for', head2: 'real-world AI.',
@@ -176,13 +180,15 @@
     },
 
     ru: {
-      nav: { courses: 'Курсы', tools: 'Бесплатные инструменты', why: 'Почему мы', roadmap: 'Дорожная карта', contact: 'Контакты', enroll: 'Записаться' },
+      nav: { courses: 'Курсы', tools: 'Бесплатные инструменты', blog: 'Блог', why: 'Почему мы', roadmap: 'Дорожная карта', contact: 'Контакты', enroll: 'Записаться' },
       hero: {
         badge: 'Обучение ИИ · с внедрением',
         title1: 'Освойте искусственный интеллект,',
         title2: 'который реально двигает бизнес.',
         sub: 'Практическое обучение ChatGPT, промпт-инженерии, автоматизации и реальному внедрению ИИ — для специалистов, команд и всех любознательных.',
         cta1: 'Записаться сейчас', cta2: 'Смотреть курсы',
+        cardLabel: 'Обучение ИИ', cardSub: 'Практические навыки для реальной работы — шаг за шагом.',
+        tag1: 'Мастерство ChatGPT', tag2: 'Внедрение ИИ', tag3: 'Промпт-инженерия', tag4: 'Автоматизация', tag5: 'Индивидуальное обучение',
       },
       courses: {
         label: 'Курсы', head1: 'Программы для', head2: 'реального ИИ.',
@@ -546,7 +552,7 @@
   (function hero() {
     const canvas = $('#hero-canvas');
     if (!canvas || typeof THREE === 'undefined' || reduce) {
-      if (canvas) canvas.style.background = 'radial-gradient(60rem 40rem at 50% 0%, rgba(59,130,246,.16), transparent 60%)';
+      if (canvas) canvas.style.background = 'radial-gradient(60rem 40rem at 50% 0%, rgba(31,158,99,.16), transparent 60%)';
       return;
     }
     let w = canvas.clientWidth, h = canvas.clientHeight;
@@ -570,9 +576,9 @@
     const c = document.createElement('canvas'); c.width = c.height = 64;
     const ctx = c.getContext('2d');
     const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-    g.addColorStop(0, 'rgba(191,219,254,1)');
-    g.addColorStop(0.4, 'rgba(59,130,246,.7)');
-    g.addColorStop(1, 'rgba(59,130,246,0)');
+    g.addColorStop(0, 'rgba(205,255,228,1)');
+    g.addColorStop(0.4, 'rgba(31,158,99,.7)');
+    g.addColorStop(1, 'rgba(31,158,99,0)');
     ctx.fillStyle = g; ctx.fillRect(0, 0, 64, 64);
     const sprite = new THREE.CanvasTexture(c);
 

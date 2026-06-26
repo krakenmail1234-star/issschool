@@ -11,7 +11,7 @@
     <!-- End Google Tag Manager -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#05070d" />
+    <meta name="theme-color" content="#081712" />
     <title>Privātums — Intelekta Skola</title>
     <meta name="description" content="Intelekta Skola privātuma un sīkdatņu paziņojums." />
     <link rel="canonical" href="https://www.intelektaskola.lv/privacy.html" />
@@ -37,7 +37,7 @@
     <script>
       tailwind.config = { theme: { extend: {
         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
-        colors: { ink: '#05070d', ink2: '#0a0f1c', brand: '#3b82f6', brandlt: '#93c5fd', branddeep: '#1d4ed8', electric: '#60a5fa', muted: '#94a3b8' },
+        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
       } } };
     </script>
   </head>
@@ -59,6 +59,7 @@
             <a href="./index.html#courses" class="nav-link" data-i18n="nav.courses">Kursi</a>
             <a href="./program.html" class="nav-link" data-i18n="nav.program">Programma</a>
             <a href="./tools/index.html" class="nav-link" data-i18n="nav.tools">Bezmaksas rīki</a>
+            <a href="./blog.html" class="nav-link" data-i18n="nav.blog">Blogs</a>
             <a href="./contact.html" class="nav-link" data-i18n="nav.contact">Kontakti</a>
           </nav>
           <div class="flex items-center gap-2">
@@ -77,6 +78,7 @@
             <a href="./index.html#courses" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.courses">Kursi</a>
             <a href="./program.html" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.program">Programma</a>
             <a href="./tools/index.html" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.tools">Bezmaksas riki</a>
+            <a href="./blog.html" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.blog">Blogs</a>
             <a href="./contact.html" class="rounded-xl px-4 py-3 transition hover:bg-white/5" data-i18n="nav.contact">Kontakti</a>
           </nav>
           <div class="mt-2 flex items-center justify-between gap-2 border-t border-white/10 pt-3">
@@ -133,7 +135,7 @@
     <script>
       window.PAGE_I18N = {
         lv: {
-          nav: { courses: 'Kursi', program: 'Programma', tools: 'Bezmaksas rīki', contact: 'Kontakti', enroll: 'Pieteikties' },
+          nav: { courses: 'Kursi', program: 'Programma', tools: 'Bezmaksas rīki', blog: 'Blogs', contact: 'Kontakti', enroll: 'Pieteikties' },
           hero: { label: 'Juridiskā informācija', title1: 'Privātums un', title2: 'sīkdatnes', updated: 'Pēdējoreiz atjaunināts: 2026. gada jūnijs' },
           s1: { h: 'Pārzinis', p: 'Par šo vietni un datu apstrādi atbild SIA Intelekta Skola (reģ. nr. 40203747500), Akmeņu iela 21b, Rīga, Latvija. Jautājumos raksti info@intelektaskola.lv.' },
           s2: { h: 'Kādus datus vācam', p: 'Mēs apstrādājam tikai tos datus, ko pats brīvprātīgi iesniedz — vārdu un e-pasta adresi kontaktformā vai ceļveža pieprasījumā. Šos datus izmantojam tikai, lai atbildētu uz tavu pieprasījumu. Apmeklējumu statistikai izmantojam Ahrefs Web Analytics — privātumu saudzējošu rīku, kas neizmanto sīkdatnes un nevāc personas datus. Citu reklāmas trekeru vietnē nav. Skriptu pārvaldībai izmantojam Google Tag Manager.' },
@@ -143,7 +145,7 @@
           cta: 'Ir jautājums? Sazinies', footer: { home: 'Sākums' },
         },
         en: {
-          nav: { courses: 'Courses', program: 'Program', tools: 'Free tools', contact: 'Contact', enroll: 'Enroll' },
+          nav: { courses: 'Courses', program: 'Program', tools: 'Free tools', blog: 'Blog', contact: 'Contact', enroll: 'Enroll' },
           hero: { label: 'Legal', title1: 'Privacy &', title2: 'cookies', updated: 'Last updated: June 2026' },
           s1: { h: 'Data controller', p: 'This site and its data processing are operated by SIA Intelekta Skola (reg. no. 40203747500), Akmeņu iela 21b, Rīga, Latvia. For questions, email info@intelektaskola.lv.' },
           s2: { h: 'What data we collect', p: 'We only process data you voluntarily submit — your name and email in the contact form or guide request. We use it solely to respond to your request. For visit statistics we use Ahrefs Web Analytics, a privacy-friendly, cookieless tool that does not collect personal data. There are no other advertising trackers on this site. We use Google Tag Manager to manage these scripts.' },
@@ -153,7 +155,7 @@
           cta: 'Have a question? Get in touch', footer: { home: 'Home' },
         },
         ru: {
-          nav: { courses: 'Курсы', program: 'Программа', tools: 'Бесплатные инструменты', contact: 'Контакты', enroll: 'Записаться' },
+          nav: { courses: 'Курсы', program: 'Программа', tools: 'Бесплатные инструменты', blog: 'Блог', contact: 'Контакты', enroll: 'Записаться' },
           hero: { label: 'Юридическая информация', title1: 'Конфиденциальность', title2: 'и cookie', updated: 'Последнее обновление: июнь 2026' },
           s1: { h: 'Ответственный за данные', p: 'За этот сайт и обработку данных отвечает SIA Intelekta Skola (рег. № 40203747500), Akmeņu iela 21b, Rīga, Латвия. По вопросам пишите info@intelektaskola.lv.' },
           s2: { h: 'Какие данные мы собираем', p: 'Мы обрабатываем только те данные, которые вы предоставляете добровольно — имя и адрес эл. почты в форме или запросе гида. Используем их исключительно для ответа на ваш запрос. Для статистики посещений мы используем Ahrefs Web Analytics — инструмент без cookie, не собирающий персональные данные. Других рекламных трекеров на сайте нет. Для управления этими скриптами мы используем Google Tag Manager.' },
