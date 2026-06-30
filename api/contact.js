@@ -251,8 +251,10 @@ module.exports = async function handler(req, res) {
   const notify = notifyEmail({ type: type, name: name, surname: surname, email: email, message: message, lang: lang, who: who });
   const confirm = confirmationEmail({ type: type, name: name });
 
+  // 1) Internal notification (critical). replyTo = visitor so staff can reply
+  //    directly. If this fails, return 502 so the frontend falls back to
+  //    mailto: and the lead is never lost.
   try {
-    // 1) Internal notification — replyTo set to the visitor so staff can reply directly.
     await sendEmail({
       to: NOTIFY_TO,
       replyTo: email,
@@ -260,8 +262,17 @@ module.exports = async function handler(req, res) {
       text: notify.text,
       html: notify.html,
     });
+  } catch (err) {
+    console.error('[api/contact] notification failed:', err && err.message ? err.message : err);
+    return sendJson(res, 502, { ok: false, error: 'E-pasta nosūtīšana neizdevās.' });
+  }
 
-    // 2) Formal Latvian confirmation to the visitor.
+  // 2) Formal Latvian confirmation to the visitor (best-effort). A failure here
+  //    — e.g. the Resend domain is not yet verified, so non-account recipients
+  //    are rejected — must NOT fail the submission: the business is already
+  //    notified and the visitor should still see success.
+  let confirmationSent = true;
+  try {
     await sendEmail({
       to: email,
       replyTo: NOTIFY_TO,
@@ -269,11 +280,10 @@ module.exports = async function handler(req, res) {
       text: confirm.text,
       html: confirm.html,
     });
-
-    return sendJson(res, 200, { ok: true, dryRun: !RESEND_API_KEY });
   } catch (err) {
-    console.error('[api/contact] send failed:', err && err.message ? err.message : err);
-    // 502 so the frontend can fall back to its mailto: flow.
-    return sendJson(res, 502, { ok: false, error: 'E-pasta nosūtīšana neizdevās.' });
+    confirmationSent = false;
+    console.error('[api/contact] confirmation failed (non-fatal):', err && err.message ? err.message : err);
   }
+
+  return sendJson(res, 200, { ok: true, dryRun: !RESEND_API_KEY, confirmationSent: confirmationSent });
 };
