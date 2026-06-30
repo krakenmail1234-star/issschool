@@ -239,6 +239,9 @@
 
           <div class="reveal" style="transition-delay:.1s">
             <form id="contactForm" class="glass glow rounded-3xl p-6 sm:p-8">
+              <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+                <label>Company<input class="js-hp" type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+              </div>
               <div class="space-y-4">
                 <label class="block">
                   <span class="mb-1.5 block text-sm font-semibold text-zinc-200" data-i18n="contact.name">Vārds</span>
@@ -314,6 +317,9 @@
           <h3 class="mt-4 text-2xl font-extrabold leading-tight sm:text-3xl" data-i18n="guide.title">Saņem bezmaksas AI ceļvedi</h3>
           <p class="mt-3 text-sm text-zinc-300" data-i18n="guide.sub">“5 AI darbplūsmas, kas ietaupa stundas katru nedēļu” — praktisks ceļvedis. Ievadi e-pastu, un nosūtīsim to tev.</p>
           <form id="guideForm" class="mt-6 space-y-3">
+            <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+              <label>Company<input class="js-hp" type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+            </div>
             <input id="guideName" required type="text" class="field w-full rounded-xl px-4 py-3" data-i18n-ph="guide.namePh" />
             <input id="guideEmail" required type="email" class="field w-full rounded-xl px-4 py-3" data-i18n-ph="guide.emailPh" />
             <button type="submit" class="btn-glow btn-primary w-full rounded-full px-6 py-3.5 font-bold transition hover:brightness-110" data-i18n="guide.button">Saņemt ceļvedi</button>

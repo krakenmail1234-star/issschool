@@ -1,28 +1,63 @@
 /* Intelekta Skola — site config + form sender.
  *
- * formEndpoint: paste the Google Apps Script web-app URL here after deploying
- * apps-script/Code.gs (see apps-script/README.md). When set, contact + guide
- * forms send real emails to info@intelektaskola.lv and the guide popup triggers
- * an automatic "thank you" reply to the visitor.
+ * Forms (contact, course application, free-guide popup) all submit through
+ * window.ISsendForm(payload). It POSTs to the Vercel serverless function at
+ * apiEndpoint (/api/contact), which emails info@intelektaskola.lv and sends the
+ * visitor a formal Latvian confirmation. The API key lives only on the server.
  *
- * If left blank, forms gracefully fall back to opening the visitor's email
- * client (mailto:), so the site still works before the endpoint is configured.
+ * If the request fails (or no endpoint is reachable), each form gracefully
+ * falls back to opening the visitor's email client (mailto:), so nothing breaks.
  */
 window.IS_CONFIG = {
-  formEndpoint: '', // e.g. 'https://script.google.com/macros/s/AKfyc.../exec'
+  // Same-origin Vercel serverless function. Leave as-is for production.
+  apiEndpoint: '/api/contact',
+  // Legacy Google Apps Script URL — only used if apiEndpoint is blank.
+  formEndpoint: '',
 };
 
-// Sends a form payload to the configured endpoint.
-// Returns a Promise<boolean>: true if it was POSTed, false if no endpoint set.
+// Timestamp the page load so the backend can reject instant (bot) submissions.
+window.IS_FORM_T0 = Date.now();
+
+// Capture the honeypot value from whichever form is being submitted.
+// Runs in the capture phase, before each form's own submit handler.
+document.addEventListener(
+  'submit',
+  function (e) {
+    var hp = e.target && e.target.querySelector ? e.target.querySelector('.js-hp') : null;
+    window.__IS_HP = hp ? hp.value : '';
+  },
+  true
+);
+
+// Sends a form payload to the backend.
+// Returns a Promise<boolean>: true if accepted, false to trigger mailto fallback.
 window.ISsendForm = function (payload) {
-  var ep = (window.IS_CONFIG && window.IS_CONFIG.formEndpoint) || '';
+  var cfg = window.IS_CONFIG || {};
+  var api = cfg.apiEndpoint || '';
+  var body = {};
+  for (var k in payload) if (Object.prototype.hasOwnProperty.call(payload, k)) body[k] = payload[k];
+  body.company = window.__IS_HP || ''; // honeypot
+  body.ts = window.IS_FORM_T0 ? Date.now() - window.IS_FORM_T0 : 0;
+
+  if (api) {
+    return fetch(api, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+      .then(function (r) { return r.ok; })
+      .catch(function () { return false; });
+  }
+
+  // Legacy fallback: Google Apps Script endpoint (no-cors, can't read response).
+  var ep = cfg.formEndpoint || '';
   if (!ep) return Promise.resolve(false);
-  // text/plain keeps this a "simple" CORS request (no preflight); no-cors lets
-  // the browser POST cross-origin to Apps Script without a CORS error.
   return fetch(ep, {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(payload),
-  }).then(function () { return true; }).catch(function () { return false; });
+    body: JSON.stringify(body),
+  })
+    .then(function () { return true; })
+    .catch(function () { return false; });
 };

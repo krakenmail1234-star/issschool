@@ -25,6 +25,9 @@
         '<h3 data-a="title" class="text-2xl font-extrabold leading-tight sm:text-3xl"></h3>' +
         '<p data-a="sub" class="mt-2 text-sm text-zinc-300"></p>' +
         '<form id="applyForm" class="mt-5 space-y-3">' +
+          '<div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">' +
+            '<label>Company<input class="js-hp" type="text" name="company" tabindex="-1" autocomplete="off" /></label>' +
+          '</div>' +
           '<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">' +
             '<label class="block"><span data-a="name" class="mb-1 block text-sm font-semibold text-zinc-200"></span><input id="apName" required type="text" class="field w-full rounded-xl px-4 py-3" /></label>' +
             '<label class="block"><span data-a="surname" class="mb-1 block text-sm font-semibold text-zinc-200"></span><input id="apSurname" required type="text" class="field w-full rounded-xl px-4 py-3" /></label>' +
