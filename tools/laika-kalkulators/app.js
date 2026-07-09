@@ -3,7 +3,7 @@
 
 const UI = {
   lv: {
-    allTools: '← Visi rīki', badge: 'Bezmaksas rīks · Cik tu ietaupi ar AI',
+    allTools: '← Visi rīki', navHome: 'Sākums', navProducts: 'Produkti', navAbout: 'Par mums', navBlog: 'Blogs', navContact: 'Kontakti', badge: 'Bezmaksas rīks · Cik tu ietaupi ar AI',
     lead: 'Atzīmē rutīnas uzdevumus, kas patērē tavu nedēļu. Mēs parādīsim, cik stundu un eiro tava komanda var ietaupīt mēnesī, kad AI paveic daļu darba.',
     step1: 'Tavi nedēļas uzdevumi', rateLabel: 'Vidējā darba stundas izmaksa', rateHint: 'Iekļauj algu + nodokļus + pieskaitāmās izmaksas. Vidēji 20–40 €/h Latvijā.', peopleLabel: 'Cilvēki, kas dara šos darbus',
     step2: 'Tavs ietaupījums', savedTime: 'Ietaupītais laiks mēnesī', moneyMonth: 'Naudas vērtība mēnesī', daysLabel: 'pilnas dienas / gadā', yearLabel: 'gadā', before: 'Pirms', afterAI: 'Pēc AI', pctLabel: '% mazāk rutīnas laika',
@@ -12,7 +12,7 @@ const UI = {
     hoursPerWeek: 'Stundas nedēļā (uz cilvēku)',
   },
   en: {
-    allTools: '← All tools', badge: 'Free tool · How much you save with AI',
+    allTools: '← All tools', navHome: 'Home', navProducts: 'Products', navAbout: 'About us', navBlog: 'Blog', navContact: 'Contact', badge: 'Free tool · How much you save with AI',
     lead: 'Tick the routine tasks that eat your week. We\'ll show how many hours and euros your team can save per month when AI does part of the work.',
     step1: 'Your weekly tasks', rateLabel: 'Average cost of a work hour', rateHint: 'Include salary + taxes + overhead. Typically €20–40/h in Latvia.', peopleLabel: 'People doing this work',
     step2: 'Your saving', savedTime: 'Time saved per month', moneyMonth: 'Money value per month', daysLabel: 'full days / year', yearLabel: 'per year', before: 'Before', afterAI: 'After AI', pctLabel: '% less routine time',
@@ -21,7 +21,7 @@ const UI = {
     hoursPerWeek: 'Hours per week (per person)',
   },
   ru: {
-    allTools: '← Все инструменты', badge: 'Бесплатный инструмент · Сколько вы экономите с ИИ',
+    allTools: '← Все инструменты', navHome: 'Главная', navProducts: 'Продукты', navAbout: 'О нас', navBlog: 'Блог', navContact: 'Контакты', badge: 'Бесплатный инструмент · Сколько вы экономите с ИИ',
     lead: 'Отметьте рутинные задачи, съедающие вашу неделю. Мы покажем, сколько часов и евро ваша команда может экономить в месяц, когда ИИ берёт часть работы.',
     step1: 'Ваши недельные задачи', rateLabel: 'Средняя стоимость рабочего часа', rateHint: 'Учтите зарплату + налоги + накладные. Обычно 20–40 €/ч в Латвии.', peopleLabel: 'Люди, выполняющие эту работу',
     step2: 'Ваша экономия', savedTime: 'Сэкономленное время в месяц', moneyMonth: 'Денежная ценность в месяц', daysLabel: 'полных дней / год', yearLabel: 'в год', before: 'До', afterAI: 'После ИИ', pctLabel: '% меньше рутины',

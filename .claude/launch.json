@@ -6,6 +6,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "5179"],
       "port": 5179
+    },
+    {
+      "name": "intelektskola-local",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4173", "--directory", "C:\\Users\\stank\\OneDrive\\Dators\\Intelektaskola_docs\\intelektskola-local"],
+      "port": 4173
     }
   ]
 }

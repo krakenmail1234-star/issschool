@@ -20,7 +20,7 @@
   /* ---------- translations ---------- */
   const T = {
     lv: {
-      nav: { courses: 'Kursi', tools: 'Bezmaksas rīki', blog: 'Blogs', why: 'Kāpēc mēs', roadmap: 'Ceļa karte', contact: 'Kontakti', enroll: 'Pieteikties' },
+      nav: { home: 'Sākums', products: 'Produkti', about: 'Par mums', courses: 'Kursi', tools: 'Bezmaksas instrumenti', blog: 'Blogs', why: 'Kāpēc mēs', roadmap: 'Ceļa karte', contact: 'Kontakti', enroll: 'Pieteikties' },
       hero: {
         badge: 'AI izglītība · ieviesta praksē',
         title1: 'Apgūsti mākslīgo intelektu, kas',
@@ -100,7 +100,7 @@
     },
 
     en: {
-      nav: { courses: 'Courses', tools: 'Free tools', blog: 'Blog', why: 'Why us', roadmap: 'Roadmap', contact: 'Contact', enroll: 'Enroll' },
+      nav: { home: 'Home', products: 'Products', about: 'About us', courses: 'Courses', tools: 'Free tools', blog: 'Blog', why: 'Why us', roadmap: 'Roadmap', contact: 'Contact', enroll: 'Enroll' },
       hero: {
         badge: 'AI Education · Implemented',
         title1: 'Master the AI that actually',
@@ -180,7 +180,7 @@
     },
 
     ru: {
-      nav: { courses: 'Курсы', tools: 'Бесплатные инструменты', blog: 'Блог', why: 'Почему мы', roadmap: 'Дорожная карта', contact: 'Контакты', enroll: 'Записаться' },
+      nav: { home: 'Главная', products: 'Продукты', about: 'О нас', courses: 'Курсы', tools: 'Бесплатные инструменты', blog: 'Блог', why: 'Почему мы', roadmap: 'Дорожная карта', contact: 'Контакты', enroll: 'Записаться' },
       hero: {
         badge: 'Обучение ИИ · с внедрением',
         title1: 'Освойте искусственный интеллект,',

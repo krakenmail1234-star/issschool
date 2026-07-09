@@ -1,16 +1,29 @@
 # Intelekta Skola
 
-> SIA Intelekta Skola is an AI training company based in Riga, Latvia, teaching practical, hands-on AI skills to businesses, teams, and individuals.
+> SIA Intelekta Skola is an AI training and consulting company based in Riga, Latvia, serving both individuals (courses, mentoring, self-study guides) and businesses (AI strategy consulting, custom chatbots, document-processing agents, marketing content tools, data analysis/forecasting, and a social media automation service).
 
-Intelekta Skola offers practical AI courses focused on real workplace tasks rather than theory. The company is registered in Latvia (Reg. No. 40203747500, VAT LV40203747500) and is based at Akmeņu iela 21b, Rīga, Latvia. The site is available in Latvian (primary), English, and Russian via a language switcher.
+Intelekta Skola is registered in Latvia (Reg. No. 40203747500, VAT LV40203747500) and based at Akmeņu iela 21b, Rīga, Latvia. The site is available in Latvian (primary), English, and Russian via a language switcher.
 
-## Courses
+## Products — training (individuals)
 
-- [AI ieviešana (AI Implementation)](https://www.intelektaskola.lv/program.html): How businesses deploy AI systems, workflows, and productivity solutions, step by step, with real examples.
-- [ChatGPT un LLM meistarība (ChatGPT & LLM Mastery)](https://www.intelektaskola.lv/program.html): Practical AI usage, prompting, workflows, and advanced ChatGPT/Claude techniques for daily work.
-- [AI automatizācija sociālajiem tīkliem (AI Automation for Social Media)](https://www.intelektaskola.lv/program.html): Automating content creation, scheduling, and publishing with modern AI tools.
-- [Individuālais AI kurss (AI Individual Course)](https://www.intelektaskola.lv/program.html): Personalized 1:1 training tailored to the learner's goals and profession.
-- [Promptu inženierija (Prompt Engineering)](https://www.intelektaskola.lv/program.html): Structured prompt-writing for business, creativity, and automation, for repeatable, predictable results.
+- [AI ieviešanas ceļvedis (AI Implementation Guide)](https://www.intelektaskola.lv/produkti/ai-ieviesana.html): A €20 self-study digital guide in three levels (Beginner, Intermediate, Advanced) covering AI foundations through to deploying solutions. Not a live, instructor-led course.
+- [Individuālais AI kurss (Individual AI Course)](https://www.intelektaskola.lv/produkti/individualais-ai-kurss.html): €150 personalized 1-on-1 mentoring covering ChatGPT, Claude, Midjourney, Gemini, automation, and prompt engineering, tailored to the learner's goals and pace.
+- [Promptu inženierija (Prompt Engineering)](https://www.intelektaskola.lv/produkti/prompt-inzenierija.html): €159 course on structured prompt-writing for business, creativity, and automation, for repeatable, predictable results.
+- [ChatGPT un LLM meistarība (ChatGPT & LLM Mastery)](https://www.intelektaskola.lv/produkti/chatgpt-llm-meistariba.html): €500 advanced course on practical AI usage, prompting, workflows, and advanced ChatGPT/LLM techniques for professionals and teams.
+
+## Products — business AI solutions (companies)
+
+- [AI ieviešanas konsultācijas (AI Implementation Consulting)](https://www.intelektaskola.lv/produkti/ai-konsultacijas.html): AI opportunity audits and team workshops. Entry consultation from €200; full audit €1000–€5000; workshop €500–€2000. Aimed at construction, manufacturing, and logistics companies deciding where to start with AI.
+- [Biznesa gadījuma izpēte un ROI aprēķins (Business Case & ROI Analysis)](https://www.intelektaskola.lv/produkti/biznesa-case-roi.html): A numbers-based business case and ROI calculation for AI investments, used for leadership buy-in and grant applications (e.g. LIAA). From €200 entry consultation; full analysis €1500–€4000.
+- [AI čatboti biznesam (AI Chatbots for Business)](https://www.intelektaskola.lv/produkti/ai-chatboti.html): Custom AI chatbots for customer service, order handling, or internal support, trained on the client's own data. From €200 entry consultation; custom chatbot from €5000.
+- [Dokumentu apstrādes AI aģenti (Document Processing AI Agents)](https://www.intelektaskola.lv/produkti/dokumentu-agenti.html): AI agents that sort, analyze, and draft responses to emails, invoices, and forms. From €200 entry consultation; full solution €3000–€15000.
+- [AI satura ģenerēšanas rīki (AI Content Generation Tools)](https://www.intelektaskola.lv/produkti/satura-generesana.html): A custom AI tool generating marketing copy, social posts, and product descriptions in natural Latvian. From €200 entry consultation; solution €2000–€8000 plus a monthly subscription.
+- [Datu analīzes un prognozēšanas rīki (Data Analysis & Forecasting Tools)](https://www.intelektaskola.lv/produkti/datu-analize-prognozes.html): AI-driven sales, inventory, and customer-behavior forecasting built on the client's own data. From €200 entry consultation; full solution from €8000.
+- [AI automatizācija sociālajiem tīkliem (AI Social Media Automation)](https://www.intelektaskola.lv/produkti/ai-automatizacija.html): €236.88/month ongoing service — Intelekta Skola's team creates, schedules, and publishes social media content using AI tools on the client's behalf. This is a done-for-you service, not a course.
+- [Digitalizācija un procesu automatizācija (Digitalization & Process Automation)](https://www.intelektaskola.lv/produkti/digitalizacija-automatizacija.html): Automates paper/spreadsheet-based business processes using tools like Microsoft Power Automate and SAP Business AI. From €200 entry consultation; project €5000–€50000. Eligible for LIAA grant co-financing.
+- [AI modeļu pielāgošana un integrācija (AI Model Fine-Tuning & Integration)](https://www.intelektaskola.lv/produkti/ai-modelu-pielagosana.html): Fine-tunes existing AI models (e.g. ChatGPT, Llama) on a client's specific data and industry terminology, and integrates them into IT infrastructure. From €200 entry consultation; project from €15000. Aimed at medium/large businesses with unique data.
+- [Personāla apmācība un ieviešanas atbalsts (Staff Training & Implementation Support)](https://www.intelektaskola.lv/produkti/personala-apmaciba.html): Hands-on staff training on using AI tools day-to-day, plus post-rollout support, so AI investments actually get used. From €200 entry consultation; training day €500–€3000.
+- [Produkti (Products overview)](https://www.intelektaskola.lv/produkti/): All products — training and business solutions — with pricing and links to detail pages.
 
 ## Free tools
 
@@ -20,8 +33,9 @@ Intelekta Skola offers practical AI courses focused on real workplace tasks rath
 
 ## Pages
 
-- [Home](https://www.intelektaskola.lv/): Overview of Intelekta Skola and its courses.
-- [Programs](https://www.intelektaskola.lv/program.html): Full list of AI courses with enrollment links.
+- [Home](https://www.intelektaskola.lv/): Overview of Intelekta Skola and its products.
+- [Par mums (About us)](https://www.intelektaskola.lv/par-mums.html): Company background, teaching approach, and legal/company details.
+- [Programma (Program overview, legacy)](https://www.intelektaskola.lv/program.html): An older programs listing; the current source of truth for products is the Produkti section above.
 - [Tools](https://www.intelektaskola.lv/tools/): Free AI tools hub.
 - [Blog](https://www.intelektaskola.lv/blog.html): Curated daily AI and ChatGPT news from Latvian media, in Latvian, each linking to its original source.
 - [Contact](https://www.intelektaskola.lv/contact.html): Contact form and company details.

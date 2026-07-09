@@ -6,7 +6,7 @@
  * ------------------------------------------------------------------ */
 const UI = {
   lv: {
-    allTools: '← Visi rīki', badge: 'Bezmaksas rīks · AI ikdienas darbam',
+    allTools: '← Visi rīki', navHome: 'Sākums', navProducts: 'Produkti', navAbout: 'Par mums', navBlog: 'Blogs', navContact: 'Kontakti', badge: 'Bezmaksas rīks · AI ikdienas darbam',
     lead: 'Izvēlies ikdienas biznesa uzdevumu, ieraksti dažus vārdus — un saņem gatavu, profesionālu AI promptu, ko vari uzreiz izmantot ChatGPT vai Claude. Bez reģistrācijas.',
     step1: 'Izvēlies scenāriju', step2: 'Aizpildi detaļas', step3: 'Tavs prompts',
     readyBadge: 'Gatavs prompts', copy: 'Kopēt', copied: 'Nokopēts!',
@@ -18,7 +18,7 @@ const UI = {
     ctaBtn: 'Pieteikties konsultācijai', ctaHome: 'Uz sākumlapu',
   },
   en: {
-    allTools: '← All tools', badge: 'Free tool · AI for everyday work',
+    allTools: '← All tools', navHome: 'Home', navProducts: 'Products', navAbout: 'About us', navBlog: 'Blog', navContact: 'Contact', badge: 'Free tool · AI for everyday work',
     lead: 'Pick an everyday business task, type a few words — and get a ready, professional AI prompt you can paste straight into ChatGPT or Claude. No sign-up.',
     step1: 'Choose a scenario', step2: 'Fill in the details', step3: 'Your prompt',
     readyBadge: 'Ready prompt', copy: 'Copy', copied: 'Copied!',
@@ -30,7 +30,7 @@ const UI = {
     ctaBtn: 'Book a consultation', ctaHome: 'Back to home',
   },
   ru: {
-    allTools: '← Все инструменты', badge: 'Бесплатный инструмент · ИИ для работы',
+    allTools: '← Все инструменты', navHome: 'Главная', navProducts: 'Продукты', navAbout: 'О нас', navBlog: 'Блог', navContact: 'Контакты', badge: 'Бесплатный инструмент · ИИ для работы',
     lead: 'Выберите ежедневную бизнес-задачу, впишите пару слов — и получите готовый профессиональный ИИ-промпт для ChatGPT или Claude. Без регистрации.',
     step1: 'Выберите сценарий', step2: 'Заполните детали', step3: 'Ваш промпт',
     readyBadge: 'Готовый промпт', copy: 'Копировать', copied: 'Скопировано!',

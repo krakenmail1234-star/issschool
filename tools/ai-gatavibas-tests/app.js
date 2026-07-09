@@ -2,15 +2,15 @@
 // 6 questions, each option 0..3 points. Score normalised to 0..100.
 
 const UI = {
-  lv: { allTools: '← Visi rīki', enroll: 'Pieteikties', badge: 'Bezmaksas tests · 6 jautājumi · ~1 min',
+  lv: { allTools: '← Visi rīki', navHome: 'Sākums', navProducts: 'Produkti', navAbout: 'Par mums', navBlog: 'Blogs', navContact: 'Kontakti', enroll: 'Pieteikties', badge: 'Bezmaksas tests · 6 jautājumi · ~1 min',
     lead: 'Atbildi uz 6 jautājumiem un uzzini, cik gatavs tavs uzņēmums ir mākslīgajam intelektam — un ar kuriem rīkiem sākt.',
     qLabel: 'Jautājums', no100: 'no 100', recosHeading: 'Tev ieteicamie pirmie soļi', planBtn: 'Saņemt personīgu plānu →', retryBtn: 'Pārstartēt testu',
     back: '← Atpakaļ', pickHint: 'Izvēlies atbildi, lai turpinātu' },
-  en: { allTools: '← All tools', enroll: 'Enroll', badge: 'Free test · 6 questions · ~1 min',
+  en: { allTools: '← All tools', navHome: 'Home', navProducts: 'Products', navAbout: 'About us', navBlog: 'Blog', navContact: 'Contact', enroll: 'Enroll', badge: 'Free test · 6 questions · ~1 min',
     lead: 'Answer 6 questions and find out how ready your business is for AI — and which tools to start with.',
     qLabel: 'Question', no100: 'out of 100', recosHeading: 'Recommended first steps', planBtn: 'Get a personal plan →', retryBtn: 'Restart test',
     back: '← Back', pickHint: 'Choose an answer to continue' },
-  ru: { allTools: '← Все инструменты', enroll: 'Записаться', badge: 'Бесплатный тест · 6 вопросов · ~1 мин',
+  ru: { allTools: '← Все инструменты', navHome: 'Главная', navProducts: 'Продукты', navAbout: 'О нас', navBlog: 'Блог', navContact: 'Контакты', enroll: 'Записаться', badge: 'Бесплатный тест · 6 вопросов · ~1 мин',
     lead: 'Ответьте на 6 вопросов и узнайте, насколько ваш бизнес готов к ИИ — и с каких инструментов начать.',
     qLabel: 'Вопрос', no100: 'из 100', recosHeading: 'Рекомендуемые первые шаги', planBtn: 'Получить личный план →', retryBtn: 'Пройти заново',
     back: '← Назад', pickHint: 'Выберите ответ, чтобы продолжить' },
