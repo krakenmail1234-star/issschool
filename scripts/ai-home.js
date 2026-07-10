@@ -23,15 +23,15 @@
       nav: { home: 'Sākums', products: 'Produkti', about: 'Par mums', courses: 'Kursi', tools: 'Bezmaksas instrumenti', blog: 'Blogs', why: 'Kāpēc mēs', roadmap: 'Ceļa karte', contact: 'Kontakti', enroll: 'Pieteikties' },
       hero: {
         badge: 'AI izglītība · ieviesta praksē',
-        title1: 'Apgūsti mākslīgo intelektu, kas',
-        title2: 'patiešām virza tavu biznesu.',
+        title1: 'Mākslīgais intelekts Latvijas biznesam',
+        title2: '— sāciet jau šodien, sākot no €200.',
         sub: 'Praktiskas, uz darbību vērstas apmācības ChatGPT, promptu inženierijā, automatizācijā un reālā AI ieviešanā — profesionāļiem, komandām un zinātkārajiem.',
         cta1: 'Pieteikties tagad', cta2: 'Apskatīt kursus',
         cardLabel: 'AI apmācības', cardSub: 'Praktiskas prasmes reālam darbam — soli pa solim.',
         tag1: 'ChatGPT meistarība', tag2: 'AI ieviešana', tag3: 'Promptu inženierija', tag4: 'Automatizācija', tag5: 'Individuālās apmācības',
       },
       courses: {
-        label: 'Kursi', head1: 'Programmas reālam', head2: 'AI darbam.',
+        label: 'Kursi', head1: 'No idejas līdz ieviešanai —', head2: 'pilns AI ceļvedis Latvijas uzņēmējiem.',
         items: [
           { title: 'AI ieviešana', desc: 'Uzzini, kā uzņēmumi ievieš AI sistēmas, darba plūsmas un produktivitātes risinājumus.', cta: 'Pieteikties' },
           { title: 'ChatGPT un LLM meistarība', desc: 'Praktiska AI lietošana, prompti, darba plūsmas un padziļinātas ChatGPT tehnikas.', cta: 'Pieteikties' },
@@ -41,7 +41,7 @@
         ],
       },
       tools: {
-        label: 'Mācies darot', head: 'Bezmaksas AI mācību rīki',
+        label: 'Mācies darot', head: 'Bezmaksas AI rīki — izmēģiniet pirms investīcijām',
         sub: 'Izmēģini metodes pirms pieteikšanās. Bez reģistrācijas. Veidojusi Intelekta Skola.',
         live: 'Pieejams', soon: 'Drīzumā', open: 'Atvērt rīku', comingSoon: 'Drīzumā',
         items: [
@@ -54,7 +54,7 @@
         ],
       },
       why: {
-        label: 'Kāpēc Intelekta Skola', head1: 'Radīts praktiskai', head2: 'AI meistarībai.',
+        label: 'Kāpēc Intelekta Skola', head1: 'Kā mēs palīdzam ieviest AI', head2: 'bez liekas sarežģītības?',
         items: [
           { title: 'Reāla ieviešana', desc: 'Katra koncepcija pārvēršas darba plūsmā, ko vari ieviest jau tajā pašā nedēļā.' },
           { title: 'Mācīšanās darot', desc: 'Tu veido, raksti promptus un automatizē dzīvē — ne tikai skaties slaidus.' },
