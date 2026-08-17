@@ -40,7 +40,7 @@ Create these menu items (LV labels):
 | Platform | URL |
 |----------|-----|
 | Facebook | https://www.facebook.com/intelektaskola |
-| Instagram | https://www.instagram.com/intelektaskola/ |
+| Instagram | https://www.instagram.com/intelektskola/ |
 | LinkedIn | https://www.linkedin.com/company/intelektaskola |
 
 ---

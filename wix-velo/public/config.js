@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
     "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
   social: {
     facebook: "https://www.facebook.com/intelektaskola",
-    instagram: "https://www.instagram.com/intelektaskola/",
+    instagram: "https://www.instagram.com/intelektskola/",
     linkedin: "https://www.linkedin.com/company/intelektaskola",
   },
   stripe: {

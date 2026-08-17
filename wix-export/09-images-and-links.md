@@ -58,7 +58,7 @@ Open links in **new tab** if you prefer users to stay on your site.
 | Platform | URL |
 |----------|-----|
 | Facebook | https://www.facebook.com/intelektaskola |
-| Instagram | https://www.instagram.com/intelektaskola/ |
+| Instagram | https://www.instagram.com/intelektskola/ |
 | LinkedIn | https://www.linkedin.com/company/intelektaskola |
 
 **Wix:** Add Social Bar in footer or use social icons linked to these URLs.

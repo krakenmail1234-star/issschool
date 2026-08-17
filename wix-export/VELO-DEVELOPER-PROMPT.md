@@ -58,7 +58,7 @@ export const SITE_CONFIG = {
   logoUrl: "https://i.imgur.com/bsQTVXQ.png",
   social: {
     facebook: "https://www.facebook.com/intelektaskola",
-    instagram: "https://www.instagram.com/intelektaskola/",
+    instagram: "https://www.instagram.com/intelektskola/",
     linkedin: "https://www.linkedin.com/company/intelektaskola",
   },
   stripe: {
@@ -118,7 +118,7 @@ Tel: +371 20771001, +371 20771002, +371 20771003
 
 Sekojiet mums
 Facebook → https://www.facebook.com/intelektaskola
-Instagram → https://www.instagram.com/intelektaskola/
+Instagram → https://www.instagram.com/intelektskola/
 LinkedIn → https://www.linkedin.com/company/intelektaskola
 ```
 
