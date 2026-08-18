@@ -1,9 +1,10 @@
 /* Intelekta Skola — site config + form sender.
  *
  * Forms (contact, course application, free-guide popup) all submit through
- * window.ISsendForm(payload). It POSTs to the Vercel serverless function at
- * apiEndpoint (/api/contact), which emails info@intelektaskola.lv and sends the
- * visitor a formal Latvian confirmation. The API key lives only on the server.
+ * window.ISsendForm(payload). Production currently posts to Google Apps Script,
+ * which emails info@intelektaskola.lv, sends visitor confirmations, and creates
+ * numbered invoice-payment emails. apiEndpoint remains available as an optional
+ * Vercel serverless alternative.
  *
  * If the request fails (or no endpoint is reachable), each form gracefully
  * falls back to opening the visitor's email client (mailto:), so nothing breaks.
@@ -12,6 +13,8 @@ window.IS_CONFIG = {
   // Gmail/Google Apps Script is the active production form backend.
   apiEndpoint: '',
   formEndpoint: 'https://script.google.com/macros/s/AKfycbziRv9loxU1mDhmR4TTgLcfpLLn6JdYTLfvwJzvawVmV_ZQHHtFOYYIYPcl557g-K-r/exec',
+  // Enable only after the matching invoice-capable Apps Script version is deployed.
+  invoiceEnabled: false,
 };
 
 // Timestamp the page load so the backend can reject instant (bot) submissions.
@@ -48,7 +51,7 @@ window.ISsendForm = function (payload) {
       .catch(function () { return false; });
   }
 
-  // Legacy fallback: Google Apps Script endpoint (no-cors, can't read response).
+  // Google Apps Script endpoint (no-cors, so delivery is confirmed by email).
   var ep = cfg.formEndpoint || '';
   if (!ep) return Promise.resolve(false);
   return fetch(ep, {

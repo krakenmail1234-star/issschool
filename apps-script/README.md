@@ -51,6 +51,26 @@ window.IS_CONFIG = {
 `apiEndpoint` must be blank to select the Gmail/Apps Script route. Commit and
 push after adding the real `/exec` URL.
 
+## Invoice requests
+
+Fixed-price products offer both Stripe card payment and **Saņemt rēķinu**.
+Invoice requests are handled by `Code.gs`; the browser never assigns an invoice
+number or controls the price. Apps Script validates the product against its
+server-side `PRODUCTS` list and generates references in this format:
+
+```text
+INV_ONLINE#<monthly sequence>/<month>/<year>
+```
+
+The sequence is protected with `LockService` and stored in Script Properties,
+so simultaneous requests cannot receive the same number. To view the total,
+last reference, and monthly counts, select and run `getInvoiceStats` in the
+Apps Script editor. The counts are deliberately not exposed by the public web
+endpoint.
+
+After updating `Code.gs`, create a new web-app version for the existing
+deployment. Invoice emails require the deployment to execute as the owner.
+
 ## Notes
 
 - A real `formEndpoint` cannot be invented or copied from another project. Google
