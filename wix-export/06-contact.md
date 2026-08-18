@@ -19,7 +19,8 @@
 - SIA Intelekta Skola
 - Reģ. Nr.: 40203747500 · reģ. datums: 19.05.2026
 - E-pasts: info@intelektaskola.lv
-- Tel: +371 20771001, +371 20771002, +371 20771003
+- Tel: +371 20771001
+- WhatsApp: https://wa.me/37120771001
 - Atbilde: 24–48 h
 
 ---

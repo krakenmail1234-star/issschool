@@ -41,7 +41,7 @@
       } } };
     </script>
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.intelektaskola.lv/#org","name":"SIA Intelekta Skola","url":"https://www.intelektaskola.lv/","email":"info@intelektaskola.lv","image":"https://www.intelektaskola.lv/assets/og-image.jpg","logo":"https://www.intelektaskola.lv/assets/logo-is.svg","vatID":"LV40203747500","description":"AI apmācības un konsultācijas uzņēmumiem un privātpersonām Rīgā, Latvijā: ChatGPT meistarība, promptu inženierija, AI automatizācija un ieviešana.","address":{"@type":"PostalAddress","streetAddress":"Akmeņu iela 21b","addressLocality":"Rīga","addressCountry":"LV"},"areaServed":"LV","priceRange":"€€","sameAs":["https://www.instagram.com/intelektskola","https://www.tiktok.com/@intelektaskola","https://www.linkedin.com/company/intelektaskola","https://www.threads.net/@intelektaskola"]}
+    {"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.intelektaskola.lv/#org","name":"SIA Intelekta Skola","url":"https://www.intelektaskola.lv/","email":"info@intelektaskola.lv","telephone":"+37120771001","image":"https://www.intelektaskola.lv/assets/og-image.jpg","logo":"https://www.intelektaskola.lv/assets/logo-is.svg","vatID":"LV40203747500","description":"AI apmācības un konsultācijas uzņēmumiem un privātpersonām Rīgā, Latvijā: ChatGPT meistarība, promptu inženierija, AI automatizācija un ieviešana.","address":{"@type":"PostalAddress","streetAddress":"Akmeņu iela 21B","addressLocality":"Rīga","postalCode":"LV-1048","addressCountry":"LV"},"areaServed":"LV","priceRange":"€€","sameAs":["https://www.instagram.com/intelektskola","https://www.tiktok.com/@intelektaskola","https://www.linkedin.com/company/intelektaskola","https://www.threads.net/@intelektaskola"]}
     </script>
   </head>
 
@@ -130,8 +130,12 @@
           </div>
           <div class="glass rounded-3xl p-6">
             <div class="text-sm font-semibold uppercase tracking-wider text-electric" data-i18n="company.addrLabel">Juridiskā adrese</div>
-            <address class="mt-2 not-italic text-zinc-200 leading-relaxed">Akmeņu iela 21b<br />Rīga<br /><span data-i18n="company.country">Latvija</span></address>
-            <a href="mailto:info@intelektaskola.lv" class="mt-4 inline-flex items-center gap-2 text-electric hover:text-brandlt">info@intelektaskola.lv</a>
+            <address class="mt-2 not-italic text-zinc-200 leading-relaxed">Akmeņu iela 21B<br />Rīga, LV-1048<br /><span data-i18n="company.country">Latvija</span></address>
+            <div class="mt-4 flex flex-col items-start gap-2">
+              <a href="mailto:info@intelektaskola.lv" class="inline-flex items-center gap-2 text-electric hover:text-brandlt">info@intelektaskola.lv</a>
+              <a href="tel:+37120771001" class="inline-flex items-center gap-2 text-electric hover:text-brandlt">+371 20 771 001</a>
+              <a href="https://wa.me/37120771001" target="_blank" rel="noopener" class="btn-primary inline-flex items-center rounded-full px-5 py-2.5 text-sm font-bold transition hover:brightness-110" data-i18n="company.whatsapp">Rakstīt WhatsApp</a>
+            </div>
           </div>
         </div>
 
@@ -156,9 +160,11 @@
     <footer class="border-t border-white/5">
       <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-zinc-500 sm:flex-row">
         <div class="flex items-center gap-2"><img src="./assets/logo-is.svg" alt="" class="h-6 w-6" /><span>© <span id="year"></span> SIA Intelekta Skola · Reg. 40203747500</span></div>
-        <div class="flex items-center gap-5">
+        <div class="flex flex-wrap items-center justify-center gap-5">
           <a href="./index.html" class="hover:text-electric" data-i18n="footer.home">Sākums</a>
           <a href="./privacy.html" class="hover:text-electric" data-i18n="footer.privacy">Privātums</a>
+          <a href="tel:+37120771001" class="hover:text-electric">+371 20 771 001</a>
+          <a href="https://wa.me/37120771001" target="_blank" rel="noopener" class="hover:text-electric">WhatsApp</a>
           <a href="mailto:info@intelektaskola.lv" class="hover:text-electric">info@intelektaskola.lv</a>
         </div>
       </div>
@@ -175,21 +181,21 @@
         lv: {
           nav: { home: 'Sākums', products: 'Produkti', about: 'Par mums', courses: 'Kursi', program: 'Programma', tools: 'Bezmaksas instrumenti', blog: 'Blogs', contact: 'Kontakti', enroll: 'Pieteikties' },
           hero: { label: 'Kontakti', title1: 'Sazinieties ar mums —', title2: 'sāksim jūsu AI ceļojumu ar bezmaksas konsultāciju', sub: 'Uzraksti ziņu — atbildam 24–48 stundu laikā. Bezmaksas konsultācija bez saistībām.', cardLabel: 'Atbildam ātri', cardSub: '24–48 stundu laikā, bez saistībām.' },
-          company: { title: 'Uzņēmums', reg: 'Reģ. numurs', registered: 'Reģistrēts', vat: 'PVN numurs', vatstatus: 'PVN statuss', vatstatusV: 'Aktīvs', addrLabel: 'Juridiskā adrese', country: 'Latvija' },
+          company: { title: 'Uzņēmums', reg: 'Reģ. numurs', registered: 'Reģistrēts', vat: 'PVN numurs', vatstatus: 'PVN statuss', vatstatusV: 'Aktīvs', addrLabel: 'Juridiskā adrese', country: 'Latvija', whatsapp: 'Rakstīt WhatsApp' },
           form: { name: 'Vārds', email: 'E-pasts', message: 'Ziņa', namePh: 'Tavs vārds', emailPh: 'tu@uznemums.lv', messagePh: 'Ko vēlies apgūt vai ieviest?', send: 'Sūtīt ziņu', note: 'Atver tavu e-pasta klientu ar adresi info@intelektaskola.lv.' },
           footer: { home: 'Sākums', privacy: 'Privātums' },
         },
         en: {
           nav: { home: 'Home', products: 'Products', about: 'About us', courses: 'Courses', program: 'Program', tools: 'Free tools', blog: 'Blog', contact: 'Contact', enroll: 'Enroll' },
           hero: { label: 'Contact', title1: 'Start Your', title2: 'AI Journey', sub: 'Send a message — we reply within 24–48 hours. A free, no-obligation consultation.', cardLabel: 'We reply fast', cardSub: 'Within 24–48 hours, no obligation.' },
-          company: { title: 'Company', reg: 'Reg. number', registered: 'Registered', vat: 'VAT number', vatstatus: 'VAT status', vatstatusV: 'Active', addrLabel: 'Legal address', country: 'Latvia' },
+          company: { title: 'Company', reg: 'Reg. number', registered: 'Registered', vat: 'VAT number', vatstatus: 'VAT status', vatstatusV: 'Active', addrLabel: 'Legal address', country: 'Latvia', whatsapp: 'Message on WhatsApp' },
           form: { name: 'Name', email: 'Email', message: 'Message', namePh: 'Your name', emailPh: 'you@company.com', messagePh: 'What would you like to learn or implement?', send: 'Send message', note: 'Opens your email client addressed to info@intelektaskola.lv.' },
           footer: { home: 'Home', privacy: 'Privacy' },
         },
         ru: {
           nav: { home: 'Главная', products: 'Продукты', about: 'О нас', courses: 'Курсы', program: 'Программа', tools: 'Бесплатные инструменты', blog: 'Блог', contact: 'Контакты', enroll: 'Записаться' },
           hero: { label: 'Контакты', title1: 'Начните свой', title2: 'путь в ИИ', sub: 'Напишите нам — отвечаем в течение 24–48 часов. Бесплатная консультация без обязательств.', cardLabel: 'Быстро отвечаем', cardSub: 'В течение 24–48 часов, без обязательств.' },
-          company: { title: 'Компания', reg: 'Рег. номер', registered: 'Зарегистрировано', vat: 'Номер НДС', vatstatus: 'Статус НДС', vatstatusV: 'Активен', addrLabel: 'Юридический адрес', country: 'Латвия' },
+          company: { title: 'Компания', reg: 'Рег. номер', registered: 'Зарегистрировано', vat: 'Номер НДС', vatstatus: 'Статус НДС', vatstatusV: 'Активен', addrLabel: 'Юридический адрес', country: 'Латвия', whatsapp: 'Написать в WhatsApp' },
           form: { name: 'Имя', email: 'Эл. почта', message: 'Сообщение', namePh: 'Ваше имя', emailPh: 'you@company.com', messagePh: 'Что хотите изучить или внедрить?', send: 'Отправить', note: 'Откроет ваш почтовый клиент с адресом info@intelektaskola.lv.' },
           footer: { home: 'Главная', privacy: 'Конфиденциальность' },
         },

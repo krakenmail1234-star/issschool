@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
     regNumber: "40203747500",
     regDate: "19.05.2026",
     email: "info@intelektaskola.lv",
-    phones: ["+371 20771001", "+371 20771002", "+371 20771003"],
+    phones: ["+371 20771001"],
     emailSubjectPrefix: "Intelekta Skola — ",
   },
   logoUrl: "https://i.imgur.com/bsQTVXQ.png",
@@ -15,6 +15,7 @@ export const SITE_CONFIG = {
   social: {
     facebook: "https://www.facebook.com/intelektaskola",
     instagram: "https://www.instagram.com/intelektskola/",
+    whatsapp: "https://wa.me/37120771001",
     linkedin: "https://www.linkedin.com/company/intelektaskola",
   },
   stripe: {

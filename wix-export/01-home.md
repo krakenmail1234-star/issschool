@@ -210,7 +210,8 @@ Pēc noklusējuma atveras e-pasta klients (mailto). Vēlāk var pieslēgt server
 
 **Sidebar — Kontaktinformācija:**
 - E-pasts: info@intelektaskola.lv
-- Tālrunis: +371 20771001, +371 20771002, +371 20771003
+- Tālrunis: +371 20771001
+- WhatsApp: https://wa.me/37120771001
 
 **Sidebar — Piezīme:**  
 Piedāvājuma detaļas vienojamies individuāli.

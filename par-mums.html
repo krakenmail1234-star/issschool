@@ -43,7 +43,7 @@
     </script>
     <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[
-      {"@type":"Organization","@id":"https://www.intelektaskola.lv/#org","name":"SIA Intelekta Skola","url":"https://www.intelektaskola.lv/","email":"info@intelektaskola.lv","logo":"https://www.intelektaskola.lv/assets/logo-is.svg","image":"https://www.intelektaskola.lv/assets/og-image.jpg","vatID":"LV40203747500","address":{"@type":"PostalAddress","streetAddress":"Akmeņu iela 21b","addressLocality":"Rīga","addressCountry":"LV"}},
+      {"@type":"Organization","@id":"https://www.intelektaskola.lv/#org","name":"SIA Intelekta Skola","url":"https://www.intelektaskola.lv/","email":"info@intelektaskola.lv","telephone":"+37120771001","logo":"https://www.intelektaskola.lv/assets/logo-is.svg","image":"https://www.intelektaskola.lv/assets/og-image.jpg","vatID":"LV40203747500","address":{"@type":"PostalAddress","streetAddress":"Akmeņu iela 21B","addressLocality":"Rīga","postalCode":"LV-1048","addressCountry":"LV"}},
       {"@type":"BreadcrumbList","itemListElement":[
         {"@type":"ListItem","position":1,"name":"Sākums","item":"https://www.intelektaskola.lv/"},
         {"@type":"ListItem","position":2,"name":"Par mums","item":"https://www.intelektaskola.lv/par-mums.html"}
@@ -149,8 +149,10 @@
           <div class="mt-4 grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
             <div><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.reg">Reģ. numurs</div><div class="mt-1 font-semibold">40203747500</div></div>
             <div><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.vat">PVN numurs</div><div class="mt-1 font-semibold">LV40203747500</div></div>
-            <div><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.addr">Juridiskā adrese</div><div class="mt-1 font-semibold">Akmeņu iela 21b, <span data-i18n="company.city">Rīga</span>, <span data-i18n="company.country">Latvija</span></div></div>
+            <div><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.addr">Juridiskā adrese</div><div class="mt-1 font-semibold">Akmeņu iela 21B, <span data-i18n="company.city">Rīga, LV-1048</span>, <span data-i18n="company.country">Latvija</span></div></div>
             <div><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.email">E-pasts</div><div class="mt-1 font-semibold"><a href="mailto:info@intelektaskola.lv" class="hover:text-electric">info@intelektaskola.lv</a></div></div>
+            <div><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.phone">Tālrunis</div><div class="mt-1 font-semibold"><a href="tel:+37120771001" class="hover:text-electric">+371 20 771 001</a></div></div>
+            <div><div class="text-xs uppercase tracking-wider text-zinc-500">WhatsApp</div><div class="mt-1 font-semibold"><a href="https://wa.me/37120771001" target="_blank" rel="noopener" class="hover:text-electric" data-i18n="company.whatsapp">Rakstīt WhatsApp</a></div></div>
           </div>
         </div>
       </section>
@@ -171,9 +173,11 @@
     <footer class="border-t border-white/5">
       <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-zinc-500 sm:flex-row">
         <div class="flex items-center gap-2"><img src="./assets/logo-is.svg" alt="" class="h-6 w-6" /><span>© <span id="year"></span> SIA Intelekta Skola · Reg. 40203747500</span></div>
-        <div class="flex items-center gap-5">
+        <div class="flex flex-wrap items-center justify-center gap-5">
           <a href="./index.html" class="hover:text-electric" data-i18n="footer.home">Sākums</a>
           <a href="./privacy.html" class="hover:text-electric" data-i18n="footer.privacy">Privātums</a>
+          <a href="tel:+37120771001" class="hover:text-electric">+371 20 771 001</a>
+          <a href="https://wa.me/37120771001" target="_blank" rel="noopener" class="hover:text-electric">WhatsApp</a>
           <a href="mailto:info@intelektaskola.lv" class="hover:text-electric">info@intelektaskola.lv</a>
         </div>
       </div>
@@ -191,7 +195,7 @@
             i4: { t: 'Automatizācijas domāšana', d: 'Izveido vienreiz, ļauj AI atkārtot — saturā, operācijās un atbalstā.' },
             i5: { t: 'Individuāls mentorings', d: 'Personīgs atbalsts, pielāgots tavai lomai un mērķiem.' },
             i6: { t: 'Nākotnei droša programma', d: 'Pastāvīgi atjaunināta, modeļiem un rīkiem attīstoties.' } },
-          company: { h: 'Uzņēmums', reg: 'Reģ. numurs', vat: 'PVN numurs', addr: 'Juridiskā adrese', city: 'Rīga', country: 'Latvija', email: 'E-pasts' },
+          company: { h: 'Uzņēmums', reg: 'Reģ. numurs', vat: 'PVN numurs', addr: 'Juridiskā adrese', city: 'Rīga, LV-1048', country: 'Latvija', email: 'E-pasts', phone: 'Tālrunis', whatsapp: 'Rakstīt WhatsApp' },
           cta: { h: 'Sāc savu AI ceļu', p: 'Apskati mūsu produktus vai piesakies bezmaksas konsultācijai — ieteiksim tev piemērotāko ceļu.', products: 'Skatīt produktus', contact: 'Sazināties' },
           footer: { home: 'Sākums', privacy: 'Privātums' },
         },
@@ -205,7 +209,7 @@
             i4: { t: 'Automation-first mindset', d: 'Design once, let AI repeat it — across content, ops and support.' },
             i5: { t: 'Individual mentoring', d: 'One-on-one guidance tailored to your role and goals.' },
             i6: { t: 'Future-proof curriculum', d: 'Continuously updated as models and tools evolve.' } },
-          company: { h: 'Company', reg: 'Reg. number', vat: 'VAT number', addr: 'Legal address', city: 'Rīga', country: 'Latvia', email: 'Email' },
+          company: { h: 'Company', reg: 'Reg. number', vat: 'VAT number', addr: 'Legal address', city: 'Rīga, LV-1048', country: 'Latvia', email: 'Email', phone: 'Phone', whatsapp: 'Message on WhatsApp' },
           cta: { h: 'Start your AI journey', p: 'Browse our products or book a free consultation — we\'ll suggest the best path for you.', products: 'View products', contact: 'Get in touch' },
           footer: { home: 'Home', privacy: 'Privacy' },
         },
@@ -219,7 +223,7 @@
             i4: { t: 'Мышление автоматизации', d: 'Настройте один раз — пусть ИИ повторяет: контент, операции, поддержка.' },
             i5: { t: 'Индивидуальное наставничество', d: 'Персональная поддержка под вашу роль и цели.' },
             i6: { t: 'Программа на будущее', d: 'Постоянно обновляется по мере развития моделей и инструментов.' } },
-          company: { h: 'Компания', reg: 'Рег. номер', vat: 'Номер НДС', addr: 'Юридический адрес', city: 'Rīga', country: 'Латвия', email: 'Эл. почта' },
+          company: { h: 'Компания', reg: 'Рег. номер', vat: 'Номер НДС', addr: 'Юридический адрес', city: 'Rīga, LV-1048', country: 'Латвия', email: 'Эл. почта', phone: 'Телефон', whatsapp: 'Написать в WhatsApp' },
           cta: { h: 'Начните свой путь в ИИ', p: 'Посмотрите наши продукты или запишитесь на бесплатную консультацию — подскажем подходящий путь.', products: 'Смотреть продукты', contact: 'Связаться' },
           footer: { home: 'Главная', privacy: 'Конфиденциальность' },
         },

@@ -54,7 +54,7 @@
     </script>
     <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[
-      {"@type":"Organization","@id":"https://www.intelektaskola.lv/#org","name":"SIA Intelekta Skola","url":"https://www.intelektaskola.lv/","email":"info@intelektaskola.lv","logo":"https://www.intelektaskola.lv/assets/logo-is.svg","image":"https://www.intelektaskola.lv/assets/og-image.jpg","vatID":"LV40203747500","address":{"@type":"PostalAddress","streetAddress":"Akmeņu iela 21b","addressLocality":"Rīga","addressCountry":"LV"}},
+      {"@type":"Organization","@id":"https://www.intelektaskola.lv/#org","name":"SIA Intelekta Skola","url":"https://www.intelektaskola.lv/","email":"info@intelektaskola.lv","telephone":"+37120771001","logo":"https://www.intelektaskola.lv/assets/logo-is.svg","image":"https://www.intelektaskola.lv/assets/og-image.jpg","vatID":"LV40203747500","address":{"@type":"PostalAddress","streetAddress":"Akmeņu iela 21B","addressLocality":"Rīga","postalCode":"LV-1048","addressCountry":"LV"}},
       {"@type":"WebSite","@id":"https://www.intelektaskola.lv/#website","url":"https://www.intelektaskola.lv/","name":"Intelekta Skola","inLanguage":"lv","publisher":{"@id":"https://www.intelektaskola.lv/#org"}},
       {"@type":"WebPage","@id":"https://www.intelektaskola.lv/#webpage","name":"Mākslīgais intelekts Latvijas biznesam — Intelekta Skola","description":"Vai nezināt, kā sākt ar mākslīgo intelektu savā uzņēmumā? Praktiskas AI konsultācijas, čatboti, dokumentu apstrāde un automatizācija — sākot no €200.","url":"https://www.intelektaskola.lv/","inLanguage":"lv","isPartOf":{"@id":"https://www.intelektaskola.lv/#website"},"about":{"@type":"Thing","name":"Mākslīgais intelekts biznesam","description":"Praktiski AI risinājumi Latvijas uzņēmumiem — konsultācijas, ieviešana un apmācība"}}
     ]}
@@ -418,9 +418,13 @@
             <div class="glass rounded-3xl p-6">
               <div class="text-sm font-semibold uppercase tracking-wider text-electric" data-i18n="company.addrLabel">Juridiskā adrese</div>
               <address class="mt-2 not-italic text-zinc-200 leading-relaxed">
-                Akmeņu iela 21b<br /><span data-i18n="company.addrCity">Rīga</span><br /><span data-i18n="company.addrZip">Latvija</span>
+                Akmeņu iela 21B<br /><span data-i18n="company.addrCity">Rīga, LV-1048</span><br /><span data-i18n="company.addrZip">Latvija</span>
               </address>
-              <a href="mailto:info@intelektaskola.lv" class="mt-4 inline-flex items-center gap-2 text-electric hover:text-brandlt">info@intelektaskola.lv</a>
+              <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                <a href="mailto:info@intelektaskola.lv" class="inline-flex items-center gap-2 text-electric hover:text-brandlt">info@intelektaskola.lv</a>
+                <a href="tel:+37120771001" class="inline-flex items-center gap-2 text-electric hover:text-brandlt">+371 20 771 001</a>
+                <a href="https://wa.me/37120771001" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-electric hover:text-brandlt" data-i18n="company.whatsapp">Rakstīt WhatsApp</a>
+              </div>
             </div>
           </div>
 
@@ -476,9 +480,11 @@
           <img src="./assets/logo-is.svg" alt="" class="h-6 w-6" />
           <span>© <span id="year"></span> SIA Intelekta Skola · Reg. 40203747500</span>
         </div>
-        <div class="flex items-center gap-5">
+        <div class="flex flex-wrap items-center justify-center gap-5">
           <a href="./program.html" class="hover:text-electric" data-i18n="footer.program">Programma</a>
           <a href="./privacy.html" class="hover:text-electric" data-i18n="footer.privacy">Privātums</a>
+          <a href="tel:+37120771001" class="hover:text-electric">+371 20 771 001</a>
+          <a href="https://wa.me/37120771001" target="_blank" rel="noopener" class="hover:text-electric">WhatsApp</a>
           <a href="mailto:info@intelektaskola.lv" class="hover:text-electric">info@intelektaskola.lv</a>
         </div>
       </div>

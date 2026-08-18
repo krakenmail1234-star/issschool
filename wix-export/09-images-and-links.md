@@ -46,8 +46,7 @@ Open links in **new tab** if you prefer users to stay on your site.
 |------|-------|
 | Email | info@intelektaskola.lv |
 | Phone | +371 20771001 |
-| Phone | +371 20771002 |
-| Phone | +371 20771003 |
+| WhatsApp | https://wa.me/37120771001 |
 | Company | SIA Intelekta Skola |
 | Registration | Reģ. Nr.: 40203747500 · reģ. datums: 19.05.2026 |
 

@@ -75,7 +75,7 @@
         ],
       },
       company: {
-        title: 'Uzņēmums', addrLabel: 'Juridiskā adrese', addrCity: 'Rīga', addrZip: 'Latvija',
+        title: 'Uzņēmums', addrLabel: 'Juridiskā adrese', addrCity: 'Rīga, LV-1048', addrZip: 'Latvija', whatsapp: 'Rakstīt WhatsApp',
         rows: [
           { k: 'Reģ. numurs', v: '40203747500' },
           { k: 'PVN numurs', v: 'LV40203747500' },
@@ -155,7 +155,7 @@
         ],
       },
       company: {
-        title: 'Company', addrLabel: 'Legal address', addrCity: 'Rīga', addrZip: 'Latvia',
+        title: 'Company', addrLabel: 'Legal address', addrCity: 'Rīga, LV-1048', addrZip: 'Latvia', whatsapp: 'Message on WhatsApp',
         rows: [
           { k: 'Reg. number', v: '40203747500' },
           { k: 'VAT number', v: 'LV40203747500' },
@@ -235,7 +235,7 @@
         ],
       },
       company: {
-        title: 'Компания', addrLabel: 'Юридический адрес', addrCity: 'Rīga', addrZip: 'Латвия',
+        title: 'Компания', addrLabel: 'Юридический адрес', addrCity: 'Rīga, LV-1048', addrZip: 'Латвия', whatsapp: 'Написать в WhatsApp',
         rows: [
           { k: 'Рег. номер', v: '40203747500' },
           { k: 'Номер НДС', v: 'LV40203747500' },

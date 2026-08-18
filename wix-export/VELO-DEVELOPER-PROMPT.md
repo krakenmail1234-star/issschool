@@ -52,7 +52,7 @@ export const SITE_CONFIG = {
     regNumber: "40203747500",
     regDate: "19.05.2026",
     email: "info@intelektaskola.lv",
-    phones: ["+371 20771001", "+371 20771002", "+371 20771003"],
+    phones: ["+371 20771001"],
     emailSubjectPrefix: "Intelekta Skola — ",
   },
   logoUrl: "https://i.imgur.com/bsQTVXQ.png",
@@ -114,7 +114,8 @@ Intelekta Skola
 SIA Intelekta Skola
 Reģ. Nr.: 40203747500 · reģ. datums: 19.05.2026
 Email: info@intelektaskola.lv
-Tel: +371 20771001, +371 20771002, +371 20771003
+Tel: +371 20771001
+WhatsApp: https://wa.me/37120771001
 
 Sekojiet mums
 Facebook → https://www.facebook.com/intelektaskola
@@ -402,7 +403,8 @@ Pacel savu mārketingu nākamajā līmenī. Mēs palīdzam apvienot tradicionāl
 - SIA Intelekta Skola
 - Reģ. Nr.: 40203747500 · reģ. datums: 19.05.2026
 - E-pasts: info@intelektaskola.lv
-- Tel: +371 20771001, +371 20771002, +371 20771003
+- Tel: +371 20771001
+- WhatsApp: https://wa.me/37120771001
 - Atbilde: 24–48 h
 
 **Sidebar:**
