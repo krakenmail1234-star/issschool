@@ -1,8 +1,27 @@
 # Form backend — Google Apps Script (sends email to info@intelektaskola.lv)
 
-This makes the website's **contact form** and **free-guide popup** send real emails
-(your static site can't send email by itself). It also auto-replies "thank you" to
-people who request the AI Guide.
+This makes all website forms send through the **info@intelektaskola.lv Gmail
+account**:
+
+- course applications notify `info@intelektaskola.lv` and confirm receipt to the applicant;
+- contact messages notify `info@intelektaskola.lv` and confirm receipt to the visitor;
+- popup signups notify `info@intelektaskola.lv` and automatically email the presentation.
+
+## Add the popup presentation
+
+Before deployment, configure one of these values near the top of `Code.gs`:
+
+```js
+// Attach a private Google Drive file to the email (recommended):
+var PRESENTATION_FILE_ID = 'YOUR_GOOGLE_DRIVE_FILE_ID';
+
+// Or email a button linking to a publicly hosted presentation:
+var PRESENTATION_URL = 'https://www.intelektaskola.lv/assets/your-presentation.pdf';
+```
+
+For a Drive URL such as `https://drive.google.com/file/d/FILE_ID/view`, copy
+only the `FILE_ID` part. The Drive file does not have to be public when it is
+sent as an attachment by the script owner.
 
 ## Deploy (one time, ~2 minutes)
 
@@ -13,7 +32,8 @@ people who request the AI Guide.
 5. Type = **Web app**. Set:
    - **Execute as:** Me (info@intelektaskola.lv)
    - **Who has access:** **Anyone**
-6. Click **Deploy**, approve the permissions prompt (it needs permission to send email).
+6. Click **Deploy**, approve the Gmail permission and, when using an attachment,
+   the Google Drive permission.
 7. Copy the **Web app URL** — it looks like
    `https://script.google.com/macros/s/AKfyc…/exec`.
 
@@ -23,19 +43,22 @@ Open [`../scripts/config.js`](../scripts/config.js) and paste the URL:
 
 ```js
 window.IS_CONFIG = {
+  apiEndpoint: '',
   formEndpoint: 'https://script.google.com/macros/s/AKfyc…/exec',
 };
 ```
 
-Commit + push. Done — submissions now email **info@intelektaskola.lv**, and guide
-signups get an automatic thank-you reply.
+`apiEndpoint` must be blank to select the Gmail/Apps Script route. Commit and
+push after adding the real `/exec` URL.
 
 ## Notes
 
-- Until `formEndpoint` is set, forms fall back to opening the visitor's email client
-  (mailto:), so nothing breaks in the meantime.
+- A real `formEndpoint` cannot be invented or copied from another project. Google
+  creates it only after the script is deployed from the Gmail account.
+- Until `formEndpoint` is set, keep the current Vercel `apiEndpoint` active; do
+  not publish both endpoint fields as blank.
 - To test: open the web-app URL in a browser — it should say
-  "Intelekta Skola form endpoint is running."
+  JSON containing `"ok":true` and `"presentationConfigured":true`.
 - Free tier is generous (~100 emails/day) — plenty for a lead form.
 - Edit the email wording (subjects/body) directly in `Code.gs`, then redeploy
   (**Deploy → Manage deployments → Edit → New version**).

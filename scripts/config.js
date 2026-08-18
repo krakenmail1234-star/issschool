@@ -9,10 +9,9 @@
  * falls back to opening the visitor's email client (mailto:), so nothing breaks.
  */
 window.IS_CONFIG = {
-  // Same-origin Vercel serverless function. Leave as-is for production.
-  apiEndpoint: '/api/contact',
-  // Legacy Google Apps Script URL — only used if apiEndpoint is blank.
-  formEndpoint: '',
+  // Gmail/Google Apps Script is the active production form backend.
+  apiEndpoint: '',
+  formEndpoint: 'https://script.google.com/macros/s/AKfycbziRv9loxU1mDhmR4TTgLcfpLLn6JdYTLfvwJzvawVmV_ZQHHtFOYYIYPcl557g-K-r/exec',
 };
 
 // Timestamp the page load so the backend can reject instant (bot) submissions.

@@ -91,11 +91,11 @@
       final: { label: 'Gatavs nākotnei?', head1: 'Nākamā desmitgade', head2: 'pieder AI.', sub: 'Apgūsti praktiskas mākslīgā intelekta prasmes ar Intelekta Skolu.', cta: 'Pieteikties tagad' },
       footer: { program: 'Programma', privacy: 'Privātums' },
       guide: {
-        badge: 'Bezmaksas dāvana', title: 'Saņem bezmaksas AI ceļvedi',
-        sub: '“5 AI darbplūsmas, kas ietaupa stundas katru nedēļu” — praktisks ceļvedis latviešu valodā. Ievadi e-pastu, un nosūtīsim to tev.',
+        badge: 'Bezmaksas dāvana', title: 'Saņem bezmaksas MI ceļvedi',
+        sub: '“Bezmaksas ceļvedis darbībai ar MI” — praktiska 11 slaidu prezentācija latviešu valodā. Ievadi e-pastu, un nosūtīsim to tev.',
         namePh: 'Tavs vārds', emailPh: 'E-pasta adrese', button: 'Saņemt ceļvedi', skip: 'Varbūt vēlāk',
         privacy: 'Bez surogātpasta. Atrakstīšanās jebkurā laikā.', subject: 'Bezmaksas AI ceļveža pieprasījums',
-        success: 'Paldies! Atveram tavu e-pasta klientu, lai pabeigtu pieprasījumu.',
+        success: 'Paldies! Pārbaudi savu e-pastu — prezentācija ir nosūtīta.',
       },
     },
 
@@ -172,10 +172,10 @@
       footer: { program: 'Program', privacy: 'Privacy' },
       guide: {
         badge: 'Free gift', title: 'Get the free AI guide',
-        sub: '“5 AI workflows that save hours every week” — a practical guide. Enter your email and we will send it to you.',
+        sub: '“A Free Guide to Working with AI” — a practical 11-slide presentation in Latvian. Enter your email and we will send it to you.',
         namePh: 'Your name', emailPh: 'Email address', button: 'Send me the guide', skip: 'Maybe later',
         privacy: 'No spam. Unsubscribe anytime.', subject: 'Free AI guide request',
-        success: 'Thank you! Opening your email client to complete the request.',
+        success: 'Thank you! Check your email — the presentation has been sent.',
       },
     },
 
@@ -252,10 +252,10 @@
       footer: { program: 'Программа', privacy: 'Конфиденциальность' },
       guide: {
         badge: 'Бесплатный подарок', title: 'Получите бесплатный гид по ИИ',
-        sub: '«5 ИИ-процессов, которые экономят часы каждую неделю» — практический гид. Введите эл. почту, и мы пришлём его.',
+        sub: '«Бесплатный гид по работе с ИИ» — практическая презентация из 11 слайдов на латышском языке. Введите эл. почту, и мы пришлём её.',
         namePh: 'Ваше имя', emailPh: 'Адрес эл. почты', button: 'Прислать гид', skip: 'Может, позже',
         privacy: 'Без спама. Отписка в любой момент.', subject: 'Запрос бесплатного гида по ИИ',
-        success: 'Спасибо! Открываем почтовый клиент для завершения запроса.',
+        success: 'Спасибо! Проверьте почту — презентация отправлена.',
       },
     },
   };
