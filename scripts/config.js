@@ -14,7 +14,7 @@ window.IS_CONFIG = {
   apiEndpoint: '',
   formEndpoint: 'https://script.google.com/macros/s/AKfycbziRv9loxU1mDhmR4TTgLcfpLLn6JdYTLfvwJzvawVmV_ZQHHtFOYYIYPcl557g-K-r/exec',
   // Enable only after the matching invoice-capable Apps Script version is deployed.
-  invoiceEnabled: false,
+  invoiceEnabled: true,
 };
 
 // Timestamp the page load so the backend can reject instant (bot) submissions.
