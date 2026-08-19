@@ -20,10 +20,16 @@ var PRODUCTS = {
   'prompt-inzenierija': { name: 'Promptu inženierija', gross: 159.00 }
 };
 
-// Configure ONE delivery method before deploying the web app.
-// For Drive, copy the ID from: drive.google.com/file/d/FILE_ID/view
-var PRESENTATION_FILE_ID = '';
 var PRESENTATION_URL = 'https://www.intelektaskola.lv/assets/bezmaksas-ai-celvedis.pdf';
+
+// Run this once from the Apps Script editor after deployment changes.
+// It prompts for the external-request permission and verifies the PDF is usable.
+function authorizePresentationDelivery() {
+  var blob = presentationBlob_();
+  var result = { ok: true, name: blob.getName(), bytes: blob.getBytes().length };
+  console.log(JSON.stringify(result));
+  return result;
+}
 
 function doPost(e) {
   try {
@@ -194,17 +200,11 @@ function sendPresentation_(email, name) {
 }
 
 function presentationBlob_() {
-  var blob;
-  if (PRESENTATION_FILE_ID) {
-    blob = DriveApp.getFileById(PRESENTATION_FILE_ID).getBlob();
-  } else {
-    var response = UrlFetchApp.fetch(PRESENTATION_URL, { followRedirects: true, muteHttpExceptions: true });
-    if (response.getResponseCode() < 200 || response.getResponseCode() >= 300) {
-      throw new Error('Could not download the guide attachment. HTTP ' + response.getResponseCode());
-    }
-    blob = response.getBlob();
+  var response = UrlFetchApp.fetch(PRESENTATION_URL, { followRedirects: true, muteHttpExceptions: true });
+  if (response.getResponseCode() < 200 || response.getResponseCode() >= 300) {
+    throw new Error('Could not download the guide attachment. HTTP ' + response.getResponseCode());
   }
-  return blob.setName('bezmaksas-ai-celvedis.pdf');
+  return response.getBlob().setName('bezmaksas-ai-celvedis.pdf');
 }
 
 function guideEmailHtml_() {
@@ -280,5 +280,5 @@ function json_(value) {
 }
 function doGet() {
   return json_({ ok: true, service: 'Intelekta Skola form endpoint', sender: NOTIFY_TO,
-    presentationConfigured: Boolean(PRESENTATION_FILE_ID || PRESENTATION_URL) });
+    presentationConfigured: Boolean(PRESENTATION_URL) });
 }

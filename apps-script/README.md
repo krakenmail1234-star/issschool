@@ -7,21 +7,19 @@ account**:
 - contact messages notify `info@intelektaskola.lv` and confirm receipt to the visitor;
 - popup signups notify `info@intelektaskola.lv` and automatically email the presentation.
 
-## Add the popup presentation
+## Popup presentation
 
-Before deployment, configure one of these values near the top of `Code.gs`:
+The PDF is attached from the public website URL configured near the top of
+`Code.gs`:
 
 ```js
-// Attach a private Google Drive file to the email (recommended):
-var PRESENTATION_FILE_ID = 'YOUR_GOOGLE_DRIVE_FILE_ID';
-
-// Or email a button linking to a publicly hosted presentation:
 var PRESENTATION_URL = 'https://www.intelektaskola.lv/assets/your-presentation.pdf';
 ```
 
-For a Drive URL such as `https://drive.google.com/file/d/FILE_ID/view`, copy
-only the `FILE_ID` part. The Drive file does not have to be public when it is
-sent as an attachment by the script owner.
+After saving the script, select and run `authorizePresentationDelivery` once.
+Approve the external-request permission and confirm the execution log reports
+the PDF filename and byte count. Without this authorization, Apps Script accepts
+the form request but cannot fetch or attach the PDF.
 
 ## Deploy (one time, ~2 minutes)
 
@@ -32,9 +30,9 @@ sent as an attachment by the script owner.
 5. Type = **Web app**. Set:
    - **Execute as:** Me (info@intelektaskola.lv)
    - **Who has access:** **Anyone**
-6. Click **Deploy**, approve the Gmail permission and, when using an attachment,
-   the Google Drive permission.
-7. Copy the **Web app URL** — it looks like
+6. Run `authorizePresentationDelivery` and approve Gmail/external-request access.
+7. Click **Deploy** and approve any remaining requested permission.
+8. Copy the **Web app URL** — it looks like
    `https://script.google.com/macros/s/AKfyc…/exec`.
 
 ## Connect it to the site

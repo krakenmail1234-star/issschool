@@ -504,16 +504,21 @@
       const name = $('#guideName').value.trim();
       const email = $('#guideEmail').value.trim();
       localStorage.setItem('is_guide_seen', '1');
-      $('#guideSuccess').classList.remove('hidden');
+      const success = $('#guideSuccess');
+      const submit = e.target.querySelector('button[type="submit"]');
+      success.classList.add('hidden');
+      if (submit) submit.disabled = true;
       const send = (window.ISsendForm || (() => Promise.resolve(false)))({ type: 'guide', name, email, lang });
       send.then((sent) => {
-        // If no backend is configured yet, fall back to emailing the lead via the visitor's client.
-        if (!sent) {
+        if (sent) {
+          success.classList.remove('hidden');
+          setTimeout(close, 2600);
+        } else {
+          if (submit) submit.disabled = false;
           const subject = encodeURIComponent(d.subject);
           const body = encodeURIComponent(`${name}\n${email}`);
           setTimeout(() => { window.location.href = `mailto:info@intelektaskola.lv?subject=${subject}&body=${body}`; }, 600);
         }
-        setTimeout(close, 2600);
       });
     });
     if (!localStorage.getItem('is_guide_seen')) {
