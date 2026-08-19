@@ -38,6 +38,7 @@
           { title: 'AI automatizācija sociālajiem tīkliem', desc: 'Automatizē satura veidošanu, plānošanu un publicēšanu ar mūsdienu AI rīkiem.', cta: 'Pieteikties' },
           { title: 'Individuālais AI kurss', desc: 'Personalizētas individuālas apmācības, pielāgotas taviem mērķiem un profesijai.', cta: 'Pieteikt 1:1', badge: 'Personīgākais' },
           { title: 'Promptu inženierija', desc: 'Apgūsti strukturētu promptu veidošanu biznesam, radošumam un automatizācijai.', cta: 'Pieteikties' },
+          { title: 'WEB risinājumi un mājaslapu izveide', desc: 'Mājaslapu izveide un uzlabošana ar Wix, WordPress, Shopify vai individuāli izstrādātu un hostētu risinājumu.', cta: 'Saņemt piedāvājumu', badge: 'No €700' },
         ],
       },
       tools: {
@@ -118,6 +119,7 @@
           { title: 'AI Automation for Social Media', desc: 'Automate content generation, planning and publishing using modern AI tools.', cta: 'Enroll' },
           { title: 'AI Individual Course', desc: 'Personalized one-on-one learning tailored to your goals and profession.', cta: 'Book 1:1', badge: 'Most personal' },
           { title: 'Prompt Engineering', desc: 'Master structured prompting for business, creativity and automation.', cta: 'Enroll' },
+          { title: 'WEB Solutions & Website Development', desc: 'Website creation and improvement with Wix, WordPress, Shopify or a custom-built and hosted solution.', cta: 'Request a quote', badge: 'From €700' },
         ],
       },
       tools: {
@@ -198,6 +200,7 @@
           { title: 'Автоматизация соцсетей с ИИ', desc: 'Автоматизируйте создание контента, планирование и публикацию современными ИИ-инструментами.', cta: 'Записаться' },
           { title: 'Индивидуальный курс по ИИ', desc: 'Персональное обучение один на один под ваши цели и профессию.', cta: 'Записаться 1:1', badge: 'Самый личный' },
           { title: 'Промпт-инженерия', desc: 'Освойте структурированные промпты для бизнеса, творчества и автоматизации.', cta: 'Записаться' },
+          { title: 'WEB-решения и создание сайтов', desc: 'Создание и доработка сайтов на Wix, WordPress, Shopify или индивидуальное решение с собственным хостингом.', cta: 'Получить расчёт', badge: 'От €700' },
         ],
       },
       tools: {
@@ -288,6 +291,7 @@
     { icon: 'bolt', href: STRIPE_AUTOMATION },        // AI automatizācija sociālajiem tīkliem
     { icon: 'user', href: STRIPE_INDIVIDUAL, featured: true }, // Individuālais AI kurss
     { icon: 'sparkle', href: STRIPE_PROMPT },         // Promptu inženierija
+    { icon: 'briefcase', href: './produkti/web-risinajumi.html', featured: true }, // WEB risinājumi
   ];
   const TOOL_META = [
     { icon: 'target', href: null },
@@ -529,6 +533,11 @@
       .then((j) => {
         const items = j && j.result;
         if (!Array.isArray(items) || !items.length) return; // no CMS content yet -> keep hardcoded defaults
+        const webMeta = COURSE_META[COURSE_META.length - 1];
+        const webTranslations = Object.fromEntries(
+          ['lv', 'en', 'ru'].map((L) => [L, T[L].courses.items[T[L].courses.items.length - 1]])
+        );
+        const hasWebProduct = items.some((c) => String(c.stripeUrl || '').includes('produkti/web-risinajumi'));
         COURSE_META = items.map((c) => ({ icon: c.icon || 'sparkle', href: c.stripeUrl || STRIPE_MAIN, featured: !!c.featured }));
         ['lv', 'en', 'ru'].forEach((L) => {
           const C = cap(L);
@@ -539,7 +548,9 @@
             cta: c['cta' + C] || fallbackCta,
             badge: c['badge' + C] || '',
           }));
+          if (!hasWebProduct) T[L].courses.items.push(webTranslations[L]);
         });
+        if (!hasWebProduct) COURSE_META.push(webMeta);
         renderCourseGrid();
         translate(lang);
         document.querySelectorAll('#courseGrid .reveal').forEach((el) => el.classList.add('is-in'));
