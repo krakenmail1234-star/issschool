@@ -23,7 +23,7 @@ var PRODUCTS = {
 // Configure ONE delivery method before deploying the web app.
 // For Drive, copy the ID from: drive.google.com/file/d/FILE_ID/view
 var PRESENTATION_FILE_ID = '';
-var PRESENTATION_URL = 'https://www.intelektaskola.lv/assets/bezmaksas-ai-celvedis.pptx';
+var PRESENTATION_URL = 'https://www.intelektaskola.lv/assets/bezmaksas-ai-celvedis.pdf';
 
 function doPost(e) {
   try {
@@ -177,19 +177,45 @@ function sendPresentation_(email, name) {
     throw new Error('Configure PRESENTATION_FILE_ID or PRESENTATION_URL before deploying.');
   }
 
-  var hello = name ? ('Sveiki, ' + name + '!') : 'Sveiki!';
-  var text = hello + '\n\n' +
-    'Paldies par interesi! Jūsu prezentācija “Bezmaksas ceļvedis darbībai ar MI” ir gatava.' +
-    (PRESENTATION_FILE_ID ? '\n\nPrezentācija ir pievienota šim e-pastam.' : '') +
-    (PRESENTATION_URL ? '\n\nAtvērt prezentāciju: ' + PRESENTATION_URL : '') + '\n\n' +
+  var text = 'Labdien!\n\n' +
+    'Paldies par Jūsu interesi par mākslīgā intelekta iespējām.\n\n' +
+    'Nosūtām Jums bezmaksas ceļvedi par mākslīgā intelekta izmantošanu, kurā apkopota praktiska informācija un ieteikumi, kas var palīdzēt labāk izprast MI sniegtās iespējas un tā pielietojumu ikdienā.\n\n' +
+    'Ja ceļveža iepazīšanas laikā rodas jautājumi vai vēlaties uzzināt, kā mākslīgo intelektu un dažādus MI rīkus iespējams izmantot tieši Jūsu ikdienas darbā, ar prieku palīdzēsim.\n\n' +
+    'Droši rakstiet mums, aprakstot savas vajadzības vai uzdevumus, kurus vēlētos atvieglot ar mākslīgā intelekta palīdzību, un mēs ieteiksim piemērotākos risinājumus.\n\n' +
     'Ar cieņu,\n' + BRAND + '\n' + NOTIFY_TO + '\n' + SITE;
   var options = {
     name: BRAND,
     replyTo: NOTIFY_TO,
-    htmlBody: emailHtml_(hello, 'Paldies par interesi! Jūsu bezmaksas AI prezentācija ir gatava.', PRESENTATION_URL)
+    htmlBody: guideEmailHtml_(),
+    attachments: [presentationBlob_()]
   };
-  if (PRESENTATION_FILE_ID) options.attachments = [DriveApp.getFileById(PRESENTATION_FILE_ID).getBlob()];
-  GmailApp.sendEmail(email, 'Jūsu bezmaksas AI prezentācija — ' + BRAND, text, options);
+  GmailApp.sendEmail(email, 'Jūsu bezmaksas ceļvedis par mākslīgo intelektu — ' + BRAND, text, options);
+}
+
+function presentationBlob_() {
+  var blob;
+  if (PRESENTATION_FILE_ID) {
+    blob = DriveApp.getFileById(PRESENTATION_FILE_ID).getBlob();
+  } else {
+    var response = UrlFetchApp.fetch(PRESENTATION_URL, { followRedirects: true, muteHttpExceptions: true });
+    if (response.getResponseCode() < 200 || response.getResponseCode() >= 300) {
+      throw new Error('Could not download the guide attachment. HTTP ' + response.getResponseCode());
+    }
+    blob = response.getBlob();
+  }
+  return blob.setName('bezmaksas-ai-celvedis.pdf');
+}
+
+function guideEmailHtml_() {
+  return '<div style="font-family:Arial,sans-serif;max-width:640px;margin:auto;color:#111827;line-height:1.65">' +
+    '<h2 style="color:#2563eb">' + BRAND + '</h2>' +
+    '<p><strong>Labdien!</strong></p>' +
+    '<p>Paldies par Jūsu interesi par mākslīgā intelekta iespējām.</p>' +
+    '<p>Nosūtām Jums bezmaksas ceļvedi par mākslīgā intelekta izmantošanu, kurā apkopota praktiska informācija un ieteikumi, kas var palīdzēt labāk izprast MI sniegtās iespējas un tā pielietojumu ikdienā.</p>' +
+    '<p>Ja ceļveža iepazīšanas laikā rodas jautājumi vai vēlaties uzzināt, kā mākslīgo intelektu un dažādus MI rīkus iespējams izmantot tieši Jūsu ikdienas darbā, ar prieku palīdzēsim.</p>' +
+    '<p>Droši rakstiet mums, aprakstot savas vajadzības vai uzdevumus, kurus vēlētos atvieglot ar mākslīgā intelekta palīdzību, un mēs ieteiksim piemērotākos risinājumus.</p>' +
+    '<p>Ceļvedis ir pievienots šim e-pastam PDF formātā.</p>' +
+    '<p>Ar cieņu,<br><strong>' + BRAND + '</strong><br><a href="mailto:' + NOTIFY_TO + '">' + NOTIFY_TO + '</a><br><a href="' + SITE + '">' + SITE + '</a></p></div>';
 }
 
 function sendApplicationConfirmation_(email, name) {
