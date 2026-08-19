@@ -28,7 +28,7 @@ var PRESENTATION_URL = 'https://www.intelektaskola.lv/assets/bezmaksas-ai-celved
 function doPost(e) {
   try {
     var data = parseRequest_(e);
-    var type = ['contact', 'apply', 'guide', 'invoice'].indexOf(String(data.type)) >= 0 ? String(data.type) : 'contact';
+    var type = ['contact', 'apply', 'guide', 'invoice', 'web'].indexOf(String(data.type)) >= 0 ? String(data.type) : 'contact';
     var name = clean_(data.name, 120);
     var surname = clean_(data.surname, 120);
     var email = clean_(data.email, 200);
@@ -52,6 +52,7 @@ function doPost(e) {
     // Gmail sends an automatic response to the person who completed the form.
     if (type === 'guide') sendPresentation_(email, name);
     else if (type === 'apply') sendApplicationConfirmation_(email, name);
+    else if (type === 'web') sendWebConfirmation_(email, name);
     else sendContactConfirmation_(email, name);
 
     return json_({ ok: true, confirmationSent: true });
@@ -234,9 +235,18 @@ function sendContactConfirmation_(email, name) {
     { name: BRAND, replyTo: NOTIFY_TO, htmlBody: emailHtml_(hello, message, '') });
 }
 
+function sendWebConfirmation_(email, name) {
+  var hello = name ? ('Labdien, ' + name + '!') : 'Labdien!';
+  var message = 'Paldies! Esam saņēmuši Jūsu WEB risinājuma pieteikumu. Izvērtēsim norādīto mājaslapas mērķi, veidu, funkcijas, platformu, budžetu un termiņu, un sazināsimies ar Jums par piemērotāko risinājumu un izmaksām.';
+  GmailApp.sendEmail(email, 'Jūsu WEB risinājuma pieteikums ir saņemts — ' + BRAND,
+    hello + '\n\n' + message + '\n\nAr cieņu,\n' + BRAND + '\n' + NOTIFY_TO + '\n' + SITE,
+    { name: BRAND, replyTo: NOTIFY_TO, htmlBody: emailHtml_(hello, message, '') });
+}
+
 function notificationSubject_(type, who) {
   if (type === 'guide') return 'Jauns AI prezentācijas pieprasījums — ' + who;
   if (type === 'apply') return 'Jauns pieteikums apmācībām — ' + who;
+  if (type === 'web') return 'Jauns WEB risinājuma pieteikums — ' + who;
   return 'Jauns kontaktpieprasījums — ' + who;
 }
 
