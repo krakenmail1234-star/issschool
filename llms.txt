@@ -1,6 +1,6 @@
 # Intelekta Skola
 
-> SIA Intelekta Skola is an AI training and consulting company based in Riga, Latvia, serving both individuals (courses, mentoring, self-study guides) and businesses (AI strategy consulting, custom chatbots, document-processing agents, marketing content tools, data analysis/forecasting, and a social media automation service).
+> SIA Intelekta Skola is an AI training, consulting, and web solutions company based in Riga, Latvia, serving both individuals (courses, mentoring, self-study guides) and businesses (website development, AI strategy consulting, custom chatbots, document-processing agents, marketing content tools, data analysis/forecasting, and social media automation).
 
 Intelekta Skola is registered in Latvia (Reg. No. 40203747500, VAT LV40203747500) and based at Akmeņu iela 21B, Rīga, LV-1048, Latvia. Contact: info@intelektaskola.lv, +371 20 771 001, WhatsApp https://wa.me/37120771001. The site is available in Latvian (primary), English, and Russian via a language switcher.
 
@@ -13,6 +13,7 @@ Intelekta Skola is registered in Latvia (Reg. No. 40203747500, VAT LV40203747500
 
 ## Products — business AI solutions (companies)
 
+- [WEB risinājumi un mājaslapu izveide (WEB Solutions & Website Development)](https://www.intelektaskola.lv/produkti/web-risinajumi.html): Website creation, redesign, and improvement with Wix, WordPress, Shopify, or a custom-built and hosted solution. Development from €700; the final quote depends on scope, features, languages, and integrations.
 - [AI ieviešanas konsultācijas (AI Implementation Consulting)](https://www.intelektaskola.lv/produkti/ai-konsultacijas.html): AI opportunity audits and team workshops. Entry consultation from €200; full audit €1000–€5000; workshop €500–€2000. Aimed at construction, manufacturing, and logistics companies deciding where to start with AI.
 - [Biznesa gadījuma izpēte un ROI aprēķins (Business Case & ROI Analysis)](https://www.intelektaskola.lv/produkti/biznesa-case-roi.html): A numbers-based business case and ROI calculation for AI investments, used for leadership buy-in and grant applications (e.g. LIAA). From €200 entry consultation; full analysis €1500–€4000.
 - [AI čatboti biznesam (AI Chatbots for Business)](https://www.intelektaskola.lv/produkti/ai-chatboti.html): Custom AI chatbots for customer service, order handling, or internal support, trained on the client's own data. From €200 entry consultation; custom chatbot from €5000.

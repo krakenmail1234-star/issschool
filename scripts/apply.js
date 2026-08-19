@@ -10,6 +10,12 @@
     en: { title: 'Apply for training', sub: 'Leave your contact details and a short message — we will get back to you.', name: 'Name', surname: 'Surname', email: 'Email', message: 'Message', send: 'Send application', sending: 'Sending…', namePh: 'Your name', surnamePh: 'Your surname', emailPh: 'you@company.com', messagePh: 'What would you like to apply for?', success: 'Thank you! Your application has been sent. We will be in touch soon.' },
     ru: { title: 'Записаться на обучение', sub: 'Оставьте контактные данные и короткое сообщение — мы свяжемся с вами.', name: 'Имя', surname: 'Фамилия', email: 'Эл. почта', message: 'Сообщение', send: 'Отправить заявку', sending: 'Отправка…', namePh: 'Ваше имя', surnamePh: 'Ваша фамилия', emailPh: 'you@company.com', messagePh: 'На что хотите записаться?', success: 'Спасибо! Ваша заявка отправлена. Мы скоро свяжемся с вами.' },
   };
+  var WEB = {
+    lv: { title: 'WEB risinājuma pieteikums', sub: 'Apraksti vēlamo mājaslapu vai esošās vietnes uzlabojumus — sagatavosim izmaksu piedāvājumu.', messagePh: 'Platforma, lapu skaits, valodas, funkcijas un vēlamais termiņš', send: 'Saņemt izmaksu piedāvājumu', success: 'Paldies! WEB risinājuma pieteikums ir nosūtīts. Sazināsimies, lai precizētu apjomu un cenu.' },
+    en: { title: 'WEB solution enquiry', sub: 'Describe the website you need or improvements to your existing site — we will prepare a quote.', messagePh: 'Platform, number of pages, languages, features and preferred deadline', send: 'Request a quote', success: 'Thank you! Your WEB solution enquiry has been sent. We will contact you to confirm scope and pricing.' },
+    ru: { title: 'Заявка на WEB-решение', sub: 'Опишите нужный сайт или улучшения существующего — мы подготовим расчёт стоимости.', messagePh: 'Платформа, количество страниц, языки, функции и желаемый срок', send: 'Получить расчёт', success: 'Спасибо! Заявка на WEB-решение отправлена. Мы свяжемся с вами для уточнения объёма и цены.' },
+  };
+  var currentContext = '';
   function lang() { var l = localStorage.getItem('is_lang') || 'lv'; return T[l] ? l : 'lv'; }
 
   // Build modal once
@@ -43,13 +49,14 @@
 
   var $ = function (s) { return modal.querySelector(s); };
   function fill() {
-    var d = T[lang()];
+    var activeLang = lang();
+    var d = Object.assign({}, T[activeLang], currentContext === 'web' ? WEB[activeLang] : {});
     modal.querySelectorAll('[data-a]').forEach(function (el) { el.textContent = d[el.getAttribute('data-a')]; });
     $('#apName').placeholder = d.namePh; $('#apSurname').placeholder = d.surnamePh;
     $('#apEmail').placeholder = d.emailPh; $('#apMsg').placeholder = d.messagePh;
     $('#apSend').textContent = d.send;
   }
-  function open() { fill(); $('#applySuccess').classList.add('hidden'); modal.classList.add('is-open'); modal.style.display = 'flex'; }
+  function open(trigger) { currentContext = trigger && trigger.dataset ? (trigger.dataset.applyContext || '') : ''; fill(); $('#applySuccess').classList.add('hidden'); modal.classList.add('is-open'); modal.style.display = 'flex'; }
   function close() { modal.classList.remove('is-open'); modal.style.display = 'none'; }
 
   $('[data-apply-close]').addEventListener('click', close);
@@ -58,19 +65,22 @@
 
   // Wire every [data-apply] trigger
   document.querySelectorAll('[data-apply]').forEach(function (el) {
-    el.addEventListener('click', function (e) { e.preventDefault(); open(); });
+    el.addEventListener('click', function (e) { e.preventDefault(); open(el); });
   });
 
   $('#applyForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    var d = T[lang()];
+    var activeLang = lang();
+    var d = Object.assign({}, T[activeLang], currentContext === 'web' ? WEB[activeLang] : {});
     var name = $('#apName').value.trim();
     var surname = $('#apSurname').value.trim();
     var email = $('#apEmail').value.trim();
     var message = $('#apMsg').value.trim();
     var btn = $('#apSend'); btn.disabled = true; btn.textContent = d.sending;
     var sender = window.ISsendForm || function () { return Promise.resolve(false); };
-    sender({ type: 'apply', name: name, surname: surname, email: email, message: message }).then(function (sent) {
+    var isWeb = currentContext === 'web';
+    var outboundMessage = isWeb ? 'WEB risinājuma pieteikums\n\n' + message : message;
+    sender({ type: isWeb ? 'contact' : 'apply', name: name, surname: surname, email: email, message: outboundMessage }).then(function (sent) {
       if (sent) {
         $('#applyForm').reset();
         $('#applySuccess').textContent = d.success;
@@ -78,7 +88,7 @@
         btn.disabled = false; btn.textContent = d.send;
         setTimeout(close, 2600);
       } else {
-        var subject = encodeURIComponent('Pieteikums apmācībām — ' + (name + ' ' + surname).trim());
+        var subject = encodeURIComponent((isWeb ? 'WEB risinājuma pieteikums — ' : 'Pieteikums apmācībām — ') + (name + ' ' + surname).trim());
         var body = encodeURIComponent(d.name + ': ' + name + '\n' + d.surname + ': ' + surname + '\n' + d.email + ': ' + email + '\n\n' + message);
         window.location.href = 'mailto:info@intelektaskola.lv?subject=' + subject + '&body=' + body;
         btn.disabled = false; btn.textContent = d.send;
