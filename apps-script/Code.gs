@@ -37,6 +37,8 @@ function doPost(e) {
     var type = ['contact', 'apply', 'guide', 'invoice', 'web'].indexOf(String(data.type)) >= 0 ? String(data.type) : 'contact';
     var name = clean_(data.name, 120);
     var surname = clean_(data.surname, 120);
+    var phone = clean_(data.phone, 80);
+    var interest = clean_(data.interest, 160);
     var email = clean_(data.email, 200);
     var message = clean_(data.message, 5000);
     var fullName = (name + ' ' + surname).trim();
@@ -51,12 +53,12 @@ function doPost(e) {
     GmailApp.sendEmail(
       NOTIFY_TO,
       notificationSubject_(type, fullName || email),
-      notificationBody_(type, name, surname, email, message),
+      notificationBody_(type, name, surname, phone, email, interest, message),
       { name: BRAND + ' (vietne)', replyTo: email }
     );
 
     // Gmail sends an automatic response to the person who completed the form.
-    if (type === 'guide') sendPresentation_(email, name);
+    if (type === 'guide') sendPresentation_(email, fullName || name);
     else if (type === 'apply') sendApplicationConfirmation_(email, name);
     else if (type === 'web') sendWebConfirmation_(email, name);
     else sendContactConfirmation_(email, name);
@@ -180,11 +182,12 @@ function roundMoney_(value) { return Math.round(value * 100) / 100; }
 function formatMoney_(value) { return Number(value).toFixed(2).replace('.', ',') + ' EUR'; }
 
 function sendPresentation_(email, name) {
-  if (!PRESENTATION_FILE_ID && !PRESENTATION_URL) {
-    throw new Error('Configure PRESENTATION_FILE_ID or PRESENTATION_URL before deploying.');
+  if (!PRESENTATION_URL) {
+    throw new Error('Configure PRESENTATION_URL before deploying.');
   }
 
-  var text = 'Labdien!\n\n' +
+  var hello = name ? ('Labdien, ' + name + '!') : 'Labdien!';
+  var text = hello + '\n\n' +
     'Paldies par Jūsu interesi par mākslīgā intelekta iespējām.\n\n' +
     'Nosūtām Jums bezmaksas ceļvedi par mākslīgā intelekta izmantošanu, kurā apkopota praktiska informācija un ieteikumi, kas var palīdzēt labāk izprast MI sniegtās iespējas un tā pielietojumu ikdienā.\n\n' +
     'Ja ceļveža iepazīšanas laikā rodas jautājumi vai vēlaties uzzināt, kā mākslīgo intelektu un dažādus MI rīkus iespējams izmantot tieši Jūsu ikdienas darbā, ar prieku palīdzēsim.\n\n' +
@@ -193,7 +196,7 @@ function sendPresentation_(email, name) {
   var options = {
     name: BRAND,
     replyTo: NOTIFY_TO,
-    htmlBody: guideEmailHtml_(),
+    htmlBody: guideEmailHtml_(name),
     attachments: [presentationBlob_()]
   };
   GmailApp.sendEmail(email, 'Jūsu bezmaksas ceļvedis par mākslīgo intelektu — ' + BRAND, text, options);
@@ -207,10 +210,11 @@ function presentationBlob_() {
   return response.getBlob().setName('bezmaksas-ai-celvedis.pdf');
 }
 
-function guideEmailHtml_() {
+function guideEmailHtml_(name) {
+  var hello = name ? ('Labdien, ' + name + '!') : 'Labdien!';
   return '<div style="font-family:Arial,sans-serif;max-width:640px;margin:auto;color:#111827;line-height:1.65">' +
     '<h2 style="color:#2563eb">' + BRAND + '</h2>' +
-    '<p><strong>Labdien!</strong></p>' +
+    '<p><strong>' + escapeHtml_(hello) + '</strong></p>' +
     '<p>Paldies par Jūsu interesi par mākslīgā intelekta iespējām.</p>' +
     '<p>Nosūtām Jums bezmaksas ceļvedi par mākslīgā intelekta izmantošanu, kurā apkopota praktiska informācija un ieteikumi, kas var palīdzēt labāk izprast MI sniegtās iespējas un tā pielietojumu ikdienā.</p>' +
     '<p>Ja ceļveža iepazīšanas laikā rodas jautājumi vai vēlaties uzzināt, kā mākslīgo intelektu un dažādus MI rīkus iespējams izmantot tieši Jūsu ikdienas darbā, ar prieku palīdzēsim.</p>' +
@@ -250,9 +254,11 @@ function notificationSubject_(type, who) {
   return 'Jauns kontaktpieprasījums — ' + who;
 }
 
-function notificationBody_(type, name, surname, email, message) {
+function notificationBody_(type, name, surname, phone, email, interest, message) {
   return 'Tips: ' + type + '\nVārds: ' + name + '\n' +
-    (surname ? ('Uzvārds: ' + surname + '\n') : '') + 'E-pasts: ' + email + '\n' +
+    (surname ? ('Uzvārds: ' + surname + '\n') : '') +
+    (phone ? ('Tālrunis: ' + phone + '\n') : '') + 'E-pasts: ' + email + '\n' +
+    (interest ? ('Interesē: ' + interest + '\n') : '') +
     (message ? ('\nZiņa:\n' + message + '\n') : '') + '\n— Nosūtīts no ' + SITE;
 }
 

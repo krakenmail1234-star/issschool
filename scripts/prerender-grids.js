@@ -95,6 +95,7 @@ function courseGridHTML() {
       ${m.featured ? `<div class="mb-2 inline-block rounded-full bg-brand/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-electric" data-i18n="courses.items.${i}.badge">${esc(item.badge || '')}</div>` : ''}
       <h3 class="text-xl font-bold" data-i18n="courses.items.${i}.title">${esc(item.title)}</h3>
       <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="courses.items.${i}.desc">${esc(item.desc)}</p>
+      ${m.price ? `<p class="mt-4 text-lg font-extrabold text-white">${esc(m.price)}</p>` : ''}
       <a href="${m.href}" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-electric hover:text-brandlt">
         <span data-i18n="courses.items.${i}.cta">${esc(item.cta)}</span> <span aria-hidden="true">→</span>
       </a>

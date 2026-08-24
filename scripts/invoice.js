@@ -12,17 +12,17 @@
 
   var COPY = {
     lv: {
-      stripe: 'Maksāt ar karti', invoice: 'Saņemt rēķinu', title: 'Saņemt rēķinu e-pastā', intro: 'Aizpildi rēķina saņēmēja datus. Rēķins ar bankas rekvizītiem un unikālu maksājuma mērķi tiks nosūtīts uz tavu e-pastu.',
+      stripe: 'Maksāt ar karti', invoice: 'Saņemt rēķinu', merchant: 'PAY', merchantSoon: 'Tiešais PAY maksājums būs pieejams, kad tiks pievienota tirgotāja saite.', title: 'Saņemt rēķinu e-pastā', intro: 'Aizpildi rēķina saņēmēja datus. Rēķins ar bankas rekvizītiem un unikālu maksājuma mērķi tiks nosūtīts uz tavu e-pastu.',
       recipient: 'Rēķina saņēmējs', recipientPh: 'Vārds, uzvārds vai uzņēmuma nosaukums', email: 'E-pasts', reg: 'Reģistrācijas numurs', vat: 'PVN numurs', address: 'Juridiskā vai deklarētā adrese', addressPh: 'Iela, pilsēta, pasta indekss, valsts',
       optional: 'nav obligāts', send: 'Izveidot un nosūtīt rēķinu', cancel: 'Atcelt', sending: 'Veidojam rēķinu…', sent: 'Rēķins ir izveidots un nosūtīts uz norādīto e-pastu.', error: 'Rēķinu neizdevās nosūtīt. Raksti info@intelektaskola.lv.', note: 'Rēķina numurs tiek piešķirts automātiski formātā INV_ONLINE#numurs/mēnesis/gads.'
     },
     en: {
-      stripe: 'Pay by card', invoice: 'Request invoice', title: 'Receive an invoice by email', intro: 'Enter the billing details. An invoice with bank details and a unique payment reference will be emailed to you.',
+      stripe: 'Pay by card', invoice: 'Request invoice', merchant: 'PAY', merchantSoon: 'Direct PAY checkout will be enabled when the merchant link is available.', title: 'Receive an invoice by email', intro: 'Enter the billing details. An invoice with bank details and a unique payment reference will be emailed to you.',
       recipient: 'Invoice recipient', recipientPh: 'Full name or legal company name', email: 'Email', reg: 'Registration number', vat: 'VAT number', address: 'Legal or declared address', addressPh: 'Street, city, postal code, country',
       optional: 'optional', send: 'Create and email invoice', cancel: 'Cancel', sending: 'Creating invoice…', sent: 'The invoice has been created and sent to the email provided.', error: 'The invoice could not be sent. Email info@intelektaskola.lv.', note: 'Invoice numbers are assigned automatically as INV_ONLINE#number/month/year.'
     },
     ru: {
-      stripe: 'Оплатить картой', invoice: 'Получить счёт', title: 'Получить счёт по электронной почте', intro: 'Укажите данные получателя. Счёт с банковскими реквизитами и уникальным назначением платежа будет отправлен на вашу почту.',
+      stripe: 'Оплатить картой', invoice: 'Получить счёт', merchant: 'PAY', merchantSoon: 'Прямая оплата PAY станет доступна после добавления ссылки продавца.', title: 'Получить счёт по электронной почте', intro: 'Укажите данные получателя. Счёт с банковскими реквизитами и уникальным назначением платежа будет отправлен на вашу почту.',
       recipient: 'Получатель счёта', recipientPh: 'Имя и фамилия или название компании', email: 'Эл. почта', reg: 'Регистрационный номер', vat: 'Номер НДС', address: 'Юридический или декларированный адрес', addressPh: 'Улица, город, индекс, страна',
       optional: 'необязательно', send: 'Создать и отправить счёт', cancel: 'Отмена', sending: 'Создаём счёт…', sent: 'Счёт создан и отправлен на указанный адрес.', error: 'Не удалось отправить счёт. Напишите info@intelektaskola.lv.', note: 'Номер присваивается автоматически: INV_ONLINE#номер/месяц/год.'
     }
@@ -112,6 +112,14 @@
       button.setAttribute('aria-label', d.invoice + ' — ' + product.name);
       button.addEventListener('click', function () { openModal(product); });
       stripe.insertAdjacentElement('afterend', button);
+      var merchant = document.createElement('button');
+      merchant.type = 'button';
+      merchant.disabled = true;
+      merchant.className = 'mt-6 ml-3 inline-flex cursor-not-allowed items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-bold text-zinc-500 opacity-60';
+      merchant.textContent = d.merchant;
+      merchant.title = d.merchantSoon;
+      merchant.setAttribute('aria-label', d.merchant + ' — ' + d.merchantSoon + ' — ' + product.name);
+      button.insertAdjacentElement('afterend', merchant);
     });
   }
 

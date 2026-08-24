@@ -94,7 +94,7 @@
       guide: {
         badge: 'Bezmaksas dāvana', title: 'Saņem bezmaksas MI ceļvedi',
         sub: '“Bezmaksas ceļvedis darbībai ar MI” — praktiska 11 slaidu prezentācija latviešu valodā. Ievadi e-pastu, un nosūtīsim to tev.',
-        namePh: 'Tavs vārds', emailPh: 'E-pasta adrese', button: 'Saņemt ceļvedi', skip: 'Varbūt vēlāk',
+        namePh: 'Vārds', surnamePh: 'Uzvārds', phonePh: 'Tālrunis ar valsts kodu, piem. +371 20771001', emailPh: 'E-pasta adrese', interest: 'Ko Jūs meklējat?', choose: 'Izvēlieties pakalpojumu', interestWeb: 'WEB risinājumi', interestAi: 'AI apmācības', interestChatbots: 'Čatboti', interestBusiness: 'Biznesa apmācības', interestOther: 'Cits', button: 'Saņemt ceļvedi', skip: 'Varbūt vēlāk',
         privacy: 'Bez surogātpasta. Atrakstīšanās jebkurā laikā.', subject: 'Bezmaksas AI ceļveža pieprasījums',
         success: 'Paldies! Pārbaudi savu e-pastu — prezentācija ir nosūtīta.',
       },
@@ -175,7 +175,7 @@
       guide: {
         badge: 'Free gift', title: 'Get the free AI guide',
         sub: '“A Free Guide to Working with AI” — a practical 11-slide presentation in Latvian. Enter your email and we will send it to you.',
-        namePh: 'Your name', emailPh: 'Email address', button: 'Send me the guide', skip: 'Maybe later',
+        namePh: 'Name', surnamePh: 'Surname', phonePh: 'Phone with country code, e.g. +371 20771001', emailPh: 'Email address', interest: 'What are you looking for?', choose: 'Choose a service', interestWeb: 'WEB solutions', interestAi: 'AI training', interestChatbots: 'Chatbots', interestBusiness: 'Business training', interestOther: 'Other', button: 'Send me the guide', skip: 'Maybe later',
         privacy: 'No spam. Unsubscribe anytime.', subject: 'Free AI guide request',
         success: 'Thank you! Check your email — the presentation has been sent.',
       },
@@ -256,7 +256,7 @@
       guide: {
         badge: 'Бесплатный подарок', title: 'Получите бесплатный гид по ИИ',
         sub: '«Бесплатный гид по работе с ИИ» — практическая презентация из 11 слайдов на латышском языке. Введите эл. почту, и мы пришлём её.',
-        namePh: 'Ваше имя', emailPh: 'Адрес эл. почты', button: 'Прислать гид', skip: 'Может, позже',
+        namePh: 'Имя', surnamePh: 'Фамилия', phonePh: 'Телефон с кодом страны, напр. +371 20771001', emailPh: 'Адрес эл. почты', interest: 'Что вас интересует?', choose: 'Выберите услугу', interestWeb: 'WEB-решения', interestAi: 'Обучение ИИ', interestChatbots: 'Чатботы', interestBusiness: 'Бизнес-обучение', interestOther: 'Другое', button: 'Прислать гид', skip: 'Может, позже',
         privacy: 'Без спама. Отписка в любой момент.', subject: 'Запрос бесплатного гида по ИИ',
         success: 'Спасибо! Проверьте почту — презентация отправлена.',
       },
@@ -286,12 +286,12 @@
   // language-independent config per card (icons, links, flags).
   // `let` so the Sanity CMS loader can replace it with editable content.
   let COURSE_META = [
-    { icon: 'rocket', href: STRIPE_MAIN },          // AI ieviešana
-    { icon: 'chat', href: STRIPE_CHATGPT },          // ChatGPT un LLM meistarība
-    { icon: 'bolt', href: STRIPE_AUTOMATION },        // AI automatizācija sociālajiem tīkliem
-    { icon: 'user', href: STRIPE_INDIVIDUAL, featured: true }, // Individuālais AI kurss
-    { icon: 'sparkle', href: STRIPE_PROMPT },         // Promptu inženierija
-    { icon: 'briefcase', href: './produkti/web-risinajumi.html', featured: true }, // WEB risinājumi
+    { icon: 'rocket', href: STRIPE_MAIN, price: '€20' },          // AI ieviešana
+    { icon: 'chat', href: STRIPE_CHATGPT, price: '€500' },          // ChatGPT un LLM meistarība
+    { icon: 'bolt', href: STRIPE_AUTOMATION, price: '€236,88' },        // AI automatizācija sociālajiem tīkliem
+    { icon: 'user', href: STRIPE_INDIVIDUAL, price: '€150', featured: true }, // Individuālais AI kurss
+    { icon: 'sparkle', href: STRIPE_PROMPT, price: '€159' },         // Promptu inženierija
+    { icon: 'briefcase', href: './produkti/web-risinajumi.html', price: '€700+', featured: true }, // WEB risinājumi
   ];
   const TOOL_META = [
     { icon: 'target', href: null },
@@ -312,6 +312,7 @@
       ${m.featured ? `<div class="mb-2 inline-block rounded-full bg-brand/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-electric" data-i18n="courses.items.${i}.badge"></div>` : ''}
       <h3 class="text-xl font-bold" data-i18n="courses.items.${i}.title"></h3>
       <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="courses.items.${i}.desc"></p>
+      ${m.price ? `<p class="mt-4 text-lg font-extrabold text-white">${m.price}</p>` : ''}
       <a href="${m.href}" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-electric hover:text-brandlt">
         <span data-i18n="courses.items.${i}.cta"></span> <span aria-hidden="true">→</span>
       </a>
@@ -502,13 +503,16 @@
       e.preventDefault();
       const d = T[lang].guide;
       const name = $('#guideName').value.trim();
+      const surname = $('#guideSurname').value.trim();
+      const phone = $('#guidePhone').value.trim();
       const email = $('#guideEmail').value.trim();
+      const interest = $('#guideInterest').value;
       localStorage.setItem('is_guide_seen', '1');
       const success = $('#guideSuccess');
       const submit = e.target.querySelector('button[type="submit"]');
       success.classList.add('hidden');
       if (submit) submit.disabled = true;
-      const send = (window.ISsendForm || (() => Promise.resolve(false)))({ type: 'guide', name, email, lang });
+      const send = (window.ISsendForm || (() => Promise.resolve(false)))({ type: 'guide', name, surname, phone, email, interest, lang });
       send.then((sent) => {
         if (sent) {
           success.classList.remove('hidden');
@@ -516,7 +520,7 @@
         } else {
           if (submit) submit.disabled = false;
           const subject = encodeURIComponent(d.subject);
-          const body = encodeURIComponent(`${name}\n${email}`);
+          const body = encodeURIComponent(`${name} ${surname}\n${phone}\n${email}\n${interest}`);
           setTimeout(() => { window.location.href = `mailto:info@intelektaskola.lv?subject=${subject}&body=${body}`; }, 600);
         }
       });
@@ -531,7 +535,7 @@
     const SANITY = { projectId: 'eanw34a4', dataset: 'production', apiVersion: '2023-01-01' };
     const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
     const groq =
-      '*[_type=="course"]|order(order asc){order,icon,stripeUrl,featured,titleLv,titleEn,titleRu,descLv,descEn,descRu,ctaLv,ctaEn,ctaRu,badgeLv,badgeEn,badgeRu}';
+      '*[_type=="course"]|order(order asc){order,icon,stripeUrl,price,featured,titleLv,titleEn,titleRu,descLv,descEn,descRu,ctaLv,ctaEn,ctaRu,badgeLv,badgeEn,badgeRu}';
     const url = `https://${SANITY.projectId}.apicdn.sanity.io/v${SANITY.apiVersion}/data/query/${SANITY.dataset}?query=${encodeURIComponent(groq)}`;
     fetch(url)
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
@@ -543,7 +547,8 @@
           ['lv', 'en', 'ru'].map((L) => [L, T[L].courses.items[T[L].courses.items.length - 1]])
         );
         const hasWebProduct = items.some((c) => String(c.stripeUrl || '').includes('produkti/web-risinajumi'));
-        COURSE_META = items.map((c) => ({ icon: c.icon || 'sparkle', href: c.stripeUrl || STRIPE_MAIN, featured: !!c.featured }));
+        const knownPrices = Object.fromEntries(COURSE_META.map((course) => [course.href, course.price]));
+        COURSE_META = items.map((c) => ({ icon: c.icon || 'sparkle', href: c.stripeUrl || STRIPE_MAIN, price: c.price || knownPrices[c.stripeUrl || STRIPE_MAIN] || '', featured: !!c.featured }));
         ['lv', 'en', 'ru'].forEach((L) => {
           const C = cap(L);
           const fallbackCta = (T[L].courses.items[0] && T[L].courses.items[0].cta) || 'Pieteikties';

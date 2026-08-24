@@ -32,7 +32,7 @@ const MAIL_FROM = process.env.MAIL_FROM || 'Intelekta Skola <info@intelektaskola
 const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MAX = { name: 120, surname: 120, email: 200, message: 5000 };
+const MAX = { name: 120, surname: 120, phone: 80, interest: 160, email: 200, message: 5000 };
 
 /* ------------------------------ helpers ------------------------------ */
 
@@ -124,7 +124,9 @@ function notifyEmail(d) {
     ['Tips', d.type],
     ['Vārds', d.name],
     d.surname ? ['Uzvārds', d.surname] : null,
+    d.phone ? ['Tālrunis', d.phone] : null,
     ['E-pasts', d.email],
+    d.interest ? ['Interesē', d.interest] : null,
     d.lang ? ['Valoda', d.lang] : null,
     d.message ? ['Ziņa', d.message] : null,
   ].filter(Boolean);
@@ -230,6 +232,8 @@ module.exports = async function handler(req, res) {
   const type = ['contact', 'apply', 'guide'].indexOf(String(data.type)) >= 0 ? String(data.type) : 'contact';
   const name = clamp(data.name, MAX.name);
   const surname = clamp(data.surname, MAX.surname);
+  const phone = clamp(data.phone, MAX.phone);
+  const interest = clamp(data.interest, MAX.interest);
   const email = clamp(data.email, MAX.email);
   const message = clamp(data.message, MAX.message);
   const lang = clamp(data.lang, 8);
@@ -248,7 +252,7 @@ module.exports = async function handler(req, res) {
   const fullName = (name + ' ' + surname).trim();
   const who = fullName || email;
 
-  const notify = notifyEmail({ type: type, name: name, surname: surname, email: email, message: message, lang: lang, who: who });
+  const notify = notifyEmail({ type: type, name: name, surname: surname, phone: phone, email: email, interest: interest, message: message, lang: lang, who: who });
   const confirm = confirmationEmail({ type: type, name: name });
 
   // 1) Internal notification (critical). replyTo = visitor so staff can reply
