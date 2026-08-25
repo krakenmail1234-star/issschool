@@ -3,6 +3,7 @@
 var NOTIFY_TO = 'info@intelektaskola.lv';
 var BRAND = 'Intelekta Skola';
 var SITE = 'https://www.intelektaskola.lv';
+var CONTACT_PHONE = '+37120771001';
 var SELLER_NAME = 'SIA Intelekta Skola';
 var SELLER_REG = '40203747500';
 var SELLER_VAT = 'LV40203747500';
@@ -192,7 +193,7 @@ function sendPresentation_(email, name) {
     'Nosūtām Jums bezmaksas ceļvedi par mākslīgā intelekta izmantošanu, kurā apkopota praktiska informācija un ieteikumi, kas var palīdzēt labāk izprast MI sniegtās iespējas un tā pielietojumu ikdienā.\n\n' +
     'Ja ceļveža iepazīšanas laikā rodas jautājumi vai vēlaties uzzināt, kā mākslīgo intelektu un dažādus MI rīkus iespējams izmantot tieši Jūsu ikdienas darbā, ar prieku palīdzēsim.\n\n' +
     'Droši rakstiet mums, aprakstot savas vajadzības vai uzdevumus, kurus vēlētos atvieglot ar mākslīgā intelekta palīdzību, un mēs ieteiksim piemērotākos risinājumus.\n\n' +
-    'Ar cieņu,\n' + BRAND + '\n' + NOTIFY_TO + '\n' + SITE;
+    'Ar cieņu,\n' + BRAND + '\n' + CONTACT_PHONE + '\n' + NOTIFY_TO + '\n' + SITE;
   var options = {
     name: BRAND,
     replyTo: NOTIFY_TO,
@@ -220,7 +221,7 @@ function guideEmailHtml_(name) {
     '<p>Ja ceļveža iepazīšanas laikā rodas jautājumi vai vēlaties uzzināt, kā mākslīgo intelektu un dažādus MI rīkus iespējams izmantot tieši Jūsu ikdienas darbā, ar prieku palīdzēsim.</p>' +
     '<p>Droši rakstiet mums, aprakstot savas vajadzības vai uzdevumus, kurus vēlētos atvieglot ar mākslīgā intelekta palīdzību, un mēs ieteiksim piemērotākos risinājumus.</p>' +
     '<p>Ceļvedis ir pievienots šim e-pastam PDF formātā.</p>' +
-    '<p>Ar cieņu,<br><strong>' + BRAND + '</strong><br><a href="mailto:' + NOTIFY_TO + '">' + NOTIFY_TO + '</a><br><a href="' + SITE + '">' + SITE + '</a></p></div>';
+    '<p style="font-family:Arial,sans-serif;font-weight:400">Ar cieņu,<br>' + BRAND + '<br><a href="tel:' + CONTACT_PHONE + '">' + CONTACT_PHONE + '</a><br><a href="mailto:' + NOTIFY_TO + '">' + NOTIFY_TO + '</a><br><a href="' + SITE + '">' + SITE + '</a></p></div>';
 }
 
 function sendApplicationConfirmation_(email, name) {

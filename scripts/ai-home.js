@@ -94,7 +94,7 @@
       guide: {
         badge: 'Bezmaksas dāvana', title: 'Saņem bezmaksas MI ceļvedi',
         sub: '“Bezmaksas ceļvedis darbībai ar MI” — praktiska 11 slaidu prezentācija latviešu valodā. Ievadi e-pastu, un nosūtīsim to tev.',
-        namePh: 'Vārds', surnamePh: 'Uzvārds', phonePh: 'Tālrunis ar valsts kodu, piem. +371 20771001', emailPh: 'E-pasta adrese', interest: 'Ko Jūs meklējat?', choose: 'Izvēlieties pakalpojumu', interestWeb: 'WEB risinājumi', interestAi: 'AI apmācības', interestChatbots: 'Čatboti', interestBusiness: 'Biznesa apmācības', interestOther: 'Cits', button: 'Saņemt ceļvedi', skip: 'Varbūt vēlāk',
+        namePh: 'Vārds', surnamePh: 'Uzvārds', phonePh: 'Tālrunis ar valsts kodu, piem. +37120771001', emailPh: 'E-pasta adrese', interest: 'Ko Jūs meklējat?', choose: 'Izvēlieties pakalpojumu', interestWeb: 'WEB risinājumi', interestAi: 'AI apmācības', interestChatbots: 'Čatboti', interestBusiness: 'Biznesa apmācības', interestOther: 'Cits', button: 'Saņemt ceļvedi', skip: 'Varbūt vēlāk',
         privacy: 'Bez surogātpasta. Atrakstīšanās jebkurā laikā.', subject: 'Bezmaksas AI ceļveža pieprasījums',
         success: 'Paldies! Pārbaudi savu e-pastu — prezentācija ir nosūtīta.',
       },
@@ -175,7 +175,7 @@
       guide: {
         badge: 'Free gift', title: 'Get the free AI guide',
         sub: '“A Free Guide to Working with AI” — a practical 11-slide presentation in Latvian. Enter your email and we will send it to you.',
-        namePh: 'Name', surnamePh: 'Surname', phonePh: 'Phone with country code, e.g. +371 20771001', emailPh: 'Email address', interest: 'What are you looking for?', choose: 'Choose a service', interestWeb: 'WEB solutions', interestAi: 'AI training', interestChatbots: 'Chatbots', interestBusiness: 'Business training', interestOther: 'Other', button: 'Send me the guide', skip: 'Maybe later',
+        namePh: 'Name', surnamePh: 'Surname', phonePh: 'Phone with country code, e.g. +37120771001', emailPh: 'Email address', interest: 'What are you looking for?', choose: 'Choose a service', interestWeb: 'WEB solutions', interestAi: 'AI training', interestChatbots: 'Chatbots', interestBusiness: 'Business training', interestOther: 'Other', button: 'Send me the guide', skip: 'Maybe later',
         privacy: 'No spam. Unsubscribe anytime.', subject: 'Free AI guide request',
         success: 'Thank you! Check your email — the presentation has been sent.',
       },
@@ -256,7 +256,7 @@
       guide: {
         badge: 'Бесплатный подарок', title: 'Получите бесплатный гид по ИИ',
         sub: '«Бесплатный гид по работе с ИИ» — практическая презентация из 11 слайдов на латышском языке. Введите эл. почту, и мы пришлём её.',
-        namePh: 'Имя', surnamePh: 'Фамилия', phonePh: 'Телефон с кодом страны, напр. +371 20771001', emailPh: 'Адрес эл. почты', interest: 'Что вас интересует?', choose: 'Выберите услугу', interestWeb: 'WEB-решения', interestAi: 'Обучение ИИ', interestChatbots: 'Чатботы', interestBusiness: 'Бизнес-обучение', interestOther: 'Другое', button: 'Прислать гид', skip: 'Может, позже',
+        namePh: 'Имя', surnamePh: 'Фамилия', phonePh: 'Телефон с кодом страны, напр. +37120771001', emailPh: 'Адрес эл. почты', interest: 'Что вас интересует?', choose: 'Выберите услугу', interestWeb: 'WEB-решения', interestAi: 'Обучение ИИ', interestChatbots: 'Чатботы', interestBusiness: 'Бизнес-обучение', interestOther: 'Другое', button: 'Прислать гид', skip: 'Может, позже',
         privacy: 'Без спама. Отписка в любой момент.', subject: 'Запрос бесплатного гида по ИИ',
         success: 'Спасибо! Проверьте почту — презентация отправлена.',
       },
