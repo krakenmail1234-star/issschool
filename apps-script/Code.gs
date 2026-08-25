@@ -200,7 +200,9 @@ function sendPresentation_(email, name) {
     htmlBody: guideEmailHtml_(name),
     attachments: [presentationBlob_()]
   };
-  GmailApp.sendEmail(email, 'Jūsu bezmaksas ceļvedis par mākslīgo intelektu — ' + BRAND, text, options);
+  // MailApp sends exactly the supplied body and does not append the Gmail
+  // account's configured signature underneath our branded signature.
+  MailApp.sendEmail(email, 'Jūsu bezmaksas ceļvedis par mākslīgo intelektu — ' + BRAND, text, options);
 }
 
 function presentationBlob_() {
