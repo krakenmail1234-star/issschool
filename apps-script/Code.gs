@@ -51,14 +51,15 @@ function doPost(e) {
     if (type !== 'guide' && !message) return json_({ ok: false, error: 'A message is required.' });
 
     // Every valid form, including "Pieteikties kursam", notifies the school.
-    GmailApp.sendEmail(
+    MailApp.sendEmail(
       NOTIFY_TO,
       notificationSubject_(type, fullName || email),
       notificationBody_(type, name, surname, phone, email, interest, message),
       { name: BRAND + ' (vietne)', replyTo: email }
     );
 
-    // Gmail sends an automatic response to the person who completed the form.
+    // The content-only mail service sends an automatic response to the person
+    // who completed the form without appending the Gmail account signature.
     if (type === 'guide') sendPresentation_(email, fullName || name);
     else if (type === 'apply') sendApplicationConfirmation_(email, name);
     else if (type === 'web') sendWebConfirmation_(email, name);
@@ -99,13 +100,13 @@ function createInvoice_(data, email) {
     email: email
   };
 
-  GmailApp.sendEmail(
+  MailApp.sendEmail(
     email,
     'Rēķins apmaksai ' + details.reference + ' — ' + BRAND,
     invoiceText_(details),
     { name: BRAND, replyTo: NOTIFY_TO, htmlBody: invoiceHtml_(details) }
   );
-  GmailApp.sendEmail(
+  MailApp.sendEmail(
     NOTIFY_TO,
     'Izveidots rēķins ' + details.reference + ' — ' + buyerName,
     invoiceAdminText_(details),
@@ -149,7 +150,7 @@ function getInvoiceStats() {
   return result;
 }
 
-function invoiceText_(d) {
+function invoiceText_(d, includeSignature) {
   return 'RĒĶINS APMAKSAI\n\nNumurs: ' + d.reference + '\nDatums: ' + d.date + '\n\n' +
     'Pakalpojuma sniedzējs:\n' + SELLER_NAME + '\nReģ. nr.: ' + SELLER_REG + '\nPVN nr.: ' + SELLER_VAT + '\n' + SELLER_ADDRESS + '\n\n' +
     'Rēķina saņēmējs:\n' + d.buyerName + '\n' + (d.buyerReg ? 'Reģ. nr.: ' + d.buyerReg + '\n' : '') +
@@ -157,11 +158,13 @@ function invoiceText_(d) {
     'Pakalpojums: ' + d.product.name + '\nSumma bez PVN: ' + formatMoney_(d.net) + '\nPVN 21%: ' + formatMoney_(d.vat) +
     '\nKopā apmaksai: ' + formatMoney_(d.product.gross) + '\n\n' +
     'Saņēmējs: ' + SELLER_NAME + '\nBanka: ' + BANK_NAME + '\nIBAN: ' + BANK_ACCOUNT + '\nBIC/SWIFT: ' + BANK_BIC +
-    '\nMaksājuma mērķis: ' + d.reference + '\n\nPaldies!\n' + BRAND;
+    '\nMaksājuma mērķis: ' + d.reference + '\n\nPaldies!' +
+    (includeSignature === false ? '' : '\n\n' + signatureText_());
 }
 
 function invoiceAdminText_(d) {
-  return invoiceText_(d) + '\n\nKlienta e-pasts: ' + d.email + '\nAutomātiskais kārtas numurs šajā mēnesī: ' + d.sequence;
+  return invoiceText_(d, false) + '\n\nKlienta e-pasts: ' + d.email +
+    '\nAutomātiskais kārtas numurs šajā mēnesī: ' + d.sequence + '\n\n' + signatureText_();
 }
 
 function invoiceHtml_(d) {
@@ -176,11 +179,23 @@ function invoiceHtml_(d) {
     '<tr><td style="text-align:right;padding:8px;border:1px solid #d1d5db">PVN 21%</td><td style="text-align:right;padding:8px;border:1px solid #d1d5db">' + formatMoney_(d.vat) + '</td></tr>' +
     '<tr><td style="text-align:right;padding:10px;border:1px solid #d1d5db"><strong>Kopā apmaksai</strong></td><td style="text-align:right;padding:10px;border:1px solid #d1d5db"><strong>' + formatMoney_(d.product.gross) + '</strong></td></tr></table>' +
     '<div style="margin-top:24px;padding:16px;background:#f3f4f6;border-radius:12px"><strong>Apmaksas rekvizīti</strong><br>Saņēmējs: ' + SELLER_NAME + '<br>Banka: ' + BANK_NAME + '<br>IBAN: <strong>' + BANK_ACCOUNT + '</strong><br>BIC/SWIFT: ' + BANK_BIC + '<br>Maksājuma mērķis: <strong>' + escapeHtml_(d.reference) + '</strong></div>' +
-    '<p>Jautājumu gadījumā rakstiet <a href="mailto:' + NOTIFY_TO + '">' + NOTIFY_TO + '</a>.</p></div>';
+    '<p>Jautājumu gadījumā rakstiet <a href="mailto:' + NOTIFY_TO + '">' + NOTIFY_TO + '</a>.</p>' +
+    signatureHtml_() + '</div>';
 }
 
 function roundMoney_(value) { return Math.round(value * 100) / 100; }
 function formatMoney_(value) { return Number(value).toFixed(2).replace('.', ',') + ' EUR'; }
+
+function signatureText_() {
+  return 'Ar cieņu,\n' + BRAND + '\n' + CONTACT_PHONE + '\n' + NOTIFY_TO + '\n' + SITE;
+}
+
+function signatureHtml_() {
+  return '<p style="font-family:Arial,sans-serif;font-weight:400">Ar cieņu,<br>' + BRAND +
+    '<br><a href="tel:' + CONTACT_PHONE + '">' + CONTACT_PHONE + '</a>' +
+    '<br><a href="mailto:' + NOTIFY_TO + '">' + NOTIFY_TO + '</a>' +
+    '<br><a href="' + SITE + '">' + SITE + '</a></p>';
+}
 
 function sendPresentation_(email, name) {
   if (!PRESENTATION_URL) {
@@ -193,7 +208,7 @@ function sendPresentation_(email, name) {
     'Nosūtām Jums bezmaksas ceļvedi par mākslīgā intelekta izmantošanu, kurā apkopota praktiska informācija un ieteikumi, kas var palīdzēt labāk izprast MI sniegtās iespējas un tā pielietojumu ikdienā.\n\n' +
     'Ja ceļveža iepazīšanas laikā rodas jautājumi vai vēlaties uzzināt, kā mākslīgo intelektu un dažādus MI rīkus iespējams izmantot tieši Jūsu ikdienas darbā, ar prieku palīdzēsim.\n\n' +
     'Droši rakstiet mums, aprakstot savas vajadzības vai uzdevumus, kurus vēlētos atvieglot ar mākslīgā intelekta palīdzību, un mēs ieteiksim piemērotākos risinājumus.\n\n' +
-    'Ar cieņu,\n' + BRAND + '\n' + CONTACT_PHONE + '\n' + NOTIFY_TO + '\n' + SITE;
+    signatureText_();
   var options = {
     name: BRAND,
     replyTo: NOTIFY_TO,
@@ -223,30 +238,30 @@ function guideEmailHtml_(name) {
     '<p>Ja ceļveža iepazīšanas laikā rodas jautājumi vai vēlaties uzzināt, kā mākslīgo intelektu un dažādus MI rīkus iespējams izmantot tieši Jūsu ikdienas darbā, ar prieku palīdzēsim.</p>' +
     '<p>Droši rakstiet mums, aprakstot savas vajadzības vai uzdevumus, kurus vēlētos atvieglot ar mākslīgā intelekta palīdzību, un mēs ieteiksim piemērotākos risinājumus.</p>' +
     '<p>Ceļvedis ir pievienots šim e-pastam PDF formātā.</p>' +
-    '<p style="font-family:Arial,sans-serif;font-weight:400">Ar cieņu,<br>' + BRAND + '<br><a href="tel:' + CONTACT_PHONE + '">' + CONTACT_PHONE + '</a><br><a href="mailto:' + NOTIFY_TO + '">' + NOTIFY_TO + '</a><br><a href="' + SITE + '">' + SITE + '</a></p></div>';
+    signatureHtml_() + '</div>';
 }
 
 function sendApplicationConfirmation_(email, name) {
   var hello = name ? ('Labdien, ' + name + '!') : 'Labdien!';
   var message = 'Paldies! Esam saņēmuši Jūsu pieteikumu apmācībām. Drīzumā sazināsimies ar Jums par piemērotāko kursu un nākamajiem soļiem.';
-  GmailApp.sendEmail(email, 'Jūsu pieteikums ir saņemts — ' + BRAND,
-    hello + '\n\n' + message + '\n\nAr cieņu,\n' + BRAND + '\n' + NOTIFY_TO + '\n' + SITE,
+  MailApp.sendEmail(email, 'Jūsu pieteikums ir saņemts — ' + BRAND,
+    hello + '\n\n' + message + '\n\n' + signatureText_(),
     { name: BRAND, replyTo: NOTIFY_TO, htmlBody: emailHtml_(hello, message, '') });
 }
 
 function sendContactConfirmation_(email, name) {
   var hello = name ? ('Labdien, ' + name + '!') : 'Labdien!';
   var message = 'Paldies, ka sazinājāties ar Intelekta Skolu. Esam saņēmuši Jūsu ziņu un drīzumā atbildēsim.';
-  GmailApp.sendEmail(email, 'Jūsu ziņa ir saņemta — ' + BRAND,
-    hello + '\n\n' + message + '\n\nAr cieņu,\n' + BRAND + '\n' + NOTIFY_TO + '\n' + SITE,
+  MailApp.sendEmail(email, 'Jūsu ziņa ir saņemta — ' + BRAND,
+    hello + '\n\n' + message + '\n\n' + signatureText_(),
     { name: BRAND, replyTo: NOTIFY_TO, htmlBody: emailHtml_(hello, message, '') });
 }
 
 function sendWebConfirmation_(email, name) {
   var hello = name ? ('Labdien, ' + name + '!') : 'Labdien!';
   var message = 'Paldies! Esam saņēmuši Jūsu WEB risinājuma pieteikumu. Izvērtēsim norādīto mājaslapas mērķi, veidu, funkcijas, platformu, budžetu un termiņu, un sazināsimies ar Jums par piemērotāko risinājumu un izmaksām.';
-  GmailApp.sendEmail(email, 'Jūsu WEB risinājuma pieteikums ir saņemts — ' + BRAND,
-    hello + '\n\n' + message + '\n\nAr cieņu,\n' + BRAND + '\n' + NOTIFY_TO + '\n' + SITE,
+  MailApp.sendEmail(email, 'Jūsu WEB risinājuma pieteikums ir saņemts — ' + BRAND,
+    hello + '\n\n' + message + '\n\n' + signatureText_(),
     { name: BRAND, replyTo: NOTIFY_TO, htmlBody: emailHtml_(hello, message, '') });
 }
 
@@ -262,15 +277,14 @@ function notificationBody_(type, name, surname, phone, email, interest, message)
     (surname ? ('Uzvārds: ' + surname + '\n') : '') +
     (phone ? ('Tālrunis: ' + phone + '\n') : '') + 'E-pasts: ' + email + '\n' +
     (interest ? ('Interesē: ' + interest + '\n') : '') +
-    (message ? ('\nZiņa:\n' + message + '\n') : '') + '\n— Nosūtīts no ' + SITE;
+    (message ? ('\nZiņa:\n' + message + '\n') : '') + '\n— Nosūtīts no ' + SITE + '\n\n' + signatureText_();
 }
 
 function emailHtml_(hello, message, url) {
   var link = url ? '<p><a href="' + escapeHtml_(url) + '" style="display:inline-block;padding:12px 20px;border-radius:999px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700">Atvērt prezentāciju</a></p>' : '';
   return '<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#111827;line-height:1.65">' +
     '<h2 style="color:#2563eb">' + BRAND + '</h2><p><strong>' + escapeHtml_(hello) + '</strong></p>' +
-    '<p>' + escapeHtml_(message) + '</p>' + link + '<p>Ar cieņu,<br><strong>' + BRAND + '</strong><br>' +
-    '<a href="mailto:' + NOTIFY_TO + '">' + NOTIFY_TO + '</a></p></div>';
+    '<p>' + escapeHtml_(message) + '</p>' + link + signatureHtml_() + '</div>';
 }
 
 function parseRequest_(e) {
