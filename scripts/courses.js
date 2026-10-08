@@ -1,15 +1,6 @@
-/* Intelekta Skola — bundled default courses.
- * These render only as a fallback until real content exists in the Sanity
- * Studio "Course (homepage card)" type (see studio-intelektask/schemaTypes/course.ts).
- * Once you add courses there, scripts/courses-render.js fetches and renders
- * those instead — no code edit needed for day-to-day changes.
- *
- * To add a course without touching code: open the Studio (studio-intelektask,
- * `npm run dev`), create a "Course (homepage card)" entry, fill in the LV/EN/RU
- * fields, pick an icon, and publish.
- *
- * Icon keys match the Studio's icon picker: rocket, chat, bolt, user, sparkle,
- * target, clock, compass, briefcase, megaphone, pen, gear.
+/* Intelekta Skola — bundled course data.
+ * Icon keys: rocket, chat, bolt, user, sparkle, target, clock, compass,
+ * briefcase, megaphone, pen, gear.
  */
 window.COURSES = [
   {

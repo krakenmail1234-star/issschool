@@ -1,8 +1,5 @@
-/* Intelekta Skola — renders course cards (and their Course schema.org markup)
- * on program.html. Tries the Sanity Studio "course" content first (same CMS
- * the homepage uses — see studio-intelektask/schemaTypes/course.ts) and falls
- * back to the bundled defaults in scripts/courses.js if the CMS has no entries
- * yet or is unreachable. Re-renders on language switch.
+/* Intelekta Skola — renders bundled course cards and Course schema.org markup
+ * on program.html. Re-renders on language switch.
  */
 (function () {
   var ICONS = {
@@ -22,10 +19,6 @@
   var DEFAULT_ICON = ICONS.target;
   var ORG_ID = 'https://www.intelektaskola.lv/#org';
   var PAGE_URL = 'https://www.intelektaskola.lv/program.html';
-  var SANITY = { projectId: 'eanw34a4', dataset: 'production', apiVersion: '2023-01-01' };
-
-  var liveCourses = null; // courses loaded from Sanity, if any
-
   function lang() {
     var l = localStorage.getItem('is_lang') || 'lv';
     return window.PAGE_I18N && window.PAGE_I18N[l] ? l : 'lv';
@@ -36,7 +29,7 @@
   }
 
   function activeCourses() {
-    return liveCourses || window.COURSES || [];
+    return window.COURSES || [];
   }
 
   function cardHTML(c) {
@@ -96,35 +89,9 @@
     renderSchema();
   }
 
-  function loadCMSCourses() {
-    var groq = '*[_type=="course"]|order(order asc){_id,order,icon,stripeUrl,featured,titleLv,titleEn,titleRu,descLv,descEn,descRu,ctaLv,ctaEn,ctaRu,badgeLv,badgeEn,badgeRu}';
-    var url = 'https://' + SANITY.projectId + '.apicdn.sanity.io/v' + SANITY.apiVersion + '/data/query/' + SANITY.dataset + '?query=' + encodeURIComponent(groq);
-    fetch(url)
-      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-      .then(function (j) {
-        var items = j && j.result;
-        if (!Array.isArray(items) || !items.length) return; // no CMS content yet -> keep bundled defaults
-        liveCourses = items.map(function (c, i) {
-          return {
-            id: c._id || ('cms-' + i),
-            stripeUrl: c.stripeUrl,
-            icon: c.icon,
-            featured: !!c.featured,
-            title: { lv: c.titleLv || '', en: c.titleEn || c.titleLv || '', ru: c.titleRu || c.titleLv || '' },
-            desc: { lv: c.descLv || '', en: c.descEn || c.descLv || '', ru: c.descRu || c.descLv || '' },
-            cta: { lv: c.ctaLv || 'Pieteikties', en: c.ctaEn || 'Enroll', ru: c.ctaRu || 'Записаться' },
-            badge: (c.badgeLv || c.badgeEn || c.badgeRu) ? { lv: c.badgeLv || '', en: c.badgeEn || '', ru: c.badgeRu || '' } : null,
-          };
-        });
-        renderAll();
-      })
-      .catch(function () { /* offline / CORS / private dataset -> keep bundled defaults silently */ });
-  }
-
   document.querySelectorAll('.langseg [data-lang]').forEach(function (b) {
     b.addEventListener('click', renderCards);
   });
 
   renderAll();
-  loadCMSCourses();
 })();

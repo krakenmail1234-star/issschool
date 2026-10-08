@@ -284,8 +284,7 @@
     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="${cls}">${I[k] || ''}</svg>`;
 
   // language-independent config per card (icons, links, flags).
-  // `let` so the Sanity CMS loader can replace it with editable content.
-  let COURSE_META = [
+  const COURSE_META = [
     { icon: 'rocket', href: STRIPE_MAIN, price: '€20' },          // AI ieviešana
     { icon: 'chat', href: STRIPE_CHATGPT, price: '€500' },          // ChatGPT un LLM meistarība
     { icon: 'bolt', href: STRIPE_AUTOMATION, price: '€236,88' },        // AI automatizācija sociālajiem tīkliem
@@ -528,45 +527,6 @@
     if (!localStorage.getItem('is_guide_seen')) {
       setTimeout(open, reduce ? 200 : 1300);
     }
-  })();
-
-  /* ---------- Sanity CMS: editable courses (optional, graceful fallback) ---------- */
-  (function loadCMSCourses() {
-    const SANITY = { projectId: 'eanw34a4', dataset: 'production', apiVersion: '2023-01-01' };
-    const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-    const groq =
-      '*[_type=="course"]|order(order asc){order,icon,stripeUrl,price,featured,titleLv,titleEn,titleRu,descLv,descEn,descRu,ctaLv,ctaEn,ctaRu,badgeLv,badgeEn,badgeRu}';
-    const url = `https://${SANITY.projectId}.apicdn.sanity.io/v${SANITY.apiVersion}/data/query/${SANITY.dataset}?query=${encodeURIComponent(groq)}`;
-    fetch(url)
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((j) => {
-        const items = j && j.result;
-        if (!Array.isArray(items) || !items.length) return; // no CMS content yet -> keep hardcoded defaults
-        const webMeta = COURSE_META[COURSE_META.length - 1];
-        const webTranslations = Object.fromEntries(
-          ['lv', 'en', 'ru'].map((L) => [L, T[L].courses.items[T[L].courses.items.length - 1]])
-        );
-        const hasWebProduct = items.some((c) => String(c.stripeUrl || '').includes('produkti/web-risinajumi'));
-        const knownPrices = Object.fromEntries(COURSE_META.map((course) => [course.href, course.price]));
-        COURSE_META = items.map((c) => ({ icon: c.icon || 'sparkle', href: c.stripeUrl || STRIPE_MAIN, price: c.price || knownPrices[c.stripeUrl || STRIPE_MAIN] || '', featured: !!c.featured }));
-        ['lv', 'en', 'ru'].forEach((L) => {
-          const C = cap(L);
-          const fallbackCta = (T[L].courses.items[0] && T[L].courses.items[0].cta) || 'Pieteikties';
-          T[L].courses.items = items.map((c) => ({
-            title: c['title' + C] || c.titleLv || '',
-            desc: c['desc' + C] || c.descLv || '',
-            cta: c['cta' + C] || fallbackCta,
-            badge: c['badge' + C] || '',
-          }));
-          if (!hasWebProduct) T[L].courses.items.push(webTranslations[L]);
-        });
-        if (!hasWebProduct) COURSE_META.push(webMeta);
-        renderCourseGrid();
-        translate(lang);
-        document.querySelectorAll('#courseGrid .reveal').forEach((el) => el.classList.add('is-in'));
-        attachTilt(document.getElementById('courseGrid'));
-      })
-      .catch(() => { /* offline / CORS / private dataset -> keep defaults silently */ });
   })();
 
   /* ---------- Three.js hero: blue particle field ---------- */
