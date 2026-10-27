@@ -20,3 +20,6 @@ Thumbs.db
 
 .vercel
 .env*.local
+
+# Hostinger upload bundle (regenerate with deploy/make-hostinger-zip.ps1)
+hostinger-upload.zip

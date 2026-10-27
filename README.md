@@ -32,6 +32,13 @@ python -m http.server 5179
 # open http://localhost:5179/index.html
 ```
 
+## Deploy
+
+- **Hostinger:** see [`HOSTINGER-DEPLOY.md`](./HOSTINGER-DEPLOY.md) — upload the zip from
+  `deploy/make-hostinger-zip.ps1` via File Manager, or connect this repo in hPanel → Advanced → Git.
+  Not a WordPress theme.
+- **Vercel:** works as-is (`.vercelignore` excludes dev folders).
+
 ## Language
 
 Latvian is the default. The header has an LV / EN / RU switch; the choice is stored in
