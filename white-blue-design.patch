@@ -1,0 +1,1978 @@
+From ddeeac63214d79fad3b0dd977895ce30f6a96452 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 24 Nov 2026 01:46:39 +0200
+Subject: [PATCH] White and blue design on every page
+
+- New light theme (styles/theme-light.css): white canvas, navy serif headings,
+  blue buttons, every block in its own white card, navy contrast boxes and footer
+- Green palette switched to blue across aurora.css, Tailwind config, chatbot,
+  hero animation and tools (make-blue)
+- Inner pages get homepage polish (scripts/site-polish.js): badges, card hover,
+  scroll reveal, broken-image fallback
+- Contact and Privacy pages redesigned; broken contact photo replaced
+- DESIGN.md documents the design system
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01TrgH3wHqx4PMFr6frWwD5i
+---
+ DESIGN.md                                   |  50 ++++++++
+ blog.html                                   |   8 +-
+ contact.html                                | 133 ++++++++++++--------
+ index.html                                  |  21 ++--
+ par-mums.html                               |  10 +-
+ privacy.html                                | 103 +++++++++++----
+ produkti/ai-automatizacija.html             |  10 +-
+ produkti/ai-chatboti.html                   |  10 +-
+ produkti/ai-ieviesana.html                  |  10 +-
+ produkti/ai-konsultacijas.html              |  10 +-
+ produkti/ai-modelu-pielagosana.html         |  10 +-
+ produkti/biznesa-case-roi.html              |  10 +-
+ produkti/chatgpt-llm-meistariba.html        |  10 +-
+ produkti/datu-analize-prognozes.html        |  10 +-
+ produkti/digitalizacija-automatizacija.html |  10 +-
+ produkti/dokumentu-agenti.html              |  10 +-
+ produkti/index.html                         |  10 +-
+ produkti/individualais-ai-kurss.html        |  10 +-
+ produkti/personala-apmaciba.html            |  10 +-
+ produkti/prompt-inzenierija.html            |  10 +-
+ produkti/satura-generesana.html             |  10 +-
+ produkti/web-risinajumi.html                |  22 ++--
+ program.html                                |  10 +-
+ scripts/ai-home.js                          |  14 +--
+ scripts/apply.js                            |   2 +-
+ scripts/chatbot.js                          |  28 ++---
+ scripts/invoice.js                          |  16 +--
+ scripts/prerender-grids.js                  |   4 +-
+ scripts/site-polish.js                      | 105 ++++++++++++++++
+ scripts/web-request.js                      |   2 +-
+ styles/aurora.css                           |  52 ++++----
+ styles/theme-light.css                      |  95 ++++++++++++++
+ tools/ai-gatavibas-tests/app.js             |   2 +-
+ tools/ai-gatavibas-tests/index.html         |  14 ++-
+ tools/index.html                            |  10 +-
+ tools/laika-kalkulators/index.html          |  10 +-
+ tools/prompt-darbnica/index.html            |  20 +--
+ 37 files changed, 634 insertions(+), 247 deletions(-)
+ create mode 100644 DESIGN.md
+ create mode 100644 scripts/site-polish.js
+ create mode 100644 styles/theme-light.css
+
+diff --git a/DESIGN.md b/DESIGN.md
+new file mode 100644
+index 0000000..4d37e5a
+--- /dev/null
++++ b/DESIGN.md
+@@ -0,0 +1,50 @@
++# Intelekta Skola — DESIGN.md
++
++Use this file for all UI work on intelektaskola.lv. Every page — homepage included — follows it.
++
++## Idea
++Clean, editorial and trustworthy: a white canvas, navy text, one confident blue. Every piece of content lives in its own white box; important moments (closing calls to action, results, the footer) sit in navy boxes for contrast. Inspired by Claude's editorial style (serif display headings, humanist body text, calm layout) but in the brand's blue taken from the logo.
++
++## Colour
++| Token | Hex | Use |
++|---|---|---|
++| canvas | `#ffffff` | page background |
++| canvas-2 | `#f5f8ff` | inner tiles, subtle bands |
++| tint | `#eef4ff` | badges, icon wells, hover |
++| line | `#e3e9f4` | card borders, dividers |
++| navy | `#0b1530` | headings, contrast boxes, footer |
++| ink | `#334155` | body text |
++| muted | `#5b6785` | secondary text |
++| blue | `#2563eb` | buttons, links, accents |
++| blue-dark | `#1d4ed8` | hover, badge text |
++| blue-light | `#93c5fd` | accents on navy |
++| good | `#047857` | status "Aktīvs" only |
++
++Contrast: body `#334155` on white ≈ 10:1; blue `#2563eb` on white ≈ 5.2:1; light text `#b9c5e4` on navy ≈ 9:1.
++
++## Type
++- Headings (h1, h2): **Source Serif 4**, 700, letter-spacing −0.015em, navy. Highlighted part of a headline: blue gradient `#2563eb → #1e40af`.
++- Body, UI, buttons, h3: **Lexend** 400–700.
++- Labels: Lexend 600, 12px, uppercase, 0.2em tracking, inside a tint pill with a blue dot.
++
++## Boxes
++- Card: white, 1px `line` border, radius 24px (`rounded-3xl`), shadow `0 1px 2px rgba(11,21,48,.04), 0 12px 32px -16px rgba(11,21,48,.18)`. Hover: lift 3px, border `#bcd0f5`, blue shadow.
++- Inner tile: `canvas-2` background, 1px `line` border, radius 16px.
++- Navy box (`.glass-strong`, footer): navy background, white headings, `#b9c5e4` text, light-blue accents; inner tiles become 7% white.
++- Text and buttons always sit inside a box — never loose on the background, except the page hero.
++
++## Buttons
++- Primary: solid blue `#2563eb`, white Lexend 700, pill, soft blue shadow; hover `#1d4ed8`.
++- Secondary: white pill, 1px `#cbd5e1` border, navy text; hover blue border and text.
++- On navy: primary becomes white with navy text.
++
++## Forms
++White fields, 1px `#cbd5e1` border, radius 12px, navy text, `#94a3b8` placeholder; focus: blue border + 3px `rgba(37,99,235,.15)` ring.
++
++## Motion
++Cards fade up 18px on scroll (0.7s, cubic-bezier(.25,0,0,1)); hover lift 0.35s. Disabled under `prefers-reduced-motion`.
++
++## Files
++- `styles/aurora.css` — base components (colours converted to blue by make-blue.py)
++- `styles/theme-light.css` — this light theme, loaded after aurora.css on every page
++- `scripts/site-polish.js` — badges, card hover, scroll reveal, image fallback (inner pages)
+diff --git a/blog.html b/blog.html
+index a46e77e..a8cdeef 100644
+--- a/blog.html
++++ b/blog.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Blogs — AI jaunumi latviski | Intelekta Skola</title>
+     <meta name="description" content="Iknedēļas AI, darba vides un digitalizācijas jaunumi latviešu valodā — apkopoti no uzticamiem Latvijas avotiem katru piektdienu." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/blog.html" />
+@@ -33,11 +33,12 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="./styles/aurora.css" />
++    <link rel="stylesheet" href="styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -290,5 +291,6 @@
+     <script src="./scripts/apply.js"></script>
+     <script src="./scripts/pages.js"></script>
+     <script src="./scripts/chatbot.js?v=2"></script>
++    <script src="scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/contact.html b/contact.html
+index 48c7061..8587376 100644
+--- a/contact.html
++++ b/contact.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Sazinieties ar mums — sāksim jūsu AI ceļojumu ar bezmaksas konsultāciju | Intelekta Skola</title>
+     <meta name="description" content="Vēlaties sākt ar mākslīgo intelektu savā uzņēmumā? Sazinieties ar Intelektaskola.lv — bezmaksas sākotnējā konsultācija, skaidra cena no €200 un praktiski risinājumi Latvijas biznesam. Palīdzam no idejas līdz ieviešanai." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/contact.html" />
+@@ -33,11 +33,12 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="./styles/aurora.css" />
++    <link rel="stylesheet" href="styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -98,63 +99,90 @@
+       </div>
+     </header>
+ 
+-    <main class="relative z-10 mx-auto max-w-7xl px-6 pb-28 pt-32">
+-      <div class="mb-14 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+-        <div>
+-          <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="hero.label">Kontakti</div>
+-          <h1 class="mt-3 text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
+-            <span data-i18n="hero.title1">Sazinieties ar mums —</span> <span class="brand-text" data-i18n="hero.title2">sāksim jūsu AI ceļojumu ar bezmaksas konsultāciju</span>
+-          </h1>
+-          <p class="mt-4 max-w-xl text-lg text-zinc-300" data-i18n="hero.sub">Uzraksti ziņu — atbildam 24–48 stundu laikā. Bezmaksas konsultācija bez saistībām.</p>
+-        </div>
+-        <div class="relative aspect-[16/10] overflow-hidden rounded-[2rem] hairline">
+-          <img src="https://images.unsplash.com/photo-1531403009284-440f915bc4cb?auto=format&fit=crop&w=1000&q=80" alt="" class="absolute inset-0 h-full w-full object-cover" loading="eager" />
+-          <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent"></div>
+-          <div class="absolute bottom-5 left-5 right-5 glass rounded-2xl p-4">
+-            <div class="text-xs font-semibold uppercase tracking-wider text-electric" data-i18n="hero.cardLabel">Atbildam ātri</div>
+-            <div class="mt-1 text-sm text-zinc-300" data-i18n="hero.cardSub">24–48 stundu laikā, bez saistībām.</div>
++    <main class="relative z-10">
++      <!-- Hero (same structure as homepage hero) -->
++      <section class="relative overflow-hidden">
++        <div class="pointer-events-none absolute inset-0 z-0" style="background:radial-gradient(60% 55% at 85% 0%, rgba(37,99,235,.28), transparent 70%),radial-gradient(45% 50% at 0% 100%, rgba(30,58,138,.35), transparent 70%)"></div>
++        <div class="relative z-10 mx-auto grid max-w-7xl gap-12 px-6 pt-32 pb-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:pt-40">
++          <div>
++            <div class="mb-6 inline-flex items-center gap-2 rounded-full hairline bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-electric">
++              <span class="h-1.5 w-1.5 rounded-full bg-electric"></span> <span data-i18n="hero.label">Kontakti</span>
++            </div>
++            <h1 class="text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
++              <span data-i18n="hero.title1">Sazinieties ar mums —</span> <span class="brand-text" data-i18n="hero.title2">sāksim jūsu AI ceļojumu ar bezmaksas konsultāciju</span>
++            </h1>
++            <p class="mt-6 max-w-xl text-lg text-zinc-300/90 md:text-xl" data-i18n="hero.sub">Uzraksti ziņu — atbildam 24–48 stundu laikā. Bezmaksas konsultācija bez saistībām.</p>
++            <div class="mt-9 flex flex-wrap items-center gap-4">
++              <a href="#contactForm" class="btn-glow btn-primary rounded-full px-7 py-3.5 text-base font-bold transition hover:brightness-110" data-i18n="form.send">Sūtīt ziņu</a>
++              <a href="https://wa.me/37120771001" target="_blank" rel="noopener" class="rounded-full hairline bg-white/5 px-7 py-3.5 text-base font-semibold text-zinc-100 transition hover:bg-white/10" data-i18n="company.whatsapp">Rakstīt WhatsApp</a>
++            </div>
+           </div>
+-        </div>
+-      </div>
+ 
+-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+-        <div class="space-y-4">
+-          <div class="glass glow rounded-3xl p-6">
+-            <div class="text-sm font-semibold uppercase tracking-wider text-electric" data-i18n="company.title">Uzņēmums</div>
+-            <div class="mt-1 text-2xl font-extrabold">SIA Intelekta Skola</div>
+-            <div class="mt-5 grid grid-cols-2 gap-4 text-sm">
+-              <div class="rounded-2xl bg-white/[.03] p-4 hairline"><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.reg">Reģ. numurs</div><div class="mt-1 font-semibold text-zinc-100">40203747500</div></div>
+-              <div class="rounded-2xl bg-white/[.03] p-4 hairline"><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.vat">PVN numurs</div><div class="mt-1 font-semibold text-zinc-100">LV40203747500</div></div>
+-              <div class="rounded-2xl bg-white/[.03] p-4 hairline"><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.vatstatus">PVN statuss</div><div class="mt-1 font-semibold text-emerald-300">● <span data-i18n="company.vatstatusV">Aktīvs</span></div></div>
++          <!-- Quick contact card (replaces the broken photo) -->
++          <div class="glass glow rounded-[2rem] p-6 sm:p-8">
++            <div class="flex items-center gap-3 rounded-2xl bg-white/[.03] p-4 hairline">
++              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-electric/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
++              <div>
++                <div class="text-xs font-semibold uppercase tracking-wider text-electric" data-i18n="hero.cardLabel">Atbildam ātri</div>
++                <div class="mt-0.5 text-sm text-zinc-300" data-i18n="hero.cardSub">24–48 stundu laikā, bez saistībām.</div>
++              </div>
+             </div>
+-          </div>
+-          <div class="glass rounded-3xl p-6">
+-            <div class="text-sm font-semibold uppercase tracking-wider text-electric" data-i18n="company.addrLabel">Juridiskā adrese</div>
+-            <address class="mt-2 not-italic text-zinc-200 leading-relaxed">Akmeņu iela 21B<br />Rīga, LV-1048<br /><span data-i18n="company.country">Latvija</span></address>
+-            <div class="mt-4 flex flex-col items-start gap-2">
+-              <a href="mailto:info@intelektaskola.lv" class="inline-flex items-center gap-2 text-electric hover:text-brandlt">info@intelektaskola.lv</a>
+-              <a href="tel:+37120771001" class="inline-flex items-center gap-2 text-electric hover:text-brandlt">+371 20 771 001</a>
+-              <a href="https://wa.me/37120771001" target="_blank" rel="noopener" class="btn-primary inline-flex items-center rounded-full px-5 py-2.5 text-sm font-bold transition hover:brightness-110" data-i18n="company.whatsapp">Rakstīt WhatsApp</a>
++            <div class="mt-4 grid gap-3">
++              <a href="mailto:info@intelektaskola.lv" class="glow-hover flex items-center gap-4 rounded-2xl bg-white/[.03] p-4 hairline transition hover:bg-white/[.06]">
++                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-electric/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></span>
++                <span class="min-w-0"><span class="block text-xs uppercase tracking-wider text-zinc-500" data-i18n="form.email">E-pasts</span><span class="block truncate font-semibold text-zinc-100">info@intelektaskola.lv</span></span>
++              </a>
++              <a href="tel:+37120771001" class="glow-hover flex items-center gap-4 rounded-2xl bg-white/[.03] p-4 hairline transition hover:bg-white/[.06]">
++                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-electric/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
++                <span><span class="block text-xs uppercase tracking-wider text-zinc-500">Tel.</span><span class="block font-semibold text-zinc-100">+371 20 771 001</span></span>
++              </a>
++              <a href="https://wa.me/37120771001" target="_blank" rel="noopener" class="glow-hover flex items-center gap-4 rounded-2xl bg-white/[.03] p-4 hairline transition hover:bg-white/[.06]">
++                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-electric/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-5A8 8 0 1 1 21 12z"/></svg></span>
++                <span><span class="block text-xs uppercase tracking-wider text-zinc-500">WhatsApp</span><span class="block font-semibold text-zinc-100">+371 20 771 001</span></span>
++              </a>
+             </div>
+           </div>
+         </div>
++      </section>
+ 
+-        <form id="contactForm" class="glass glow rounded-3xl p-6 sm:p-8">
+-          <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+-            <label>Company<input class="js-hp" type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+-          </div>
+-          <div class="space-y-4">
+-            <label class="block"><span class="mb-1.5 block text-sm font-semibold text-zinc-200" data-i18n="form.name">Vārds</span>
+-              <input id="cfName" required type="text" class="field w-full rounded-xl px-4 py-3" data-i18n-ph="form.namePh" /></label>
+-            <label class="block"><span class="mb-1.5 block text-sm font-semibold text-zinc-200" data-i18n="form.email">E-pasts</span>
+-              <input id="cfEmail" required type="email" class="field w-full rounded-xl px-4 py-3" data-i18n-ph="form.emailPh" /></label>
+-            <label class="block"><span class="mb-1.5 block text-sm font-semibold text-zinc-200" data-i18n="form.message">Ziņa</span>
+-              <textarea id="cfMsg" required rows="6" class="field w-full resize-none rounded-xl px-4 py-3" data-i18n-ph="form.messagePh"></textarea></label>
+-            <button type="submit" class="btn-primary w-full rounded-full px-6 py-3.5 font-bold transition hover:brightness-110" data-i18n="form.send">Sūtīt ziņu</button>
+-            <p class="text-center text-xs text-zinc-500" data-i18n="form.note">Atver tavu e-pasta klientu ar adresi info@intelektaskola.lv.</p>
++      <!-- Company + form -->
++      <section class="mx-auto max-w-7xl px-6 pb-24 md:pb-32">
++        <div class="grid grid-cols-1 gap-6 lg:grid-cols-5">
++          <div class="space-y-6 lg:col-span-2">
++            <div class="glass glow-hover rounded-3xl p-6 sm:p-8">
++              <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="company.title">Uzņēmums</div>
++              <div class="mt-2 text-2xl font-extrabold tracking-tight">SIA Intelekta Skola</div>
++              <div class="mt-6 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
++                <div class="rounded-2xl bg-white/[.03] p-4 hairline"><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.reg">Reģ. numurs</div><div class="mt-1 font-semibold text-zinc-100">40203747500</div></div>
++                <div class="rounded-2xl bg-white/[.03] p-4 hairline"><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.vat">PVN numurs</div><div class="mt-1 font-semibold text-zinc-100">LV40203747500</div></div>
++                <div class="rounded-2xl bg-white/[.03] p-4 hairline sm:col-span-2"><div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.vatstatus">PVN statuss</div><div class="mt-1 inline-flex items-center gap-2 font-semibold text-sky-300"><span class="h-2 w-2 rounded-full bg-sky-300"></span><span data-i18n="company.vatstatusV">Aktīvs</span></div></div>
++              </div>
++            </div>
++            <div class="glass glow-hover rounded-3xl p-6 sm:p-8">
++              <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="company.addrLabel">Juridiskā adrese</div>
++              <address class="mt-3 not-italic text-lg leading-relaxed text-zinc-200">Akmeņu iela 21B<br />Rīga, LV-1048<br /><span data-i18n="company.country">Latvija</span></address>
++            </div>
+           </div>
+-        </form>
+-      </div>
++
++          <form id="contactForm" class="glass glow relative scroll-mt-28 rounded-3xl p-6 sm:p-8 lg:col-span-3">
++            <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
++              <label>Company<input class="js-hp" type="text" name="company" tabindex="-1" autocomplete="off" /></label>
++            </div>
++            <div class="space-y-5">
++              <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
++                <label class="block"><span class="mb-1.5 block text-sm font-semibold text-zinc-200" data-i18n="form.name">Vārds</span>
++                  <input id="cfName" required type="text" class="field w-full rounded-xl px-4 py-3" data-i18n-ph="form.namePh" /></label>
++                <label class="block"><span class="mb-1.5 block text-sm font-semibold text-zinc-200" data-i18n="form.email">E-pasts</span>
++                  <input id="cfEmail" required type="email" class="field w-full rounded-xl px-4 py-3" data-i18n-ph="form.emailPh" /></label>
++              </div>
++              <label class="block"><span class="mb-1.5 block text-sm font-semibold text-zinc-200" data-i18n="form.message">Ziņa</span>
++                <textarea id="cfMsg" required rows="7" class="field w-full resize-none rounded-xl px-4 py-3" data-i18n-ph="form.messagePh"></textarea></label>
++              <button type="submit" class="btn-glow btn-primary w-full rounded-full px-6 py-3.5 text-base font-bold transition hover:brightness-110" data-i18n="form.send">Sūtīt ziņu</button>
++              <p class="text-center text-xs text-zinc-500" data-i18n="form.note">Atver tavu e-pasta klientu ar adresi info@intelektaskola.lv.</p>
++            </div>
++          </form>
++        </div>
++      </section>
+     </main>
+ 
+     <footer class="border-t border-white/5">
+@@ -205,5 +233,6 @@
+     <script src="./scripts/apply.js"></script>
+     <script src="./scripts/pages.js"></script>
+     <script src="./scripts/chatbot.js?v=2"></script>
++    <script src="scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/index.html b/index.html
+index 9a89e96..46b0181 100644
+--- a/index.html
++++ b/index.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>AI apmācības un risinājumi biznesam | Intelekta Skola</title>
+     <meta
+       name="description"
+@@ -36,6 +36,7 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="./styles/aurora.css" />
++    <link rel="stylesheet" href="styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+     <script>
+@@ -44,9 +45,9 @@
+           extend: {
+             fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+             colors: {
+-              ink: '#081712', ink2: '#0e231b',
+-              brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0',
+-              muted: '#9fb3a8',
++              ink: '#070b18', ink2: '#0e1629',
++              brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa',
++              muted: '#9aa8c7',
+             },
+           },
+         },
+@@ -260,7 +261,7 @@
+     <a href="./tools/prompt-darbnica/index.html" class="reveal glass glow-hover block rounded-3xl p-7" style="transition-delay:0.06s" data-tilt>
+       <div class="mb-5 flex items-center justify-between">
+         <span class="inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M4 20 14 10"/><path d="M15 4l1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2z"/></svg></span>
+-        <span class="rounded-full bg-emerald-400/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-emerald-300" data-i18n="tools.live">Pieejams</span>
++        <span class="rounded-full bg-sky-400/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-sky-300" data-i18n="tools.live">Pieejams</span>
+       </div>
+       <h3 class="text-xl font-bold" data-i18n="tools.items.1.title">Promptu ģenerators</h3>
+       <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="tools.items.1.desc">Izveido profesionālus promptus.</p>
+@@ -278,7 +279,7 @@
+     <a href="./tools/ai-gatavibas-tests/index.html" class="reveal glass glow-hover block rounded-3xl p-7" style="transition-delay:0.18s" data-tilt>
+       <div class="mb-5 flex items-center justify-between">
+         <span class="inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 14l4-4"/></svg></span>
+-        <span class="rounded-full bg-emerald-400/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-emerald-300" data-i18n="tools.live">Pieejams</span>
++        <span class="rounded-full bg-sky-400/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-sky-300" data-i18n="tools.live">Pieejams</span>
+       </div>
+       <h3 class="text-xl font-bold" data-i18n="tools.items.3.title">AI gatavības novērtējums</h3>
+       <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="tools.items.3.desc">Novērtē gatavību AI ieviešanai.</p>
+@@ -296,7 +297,7 @@
+     <a href="./tools/laika-kalkulators/index.html" class="reveal glass glow-hover block rounded-3xl p-7" style="transition-delay:0.3s" data-tilt>
+       <div class="mb-5 flex items-center justify-between">
+         <span class="inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+-        <span class="rounded-full bg-emerald-400/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-emerald-300" data-i18n="tools.live">Pieejams</span>
++        <span class="rounded-full bg-sky-400/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-sky-300" data-i18n="tools.live">Pieejams</span>
+       </div>
+       <h3 class="text-xl font-bold" data-i18n="tools.items.5.title">AI laika un ROI kalkulators</h3>
+       <p class="mt-2 text-sm leading-relaxed text-zinc-400" data-i18n="tools.items.5.desc">Redzi, cik stundu un eiro AI ietaupa.</p>
+@@ -427,7 +428,7 @@
+     </div>
+     <div class="rounded-2xl bg-white/[.03] p-4 hairline">
+       <div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.rows.2.k">PVN statuss</div>
+-      <div class="mt-1 font-semibold" data-i18n-html="company.rows.2.v"><span class="text-emerald-300">Aktīvs</span></div>
++      <div class="mt-1 font-semibold" data-i18n-html="company.rows.2.v"><span class="text-sky-300">Aktīvs</span></div>
+     </div><!-- /PRERENDER --></div>
+             </div>
+             <div class="glass rounded-3xl p-6">
+@@ -551,7 +552,7 @@
+             <span data-i18n="guide.privacy">Bez surogātpasta. Atrakstīšanās jebkurā laikā.</span>
+             <button id="guideSkip" type="button" class="font-semibold text-zinc-400 underline-offset-2 hover:text-white hover:underline" data-i18n="guide.skip">Varbūt vēlāk</button>
+           </div>
+-          <p id="guideSuccess" class="mt-4 hidden rounded-xl border border-emerald-400/30 bg-emerald-400/10 p-3 text-center text-sm font-semibold text-emerald-300" data-i18n="guide.success">Paldies! Pārbaudi savu e-pastu — prezentācija ir nosūtīta.</p>
++          <p id="guideSuccess" class="mt-4 hidden rounded-xl border border-sky-400/30 bg-sky-400/10 p-3 text-center text-sm font-semibold text-sky-300" data-i18n="guide.success">Paldies! Pārbaudi savu e-pastu — prezentācija ir nosūtīta.</p>
+         </div>
+       </div>
+     </div>
+diff --git a/par-mums.html b/par-mums.html
+index a1f50db..2f9f8a6 100644
+--- a/par-mums.html
++++ b/par-mums.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Intelektaskola.lv — jūsu ceļvedis mākslīgā intelekta pasaulē Latvijā</title>
+     <meta name="description" content="Intelektaskola.lv ir Latvijas mākslīgā intelekta konsultāciju uzņēmums. Palīdzam uzņēmumiem saprast AI iespējas, ieviest ChatGPT un citus rīkus, automatizēt procesus un aprēķināt investīciju atdevi. Sāciet savu AI ceļojumu kopā ar mums." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/par-mums.html" />
+@@ -33,12 +33,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="./styles/aurora.css" />
++    <link rel="stylesheet" href="styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -233,5 +234,6 @@
+     <script src="./scripts/apply.js"></script>
+     <script src="./scripts/pages.js"></script>
+     <script src="./scripts/chatbot.js?v=2"></script>
++    <script src="scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/privacy.html b/privacy.html
+index 36387f2..a30cf6b 100644
+--- a/privacy.html
++++ b/privacy.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Privātums — Intelekta Skola</title>
+     <meta name="description" content="Intelekta Skola privātuma un sīkdatņu paziņojums." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/privacy.html" />
+@@ -33,11 +33,12 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="./styles/aurora.css" />
++    <link rel="stylesheet" href="styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
+       } } };
+     </script>
+   </head>
+@@ -95,26 +96,85 @@
+       </div>
+     </header>
+ 
+-    <main class="relative z-10 mx-auto max-w-3xl px-6 pb-28 pt-32">
+-      <div class="mb-10">
+-        <div class="text-xs font-semibold uppercase tracking-[0.25em] text-electric" data-i18n="hero.label">Juridiskā informācija</div>
+-        <h1 class="mt-3 text-4xl font-extrabold tracking-tight md:text-5xl">
+-          <span data-i18n="hero.title1">Privātums un</span> <span class="brand-text" data-i18n="hero.title2">sīkdatnes</span>
+-        </h1>
+-        <p class="mt-3 text-sm text-zinc-400" data-i18n="hero.updated">Pēdējoreiz atjaunināts: 2026. gada jūnijs</p>
+-      </div>
++    <main class="relative z-10">
++      <!-- Hero (same structure as homepage hero) -->
++      <section class="relative overflow-hidden">
++        <div class="pointer-events-none absolute inset-0 z-0" style="background:radial-gradient(60% 60% at 85% 0%, rgba(37,99,235,.26), transparent 70%),radial-gradient(40% 60% at 0% 100%, rgba(30,58,138,.3), transparent 70%)"></div>
++        <div class="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-14 lg:pt-40">
++          <div class="mb-6 inline-flex items-center gap-2 rounded-full hairline bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-electric">
++            <span class="h-1.5 w-1.5 rounded-full bg-electric"></span> <span data-i18n="hero.label">Juridiskā informācija</span>
++          </div>
++          <h1 class="text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
++            <span data-i18n="hero.title1">Privātums un</span> <span class="brand-text" data-i18n="hero.title2">sīkdatnes</span>
++          </h1>
++          <p class="mt-6 inline-flex items-center gap-2 text-sm text-zinc-400">
++            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" class="h-4 w-4 text-electric"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
++            <span data-i18n="hero.updated">Pēdējoreiz atjaunināts: 2026. gada jūnijs</span>
++          </p>
++        </div>
++      </section>
+ 
+-      <div class="space-y-5">
+-        <section class="glass rounded-3xl p-6"><h2 class="text-lg font-bold text-electric" data-i18n="s1.h">Pārzinis</h2><p class="mt-2 text-zinc-300" data-i18n="s1.p">Par šo vietni un datu apstrādi atbild SIA Intelekta Skola (reģ. nr. 40203747500), Akmeņu iela 21B, Rīga, LV-1048, Latvija. Jautājumos raksti info@intelektaskola.lv vai zvani +371 20 771 001.</p></section>
+-        <section class="glass rounded-3xl p-6"><h2 class="text-lg font-bold text-electric" data-i18n="s2.h">Kādus datus vācam</h2><p class="mt-2 text-zinc-300" data-i18n="s2.p">Mēs apstrādājam tikai tos datus, ko pats brīvprātīgi iesniedz — vārdu un e-pasta adresi kontaktformā vai ceļveža pieprasījumā. Šos datus izmantojam tikai, lai atbildētu uz tavu pieprasījumu. Apmeklējumu statistikai izmantojam Ahrefs Web Analytics — privātumu saudzējošu rīku, kas neizmanto sīkdatnes un nevāc personas datus. Citu reklāmas trekeru vietnē nav. Skriptu pārvaldībai izmantojam Google Tag Manager.</p></section>
+-        <section class="glass rounded-3xl p-6"><h2 class="text-lg font-bold text-electric" data-i18n="s3.h">Sīkdatnes un lokālā krātuve</h2><p class="mt-2 text-zinc-300" data-i18n="s3.p">Vietne tavā pārlūkā lokāli saglabā tikai valodas izvēli un to, vai esi redzējis ceļveža logu. Šī informācija paliek tavā ierīcē un netiek nodota trešajām pusēm.</p></section>
+-        <section class="glass rounded-3xl p-6"><h2 class="text-lg font-bold text-electric" data-i18n="s4.h">Tavas tiesības</h2><p class="mt-2 text-zinc-300" data-i18n="s4.p">Tev ir tiesības pieprasīt piekļuvi saviem datiem, to labošanu vai dzēšanu. Lai to izdarītu, raksti uz info@intelektaskola.lv, un mēs atbildēsim saprātīgā termiņā.</p></section>
+-        <section class="glass rounded-3xl p-6"><h2 class="text-lg font-bold text-electric" data-i18n="s5.h">Maksājumi</h2><p class="mt-2 text-zinc-300" data-i18n="s5.p">Maksājumus apstrādā Stripe. Maksājuma dati tiek nodoti tieši Stripe drošā vidē — mēs neuzglabājam tavus maksājumu karšu datus.</p></section>
+-      </div>
++      <section class="mx-auto max-w-7xl px-6 pb-24 md:pb-32">
++        <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
++          <!-- Table of contents -->
++          <aside class="hidden lg:col-span-4 lg:block">
++            <nav class="glass sticky top-28 rounded-3xl p-5 text-sm">
++              <a href="#s1" class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-zinc-300 transition hover:bg-white/5 hover:text-electric"><span class="font-bold text-electric">01</span><span data-i18n="s1.h">Pārzinis</span></a>
++              <a href="#s2" class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-zinc-300 transition hover:bg-white/5 hover:text-electric"><span class="font-bold text-electric">02</span><span data-i18n="s2.h">Kādus datus vācam</span></a>
++              <a href="#s3" class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-zinc-300 transition hover:bg-white/5 hover:text-electric"><span class="font-bold text-electric">03</span><span data-i18n="s3.h">Sīkdatnes un lokālā krātuve</span></a>
++              <a href="#s4" class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-zinc-300 transition hover:bg-white/5 hover:text-electric"><span class="font-bold text-electric">04</span><span data-i18n="s4.h">Tavas tiesības</span></a>
++              <a href="#s5" class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-zinc-300 transition hover:bg-white/5 hover:text-electric"><span class="font-bold text-electric">05</span><span data-i18n="s5.h">Maksājumi</span></a>
++            </nav>
++          </aside>
+ 
+-      <div class="mt-10 text-center">
+-        <a href="./contact.html" class="btn-primary inline-block rounded-full px-6 py-3 font-bold transition hover:brightness-110" data-i18n="cta">Ir jautājums? Sazinies</a>
+-      </div>
++          <!-- Sections -->
++          <div class="space-y-5 lg:col-span-8">
++            <section id="s1" class="glass glow-hover scroll-mt-28 rounded-3xl p-6 sm:p-8">
++              <div class="flex items-center gap-4">
++                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-electric/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/></svg></span>
++                <h2 class="text-xl font-bold tracking-tight text-zinc-100"><span class="mr-2 text-electric">01</span><span data-i18n="s1.h">Pārzinis</span></h2>
++              </div>
++              <p class="mt-4 leading-relaxed text-zinc-300" data-i18n="s1.p">Par šo vietni un datu apstrādi atbild SIA Intelekta Skola (reģ. nr. 40203747500), Akmeņu iela 21B, Rīga, LV-1048, Latvija. Jautājumos raksti info@intelektaskola.lv vai zvani +371 20 771 001.</p>
++            </section>
++            <section id="s2" class="glass glow-hover scroll-mt-28 rounded-3xl p-6 sm:p-8">
++              <div class="flex items-center gap-4">
++                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-electric/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg></span>
++                <h2 class="text-xl font-bold tracking-tight text-zinc-100"><span class="mr-2 text-electric">02</span><span data-i18n="s2.h">Kādus datus vācam</span></h2>
++              </div>
++              <p class="mt-4 leading-relaxed text-zinc-300" data-i18n="s2.p">Mēs apstrādājam tikai tos datus, ko pats brīvprātīgi iesniedz — vārdu un e-pasta adresi kontaktformā vai ceļveža pieprasījumā. Šos datus izmantojam tikai, lai atbildētu uz tavu pieprasījumu. Apmeklējumu statistikai izmantojam Ahrefs Web Analytics — privātumu saudzējošu rīku, kas neizmanto sīkdatnes un nevāc personas datus. Citu reklāmas trekeru vietnē nav. Skriptu pārvaldībai izmantojam Google Tag Manager.</p>
++            </section>
++            <section id="s3" class="glass glow-hover scroll-mt-28 rounded-3xl p-6 sm:p-8">
++              <div class="flex items-center gap-4">
++                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-electric/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M21 12.5A9 9 0 1 1 11.5 3a3 3 0 0 0 4 4 3 3 0 0 0 5.5 5.5z"/><circle cx="8.5" cy="10.5" r=".8" fill="currentColor"/><circle cx="14" cy="15" r=".8" fill="currentColor"/><circle cx="9" cy="16" r=".8" fill="currentColor"/></svg></span>
++                <h2 class="text-xl font-bold tracking-tight text-zinc-100"><span class="mr-2 text-electric">03</span><span data-i18n="s3.h">Sīkdatnes un lokālā krātuve</span></h2>
++              </div>
++              <p class="mt-4 leading-relaxed text-zinc-300" data-i18n="s3.p">Vietne tavā pārlūkā lokāli saglabā tikai valodas izvēli un to, vai esi redzējis ceļveža logu. Šī informācija paliek tavā ierīcē un netiek nodota trešajām pusēm.</p>
++            </section>
++            <section id="s4" class="glass glow-hover scroll-mt-28 rounded-3xl p-6 sm:p-8">
++              <div class="flex items-center gap-4">
++                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-electric/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
++                <h2 class="text-xl font-bold tracking-tight text-zinc-100"><span class="mr-2 text-electric">04</span><span data-i18n="s4.h">Tavas tiesības</span></h2>
++              </div>
++              <p class="mt-4 leading-relaxed text-zinc-300" data-i18n="s4.p">Tev ir tiesības pieprasīt piekļuvi saviem datiem, to labošanu vai dzēšanu. Lai to izdarītu, raksti uz info@intelektaskola.lv, un mēs atbildēsim saprātīgā termiņā.</p>
++            </section>
++            <section id="s5" class="glass glow-hover scroll-mt-28 rounded-3xl p-6 sm:p-8">
++              <div class="flex items-center gap-4">
++                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-electric/10 text-electric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M7 15h3"/></svg></span>
++                <h2 class="text-xl font-bold tracking-tight text-zinc-100"><span class="mr-2 text-electric">05</span><span data-i18n="s5.h">Maksājumi</span></h2>
++              </div>
++              <p class="mt-4 leading-relaxed text-zinc-300" data-i18n="s5.p">Maksājumus apstrādā Stripe. Maksājuma dati tiek nodoti tieši Stripe drošā vidē — mēs neuzglabājam tavus maksājumu karšu datus.</p>
++            </section>
++
++            <div class="glass glow flex flex-col items-center justify-between gap-5 rounded-3xl p-6 text-center sm:flex-row sm:p-8 sm:text-left">
++              <div>
++                <div class="text-lg font-bold text-zinc-100">info@intelektaskola.lv</div>
++                <div class="mt-1 text-sm text-zinc-400">+371 20 771 001</div>
++              </div>
++              <a href="./contact.html" class="btn-glow btn-primary inline-block shrink-0 rounded-full px-7 py-3.5 font-bold transition hover:brightness-110" data-i18n="cta">Ir jautājums? Sazinies</a>
++            </div>
++          </div>
++        </div>
++      </section>
+     </main>
+ 
+     <footer class="border-t border-white/5">
+@@ -174,5 +234,6 @@
+     <script src="./scripts/apply.js"></script>
+     <script src="./scripts/pages.js"></script>
+     <script src="./scripts/chatbot.js?v=2"></script>
++    <script src="scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/ai-automatizacija.html b/produkti/ai-automatizacija.html
+index 9bdf2c5..fe3c7d5 100644
+--- a/produkti/ai-automatizacija.html
++++ b/produkti/ai-automatizacija.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>AI automatizācija sociālajiem tīkliem — ikmēneša serviss | Intelekta Skola</title>
+     <meta name="description" content="Ikmēneša AI automatizācijas serviss sociālajiem tīkliem — mēs pārņemam satura veidošanu, plānošanu un publicēšanu ar mūsdienu AI rīkiem. No €236.88/mēnesī." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/ai-automatizacija.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -227,5 +228,6 @@
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/invoice.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/ai-chatboti.html b/produkti/ai-chatboti.html
+index b2c7e8f..5b57373 100644
+--- a/produkti/ai-chatboti.html
++++ b/produkti/ai-chatboti.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Pielāgoti AI čatboti biznesam | Intelekta Skola</title>
+     <meta name="description" content="Uzņēmumam pielāgots AI čatbots klientu apkalpošanai, pasūtījumiem un iekšējiem jautājumiem — strādā 24/7. E-komercijai, pakalpojumiem, pašvaldībām. No €200." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/ai-chatboti.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -221,5 +222,6 @@
+     <script src="../scripts/apply.js"></script>
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/ai-ieviesana.html b/produkti/ai-ieviesana.html
+index 7372429..35b850a 100644
+--- a/produkti/ai-ieviesana.html
++++ b/produkti/ai-ieviesana.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>AI ieviešanas ceļvedis — mākslīgā intelekta pamati līdz ieviešanai | Intelekta Skola</title>
+     <meta name="description" content="AI ieviešanas ceļvedis tiem, kas grib saprast mākslīgo intelektu no pamatiem un sākt to lietot praktiski — trīs līmeņi, savs temps, viens maksājums: €20." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/ai-ieviesana.html" />
+@@ -33,12 +33,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -259,5 +260,6 @@
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/invoice.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/ai-konsultacijas.html b/produkti/ai-konsultacijas.html
+index 2c97a6f..560f4ba 100644
+--- a/produkti/ai-konsultacijas.html
++++ b/produkti/ai-konsultacijas.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>AI ieviešanas konsultācijas un darbsemināri | Intelekta Skola</title>
+     <meta name="description" content="AI iespēju audits un darbsemināri uzņēmumiem būvniecībā, ražošanā un loģistikā. Skaidrs rīcības plāns pirms investīcijām. Konsultācija no €200." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/ai-konsultacijas.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -221,5 +222,6 @@
+     <script src="../scripts/apply.js"></script>
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/ai-modelu-pielagosana.html b/produkti/ai-modelu-pielagosana.html
+index deaac93..d05c4a4 100644
+--- a/produkti/ai-modelu-pielagosana.html
++++ b/produkti/ai-modelu-pielagosana.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>AI modeļu pielāgošana (fine-tuning) un integrācija | Intelekta Skola</title>
+     <meta name="description" content="Pielāgo ChatGPT, Llama vai citus AI modeļus savai nozarei, terminoloģijai un datiem, un integrē tos savā IT infrastruktūrā. Vidējiem un lieliem uzņēmumiem. No €15000." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/ai-modelu-pielagosana.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -221,5 +222,6 @@
+     <script src="../scripts/apply.js"></script>
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/biznesa-case-roi.html b/produkti/biznesa-case-roi.html
+index 47ae39e..26575df 100644
+--- a/produkti/biznesa-case-roi.html
++++ b/produkti/biznesa-case-roi.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Biznesa gadījuma izpēte un ROI aprēķins | Intelekta Skola</title>
+     <meta name="description" content="Detalizēts biznesa gadījuma (business case) un ROI aprēķins AI investīcijām — pamats vadības lēmumiem un LIAA grantu pieteikumiem. No €200." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/biznesa-case-roi.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -221,5 +222,6 @@
+     <script src="../scripts/apply.js"></script>
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/chatgpt-llm-meistariba.html b/produkti/chatgpt-llm-meistariba.html
+index da0b938..fcb0012 100644
+--- a/produkti/chatgpt-llm-meistariba.html
++++ b/produkti/chatgpt-llm-meistariba.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>ChatGPT un LLM meistarība — padziļināts kurss | Intelekta Skola</title>
+     <meta name="description" content="ChatGPT un LLM meistarības kurss — praktiska AI lietošana, prompti, darba plūsmas un padziļinātas ChatGPT tehnikas profesionāļiem un komandām. €500." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/chatgpt-llm-meistariba.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -227,5 +228,6 @@
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/invoice.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/datu-analize-prognozes.html b/produkti/datu-analize-prognozes.html
+index 4efa7de..148d040 100644
+--- a/produkti/datu-analize-prognozes.html
++++ b/produkti/datu-analize-prognozes.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>AI datu analīzes un prognozēšanas rīki | Intelekta Skola</title>
+     <meta name="description" content="AI sistēma, kas analizē uzņēmuma datus un prognozē pārdošanu, krājumu vajadzības un klientu uzvedību. Mazumtirdzniecībai, loģistikai, vairumtirdzniecībai. No €200." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/datu-analize-prognozes.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -221,5 +222,6 @@
+     <script src="../scripts/apply.js"></script>
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/digitalizacija-automatizacija.html b/produkti/digitalizacija-automatizacija.html
+index aa42874..d0ac9df 100644
+--- a/produkti/digitalizacija-automatizacija.html
++++ b/produkti/digitalizacija-automatizacija.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Digitalizācija un procesu automatizācija ar AI | Intelekta Skola</title>
+     <meta name="description" content="Pārej no papīra un Excel uz automatizētiem procesiem ar AI rīkiem. Der LIAA granta līdzfinansējumam. No €200 konsultācija, projekti €5000–€50000." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/digitalizacija-automatizacija.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -221,5 +222,6 @@
+     <script src="../scripts/apply.js"></script>
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/dokumentu-agenti.html b/produkti/dokumentu-agenti.html
+index 0b1694d..14ab707 100644
+--- a/produkti/dokumentu-agenti.html
++++ b/produkti/dokumentu-agenti.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>E-pastu un dokumentu apstrādes AI aģenti | Intelekta Skola</title>
+     <meta name="description" content="AI aģenti, kas automātiski šķiro, analizē un sagatavo atbildes uz e-pastiem, rēķiniem un veidlapām. Grāmatvedībai, juridiskajām firmām, pašvaldībām. No €200." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/dokumentu-agenti.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -221,5 +222,6 @@
+     <script src="../scripts/apply.js"></script>
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/index.html b/produkti/index.html
+index 7989ac9..cf7a188 100644
+--- a/produkti/index.html
++++ b/produkti/index.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>AI kursi, biznesa un WEB risinājumi Latvijā | Intelekta Skola</title>
+     <meta name="description" content="AI kursi, ChatGPT apmācības, čatboti, automatizācija un WEB izstrāde Latvijas uzņēmumiem. Apskati cenas un izvēlies piemērotāko risinājumu." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/" />
+@@ -33,12 +33,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -369,5 +370,6 @@
+     <script src="../scripts/apply.js"></script>
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/individualais-ai-kurss.html b/produkti/individualais-ai-kurss.html
+index c19d7c0..3a64ad1 100644
+--- a/produkti/individualais-ai-kurss.html
++++ b/produkti/individualais-ai-kurss.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Individuālais AI kurss — personalizēts 1-uz-1 mentorings | Intelekta Skola</title>
+     <meta name="description" content="Individuālais AI kurss Rīgā vai attālināti — mācies vienu pret vienu ar pieredzējušu mentoru, savā tempā. ChatGPT, Claude, Midjourney, Gemini un automatizācija. €150." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/individualais-ai-kurss.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -228,5 +229,6 @@
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/invoice.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/personala-apmaciba.html b/produkti/personala-apmaciba.html
+index 8d61dca..bbe5d60 100644
+--- a/produkti/personala-apmaciba.html
++++ b/produkti/personala-apmaciba.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Personāla apmācība un AI ieviešanas atbalsts | Intelekta Skola</title>
+     <meta name="description" content="Praktiska AI apmācība darbiniekiem un atbalsts pēc ieviešanas — lai jaunie rīki tiešām tiek lietoti, ne tikai iegādāti. €500–€3000 par apmācību dienu." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/personala-apmaciba.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -221,5 +222,6 @@
+     <script src="../scripts/apply.js"></script>
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/prompt-inzenierija.html b/produkti/prompt-inzenierija.html
+index c284bde..0eb8439 100644
+--- a/produkti/prompt-inzenierija.html
++++ b/produkti/prompt-inzenierija.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Promptu inženierija — strukturētu promptu kurss | Intelekta Skola</title>
+     <meta name="description" content="Promptu inženierijas kurss — apgūsti strukturētu promptu veidošanu biznesam, radošumam un automatizācijai. Praktiski, atkārtojami paņēmieni. €159." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/prompt-inzenierija.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -228,5 +229,6 @@
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/invoice.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/satura-generesana.html b/produkti/satura-generesana.html
+index 1600025..d85fe10 100644
+--- a/produkti/satura-generesana.html
++++ b/produkti/satura-generesana.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>AI satura ģenerēšanas rīki mārketingam | Intelekta Skola</title>
+     <meta name="description" content="AI rīks, kas ģenerē mārketinga tekstus, sociālo tīklu ziņas un produktu aprakstus latviešu valodā — konsekventa zīmola balss bez pilnas mārketinga komandas. No €200." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/satura-generesana.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -221,5 +222,6 @@
+     <script src="../scripts/apply.js"></script>
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/produkti/web-risinajumi.html b/produkti/web-risinajumi.html
+index a0280da..3df92b3 100644
+--- a/produkti/web-risinajumi.html
++++ b/produkti/web-risinajumi.html
+@@ -8,8 +8,8 @@
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>WEB risinājumi un mājaslapu izveide no €700 | Intelekta Skola</title>
+     <meta name="description" content="Mājaslapu izveide un apstrāde ar Wix, WordPress, Shopify vai individuāli izstrādātu risinājumu. Dizains, mobilā versija, pamata SEO un palaišana. No €700." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/produkti/web-risinajumi.html" />
+@@ -31,12 +31,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+     <script type="application/ld+json">
+@@ -159,12 +160,12 @@
+           <fieldset>
+             <legend class="text-sm font-semibold text-zinc-200" data-i18n="request.features">Nepieciešamās iespējas</legend>
+             <div class="mt-3 grid gap-3 text-sm text-zinc-300 sm:grid-cols-2">
+-              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="languages" class="h-4 w-4 accent-emerald-400" /><span data-i18n="request.featureLanguages">Vairākas valodas</span></label>
+-              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="payments" class="h-4 w-4 accent-emerald-400" /><span data-i18n="request.featurePayments">Tiešsaistes maksājumi</span></label>
+-              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="booking" class="h-4 w-4 accent-emerald-400" /><span data-i18n="request.featureBooking">Rezervācijas / pieraksts</span></label>
+-              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="blog" class="h-4 w-4 accent-emerald-400" /><span data-i18n="request.featureBlog">Blogs / jaunumi</span></label>
+-              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="crm" class="h-4 w-4 accent-emerald-400" /><span data-i18n="request.featureCrm">Formas / CRM integrācija</span></label>
+-              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="ai" class="h-4 w-4 accent-emerald-400" /><span data-i18n="request.featureAi">AI čatbots vai automatizācija</span></label>
++              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="languages" class="h-4 w-4 accent-sky-400" /><span data-i18n="request.featureLanguages">Vairākas valodas</span></label>
++              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="payments" class="h-4 w-4 accent-sky-400" /><span data-i18n="request.featurePayments">Tiešsaistes maksājumi</span></label>
++              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="booking" class="h-4 w-4 accent-sky-400" /><span data-i18n="request.featureBooking">Rezervācijas / pieraksts</span></label>
++              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="blog" class="h-4 w-4 accent-sky-400" /><span data-i18n="request.featureBlog">Blogs / jaunumi</span></label>
++              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="crm" class="h-4 w-4 accent-sky-400" /><span data-i18n="request.featureCrm">Formas / CRM integrācija</span></label>
++              <label class="flex items-center gap-3"><input type="checkbox" name="wrFeatures" value="ai" class="h-4 w-4 accent-sky-400" /><span data-i18n="request.featureAi">AI čatbots vai automatizācija</span></label>
+             </div>
+           </fieldset>
+           <div class="grid gap-4 sm:grid-cols-2">
+@@ -264,5 +265,6 @@
+     <script src="../scripts/pages.js"></script>
+     <script src="../scripts/web-request.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/program.html b/program.html
+index 26bf383..5cc3690 100644
+--- a/program.html
++++ b/program.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Programma — Intelekta Skola</title>
+     <meta name="description" content="Intelekta Skolas AI kursi: ieviešana, ChatGPT meistarība, automatizācija, individuālās apmācības un promptu inženierija." />
+     <link rel="canonical" href="https://www.intelektaskola.lv/program.html" />
+@@ -33,12 +33,13 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="./styles/aurora.css" />
++    <link rel="stylesheet" href="styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = { theme: { extend: {
+         fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-        colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-        boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++        colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++        boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+       } } };
+     </script>
+   </head>
+@@ -189,5 +190,6 @@
+     <script src="./scripts/pages.js"></script>
+     <script src="./scripts/invoice.js"></script>
+     <script src="./scripts/chatbot.js?v=2"></script>
++    <script src="scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/scripts/ai-home.js b/scripts/ai-home.js
+index b814adb..bc0a689 100644
+--- a/scripts/ai-home.js
++++ b/scripts/ai-home.js
+@@ -326,7 +326,7 @@
+       <div class="mb-5 flex items-center justify-between">
+         <span class="inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric">${icon(m.icon)}</span>
+         ${m.live
+-          ? '<span class="rounded-full bg-emerald-400/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-emerald-300" data-i18n="tools.live"></span>'
++          ? '<span class="rounded-full bg-sky-400/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-sky-300" data-i18n="tools.live"></span>'
+           : '<span class="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-zinc-400" data-i18n="tools.soon"></span>'}
+       </div>
+       <h3 class="text-xl font-bold" data-i18n="tools.items.${i}.title"></h3>
+@@ -381,8 +381,8 @@
+       const path = el.getAttribute('data-i18n-html');
+       const v = get(dict, path);
+       const row = get(dict, path.replace(/\.v$/, ''));
+-      if (typeof v === 'string') el.innerHTML = (row && row.good ? '<span class="text-emerald-300">● </span>' : '') + v;
+-      el.classList.toggle('text-emerald-300', !!(row && row.good));
++      if (typeof v === 'string') el.innerHTML = (row && row.good ? '<span class="text-sky-300">● </span>' : '') + v;
++      el.classList.toggle('text-sky-300', !!(row && row.good));
+       el.classList.toggle('text-zinc-100', !(row && row.good));
+     });
+     document.querySelectorAll('[data-i18n-ph]').forEach((el) => {
+@@ -533,7 +533,7 @@
+   (function hero() {
+     const canvas = $('#hero-canvas');
+     if (!canvas || typeof THREE === 'undefined' || reduce) {
+-      if (canvas) canvas.style.background = 'radial-gradient(60rem 40rem at 50% 0%, rgba(31,158,99,.16), transparent 60%)';
++      if (canvas) canvas.style.background = 'radial-gradient(60rem 40rem at 50% 0%, rgba(37,99,235,.16), transparent 60%)';
+       return;
+     }
+     let w = canvas.clientWidth, h = canvas.clientHeight;
+@@ -557,9 +557,9 @@
+     const c = document.createElement('canvas'); c.width = c.height = 64;
+     const ctx = c.getContext('2d');
+     const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+-    g.addColorStop(0, 'rgba(205,255,228,1)');
+-    g.addColorStop(0.4, 'rgba(31,158,99,.7)');
+-    g.addColorStop(1, 'rgba(31,158,99,0)');
++    g.addColorStop(0, 'rgba(219,234,254,1)');
++    g.addColorStop(0.4, 'rgba(37,99,235,.7)');
++    g.addColorStop(1, 'rgba(37,99,235,0)');
+     ctx.fillStyle = g; ctx.fillRect(0, 0, 64, 64);
+     const sprite = new THREE.CanvasTexture(c);
+ 
+diff --git a/scripts/apply.js b/scripts/apply.js
+index 29069e1..942499d 100644
+--- a/scripts/apply.js
++++ b/scripts/apply.js
+@@ -36,7 +36,7 @@
+           '<label class="block"><span data-a="message" class="mb-1 block text-sm font-semibold text-zinc-200"></span><textarea id="apMsg" required rows="4" class="field w-full resize-none rounded-xl px-4 py-3"></textarea></label>' +
+           '<button type="submit" id="apSend" class="btn-glow btn-primary w-full rounded-full px-6 py-3.5 font-bold transition hover:brightness-110"></button>' +
+         '</form>' +
+-        '<p id="applySuccess" class="mt-4 hidden rounded-xl border border-emerald-400/30 bg-emerald-400/10 p-3 text-center text-sm font-semibold text-emerald-300"></p>' +
++        '<p id="applySuccess" class="mt-4 hidden rounded-xl border border-sky-400/30 bg-sky-400/10 p-3 text-center text-sm font-semibold text-sky-300"></p>' +
+       '</div>' +
+     '</div>';
+   document.body.appendChild(modal);
+diff --git a/scripts/chatbot.js b/scripts/chatbot.js
+index f8f71d3..58fecae 100644
+--- a/scripts/chatbot.js
++++ b/scripts/chatbot.js
+@@ -97,27 +97,27 @@
+   var st = document.createElement('style');
+   st.textContent =
+     '#cbWrap{position:fixed;right:18px;bottom:18px;z-index:115;font-family:Lexend,system-ui,sans-serif}' +
+-    '#cbBtn{display:flex;align-items:center;gap:10px;border:1px solid rgba(92,255,176,.4);background:linear-gradient(120deg,#5CFFB0,#0f5c39);color:#fff;border-radius:9999px;padding:10px 16px 10px 12px;font-weight:700;cursor:pointer;box-shadow:0 12px 30px -8px rgba(31,158,99,.6);transition:transform .25s}' +
++    '#cbBtn{display:flex;align-items:center;gap:10px;border:1px solid rgba(96,165,250,.4);background:linear-gradient(120deg, #3b82f6, #1e40af);color:#fff;border-radius:9999px;padding:10px 16px 10px 12px;font-weight:700;cursor:pointer;box-shadow:0 12px 30px -8px rgba(37,99,235,.6);transition:transform .25s}' +
+     '#cbBtn:hover{transform:translateY(-2px)}' +
+-    '#cbPanel{position:absolute;right:0;bottom:64px;width:min(92vw,380px);height:min(70vh,560px);display:none;flex-direction:column;border-radius:22px;overflow:hidden;border:1px solid rgba(92,255,176,.2);background:linear-gradient(180deg,#0a0f1c,#05070d);box-shadow:0 30px 70px -20px rgba(0,0,0,.8)}' +
++    '#cbPanel{position:absolute;right:0;bottom:64px;width:min(92vw,380px);height:min(70vh,560px);display:none;flex-direction:column;border-radius:22px;overflow:hidden;border:1px solid rgba(96,165,250,.2);background:linear-gradient(180deg,#0a0f1c,#05070d);box-shadow:0 30px 70px -20px rgba(0,0,0,.8)}' +
+     '#cbWrap.open #cbPanel{display:flex;animation:cbIn .3s cubic-bezier(.25,0,0,1) both}' +
+     '#cbWrap.open #cbBtn{display:none}' +
+     '@keyframes cbIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}' +
+-    '.cb-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(120deg,rgba(31,158,99,.25),rgba(15,92,57,.15));border-bottom:1px solid rgba(92,255,176,.18)}' +
+-    '.cb-av{display:grid;place-items:center;height:40px;width:40px;border-radius:50%;background:linear-gradient(135deg,#7CFFC2,#0f5c39);color:#fff;font-weight:800}' +
++    '.cb-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(120deg,rgba(37,99,235,.25),rgba(30,58,138,.15));border-bottom:1px solid rgba(96,165,250,.18)}' +
++    '.cb-av{display:grid;place-items:center;height:40px;width:40px;border-radius:50%;background:linear-gradient(135deg,#93c5fd,#1e3a8a);color:#fff;font-weight:800}' +
+     '.cb-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}' +
+-    '.cb-msgs::-webkit-scrollbar{width:7px}.cb-msgs::-webkit-scrollbar-thumb{background:rgba(92,255,176,.35);border-radius:9px}' +
++    '.cb-msgs::-webkit-scrollbar{width:7px}.cb-msgs::-webkit-scrollbar-thumb{background:rgba(96,165,250,.35);border-radius:9px}' +
+     '.cb-b{max-width:84%;padding:10px 13px;border-radius:16px;font-size:14px;line-height:1.45}' +
+-    '.cb-bot{align-self:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(92,255,176,.15);color:#e7ecf5;border-bottom-left-radius:5px}' +
+-    '.cb-user{align-self:flex-end;background:linear-gradient(120deg,#1f9d63,#0f5c39);color:#fff;border-bottom-right-radius:5px}' +
++    '.cb-bot{align-self:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(96,165,250,.15);color:#e7ecf5;border-bottom-left-radius:5px}' +
++    '.cb-user{align-self:flex-end;background:linear-gradient(120deg,#2563eb,#1e3a8a);color:#fff;border-bottom-right-radius:5px}' +
+     '.cb-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 16px 10px}' +
+-    '.cb-chip{font-size:12.5px;font-weight:600;color:#cdffe4;background:rgba(31,158,99,.12);border:1px solid rgba(92,255,176,.25);border-radius:9999px;padding:6px 11px;cursor:pointer;transition:background .2s}' +
+-    '.cb-chip:hover{background:rgba(31,158,99,.25)}' +
+-    '.cb-form{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(92,255,176,.15)}' +
+-    '.cb-in{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(92,255,176,.2);border-radius:12px;padding:10px 13px;color:#e7ecf5;font-size:14px;outline:none}' +
+-    '.cb-in:focus{border-color:rgba(92,255,176,.6)}' +
+-    '.cb-send{display:grid;place-items:center;height:42px;width:42px;border:none;border-radius:12px;background:linear-gradient(120deg,#5CFFB0,#0f5c39);color:#fff;cursor:pointer}' +
+-    '.cb-typing{display:flex;gap:4px;align-items:center}.cb-dot{height:7px;width:7px;border-radius:50%;background:#7CFFC2;animation:cbDot 1s infinite}.cb-dot:nth-child(2){animation-delay:.15s}.cb-dot:nth-child(3){animation-delay:.3s}' +
++    '.cb-chip{font-size:12.5px;font-weight:600;color:#dbeafe;background:rgba(37,99,235,.12);border:1px solid rgba(96,165,250,.25);border-radius:9999px;padding:6px 11px;cursor:pointer;transition:background .2s}' +
++    '.cb-chip:hover{background:rgba(37,99,235,.25)}' +
++    '.cb-form{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(96,165,250,.15)}' +
++    '.cb-in{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:10px 13px;color:#e7ecf5;font-size:14px;outline:none}' +
++    '.cb-in:focus{border-color:rgba(96,165,250,.6)}' +
++    '.cb-send{display:grid;place-items:center;height:42px;width:42px;border:none;border-radius:12px;background:linear-gradient(120deg, #3b82f6, #1e40af);color:#fff;cursor:pointer}' +
++    '.cb-typing{display:flex;gap:4px;align-items:center}.cb-dot{height:7px;width:7px;border-radius:50%;background:#93c5fd;animation:cbDot 1s infinite}.cb-dot:nth-child(2){animation-delay:.15s}.cb-dot:nth-child(3){animation-delay:.3s}' +
+     '@keyframes cbDot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}';
+   document.head.appendChild(st);
+ 
+diff --git a/scripts/invoice.js b/scripts/invoice.js
+index ab7831d..6908c3d 100644
+--- a/scripts/invoice.js
++++ b/scripts/invoice.js
+@@ -40,7 +40,7 @@
+ 
+   function field(label, name, type, placeholder, required, extra) {
+     return '<label style="display:block"><span style="display:block;margin-bottom:6px;font-size:13px;font-weight:700;color:#d4d4d8">' + label + (extra ? ' <span style="font-weight:400;color:#71717a">(' + extra + ')</span>' : '') + '</span>' +
+-      '<input name="' + name + '" type="' + type + '" ' + (required ? 'required ' : '') + 'placeholder="' + placeholder + '" style="box-sizing:border-box;width:100%;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:#0e231b;color:#fff;padding:12px 14px;outline:none"></label>';
++      '<input name="' + name + '" type="' + type + '" ' + (required ? 'required ' : '') + 'placeholder="' + placeholder + '" style="box-sizing:border-box;width:100%;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:#0e1629;color:#fff;padding:12px 14px;outline:none"></label>';
+   }
+ 
+   function ensureModal() {
+@@ -52,11 +52,11 @@
+     wrap.setAttribute('role', 'dialog');
+     wrap.setAttribute('aria-modal', 'true');
+     wrap.setAttribute('aria-labelledby', 'invoiceTitle');
+-    wrap.style.cssText = 'position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(2,10,7,.82);backdrop-filter:blur(8px)';
+-    wrap.innerHTML = '<div style="width:min(100%,620px);max-height:92vh;overflow:auto;border:1px solid rgba(255,255,255,.14);border-radius:24px;background:#081712;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.5)">' +
+-      '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px"><div><div style="font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#5CFFB0">INTELEKTA SKOLA</div><h2 id="invoiceTitle" style="margin:8px 0 0;font-size:26px;color:#fff">' + d.title + '</h2></div><button type="button" data-invoice-close aria-label="Close" style="border:0;background:transparent;color:#a1a1aa;font-size:28px;cursor:pointer">×</button></div>' +
++    wrap.style.cssText = 'position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(3,6,16,.82);backdrop-filter:blur(8px)';
++    wrap.innerHTML = '<div style="width:min(100%,620px);max-height:92vh;overflow:auto;border:1px solid rgba(255,255,255,.14);border-radius:24px;background:#070b18;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.5)">' +
++      '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px"><div><div style="font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#60a5fa">INTELEKTA SKOLA</div><h2 id="invoiceTitle" style="margin:8px 0 0;font-size:26px;color:#fff">' + d.title + '</h2></div><button type="button" data-invoice-close aria-label="Close" style="border:0;background:transparent;color:#a1a1aa;font-size:28px;cursor:pointer">×</button></div>' +
+       '<p data-invoice-intro style="color:#a1a1aa;line-height:1.55">' + d.intro + '</p>' +
+-      '<div data-invoice-product style="margin:18px 0;padding:14px;border-radius:14px;background:rgba(31,157,99,.13);color:#d1fae5"></div>' +
++      '<div data-invoice-product style="margin:18px 0;padding:14px;border-radius:14px;background:rgba(37,99,235,.13);color:#dbeafe"></div>' +
+       '<form id="invoiceForm"><div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Company<input class="js-hp" type="text" name="company" tabindex="-1" autocomplete="off"></label></div>' +
+       '<div style="display:grid;gap:14px">' +
+       field(d.recipient, 'billingName', 'text', d.recipientPh, true, '') +
+@@ -64,7 +64,7 @@
+       '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px">' + field(d.reg, 'billingRegNumber', 'text', '', false, d.optional) + field(d.vat, 'billingVatNumber', 'text', 'LV…', false, d.optional) + '</div>' +
+       field(d.address, 'billingAddress', 'text', d.addressPh, true, '') +
+       '<p data-invoice-note style="margin:0;font-size:12px;color:#71717a">' + d.note + '</p><div data-invoice-status role="status" style="display:none;padding:12px;border-radius:12px"></div>' +
+-      '<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end"><button type="button" data-invoice-close style="border:1px solid rgba(255,255,255,.14);border-radius:999px;background:transparent;color:#d4d4d8;padding:11px 18px;font-weight:700;cursor:pointer">' + d.cancel + '</button><button type="submit" style="border:0;border-radius:999px;background:linear-gradient(135deg,#1f9d63,#5CFFB0);color:#052014;padding:11px 20px;font-weight:800;cursor:pointer">' + d.send + '</button></div>' +
++      '<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end"><button type="button" data-invoice-close style="border:1px solid rgba(255,255,255,.14);border-radius:999px;background:transparent;color:#d4d4d8;padding:11px 18px;font-weight:700;cursor:pointer">' + d.cancel + '</button><button type="submit" style="border:0;border-radius:999px;background:linear-gradient(135deg,#2563eb,#60a5fa);color:#0b1530;padding:11px 20px;font-weight:800;cursor:pointer">' + d.send + '</button></div>' +
+       '</div></form></div>';
+     document.body.appendChild(wrap);
+     modal = wrap;
+@@ -145,8 +145,8 @@
+       billingAddress: String(data.get('billingAddress') || '')
+     }).then(function (sent) {
+       status.style.display = 'block';
+-      status.style.background = sent ? 'rgba(16,185,129,.14)' : 'rgba(239,68,68,.14)';
+-      status.style.color = sent ? '#a7f3d0' : '#fecaca';
++      status.style.background = sent ? 'rgba(59,130,246,.14)' : 'rgba(239,68,68,.14)';
++      status.style.color = sent ? '#bfdbfe' : '#fecaca';
+       status.textContent = sent ? d.sent : d.error;
+       if (sent) form.reset();
+     }).catch(function () {
+diff --git a/scripts/prerender-grids.js b/scripts/prerender-grids.js
+index 5bfe9cb..3218580 100644
+--- a/scripts/prerender-grids.js
++++ b/scripts/prerender-grids.js
+@@ -111,7 +111,7 @@ function toolGridHTML() {
+       <div class="mb-5 flex items-center justify-between">
+         <span class="inline-grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 text-electric">${icon(m.icon)}</span>
+         ${m.live
+-          ? `<span class="rounded-full bg-emerald-400/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-emerald-300" data-i18n="tools.live">${esc(T.lv.tools.live)}</span>`
++          ? `<span class="rounded-full bg-sky-400/15 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-sky-300" data-i18n="tools.live">${esc(T.lv.tools.live)}</span>`
+           : `<span class="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-zinc-400" data-i18n="tools.soon">${esc(T.lv.tools.soon)}</span>`}
+       </div>
+       <h3 class="text-xl font-bold" data-i18n="tools.items.${i}.title">${esc(item.title)}</h3>
+@@ -150,7 +150,7 @@ function companyGridHTML() {
+   return T.lv.company.rows.map((row, i) => `
+     <div class="rounded-2xl bg-white/[.03] p-4 hairline">
+       <div class="text-xs uppercase tracking-wider text-zinc-500" data-i18n="company.rows.${i}.k">${esc(row.k)}</div>
+-      <div class="mt-1 font-semibold" data-i18n-html="company.rows.${i}.v">${row.good ? `<span class="text-emerald-300">${esc(row.v)}</span>` : esc(row.v)}</div>
++      <div class="mt-1 font-semibold" data-i18n-html="company.rows.${i}.v">${row.good ? `<span class="text-sky-300">${esc(row.v)}</span>` : esc(row.v)}</div>
+     </div>`).join('');
+ }
+ 
+diff --git a/scripts/site-polish.js b/scripts/site-polish.js
+new file mode 100644
+index 0000000..71d0694
+--- /dev/null
++++ b/scripts/site-polish.js
+@@ -0,0 +1,105 @@
++/* Intelekta Skola — site-polish.js
++   Brings every inner page in line with the homepage look:
++   hero glow, badge label, glowing buttons and cards, scroll reveal,
++   and a safe fallback for broken images.
++   Include on every page except the homepage, right after the other scripts:
++   <script src="/scripts/site-polish.js" defer></script>                      */
++(function () {
++  if (window.__isPolish) return; window.__isPolish = true;
++  var main = document.querySelector('main');
++  if (!main) return;
++  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
++
++  // 1) Styles (scoped, no dependency on Tailwind building new classes)
++  var css = [
++    '.isp-glow{position:absolute;left:0;right:0;top:0;height:900px;pointer-events:none;z-index:0;',
++    'background:radial-gradient(55% 60% at 85% 0%,rgba(37,99,235,.26),transparent 70%),',
++    'radial-gradient(40% 55% at 0% 70%,rgba(30,58,138,.28),transparent 70%)}',
++    '.isp-badge{display:inline-flex!important;align-items:center;gap:.5rem;border-radius:9999px;',
++    'border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);padding:.375rem 1rem;',
++    'letter-spacing:.2em!important;margin-bottom:.5rem}',
++    '.isp-badge:before{content:"";width:6px;height:6px;border-radius:9999px;background:#60a5fa;box-shadow:0 0 10px #60a5fa}',
++    '.isp-card{transition:transform .35s cubic-bezier(.25,0,0,1),box-shadow .35s,border-color .35s}',
++    'main .isp-card:hover{transform:translateY(-3px);border-color:rgba(96,165,250,.28)!important;',
++    'box-shadow:0 18px 50px -20px rgba(37,99,235,.55)}',
++    '.isp-btn{box-shadow:0 10px 40px -10px rgba(96,165,250,.55)}',
++    '.isp-reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.25,0,0,1),transform .7s cubic-bezier(.25,0,0,1)}',
++    '.isp-reveal.isp-in{opacity:1;transform:none}',
++    '.isp-imgfail{background:radial-gradient(70% 70% at 70% 20%,rgba(96,165,250,.25),transparent 60%),linear-gradient(135deg,#0e1629,#070b18)}',
++    '.isp-dot{display:inline-flex!important;align-items:center;gap:.5rem}',
++    '.isp-dot:before{content:"";width:6px;height:6px;border-radius:9999px;background:#60a5fa;box-shadow:0 0 10px #60a5fa}',
++    '.isp-sec{border-radius:1.5rem;padding:1.5rem}',
++    '@media(min-width:640px){.isp-sec{padding:2rem}}',
++    '.isp-h2{letter-spacing:-.01em}',
++    'main h1{text-wrap:balance}'
++  ].join('');
++  var st = document.createElement('style'); st.id = 'isp-style'; st.textContent = css;
++  document.head.appendChild(st);
++
++  // 2) Hero glow behind the top of the page
++  if (!document.querySelector('.isp-glow')) {
++    var g = document.createElement('div'); g.className = 'isp-glow';
++    document.body.insertBefore(g, document.body.firstChild);
++  }
++
++  // 3) Small label above the first h1 -> homepage-style badge
++  var h1 = main.querySelector('h1');
++  if (h1) {
++    var prev = h1.previousElementSibling;
++    var hasDot = prev && (/^[●•]/.test(prev.textContent.trim()) || prev.querySelector('[class*="rounded-full"], svg'));
++    if (prev && !hasDot && /uppercase/.test(prev.className) && prev.textContent.trim().length < 60) {
++      prev.classList.add(/rounded-full/.test(prev.className) ? 'isp-dot' : 'isp-badge');
++    }
++    h1.classList.add('leading-[1.05]');
++  }
++
++  // 3b) Plain content sections (product pages, about) -> glass cards like the homepage
++  main.querySelectorAll(':scope > section').forEach(function (sec) {
++    if (/glass/.test(sec.className) || sec.querySelector('.glass, form, article')) return;
++    if (!sec.querySelector('h2')) return;
++    sec.classList.add('glass', 'isp-card', 'isp-sec');
++    var h2 = sec.querySelector('h2');
++    if (h2) h2.classList.add('isp-h2');
++  });
++
++  // 4) Cards get the homepage hover glow
++  main.querySelectorAll('.glass').forEach(function (el) {
++    if (el.tagName === 'FORM' || el.closest('form')) return;
++    if (el.querySelector('input, textarea, select')) return; // keep tool panels still
++    if (/glow-hover/.test(el.className)) return;
++    if (el.offsetWidth > 0 && el.offsetWidth < 1100) el.classList.add('isp-card');
++  });
++
++  // 5) Primary buttons glow like the homepage CTA
++  document.querySelectorAll('main .btn-primary').forEach(function (b) {
++    if (!/btn-glow/.test(b.className)) b.classList.add('isp-btn');
++  });
++
++  // 6) Broken images: hide the broken icon, keep a branded gradient
++  function failImg(img) {
++    img.style.visibility = 'hidden';
++    if (img.parentElement) img.parentElement.classList.add('isp-imgfail');
++  }
++  main.querySelectorAll('img').forEach(function (img) {
++    if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) failImg(img);
++    img.addEventListener('error', function () { failImg(img); });
++  });
++
++  // 7) Scroll reveal for sections and cards (homepage feel)
++  if (!reduce && 'IntersectionObserver' in window) {
++    var targets = main.querySelectorAll(':scope > section, :scope > div > section, .glass, article, h2');
++    var vh = window.innerHeight;
++    var io = new IntersectionObserver(function (es) {
++      es.forEach(function (e) {
++        if (e.isIntersecting) { e.target.classList.add('isp-in'); io.unobserve(e.target); }
++      });
++    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
++    targets.forEach(function (el, i) {
++      if (el.closest('.isp-reveal')) return;
++      if (el.getBoundingClientRect().top < vh) return; // never hide what is already on screen
++      el.classList.add('isp-reveal');
++      el.style.transitionDelay = ((i % 3) * 0.06) + 's';
++      io.observe(el);
++    });
++  }
++})();
+diff --git a/scripts/web-request.js b/scripts/web-request.js
+index 94cf003..874e251 100644
+--- a/scripts/web-request.js
++++ b/scripts/web-request.js
+@@ -47,7 +47,7 @@
+     var status = document.getElementById('wrStatus');
+     status.textContent = text;
+     status.className = 'rounded-xl p-3 text-center text-sm font-semibold ' +
+-      (ok ? 'border border-emerald-400/30 bg-emerald-400/10 text-emerald-300' : 'border border-amber-400/30 bg-amber-400/10 text-amber-200');
++      (ok ? 'border border-sky-400/30 bg-sky-400/10 text-sky-300' : 'border border-amber-400/30 bg-amber-400/10 text-amber-200');
+   }
+ 
+   form.addEventListener('submit', function (event) {
+diff --git a/styles/aurora.css b/styles/aurora.css
+index 760e510..c6e0944 100644
+--- a/styles/aurora.css
++++ b/styles/aurora.css
+@@ -3,16 +3,16 @@
+  * Palette: near-black background, electric-blue accents, near-white text.
+  */
+ :root {
+-  --bg: #081712;
+-  --bg2: #0e231b;
+-  --brand: #1f9d63;        /* primary blue */
+-  --brand-lt: #7CFFC2;     /* light blue */
+-  --brand-deep: #0f5c39;   /* deep blue */
+-  --brand-electric: #5CFFB0;
++  --bg: #070b18;
++  --bg2: #0e1629;
++  --brand: #2563eb;        /* primary blue */
++  --brand-lt: #93c5fd;     /* light blue */
++  --brand-deep: #1e3a8a;   /* deep blue */
++  --brand-electric: #60a5fa;
+   --text: #e7ecf5;
+-  --muted: #9fb3a8;
+-  --line: rgba(92, 255, 176, 0.18);
+-  --good: #34d399;
++  --muted: #9aa8c7;
++  --line: rgba(96, 165, 250, 0.18);
++  --good: #38bdf8;
+ }
+ 
+ * { -webkit-tap-highlight-color: transparent; }
+@@ -24,14 +24,14 @@ body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+   content: '';
+   position: fixed; inset: 0; z-index: 0; pointer-events: none;
+   background:
+-    radial-gradient(60rem 40rem at 50% -10%, rgba(31, 158, 99, 0.16), transparent 60%),
+-    radial-gradient(40rem 30rem at 90% 20%, rgba(15, 92, 57, 0.12), transparent 60%),
+-    radial-gradient(40rem 30rem at 0% 70%, rgba(92, 255, 176, 0.10), transparent 60%);
++    radial-gradient(60rem 40rem at 50% -10%, rgba(37, 99, 235, 0.16), transparent 60%),
++    radial-gradient(40rem 30rem at 90% 20%, rgba(30, 58, 138, 0.12), transparent 60%),
++    radial-gradient(40rem 30rem at 0% 70%, rgba(96, 165, 250, 0.10), transparent 60%);
+ }
+ 
+ /* Gradient brand text + line */
+ .brand-text {
+-  background: linear-gradient(135deg, #cdffe4, #1f9d63 45%, #0f5c39);
++  background: linear-gradient(135deg, #dbeafe, #60a5fa 45%, #3b82f6);
+   -webkit-background-clip: text; background-clip: text; color: transparent;
+ }
+ .brand-line { background: linear-gradient(90deg, transparent, var(--brand), transparent); }
+@@ -46,12 +46,12 @@ body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+ .glass-strong { background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)); }
+ 
+ /* Glow + hover lift (cards) */
+-.glow { box-shadow: 0 0 0 1px rgba(31, 158, 99, 0.14), 0 20px 60px -20px rgba(31, 158, 99, 0.25); }
++.glow { box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.14), 0 20px 60px -20px rgba(37, 99, 235, 0.25); }
+ .glow-hover { transition: transform .5s cubic-bezier(.25,0,0,1), box-shadow .5s cubic-bezier(.25,0,0,1), border-color .5s; }
+ .glow-hover:hover {
+   transform: translateY(-8px) scale(1.02);
+-  box-shadow: 0 0 0 1px rgba(92, 255, 176, 0.45), 0 30px 70px -24px rgba(31, 158, 99, 0.4);
+-  border-color: rgba(92, 255, 176, 0.5);
++  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.45), 0 30px 70px -24px rgba(37, 99, 235, 0.4);
++  border-color: rgba(96, 165, 250, 0.5);
+ }
+ 
+ /* Framer-Motion-style reveal: opacity 0->1, y 24->0, 0.8s, ease [0.25,0,0,1] */
+@@ -60,11 +60,11 @@ body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+ @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+ 
+ /* Buttons */
+-.btn-primary { background: linear-gradient(120deg, #5CFFB0, #0f5c39); color: #fff; }
++.btn-primary { background: linear-gradient(120deg, #3b82f6, #1e40af); color: #fff; }
+ .btn-glow { position: relative; isolation: isolate; }
+ .btn-glow::before {
+   content: ''; position: absolute; inset: -3px; z-index: -1; border-radius: 9999px;
+-  background: linear-gradient(120deg, #7CFFC2, #1f9d63, #0f5c39, #1f9d63);
++  background: linear-gradient(120deg, #93c5fd, #3b82f6, #1e40af, #3b82f6);
+   filter: blur(14px); opacity: .55; animation: aurora-pulse 3.2s ease-in-out infinite;
+ }
+ @keyframes aurora-pulse { 0%,100% { opacity: .4; } 50% { opacity: .85; } }
+@@ -72,12 +72,12 @@ body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+ /* Form fields */
+ .field { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); color: var(--text); transition: border-color .3s, box-shadow .3s; }
+ .field::placeholder { color: #64748b; }
+-.field:focus { outline: none; border-color: rgba(92, 255, 176, 0.6); box-shadow: 0 0 0 3px rgba(31, 158, 99, 0.12); }
++.field:focus { outline: none; border-color: rgba(96, 165, 250, 0.6); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12); }
+ 
+ /* Range slider (calculator) */
+-input[type='range'] { -webkit-appearance: none; appearance: none; height: 8px; border-radius: 99px; background: linear-gradient(90deg, #0f5c39, #5CFFB0); outline: none; }
+-input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; height: 22px; width: 22px; border-radius: 50%; background: #fff; border: 3px solid #1f9d63; box-shadow: 0 4px 12px rgba(31,158,99,.5); cursor: pointer; }
+-input[type='range']::-moz-range-thumb { height: 22px; width: 22px; border-radius: 50%; background: #fff; border: 3px solid #1f9d63; cursor: pointer; }
++input[type='range'] { -webkit-appearance: none; appearance: none; height: 8px; border-radius: 99px; background: linear-gradient(90deg, #1e3a8a, #60a5fa); outline: none; }
++input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; height: 22px; width: 22px; border-radius: 50%; background: #fff; border: 3px solid #2563eb; box-shadow: 0 4px 12px rgba(37,99,235,.5); cursor: pointer; }
++input[type='range']::-moz-range-thumb { height: 22px; width: 22px; border-radius: 50%; background: #fff; border: 3px solid #2563eb; cursor: pointer; }
+ 
+ /* 3D scene helpers */
+ .scene { perspective: 1200px; }
+@@ -88,15 +88,15 @@ input[type='range']::-moz-range-thumb { height: 22px; width: 22px; border-radius
+ .nav-link::after { content: ''; position: absolute; left: 0; bottom: -4px; height: 1px; width: 0; background: var(--brand); transition: width .35s cubic-bezier(.25,0,0,1); }
+ .nav-link:hover::after { width: 100%; }
+ 
+-::selection { background: rgba(31, 158, 99, 0.35); color: #fff; }
++::selection { background: rgba(37, 99, 235, 0.35); color: #fff; }
+ 
+ /* Pretty scrollbars on scrollable panels */
+ .nice-scroll::-webkit-scrollbar { width: 8px; }
+-.nice-scroll::-webkit-scrollbar-thumb { background: rgba(92, 255, 176, 0.35); border-radius: 99px; }
++.nice-scroll::-webkit-scrollbar-thumb { background: rgba(96, 165, 250, 0.35); border-radius: 99px; }
+ 
+ /* Selected card highlight (calculator tasks) */
+-.task-on { box-shadow: 0 0 0 1px rgba(92, 255, 176, 0.5), 0 10px 30px -8px rgba(31, 158, 99, 0.35); }
++.task-on { box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.5), 0 10px 30px -8px rgba(37, 99, 235, 0.35); }
+ 
+ /* Language switch segmented control */
+ .langseg button { color: var(--muted); transition: color .25s, background .25s; }
+-.langseg button.is-active { color: #fff; background: rgba(31, 158, 99, 0.22); }
++.langseg button.is-active { color: #fff; background: rgba(37, 99, 235, 0.22); }
+diff --git a/styles/theme-light.css b/styles/theme-light.css
+new file mode 100644
+index 0000000..5a6c6f6
+--- /dev/null
++++ b/styles/theme-light.css
+@@ -0,0 +1,95 @@
++/* Intelekta Skola — light theme: white canvas, blue accents, navy contrast boxes.
++   Load AFTER aurora.css on every page (homepage included):
++   <link rel="stylesheet" href="/styles/theme-light.css" />                      */
++@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap');
++
++:root {
++  --bg: #ffffff; --bg2: #f5f8ff; --text: #0b1530; --muted: #5b6785;
++  --brand: #2563eb; --brand-lt: #1d4ed8; --brand-deep: #1e3a8a; --brand-electric: #2563eb;
++  --line: #e3e9f4; --navy: #0b1530; --tint: #eef4ff;
++  color-scheme: light;
++}
++
++/* Canvas */
++html, body, body.ambient { background: #fff !important; color: var(--text) !important; }
++body.ambient::before, body.ambient::after { opacity: .0 !important; }
++.isp-glow { background: radial-gradient(55% 60% at 85% 0%, rgba(37,99,235,.10), transparent 70%),
++            radial-gradient(40% 55% at 0% 60%, rgba(37,99,235,.06), transparent 70%) !important; }
++::selection { background: rgba(37,99,235,.18); color: var(--navy); }
++
++/* Headings: editorial serif, navy */
++main h1, main h2, section h1, section h2 {
++  font-family: 'Source Serif 4', Georgia, serif !important; font-weight: 700 !important;
++  letter-spacing: -.015em !important; color: var(--navy);
++}
++.brand-text { background: linear-gradient(120deg, #2563eb, #1e40af) !important;
++  -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important; }
++
++/* Text colours (Tailwind utilities used on the site) */
++.text-white:not(.btn-primary):not(.btn-primary *), .text-zinc-50, .text-zinc-100, .text-zinc-200 { color: #0b1530 !important; }
++.text-zinc-300, .text-zinc-300\/90 { color: #334155 !important; }
++.text-zinc-400 { color: #475569 !important; }
++.text-zinc-500, .text-muted { color: #5b6785 !important; }
++.text-electric, .text-brand, .text-sky, .text-accent { color: #2563eb !important; }
++.text-brandlt, .hover\:text-brandlt:hover, .hover\:text-electric:hover { color: #1d4ed8 !important; }
++.text-sky-300, .text-sky-300 { color: #047857 !important; }
++
++/* Surfaces: every block sits in its own white box */
++.glass, .glass-strong {
++  background: #fff !important; border: 1px solid var(--line) !important;
++  box-shadow: 0 1px 2px rgba(11,21,48,.04), 0 12px 32px -16px rgba(11,21,48,.18) !important;
++  backdrop-filter: none !important;
++}
++.hairline { border: 1px solid var(--line) !important; }
++.bg-white\/5, .bg-white\/\[\.03\], .bg-white\/\[\.04\], .bg-white\/10 { background-color: #f5f8ff !important; }
++.hover\:bg-white\/5:hover, .hover\:bg-white\/10:hover, .hover\:bg-white\/\[\.06\]:hover { background-color: var(--tint) !important; }
++.border-white\/5, .border-white\/10 { border-color: var(--line) !important; }
++.bg-ink, .bg-ink2 { background-color: #fff !important; }
++.bg-electric\/10, .bg-brand\/15, .bg-brand\/10 { background-color: var(--tint) !important; }
++.bg-electric { background-color: #2563eb !important; }
++.glow { box-shadow: 0 0 0 1px rgba(37,99,235,.12), 0 18px 44px -18px rgba(37,99,235,.35) !important; }
++.glow-hover:hover, .isp-card:hover { border-color: #bcd0f5 !important;
++  box-shadow: 0 20px 44px -20px rgba(37,99,235,.35) !important; }
++.to-ink { --tw-gradient-to: #ffffff var(--tw-gradient-to-position) !important; }
++#hero-canvas { opacity: .35 !important; }
++
++/* Badges / labels: blue tint pill */
++.isp-badge, .isp-dot, main .rounded-full.uppercase, section .rounded-full.uppercase {
++  background: var(--tint) !important; border: 1px solid #cfdcf7 !important; color: #1d4ed8 !important;
++}
++.isp-badge:before, .isp-dot:before { background: #2563eb !important; box-shadow: none !important; }
++
++/* Buttons */
++.btn-primary { background: #2563eb !important; color: #fff !important; border: 1px solid #1d4ed8;
++  box-shadow: 0 8px 22px -10px rgba(37,99,235,.7) !important; }
++.btn-primary:hover { background: #1d4ed8 !important; filter: none !important; }
++a.hairline.rounded-full, button.hairline.rounded-full { background: #fff !important; color: #0b1530 !important;
++  border: 1px solid #cbd5e1 !important; }
++a.hairline.rounded-full:hover { border-color: #2563eb !important; color: #1d4ed8 !important; }
++
++/* Header: white bar with border */
++header .glass { background: rgba(255,255,255,.88) !important; backdrop-filter: blur(12px) !important; }
++header .text-zinc-300, header nav a { color: #334155 !important; }
++.langseg button { color: #5b6785 !important; }
++.langseg button.is-active { background: var(--tint) !important; color: #1d4ed8 !important; }
++
++/* Forms */
++.field { background: #fff !important; border: 1px solid #cbd5e1 !important; color: #0b1530 !important; }
++.field::placeholder { color: #94a3b8 !important; }
++.field:focus { border-color: #2563eb !important; box-shadow: 0 0 0 3px rgba(37,99,235,.15) !important; }
++
++/* Navy contrast boxes: closing CTA blocks and the footer */
++.glass-strong, footer {
++  background: #0b1530 !important; color: #e6ecfb !important; border-color: #0b1530 !important;
++}
++.glass-strong h1, .glass-strong h2, .glass-strong h3, .glass-strong .text-white,
++.glass-strong .text-zinc-100, .glass-strong .text-zinc-200 { color: #fff !important; }
++.glass-strong .text-zinc-300, .glass-strong .text-zinc-400, .glass-strong p,
++footer, footer a, footer .text-zinc-500 { color: #b9c5e4 !important; }
++footer a:hover { color: #fff !important; }
++.glass-strong .brand-text { background: linear-gradient(120deg, #93c5fd, #60a5fa) !important;
++  -webkit-background-clip: text !important; background-clip: text !important; }
++.glass-strong .btn-primary { background: #fff !important; color: #0b1530 !important; border-color: #fff; }
++.glass-strong .text-electric, footer .text-electric { color: #93c5fd !important; }
++main section > .pointer-events-none.absolute.inset-0 { opacity: .35 !important; }
++.glass-strong .glass, .glass-strong .hairline, .glass-strong .bg-white\/5 { background: rgba(255,255,255,.07) !important; border-color: rgba(255,255,255,.14) !important; box-shadow: none !important; }
+diff --git a/tools/ai-gatavibas-tests/app.js b/tools/ai-gatavibas-tests/app.js
+index e734d14..3f372c1 100644
+--- a/tools/ai-gatavibas-tests/app.js
++++ b/tools/ai-gatavibas-tests/app.js
+@@ -72,7 +72,7 @@ const TIERS = [
+     title: { lv: 'Pamati ir — laiks sistēmai', en: 'Foundations are there — time for a system', ru: 'Основа есть — пора систематизировать' },
+     text: { lv: 'Jūs jau lietojat AI, bet bez vienotas pieejas. Ar struktūru un veidnēm rezultāts kļūs paredzams un mērāms.', en: 'You already use AI, but without a unified approach. With structure and templates, results become predictable and measurable.', ru: 'Вы уже используете ИИ, но без единого подхода. Со структурой и шаблонами результат станет предсказуемым и измеримым.' },
+     recos: { lv: ['Praktiskās promptu veidnes biežākajiem uzdevumiem', 'Procesu kartēšana: kur AI dod lielāko ietaupījumu', 'Komandas apmācība ar reāliem jūsu piemēriem'], en: ['Practical prompt templates for common tasks', 'Process mapping: where AI saves the most', 'Team training with your real examples'], ru: ['Практические шаблоны промптов для частых задач', 'Картирование процессов: где ИИ экономит больше всего', 'Обучение команды на ваших реальных примерах'] } },
+-  { min: 70, max: 100, badgeClass: 'bg-good/25 text-emerald-300',
++  { min: 70, max: 100, badgeClass: 'bg-good/25 text-sky-300',
+     badge: { lv: 'Gatavs paātrināt', en: 'Ready to accelerate', ru: 'Готовы ускоряться' },
+     title: { lv: 'Gatavs nākamajam līmenim', en: 'Ready for the next level', ru: 'Готовы к следующему уровню' },
+     text: { lv: 'Lieliski! Pamati ir stipri. Tagad fokuss uz automatizāciju, padziļinātām prasmēm un mērāmu ROI.', en: 'Excellent! The foundations are strong. Now focus on automation, advanced skills and measurable ROI.', ru: 'Отлично! Основа крепкая. Теперь фокус на автоматизации, продвинутых навыках и измеримом ROI.' },
+diff --git a/tools/ai-gatavibas-tests/index.html b/tools/ai-gatavibas-tests/index.html
+index 40f94ed..6d03e4f 100644
+--- a/tools/ai-gatavibas-tests/index.html
++++ b/tools/ai-gatavibas-tests/index.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>AI Gatavības Tests — Intelekta Skola</title>
+     <meta
+       name="description"
+@@ -36,13 +36,14 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../../styles/aurora.css" />
++    <link rel="stylesheet" href="../../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = {
+         theme: { extend: {
+           fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-          colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', accent: '#1f9d63', sky: '#5CFFB0', muted: '#9fb3a8', good: '#34d399' },
+-          boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++          colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', accent: '#2563eb', sky: '#60a5fa', muted: '#9aa8c7', good: '#38bdf8' },
++          boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+           keyframes: { pop: { '0%': { transform: 'scale(.96) translateY(10px)', opacity: '0' }, '100%': { transform: 'scale(1) translateY(0)', opacity: '1' } } },
+           animation: { pop: 'pop .4s ease-out both' },
+         } },
+@@ -114,8 +115,8 @@
+                   <circle id="gaugeRing" class="gauge-ring" cx="60" cy="60" r="52" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" />
+                   <defs>
+                     <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+-                      <stop offset="0" stop-color="#0f5c39" />
+-                      <stop offset="1" stop-color="#5CFFB0" />
++                      <stop offset="0" stop-color="#1e3a8a" />
++                      <stop offset="1" stop-color="#60a5fa" />
+                     </linearGradient>
+                   </defs>
+                 </svg>
+@@ -161,5 +162,6 @@
+     <script src="../../scripts/icons.js"></script>
+     <script src="./app.js?v=2"></script>
+     <script src="../../scripts/chatbot.js?v=2"></script>
++    <script src="../../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/tools/index.html b/tools/index.html
+index d548048..4b9337c 100644
+--- a/tools/index.html
++++ b/tools/index.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Bezmaksas AI rīki — Intelekta Skola</title>
+     <meta
+       name="description"
+@@ -36,13 +36,14 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../styles/aurora.css" />
++    <link rel="stylesheet" href="../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = {
+         theme: { extend: {
+           fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-          colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', muted: '#9fb3a8' },
+-          boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++          colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', muted: '#9aa8c7' },
++          boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+         } },
+       };
+     </script>
+@@ -160,5 +161,6 @@
+     <script src="../scripts/config.js"></script>
+     <script src="../scripts/apply.js"></script>
+     <script src="../scripts/chatbot.js?v=2"></script>
++    <script src="../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/tools/laika-kalkulators/index.html b/tools/laika-kalkulators/index.html
+index d5a9c1b..1d12987 100644
+--- a/tools/laika-kalkulators/index.html
++++ b/tools/laika-kalkulators/index.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>AI Laika Kalkulators — Intelekta Skola</title>
+     <meta
+       name="description"
+@@ -36,13 +36,14 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../../styles/aurora.css" />
++    <link rel="stylesheet" href="../../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = {
+         theme: { extend: {
+           fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+-          colors: { ink: '#081712', ink2: '#0e231b', brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0', accent: '#1f9d63', sky: '#5CFFB0', muted: '#9fb3a8', good: '#34d399' },
+-          boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++          colors: { ink: '#070b18', ink2: '#0e1629', brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa', accent: '#2563eb', sky: '#60a5fa', muted: '#9aa8c7', good: '#38bdf8' },
++          boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+         } },
+       };
+     </script>
+@@ -177,5 +178,6 @@
+     <script src="../../scripts/icons.js"></script>
+     <script src="./app.js?v=2"></script>
+     <script src="../../scripts/chatbot.js?v=2"></script>
++    <script src="../../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+diff --git a/tools/prompt-darbnica/index.html b/tools/prompt-darbnica/index.html
+index 1be179d..6aedfb0 100644
+--- a/tools/prompt-darbnica/index.html
++++ b/tools/prompt-darbnica/index.html
+@@ -10,8 +10,8 @@
+     })(window,document,'script','dataLayer','GTM-NFF2HWVP');</script>
+     <!-- End Google Tag Manager -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <meta name="color-scheme" content="dark" />
+-    <meta name="theme-color" content="#081712" />
++    <meta name="color-scheme" content="light" />
++    <meta name="theme-color" content="#ffffff" />
+     <title>Promptu Darbnīca — Intelekta Skola</title>
+     <meta
+       name="description"
+@@ -36,6 +36,7 @@
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+     <link rel="stylesheet" href="../../styles/aurora.css" />
++    <link rel="stylesheet" href="../../styles/theme-light.css" />
+     <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+       tailwind.config = {
+@@ -43,11 +44,11 @@
+           extend: {
+             fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
+             colors: {
+-              ink: '#081712', ink2: '#0e231b',
+-              brand: '#1f9d63', brandlt: '#7CFFC2', branddeep: '#0f5c39', electric: '#5CFFB0',
+-              accent: '#1f9d63', sky: '#5CFFB0', muted: '#9fb3a8', good: '#34d399',
++              ink: '#070b18', ink2: '#0e1629',
++              brand: '#2563eb', brandlt: '#93c5fd', branddeep: '#1e3a8a', electric: '#60a5fa',
++              accent: '#2563eb', sky: '#60a5fa', muted: '#9aa8c7', good: '#38bdf8',
+             },
+-            boxShadow: { depth: '0 10px 30px -8px rgba(31,158,99,.3), 0 30px 60px -20px rgba(92,255,176,.25)' },
++            boxShadow: { depth: '0 10px 30px -8px rgba(37,99,235,.3), 0 30px 60px -20px rgba(96,165,250,.25)' },
+           },
+         },
+       };
+@@ -59,7 +60,7 @@
+       .flip.is-flipped .flip__inner { transform: rotateY(180deg); }
+       .flip__face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+       .flip__back { transform: rotateY(180deg); }
+-      .task-on { box-shadow: 0 0 0 1px rgba(92,255,176,.5), 0 10px 30px -8px rgba(31,158,99,.35); }
++      .task-on { box-shadow: 0 0 0 1px rgba(96,165,250,.5), 0 10px 30px -8px rgba(37,99,235,.35); }
+     </style>
+   </head>
+ 
+@@ -166,8 +167,8 @@
+                   <div class="mb-1 text-xs font-bold uppercase tracking-wide text-red-300" data-i18n="beforeLabel">Pirms (tava melnraksta doma)</div>
+                   <p id="beforeOut" class="text-sm text-zinc-300"></p>
+                 </div>
+-                <div class="nice-scroll flex-1 overflow-auto rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-3">
+-                  <div class="mb-1 text-xs font-bold uppercase tracking-wide text-emerald-300" data-i18n="afterLabel">Pēc (ko AI atgriež)</div>
++                <div class="nice-scroll flex-1 overflow-auto rounded-2xl border border-sky-400/20 bg-sky-500/10 p-3">
++                  <div class="mb-1 text-xs font-bold uppercase tracking-wide text-sky-300" data-i18n="afterLabel">Pēc (ko AI atgriež)</div>
+                   <p id="afterOut" class="whitespace-pre-wrap text-sm text-zinc-100"></p>
+                 </div>
+               </div>
+@@ -214,5 +215,6 @@
+     <script src="../../scripts/icons.js"></script>
+     <script src="./app.js?v=2"></script>
+     <script src="../../scripts/chatbot.js?v=2"></script>
++    <script src="../../scripts/site-polish.js" defer></script>
+   </body>
+ </html>
+-- 
+2.43.0
+
